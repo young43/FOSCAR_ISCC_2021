@@ -71,4 +71,9 @@
 -->
 <node name="test_path" pkg="obstacle_detector" type="test.py" output="screen">
  </node>
+
+ 
+  <!-- for serial control -->
+  <node pkg="race" type="serial_control_node" name="serial_control_node" />
+
 </launch>

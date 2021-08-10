@@ -16,17 +16,19 @@ from race.msg import drive_values
 
 drive_values_pub = rospy.Publisher('control_value', drive_values, queue_size=1)
 RECOV = 1.5
-Speed = 0.1
+Speed = 1.0
 def drive(angle, speed):
 	global drive_values_pub
 	global Speed
 	drive_value = drive_values()
 	drive_value.throttle = Speed
-	drive_value.steering = angle
-
-	#drive_values_pub.publish(drive_value)
-
-	print("steer : ", drive_value.steering*180/math.pi)
+	print("angle:",angle)
+	drive_value.steering = angle*180/math.pi
+	print("steering:",drive_value.steering)
+	drive_values_pub.publish(drive_value)
+	#print("xycar_angle:" ,xycar_angle)
+	#print("xycar_angle_deg:" ,xycar_angle_deg)
+	#print("steer : ", drive_value.steering*180/math.pi)
 	print("throttle : ", drive_value.throttle)
 
 class point:
@@ -67,23 +69,23 @@ class point:
 			#self.publish_angle()
 			return
 
-		elif len(list_l_y) == 0 and sum(list_r_y)/len(list_r_y) <= 0.1:
-			RECOV = 3
+		elif len(list_l_y) == 0 and sum(list_r_y)/len(list_r_y) <= 0.5:
+			RECOV = 1.2
 			list_l_y = [-i*RECOV for i in list_r_y]
 			print("aa")
 
-		elif len(list_l_y) == 0 and sum(list_r_y)/len(list_r_y) > 0.1:
-			RECOV = 1.5 
+		elif len(list_l_y) == 0 and sum(list_r_y)/len(list_r_y) > 0.5:
+			RECOV = 1.1 
 			list_l_y = [-i*RECOV for i in list_r_y]
 			print("bb")	
 
-		elif len(list_r_y) == 0 and sum(list_l_y)/len(list_l_y) >= -0.1:
-			RECOV = 3
+		elif len(list_r_y) == 0 and sum(list_l_y)/len(list_l_y) >= -0.5:
+			RECOV = 1.1
 			list_r_y = [-i*RECOV for i in list_l_y]
 			print("cc")
 
-		elif len(list_r_y) == 0 and sum(list_l_y)/len(list_l_y) < -0.1:
-			RECOV = 1.5 
+		elif len(list_r_y) == 0 and sum(list_l_y)/len(list_l_y) < -0.5:
+			RECOV = 1.2 
 			list_r_y = [-i*RECOV for i in list_l_y]
 			print("dd")
 
@@ -104,10 +106,10 @@ class point:
 
 	def calc_angle(self):
 		self.xycar_angle = math.atan2(self.center_y,self.center_x)
-		#self.xycar_angle_deg = self.xycar_angle*180/math.pi #obstacles chase
-		#if (self.xycar_angle_deg > 26): self.xycar_angle_deg = 26
-		#elif (self.xycar_angle_deg < -26): self.xycar_angle_deg = -26
-		print("Angle Rad : ", self.xycar_angle)
+		self.xycar_angle_deg = self.xycar_angle*180/math.pi #obstacles chase
+		if (self.xycar_angle_deg > 30): self.xycar_angle_deg = 30
+		elif (self.xycar_angle_deg < -30): self.xycar_angle_deg = 30
+		print("Angle Rad : ", self.xycar_angle_deg)
 
 #def callback(config, level):
 	    

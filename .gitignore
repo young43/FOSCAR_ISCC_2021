@@ -1,3 +1,10 @@
 # bag파일 무시
 *.bag
+*.bag.active
 *.avi
+*.mov
+
+
+# build, devel
+./buld/*
+./devel/*

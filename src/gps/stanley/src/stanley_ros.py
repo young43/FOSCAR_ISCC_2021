@@ -157,7 +157,7 @@ class Stanley:
 
         # 현재 위치에서 가장 가까운 Waypoint를 Start Point로 설정함. (맨 처음 한번만 실행)
         if not self.current_idx_flag:
-            for i in range(n_points):
+            for i in range(100): # npoints
                 dx = front_x - self.map_xs[i]
                 dy = front_y - self.map_ys[i]
 
@@ -184,7 +184,7 @@ class Stanley:
 
             dist = np.sqrt(dx * dx + dy * dy)
 
-            if dist < min_dist and abs(self.current_idx - i) <= 100:
+            if dist < min_dist and abs(self.current_idx - i) <= 20:
                 min_dist = dist
                 min_index = i
 
@@ -213,17 +213,17 @@ class Stanley:
         print("STEERING: {}".format(np.degrees(cte_term)))
 
         if abs(np.degrees(cte_term)) > 1:
-            if v >= 8:
+            if v >= 6:
                 v -= 0.2
         else:
-            if v <= 14:
+            if v <= 10:
                 v += 0.2
 
         # 가끔 튀는 값이 있어서 예외처리 해줌.
-        # if self.prev_steer != None and abs(np.degrees(steer) - np.degrees(self.prev_steer)) >= 60:
-        #    steer = self.prev_steer
-        #
-        # self.prev_steer = steer
+        if self.prev_steer != None and abs(np.degrees(steer) - np.degrees(self.prev_steer)) >= 60:
+           steer = self.prev_steer
+        
+        self.prev_steer = steer
 
         return steer, v
 
