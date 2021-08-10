@@ -6,7 +6,7 @@ import rospkg
 from geometry_msgs.msg import PoseStamped
 from tf.transformations import euler_from_quaternion
 
-from race.msg import lane_info, drive_values
+# from race.msg import lane_info, drive_values
 
 import sys
 import math
@@ -122,9 +122,13 @@ class Stanley:
 
             self.map_yaws.append(self.map_yaws[-1])
 
+
+        self.prev_steer = None
+
+
         self.current_idx = 0
         self.current_idx_flag = False
-        self.prev_steer = None
+        self.next_waypoint = None
 
 
     def getWayPoint(self):
@@ -143,6 +147,69 @@ class Stanley:
 
         return angle
 
+
+    def getPlaneDistance(self, x1, y1, x2, y2):
+        return np.sqrt((x1-x2)**2 + (y1-y2)**2)
+
+    def getNextWaypoint(self, fx, fy):
+        # init current waypoint
+        if self.next_waypoint == None:
+            min_dist = 9999999
+
+            for i in range(len(self.map_xs)):
+                dx = self.map_xs[i]
+                dy = self.map_ys[i]
+                
+                cur_dist = self.getPlaneDistance(fx, fy, dx, dy)
+                if min_dist > cur_dist:
+                    min_dist = cur_dist
+                    self.next_waypoint = i
+            
+            self.current_idx_flag = True
+
+
+        if self.current_idx_flag:
+            self.current_idx = self.next_waypoint
+
+        for i in range(self.current_idx, len(self.map_xs)):
+            if i == len(self.map_xs)-1:
+                print("search waypoint is the last")
+                break
+            
+            dx = self.map_xs[i]
+            dy = self.map_ys[i]
+            if self.getPlaneDistance(fx, fy, dx, dy) > 4:
+                min_dist2 = 9999999
+                for j in range(len(self.map_xs)):
+                    dx = self.map_xs[j]
+                    dy = self.map_ys[j]
+                    cur_dist2 = self.getPlaneDistance(fx, fy, dx, dy)
+                    if min_dist2 > cur_dist2:
+                        min_dist2 = cur_dist2
+                        self.current_idx = j
+                break
+
+            if self.getPlaneDistance(fx, fy, dx, dy) > 1:
+                self.current_idx = i
+                # mode는 나중에...
+                break
+
+
+        # Nextwaypoint 계산
+        for i in range(self.next_waypoint, len(self.map_xs)):
+            if i == len(self.map_xs)-1:
+                print("search waypoint is the last")
+                return
+
+            dx = self.map_xs[i]
+            dy = self.map_ys[i]
+            if self.getPlaneDistance(fx, fy, dx, dy) > 5:
+                self.next_waypoint = i
+                return
+
+
+
+
     # Stanley Method
     # v는 속도
     def control(self, x, y, yaw, v):
@@ -156,46 +223,48 @@ class Stanley:
 
 
         # 현재 위치에서 가장 가까운 Waypoint를 Start Point로 설정함. (맨 처음 한번만 실행)
-        if not self.current_idx_flag:
-            for i in range(100): # npoints
-                dx = front_x - self.map_xs[i]
-                dy = front_y - self.map_ys[i]
+        # if not self.current_idx_flag:
+        #     for i in range(100): # npoints
+        #         dx = front_x - self.map_xs[i]
+        #         dy = front_y - self.map_ys[i]
 
-                dist = np.sqrt(dx * dx + dy * dy)
+        #         dist = np.sqrt(dx * dx + dy * dy)
 
-                if dist < min_dist:
-                    min_dist = dist
-                    min_index = i
+        #         if dist < min_dist:
+        #             min_dist = dist
+        #             min_index = i
 
-                    self.current_idx_flag = True
-                    self.current_idx = min_index
-
-
-        # 만약 Start Point 없으면 예외처리
-        if not self.current_idx_flag:
-            return None
+        #             self.current_idx_flag = True
+        #             self.current_idx = min_index
 
 
-        # 이미 지나갔거나, 너무 멀리 떨어진 Way Point는 잡지 않도록 처리함.
-        # current_idx 는 현재 위치와 가장 가까운 Way Point 를 의미함.
-        for i in range(self.current_idx, n_points):
-            dx = front_x - self.map_xs[i]
-            dy = front_y - self.map_ys[i]
+        # # 만약 Start Point 없으면 예외처리
+        # if not self.current_idx_flag:
+        #     return None
 
-            dist = np.sqrt(dx * dx + dy * dy)
 
-            if dist < min_dist and abs(self.current_idx - i) <= 20:
-                min_dist = dist
-                min_index = i
+        # # 이미 지나갔거나, 너무 멀리 떨어진 Way Point는 잡지 않도록 처리함.
+        # # current_idx 는 현재 위치와 가장 가까운 Way Point 를 의미함.
+        # for i in range(self.current_idx, n_points):
+        #     dx = front_x - self.map_xs[i]
+        #     dy = front_y - self.map_ys[i]
 
-                self.current_idx = min_index
+        #     dist = np.sqrt(dx * dx + dy * dy)
 
+        #     if dist < min_dist and abs(self.current_idx - i) <= 20:
+        #         min_dist = dist
+        #         min_index = i
+
+        #         self.current_idx = min_index
+
+        self.getNextWaypoint(front_x, front_y)
+        print(self.current_idx)
 
 
         # compute cte at front axle
-        map_x = self.map_xs[min_index]
-        map_y = self.map_ys[min_index]
-        map_yaw = self.map_yaws[min_index]
+        map_x = self.map_xs[self.current_idx]
+        map_y = self.map_ys[self.current_idx]
+        map_yaw = self.map_yaws[self.current_idx]
 
         dx = map_x - front_x
         dy = map_y - front_y
@@ -330,7 +399,7 @@ if __name__ == "__main__":
 
 
     rospy.Subscriber("current_pose", PoseStamped, update_pose)
-    drive_pub = rospy.Publisher('control_value', drive_values, queue_size=1)
+    # drive_pub = rospy.Publisher('control_value', drive_values, queue_size=1)
 
     mapx, mapy, map_yaw = stanley.getWayPoint()
     steer = 0
@@ -365,8 +434,6 @@ if __name__ == "__main__":
 
         steer, vel = stanley.control(model.x, model.y, model.yaw, vel)
 
-        print(vel)
-
         if steer == None:
             print('No Neareast Point')
             break
@@ -394,7 +461,7 @@ if __name__ == "__main__":
         # print(mov_avg.data_list)
         # print(mov_avg.getAvg())
 
-        drive(mov_avg.getAvg(), vel)
+        # drive(mov_avg.getAvg(), vel)
 
 
         # plot test
