@@ -3,8 +3,10 @@
 namespace waypoint_follower
 {
 // Constructor
-PurePursuit::PurePursuit() : next_waypoint_number_(-1), current_idx(-1), lookahead_distance_(0), mode(0), mission_flag(0), is_obstacle_detected(0), static_obstacle_flag(0),
-                             straight_go_flag(false), left_go_flag(false), is_obstacle_detected_8m(0) {}
+PurePursuit::PurePursuit() : 
+  next_waypoint_number_(-1), current_idx(-1), lookahead_distance_(0), mode(0), mission_flag(0), 
+  is_obstacle_detected(0), static_obstacle_flag(0), straight_go_flag(false), 
+  left_go_flag(false), is_obstacle_detected_8m(0), is_finish(false) {}
 
 // Destructor
 PurePursuit::~PurePursuit() {}
@@ -44,7 +46,7 @@ void PurePursuit::getNextWaypoint()
     float min_distance = 9999999;
     for (int i = 0; i < path_size; i++) {
       float current_distance = getPlaneDistance(waypoints.at(i).first, current_pose_.position);
-      ROS_INFO("POINT %d = %f", i, current_distance);
+      // ROS_INFO("POINT %d = %f", i, current_distance);
       if (min_distance > current_distance) {
         min_distance = current_distance;
         next_waypoint_number_ = i;
@@ -97,6 +99,7 @@ void PurePursuit::getNextWaypoint()
     {
       ROS_INFO("search waypoint is the last");
       next_waypoint_number_ = i;
+      is_finish = true;
       return;
     }
 

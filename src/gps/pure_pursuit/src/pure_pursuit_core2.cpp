@@ -94,7 +94,7 @@ void PurePursuitNode::initForROS()
 }
 
 void PurePursuitNode::run(char** argv) {
-  ROS_INFO_STREAM("pure pursuit start");
+  ROS_INFO_STREAM("pure pursuit2 start");
 
   // temp
   const_lookahead_distance_ = atof(argv[2]);

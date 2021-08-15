@@ -52,6 +52,7 @@ public:
   // variables
   int next_waypoint_number_;
   int current_idx;
+  bool is_finish;
 
   geometry_msgs::Point next_target_position_;
   geometry_msgs::Point current_position;
