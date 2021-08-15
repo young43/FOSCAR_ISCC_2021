@@ -4,7 +4,10 @@
 *.avi
 *.mov
 
+# weights파일
+*.weights
 
 # build, devel
 ./buld/*
 ./devel/*
+
