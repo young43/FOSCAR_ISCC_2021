@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 예선 실행 패스 -->
+<!-- 본선 실행 패스 -->
 <launch>
   <arg name="path" />
   <arg name="ld" />
