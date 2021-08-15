@@ -11,7 +11,7 @@
     <arg name="path2" value="$(arg path)" />
   </include>
 
-  <node pkg="pure_pursuit" type="pure_pursuit" name="pure_pursuit" output="screen" args="$(arg path) $(arg ld) $(arg vel) $(arg vel) $(arg final_constant) $(arg obs_order)" />
+  <node pkg="pure_pursuit" type="pure_pursuit" name="pure_pursuit" output="screen" args="$(arg path) $(arg ld) $(arg vel) $(arg final_constant) $(arg obs_order)" />
   <node pkg="pure_pursuit" type="coordinate2pos" name="coordinate2pos" />
   <node pkg="utmk_coordinate" type="wgs84_to_utmk.py" name="wgs84_to_utmk" />
 

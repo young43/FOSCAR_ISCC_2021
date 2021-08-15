@@ -82,7 +82,9 @@ private:
 
   // for main control
   void callbackFromObstacle(const avoid_obstacle::TrueObstacles& msg);
-  void callbackFromObstacle2(const avoid_obstacle::DetectedObstacles& msg);
+  void callbackFromObstacle2(const avoid_obstacle::DetectedObstacles& msg);   // 왼오
+  void callbackFromObstacle3(const avoid_obstacle::DetectedObstacles& msg);   // 오왼
+
   void callbackFromObstacle_8M(const avoid_obstacle::TrueObstacles& msg);
   void callbackFromTrafficLight(const darknet_ros_msgs::BoundingBoxes& msg);
   // void callbackFromLane(const {msg_type}& msg);

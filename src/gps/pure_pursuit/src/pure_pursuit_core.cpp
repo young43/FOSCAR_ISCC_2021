@@ -93,8 +93,17 @@ void PurePursuitNode::run(char** argv) {
   const_lookahead_distance_ = atof(argv[2]);
   const_velocity_ = atof(argv[3]);
   final_constant = atof(argv[4]);
-  obs_is_left = atoi(argv[5]);
+
+  // 1이면 왼오(default), 0이면 오왼
+  obs_is_left = atoi(argv[5]);  
   //////////////////////////
+
+  // 0이면 오왼이므로 callback 함수를 바꿔줌
+  if(!obs_is_left){
+    obstacle_sub2 = nh_.subscribe("detected_obs", 1,
+    &PurePursuitNode::callbackFromObstacle3, this);
+  }
+
 
   ros::Rate loop_rate(LOOP_RATE_);
   while (ros::ok()) {
@@ -131,23 +140,25 @@ void PurePursuitNode::run(char** argv) {
     if(pp_.mode == 0){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 8;
-      final_constant = 1.0;
+      const_velocity_ = 10;
+      final_constant = 1.2;
     }
 
     // MODE 1 - Normal 커브구간
     if (pp_.mode == 1) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
-      const_velocity_ = 6;
+      const_velocity_ = 8;
       final_constant = 1.5;
     }
 
     // MODE 2 : 신호등 (직진구간)
     if (pp_.mode == 2) {
+      pp_.mission_flag = 0; 
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
-      pp_.mission_flag = 0;
+      final_constant = 1.2;
+     
 
       // 첫 신호등 인덱스 : tf_idx_1
       if(pp_.reachMissionIdx(tf_idx_1) && !pp_.straight_go_flag) {
@@ -159,10 +170,11 @@ void PurePursuitNode::run(char** argv) {
 
     // MODE 3 : 동적 장애물 & 신호등
       if (pp_.mode == 3) {
+        pp_.mission_flag = 0;
         const_lookahead_distance_ = 4;
         const_velocity_ = 6;
-        pp_.mission_flag = 0;
-
+        final_constant = 1.2;
+        
         // 장애물 멈추기
         if (pp_.is_obstacle_detected)
         {
@@ -194,6 +206,7 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 4) {
       const_lookahead_distance_ = 3;
       const_velocity_ = 5;
+      final_constant = 1.2;
 
       // 왼 오
       if(obs_is_left){
@@ -299,7 +312,7 @@ void PurePursuitNode::run(char** argv) {
     if(pp_.mode == 5){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 14;
+      const_velocity_ = 12;
       final_constant = 1.2;
 
       geometry_msgs::Point green_point = pp_.waypoints.at(pp_.current_idx).first;
@@ -498,59 +511,61 @@ void PurePursuitNode::callbackFromObstacle2(const avoid_obstacle::DetectedObstac
   }
 }
 /*************************************************************************************************************/
-// 오 - 왼
-// void PurePursuitNode::callbackFromObstacle2(const avoid_obstacle::DetectedObstacles& msg) {
-//   // 전역 변수 tmp_yaw_rate
-//   tmp_yaw_rate = 0.0;
-//
-//   left_detected = false;
-//   right_detected = false;
-//   pp_.obstacles.clear();
-//
-//   // 모든 장애물 데이터 벡터에 저장
-//   for(unsigned int i = 0; i < msg.obstacles.size(); i++) {
-//       Obstacle obs = Obstacle(msg.obstacles[i].x, msg.obstacles[i].y, msg.obstacles[i].radius, msg.obstacles[i].true_radius);
-//       pp_.obstacles.push_back(obs);
-//   }
-//
-//   //Rigt -> left Static obs sub
-//   //left avoid flag가 true 이면 인식 범위를 5로 늘림.
-//   if(right_avoid){
-//     target_dist = 5.0;
-//   }
-//
-//   for(unsigned int i = 0; i < pp_.obstacles.size(); i++)
-//   {
-//       // 전방 0도 ~ 50도 확인
-//       if(pp_.obstacles[i].yaw_rate <= 0 && pp_.obstacles[i].yaw_rate > -50.0)
-//       {
-//           // 전방 1m ~ target_distance 확인
-//           if (pp_.obstacles[i].dist < target_dist && pp_.obstacles[i].dist > min_dist){
-//               // ROS_INFO("Point [X,Y] : [%f, %f]", obstacles[i].x, obstacles[i].y);
-//               // ROS_INFO("Distance : [%f]     Yaw_Rate : [%f]", obstacles[i].dist, obstacles[i].yaw_rate);
-//               right_detected = true;
-//               tmp_yaw_rate = pp_.obstacles[i].yaw_rate;
-//               //tmp_distance = pp_.obstacles[i].dist;
-//           }
-//       }
-//
-//       // 첫 장애물 통과후, 오른쪽 장애물 인식
-//       if(right_avoid && pp_.obstacles[i].yaw_rate < 60.0 && pp_.obstacles[i].yaw_rate > 0)
-//       {
-//           if(pp_.obstacles[i].dist < target_dist)
-//           {
-//               // ROS_INFO("Point [X,Y] : [%f, %f]", obstacles[i].x, obstacles[i].y);
-//               // ROS_INFO("Distance : [%f]     Yaw_Rate : [%f]", obstacles[i].dist, obstacles[i].yaw_rate);
-//               left_detected = true;
-//               tmp_yaw_rate = pp_.obstacles[i].yaw_rate;
-//           }
-//       }
-//
-//       // if(pp_.mission_flag == 4 && !right_detected) {
-//       //   right_avoid = true;
-//       // }
-//   }
-// }
+// 오왼
+void PurePursuitNode::callbackFromObstacle3(const avoid_obstacle::DetectedObstacles& msg) {
+  // 전역 변수 tmp_yaw_rate
+  tmp_yaw_rate = 0.0;
+
+  left_detected = false;
+  right_detected = false;
+  pp_.obstacles.clear();
+
+  // 모든 장애물 데이터 벡터에 저장
+  for(unsigned int i = 0; i < msg.obstacles.size(); i++) {
+      Obstacle obs = Obstacle(msg.obstacles[i].x, msg.obstacles[i].y, msg.obstacles[i].radius, msg.obstacles[i].true_radius);
+      pp_.obstacles.push_back(obs);
+  }
+
+  //Rigt -> left Static obs sub
+  //left avoid flag가 true 이면 인식 범위를 5로 늘림.
+  if(right_avoid){
+    target_dist = 5.0;
+  }
+
+  for(unsigned int i = 0; i < pp_.obstacles.size(); i++)
+  {
+      // 전방 0도 ~ 50도 확인
+      if(pp_.obstacles[i].yaw_rate <= 0 && pp_.obstacles[i].yaw_rate > -50.0)
+      {
+          // 전방 1m ~ target_distance 확인
+          if (pp_.obstacles[i].dist < target_dist && pp_.obstacles[i].dist > min_dist){
+              // ROS_INFO("Point [X,Y] : [%f, %f]", obstacles[i].x, obstacles[i].y);
+              // ROS_INFO("Distance : [%f]     Yaw_Rate : [%f]", obstacles[i].dist, obstacles[i].yaw_rate);
+              right_detected = true;
+              tmp_yaw_rate = pp_.obstacles[i].yaw_rate;
+              //tmp_distance = pp_.obstacles[i].dist;
+          }
+      }
+
+      // 첫 장애물 통과후, 오른쪽 장애물 인식
+      if(right_avoid && pp_.obstacles[i].yaw_rate < 60.0 && pp_.obstacles[i].yaw_rate > 0)
+      {
+          if(pp_.obstacles[i].dist < target_dist)
+          {
+              // ROS_INFO("Point [X,Y] : [%f, %f]", obstacles[i].x, obstacles[i].y);
+              // ROS_INFO("Distance : [%f]     Yaw_Rate : [%f]", obstacles[i].dist, obstacles[i].yaw_rate);
+              left_detected = true;
+              tmp_yaw_rate = pp_.obstacles[i].yaw_rate;
+          }
+      }
+
+      // if(pp_.mission_flag == 4 && !right_detected) {
+      //   right_avoid = true;
+      // }
+  }
+}
+
+
 /*************************************************************************************************************/
 void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingBoxes& msg) {
   std::vector<darknet_ros_msgs::BoundingBox> traffic_lights = msg.bounding_boxes;

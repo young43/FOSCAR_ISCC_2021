@@ -71,6 +71,14 @@ public:
   bool left_go_flag;
   int is_obstacle_detected_8m;
 
+  // for delivery
+  bool a1_flag = false;
+  bool a2_flag = false;
+  bool a3_flag = false;
+  bool b1_flag = false;
+  bool b2_flag = false;
+  bool b3_flag = false;
+
   std::vector<Obstacle> obstacles;
 
   
