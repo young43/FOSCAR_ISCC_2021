@@ -1,9 +1,9 @@
 yolo_model:
 
   config_file:
-    name: yolov3.cfg
+    name: yolov3_ex.cfg
   weight_file:
-    name: yolov3_3.weights
+    name: yolov3_ex.weights
   threshold:
     value: 0.6
   detection_classes:
@@ -18,4 +18,9 @@ yolo_model:
       - 4 red left
       - 4 left go
       - 4 red yellow
+      - stop
+      - s course
+      - slow
+      - u turn
+      - delivery
       
