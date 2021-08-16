@@ -26,15 +26,21 @@ def parse_txt(path):
 
 if __name__ == "__main__":
     file_name = sys.argv[1]
+    scale = 1.0
 
     if len(file_name) == 0:
         print('The file is not exist')
         exit(-1)
 
+    if len(sys.argv) == 3:
+	scale = float(sys.argv[2])
+
+
     path = parse_txt(file_name)
 
     k_city_start_position = path[0]
     school_start_position = np.array([955537.894297, 1956944.4206, 0],np.float64)
+    # school_start_position = np.array([955538.0616791563, 1956939.4269970166, 0],np.float64)
     print("k_city_start_position : {}".format(k_city_start_position))
     print("school_start_position : {}".format(school_start_position))
 
@@ -44,18 +50,31 @@ if __name__ == "__main__":
     print("offset : {}".format(offset))
     
     #### for rotation ####
-    theta = 30; # degree
+    theta = 80; # degree
     theta = theta * np.pi / 180
     rotation_matrix = np.array([[np.cos(theta), np.sin(theta), 0],[-np.sin(theta), np.cos(theta), 0], [0, 0, 1]], np.float64)
+
+
+    scale_matrix = np.array([[scale, 0, 0],[0, scale, 0], [0, 0, 1]], np.float64)
     
     rotation_path = path - k_city_start_position
+
+    # TRS
+
     rotation_path = np.dot(rotation_path, rotation_matrix)
+    rotation_path = np.dot(rotation_path, scale_matrix)
+
+
     rotation_path += k_city_start_position
+    new_path = rotation_path + offset 
+
+
+
     ######################
     
     
     #### for parallel translation ####
-    new_path = rotation_path + offset    
+   
     
     ##################################
 
