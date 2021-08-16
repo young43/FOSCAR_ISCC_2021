@@ -568,72 +568,50 @@ void PurePursuitNode::callbackFromObstacle3(const avoid_obstacle::DetectedObstac
 
 /*************************************************************************************************************/
 void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingBoxes& msg) {
-  std::vector<darknet_ros_msgs::BoundingBox> traffic_lights = msg.bounding_boxes;
+  // std::vector<darknet_ros_msgs::BoundingBox> traffic_lights = msg.bounding_boxes;
+  // std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
+
+  std::vector<darknet_ros_msgs::BoundingBox> yoloObjects = msg.bounding_boxes;
+
+  // 신호등 객체만 따로 검출함 (원근법 알고리즘 적용위함)
+  std::vector<darknet_ros_msgs::BoundingBox> traffic_lights;
+  for(int i=0; i<yoloObjects.size(); i++){
+    if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 left"
+      || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green" 
+      || yoloObjects[i].Class == "4 red left" || yoloObjects[i].Class == "4 left go"  || yoloObjects[i].Class == "4 red yellow"){
+
+        traffic_lights.push_back(yoloObjects[i]);
+
+      }
+  }
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
 
-  // for (unsigned int i = 0; i < traffic_lights.size(); i++) {
-  //   int xmin = traffic_lights[i].xmin;
-  //   int ymin = traffic_lights[i].ymin;
-  //   int xmax = traffic_lights[i].xmax;
-  //   int ymax = traffic_lights[i].ymax;
-  //   int area;
-  //
-  //   std::cout << "index : " << i << std::endl;
-  //   std::cout << "class name : "<<traffic_lights[i].Class << std::endl;
-  //   // std::cout << "xmin : "<<traffic_lights[i].xmin << std::endl;
-  //   // std::cout << "ymin : "<<traffic_lights[i].ymin << std::endl;
-  //   // std::cout << "ymax : "<<traffic_lights[i].xmax << std::endl;
-  //   // std::cout << "ymin : "<<traffic_lights[i].ymax << std::endl;
-  //   area = (xmax - xmin) * (ymax - ymin);
-  //   std::cout << "area : " << area << std::endl;
-  // }
 
- // for test
  int index = 0;
 
- // check mode 17
- if (pp_.mode == 17) {
-   if(traffic_lights.size() > 1)
-   {
-     int first_traffic = (traffic_lights[0].xmax - traffic_lights[0].xmin) * (traffic_lights[0].ymax - traffic_lights[0].ymin);
-     int second_traffic = (traffic_lights[1].xmax - traffic_lights[1].xmin) * (traffic_lights[1].ymax - traffic_lights[1].ymin);
+  // check mode 9 (신호등 좌회전 구간)
+  if (pp_.mode == 9) {
+    if(traffic_lights.size() > 1)
+    {
+      int first_traffic = (traffic_lights[0].xmax - traffic_lights[0].xmin) * (traffic_lights[0].ymax - traffic_lights[0].ymin);
+      int second_traffic = (traffic_lights[1].xmax - traffic_lights[1].xmin) * (traffic_lights[1].ymax - traffic_lights[1].ymin);
 
-     if(first_traffic * 0.6 < second_traffic) {
-       if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 red left" || traffic_lights[0].Class == "4 left go" ||
+      if(first_traffic * 0.6 < second_traffic) {
+        if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 red left" || traffic_lights[0].Class == "4 left go" ||
           traffic_lights[1].Class == "3 left" || traffic_lights[1].Class == "4 red left" || traffic_lights[1].Class == "4 left go") {
             pp_.left_go_flag = true;
-          }
-       else {
-         pp_.left_go_flag = false;
-       }
+        }
+        else {
+          pp_.left_go_flag = false;
+        }
 
-       if (pp_.left_go_flag) {
-         std::cout << "mode 17 left go" << std::endl;
-       }
-      return;
-     }
-   }
+        if (pp_.left_go_flag) {
+          std::cout << "mode 9 left go" << std::endl;
+        }
+        return;
+      }
+    } 
  }
-
- // if(traffic_lights.size() > 1)
- // {
- //    int first_traffic = (traffic_lights[0].xmax - traffic_lights[0].xmin) * (traffic_lights[0].ymax - traffic_lights[0].ymin);
- //    int second_traffic = (traffic_lights[1].xmax - traffic_lights[1].xmin) * (traffic_lights[1].ymax - traffic_lights[1].ymin);
- //
- //    if(first_traffic * 0.8 < second_traffic)
- //    {
- //        if(traffic_lights[0].xmin < traffic_lights[1].xmin)
- //        {
- //            // 0 index select
- //            index = 0;
- //        }
- //        else
- //        {
- //          // 1 index select
- //          index = 1;
- //        }
- //    }
- // }
 
   if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
       traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 red yellow")
@@ -658,13 +636,14 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   }
 
   //traffic test
-  std::cout << "*******************" << std::endl << std::endl;
-  if (pp_.straight_go_flag){
-    std::cout << "straight go" << std::endl;
-  }
-  if (pp_.left_go_flag) {
-    std::cout << "left go" << std::endl;
-  }
+  // std::cout << "*******************" << std::endl << std::endl;
+  // if (pp_.straight_go_flag){
+  //   std::cout << "straight go" << std::endl;
+  // }
+  // if (pp_.left_go_flag) {
+  //   std::cout << "left go" << std::endl;
+  // }
+
 }
 // void callbackFromLane(const {msg_type}& msg)
 
