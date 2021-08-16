@@ -53,7 +53,7 @@ if __name__ == "__main__":
   rospack = rospkg.RosPack()
   ROS_HOME = rospack.get_path('rviz_visualization')
 
-
+  print(sys.argv)
   _, file1, x, y = sys.argv
   x = float(x)
   y = float(y)

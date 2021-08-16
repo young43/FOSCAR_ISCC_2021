@@ -146,11 +146,14 @@ void PurePursuitNode::run(char** argv) {
 
 
     // 마지막 waypoint 에 다다랐으면 멈추기
-    if(pp_.is_finish){
+    if(pp_.is_finish && pp_.mode == 8){
       pulishControlMsg(0,0);
       ROS_INFO_STREAM("Finish Pure Pursuit");
       continue;
     }
+
+
+    ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
 
     // MODE 0 - Normal 직진구간
     if(pp_.mode == 0){
@@ -172,6 +175,8 @@ void PurePursuitNode::run(char** argv) {
     // MODE 2 - 주차
     // 주차 구간
     if (pp_.mode == 2) {
+      pp_.is_finish = false;
+
       if (pp_.mission_flag == 3 || pp_.mission_flag == 0) {
         const_lookahead_distance_ = 6;
         const_velocity_ = 6;
@@ -183,18 +188,18 @@ void PurePursuitNode::run(char** argv) {
       // int end_parking_backward_idx = 100;
       // int end_parking_full_steer_backward_idx = 75;
 
-      // second
-      // int start_parking_idx = 280;
-      // int end_parking_idx = 87;
-      // int end_parking_backward_idx = 55;
-      // int end_parking_full_steer_backward_idx = 25;
+       // second
+       int start_parking_idx = 280;
+       int end_parking_idx = 87;
+       int end_parking_backward_idx = 55;
+       int end_parking_full_steer_backward_idx = 25;
 
 
       // third
-      int start_parking_idx = 290;
-      int end_parking_idx = 145;
-      int end_parking_backward_idx = 117; // 120
-      int end_parking_full_steer_backward_idx = 90;
+//      int start_parking_idx = 290;
+//      int end_parking_idx = 145;
+//      int end_parking_backward_idx = 117; // 120
+//      int end_parking_full_steer_backward_idx = 90;
 
       // forth
       // int start_parking_idx = 320;
@@ -222,9 +227,10 @@ void PurePursuitNode::run(char** argv) {
       if (pp_.mission_flag == 0 && pp_.next_waypoint_number_ >= start_parking_idx){
         pp_.setWaypoints(parking_path);
         const_lookahead_distance_ = 3;
-        const_velocity_ = 3;
+        const_velocity_ = 3;  // 3
         pp_.mission_flag = 1;
       }
+
       // 주차 끝
       if(pp_.mission_flag == 1 && pp_.reachMissionIdx(end_parking_idx)){
         /////////////////////////////////////////////////////////////////////////////////
@@ -256,7 +262,7 @@ void PurePursuitNode::run(char** argv) {
           // 0.1초
           usleep(100000);
         }
-
+        ROS_INFO("PATH SWITCHING");
         pp_.setWaypoints(global_path);
         pp_.mission_flag = 3;
       }
@@ -265,7 +271,8 @@ void PurePursuitNode::run(char** argv) {
       {
         const_lookahead_distance_ = 6;
         const_velocity_ = 10;
-        final_constant = 1.5;
+        final_constant = 1.2;
+
       }
     }
 
@@ -284,6 +291,9 @@ void PurePursuitNode::run(char** argv) {
         pulishControlMsg(0,0);
         continue;
       }
+
+
+
     }
 
     // MODE 9 : 신호등 (좌회전)
@@ -401,7 +411,7 @@ void PurePursuitNode::run(char** argv) {
 
       if((pp_.mission_flag==0 && (pp_.a1_flag && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1)) 
         || (pp_.mission_flag==0 && (pp_.a2_flag && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
-        || (pp_.mission_flag==0 && (pp_.a3_flag && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3)) {
+        || (pp_.mission_flag==0 && (pp_.a3_flag && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
         
         for (int i = 0; i < 50; i++)
         {
@@ -426,7 +436,7 @@ void PurePursuitNode::run(char** argv) {
     if(pp_.mode == 8){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 12;
+      const_velocity_ = 15;
       final_constant = 1.2;      
     }
 

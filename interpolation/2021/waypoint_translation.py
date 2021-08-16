@@ -38,9 +38,10 @@ if __name__ == "__main__":
 
     path = parse_txt(file_name)
 
-    k_city_start_position = path[0]
-    school_start_position = np.array([955537.894297, 1956944.4206, 0],np.float64)
-    # school_start_position = np.array([955538.0616791563, 1956939.4269970166, 0],np.float64)
+    # k_city_start_position = path[0]
+    k_city_start_position = np.array([955537.894297, 1956944.4206, 0],np.float64)
+    # school_start_position = np.array([955537.894297, 1956944.4206, 0],np.float64)
+    school_start_position = np.array([955566.644773, 1956921.99891, 0],np.float64)
     print("k_city_start_position : {}".format(k_city_start_position))
     print("school_start_position : {}".format(school_start_position))
 
@@ -61,8 +62,8 @@ if __name__ == "__main__":
 
     # TRS
 
-    rotation_path = np.dot(rotation_path, rotation_matrix)
-    rotation_path = np.dot(rotation_path, scale_matrix)
+    # rotation_path = np.dot(rotation_path, rotation_matrix)
+    # rotation_path = np.dot(rotation_path, scale_matrix)
 
 
     rotation_path += k_city_start_position
