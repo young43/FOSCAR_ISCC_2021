@@ -39,9 +39,13 @@ if __name__ == "__main__":
     path = parse_txt(file_name)
 
     # k_city_start_position = path[0]
-    k_city_start_position = np.array([955537.894297, 1956944.4206, 0],np.float64)
+    k_city_start_position = np.array([955537.894297, 1956944.4206, 0],np.float64) # for parking
+
+
     # school_start_position = np.array([955537.894297, 1956944.4206, 0],np.float64)
-    school_start_position = np.array([955566.644773, 1956921.99891, 0],np.float64)
+    # school_start_position = np.array([955566.644773, 1956921.99891, 0],np.float64) # school(center)
+    school_start_position = np.array([955576.601804, 1956925.47369, 0],np.float64) # school(corner)
+
     print("k_city_start_position : {}".format(k_city_start_position))
     print("school_start_position : {}".format(school_start_position))
 
@@ -51,7 +55,8 @@ if __name__ == "__main__":
     print("offset : {}".format(offset))
     
     #### for rotation ####
-    theta = 80; # degree
+    # final1(100), final2(80), parking(0)
+    theta = 0; # degree
     theta = theta * np.pi / 180
     rotation_matrix = np.array([[np.cos(theta), np.sin(theta), 0],[-np.sin(theta), np.cos(theta), 0], [0, 0, 1]], np.float64)
 
@@ -62,8 +67,8 @@ if __name__ == "__main__":
 
     # TRS
 
-    # rotation_path = np.dot(rotation_path, rotation_matrix)
-    # rotation_path = np.dot(rotation_path, scale_matrix)
+    rotation_path = np.dot(rotation_path, rotation_matrix)
+    rotation_path = np.dot(rotation_path, scale_matrix)
 
 
     rotation_path += k_city_start_position

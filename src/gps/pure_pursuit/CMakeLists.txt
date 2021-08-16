@@ -49,6 +49,13 @@ add_executable(
   src/pure_pursuit_core2.cpp
 )
 
+add_executable(
+  pure_pursuit3
+  src/pure_pursuit_node.cpp
+  src/pure_pursuit.cpp
+  src/pure_pursuit_delivery.cpp
+)
+
 target_link_libraries(pure_pursuit ${catkin_LIBRARIES})
 add_dependencies(pure_pursuit ${catkin_EXPORTED_TARGETS})
 
