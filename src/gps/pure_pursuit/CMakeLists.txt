@@ -62,6 +62,9 @@ add_dependencies(pure_pursuit ${catkin_EXPORTED_TARGETS})
 target_link_libraries(pure_pursuit2 ${catkin_LIBRARIES})
 add_dependencies(pure_pursuit2 ${catkin_EXPORTED_TARGETS})
 
+target_link_libraries(pure_pursuit3 ${catkin_LIBRARIES})
+add_dependencies(pure_pursuit3 ${catkin_EXPORTED_TARGETS})
+
 add_executable(coordinate2pos src/coordinate2pos.cpp)
 target_link_libraries(coordinate2pos ${catkin_LIBRARIES})
 add_dependencies(coordinate2pos ${catkin_EXPORTED_TARGETS})
