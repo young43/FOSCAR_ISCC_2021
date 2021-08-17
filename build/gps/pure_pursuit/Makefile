@@ -91,15 +91,16 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
 
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
 
-.PHONY : list_install_components/fast
+.PHONY : edit_cache/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -124,16 +125,15 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
 
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
 
-.PHONY : edit_cache/fast
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -198,6 +198,21 @@ roslint/fast:
 .PHONY : roslint/fast
 
 # Convenience name for target.
+gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/rule:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f CMakeFiles/Makefile2 gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/rule
+.PHONY : gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/rule
+
+# Convenience name for target.
+pure_pursuit2: gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/rule
+
+.PHONY : pure_pursuit2
+
+# fast build rule for target.
+pure_pursuit2/fast:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build
+.PHONY : pure_pursuit2/fast
+
+# Convenience name for target.
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/rule:
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f CMakeFiles/Makefile2 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/rule
 .PHONY : gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/rule
@@ -211,6 +226,21 @@ pure_pursuit: gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/rule
 pure_pursuit/fast:
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build
 .PHONY : pure_pursuit/fast
+
+# Convenience name for target.
+gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/rule:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f CMakeFiles/Makefile2 gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/rule
+.PHONY : gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/rule
+
+# Convenience name for target.
+pure_pursuit3: gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/rule
+
+.PHONY : pure_pursuit3
+
+# fast build rule for target.
+pure_pursuit3/fast:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build
+.PHONY : pure_pursuit3/fast
 
 # Convenience name for target.
 gps/pure_pursuit/CMakeFiles/coordinate2pos.dir/rule:
@@ -260,7 +290,9 @@ src/pure_pursuit.o: src/pure_pursuit.cpp.o
 
 # target to build an object file
 src/pure_pursuit.cpp.o:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit.cpp.o
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit.cpp.o
 .PHONY : src/pure_pursuit.cpp.o
 
 src/pure_pursuit.i: src/pure_pursuit.cpp.i
@@ -269,7 +301,9 @@ src/pure_pursuit.i: src/pure_pursuit.cpp.i
 
 # target to preprocess a source file
 src/pure_pursuit.cpp.i:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit.cpp.i
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.i
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit.cpp.i
 .PHONY : src/pure_pursuit.cpp.i
 
 src/pure_pursuit.s: src/pure_pursuit.cpp.s
@@ -278,7 +312,9 @@ src/pure_pursuit.s: src/pure_pursuit.cpp.s
 
 # target to generate assembly for a file
 src/pure_pursuit.cpp.s:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit.cpp.s
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.s
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit.cpp.s
 .PHONY : src/pure_pursuit.cpp.s
 
 src/pure_pursuit_core.o: src/pure_pursuit_core.cpp.o
@@ -308,13 +344,69 @@ src/pure_pursuit_core.cpp.s:
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.s
 .PHONY : src/pure_pursuit_core.cpp.s
 
+src/pure_pursuit_core2.o: src/pure_pursuit_core2.cpp.o
+
+.PHONY : src/pure_pursuit_core2.o
+
+# target to build an object file
+src/pure_pursuit_core2.cpp.o:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit_core2.cpp.o
+.PHONY : src/pure_pursuit_core2.cpp.o
+
+src/pure_pursuit_core2.i: src/pure_pursuit_core2.cpp.i
+
+.PHONY : src/pure_pursuit_core2.i
+
+# target to preprocess a source file
+src/pure_pursuit_core2.cpp.i:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit_core2.cpp.i
+.PHONY : src/pure_pursuit_core2.cpp.i
+
+src/pure_pursuit_core2.s: src/pure_pursuit_core2.cpp.s
+
+.PHONY : src/pure_pursuit_core2.s
+
+# target to generate assembly for a file
+src/pure_pursuit_core2.cpp.s:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit_core2.cpp.s
+.PHONY : src/pure_pursuit_core2.cpp.s
+
+src/pure_pursuit_delivery.o: src/pure_pursuit_delivery.cpp.o
+
+.PHONY : src/pure_pursuit_delivery.o
+
+# target to build an object file
+src/pure_pursuit_delivery.cpp.o:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit_delivery.cpp.o
+.PHONY : src/pure_pursuit_delivery.cpp.o
+
+src/pure_pursuit_delivery.i: src/pure_pursuit_delivery.cpp.i
+
+.PHONY : src/pure_pursuit_delivery.i
+
+# target to preprocess a source file
+src/pure_pursuit_delivery.cpp.i:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit_delivery.cpp.i
+.PHONY : src/pure_pursuit_delivery.cpp.i
+
+src/pure_pursuit_delivery.s: src/pure_pursuit_delivery.cpp.s
+
+.PHONY : src/pure_pursuit_delivery.s
+
+# target to generate assembly for a file
+src/pure_pursuit_delivery.cpp.s:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit_delivery.cpp.s
+.PHONY : src/pure_pursuit_delivery.cpp.s
+
 src/pure_pursuit_node.o: src/pure_pursuit_node.cpp.o
 
 .PHONY : src/pure_pursuit_node.o
 
 # target to build an object file
 src/pure_pursuit_node.cpp.o:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit_node.cpp.o
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit_node.cpp.o
 .PHONY : src/pure_pursuit_node.cpp.o
 
 src/pure_pursuit_node.i: src/pure_pursuit_node.cpp.i
@@ -323,7 +415,9 @@ src/pure_pursuit_node.i: src/pure_pursuit_node.cpp.i
 
 # target to preprocess a source file
 src/pure_pursuit_node.cpp.i:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit_node.cpp.i
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.i
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit_node.cpp.i
 .PHONY : src/pure_pursuit_node.cpp.i
 
 src/pure_pursuit_node.s: src/pure_pursuit_node.cpp.s
@@ -332,7 +426,9 @@ src/pure_pursuit_node.s: src/pure_pursuit_node.cpp.s
 
 # target to generate assembly for a file
 src/pure_pursuit_node.cpp.s:
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/src/pure_pursuit_node.cpp.s
 	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.s
+	cd /home/foscar/ISCC_2021/build && $(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/src/pure_pursuit_node.cpp.s
 .PHONY : src/pure_pursuit_node.cpp.s
 
 # Help Target
@@ -344,14 +440,16 @@ help:
 	@echo "... install/strip"
 	@echo "... install"
 	@echo "... rebuild_cache"
-	@echo "... roslint_pure_pursuit"
-	@echo "... roslint"
-	@echo "... list_install_components"
-	@echo "... pure_pursuit"
+	@echo "... edit_cache"
 	@echo "... install/local"
 	@echo "... test"
+	@echo "... roslint_pure_pursuit"
+	@echo "... roslint"
+	@echo "... pure_pursuit2"
+	@echo "... list_install_components"
+	@echo "... pure_pursuit"
+	@echo "... pure_pursuit3"
 	@echo "... coordinate2pos"
-	@echo "... edit_cache"
 	@echo "... src/coordinate2pos.o"
 	@echo "... src/coordinate2pos.i"
 	@echo "... src/coordinate2pos.s"
@@ -361,6 +459,12 @@ help:
 	@echo "... src/pure_pursuit_core.o"
 	@echo "... src/pure_pursuit_core.i"
 	@echo "... src/pure_pursuit_core.s"
+	@echo "... src/pure_pursuit_core2.o"
+	@echo "... src/pure_pursuit_core2.i"
+	@echo "... src/pure_pursuit_core2.s"
+	@echo "... src/pure_pursuit_delivery.o"
+	@echo "... src/pure_pursuit_delivery.i"
+	@echo "... src/pure_pursuit_delivery.s"
 	@echo "... src/pure_pursuit_node.o"
 	@echo "... src/pure_pursuit_node.i"
 	@echo "... src/pure_pursuit_node.s"

@@ -2404,6 +2404,19 @@ roslint/fast:
 .PHONY : roslint/fast
 
 #=============================================================================
+# Target rules for targets named pure_pursuit2
+
+# Build rule for target.
+pure_pursuit2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pure_pursuit2
+.PHONY : pure_pursuit2
+
+# fast build rule for target.
+pure_pursuit2/fast:
+	$(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit2.dir/build
+.PHONY : pure_pursuit2/fast
+
+#=============================================================================
 # Target rules for targets named pure_pursuit
 
 # Build rule for target.
@@ -2415,6 +2428,19 @@ pure_pursuit: cmake_check_build_system
 pure_pursuit/fast:
 	$(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/build
 .PHONY : pure_pursuit/fast
+
+#=============================================================================
+# Target rules for targets named pure_pursuit3
+
+# Build rule for target.
+pure_pursuit3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pure_pursuit3
+.PHONY : pure_pursuit3
+
+# fast build rule for target.
+pure_pursuit3/fast:
+	$(MAKE) -f gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build.make gps/pure_pursuit/CMakeFiles/pure_pursuit3.dir/build
+.PHONY : pure_pursuit3/fast
 
 #=============================================================================
 # Target rules for targets named coordinate2pos
@@ -5396,7 +5422,9 @@ help:
 	@echo "... darknet_ros"
 	@echo "... roslint_pure_pursuit"
 	@echo "... roslint"
+	@echo "... pure_pursuit2"
 	@echo "... pure_pursuit"
+	@echo "... pure_pursuit3"
 	@echo "... coordinate2pos"
 	@echo "... sick_generic_caller"
 	@echo "... sick_scan_genpy"

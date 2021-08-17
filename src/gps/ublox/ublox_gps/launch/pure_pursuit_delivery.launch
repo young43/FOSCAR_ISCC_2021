@@ -21,17 +21,15 @@
     <rosparam command="load" file="$(find ublox_gps)/config/$(arg param_file_name).yaml" />
   </node>
 
-  <node pkg="pure_pursuit" type="pure_pursuit" name="pure_pursuit" output="screen" args="$(arg path) $(arg ld) $(arg vel) $(arg final_constant)" />
+  <node pkg="pure_pursuit" type="pure_pursuit3" name="pure_pursuit3" output="screen" args="$(arg path) $(arg ld) $(arg vel) $(arg final_constant)" />
   <node pkg="pure_pursuit" type="coordinate2pos" name="coordinate2pos" />
   <node pkg="utmk_coordinate" type="wgs84_to_utmk.py" name="wgs84_to_utmk" />
 
   <node pkg="race" type="serial_control_node" name="serial_control_node" />
 
-
-  <!-- yolo -->  
+  
   <include file="$(find darknet_ros)/launch/darknet_ros.launch" />
 
-  <!-- usb_cam node-->
   <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
     <param name="video_device" value="/dev/video0" />
     <param name="image_width" value="640" />
@@ -40,5 +38,6 @@
     <param name="camera_frame_id" value="usb_cam" />
     <param name="io_method" value="mmap"/>
   </node>
+  
 
 </launch>

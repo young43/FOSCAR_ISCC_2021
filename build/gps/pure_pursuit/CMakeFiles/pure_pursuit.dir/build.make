@@ -170,34 +170,6 @@ pure_pursuit_EXTERNAL_OBJECTS =
 /home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 /home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libpthread.so
 /home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libroslib.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/librospack.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libpython2.7.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libtf.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libtf2_ros.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libactionlib.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libmessage_filters.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libroscpp.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libxmlrpcpp.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/librosconsole.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/librosconsole_log4cxx.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/librosconsole_backend_interface.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libtf2.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libroscpp_serialization.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/librostime.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /opt/ros/melodic/lib/libcpp_common.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_system.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_thread.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 /home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit: gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable /home/foscar/ISCC_2021/devel/lib/pure_pursuit/pure_pursuit"
 	cd /home/foscar/ISCC_2021/build/gps/pure_pursuit && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pure_pursuit.dir/link.txt --verbose=$(VERBOSE)
