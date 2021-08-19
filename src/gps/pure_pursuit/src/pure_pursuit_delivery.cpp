@@ -56,15 +56,19 @@ const int tf_idx_7 = 5285; // 5285
 
 
 /* delivery Index manager */
-// const int dv_a_idx_1 = 214;
-// const int dv_b_idx_1 = 274;
-// const int dv_b_idx_2 = 370;
-// const int dv_b_idx_3 = 442;
+// school staright 구간
+//const int dv_a_idx_1 = 214;
+//const int dv_b_idx_1 = 274;
+//const int dv_b_idx_2 = 370;
+//const int dv_b_idx_3 = 442;
 
-const int dv_a_idx_1 = 200;
-const int dv_b_idx_1 = 264;
-const int dv_b_idx_2 = 350;
-const int dv_b_idx_3 = 422;
+
+// kcity 0.68배
+const int dv_a_idx_1 = 390;
+const int dv_b_idx_1 = 2483;
+const int dv_b_idx_2 = 2525;
+const int dv_b_idx_3 = 2565;
+
 /*************************/
 
 // float tmp_distance = 100.0;
@@ -106,7 +110,7 @@ void PurePursuitNode::initForROS()
 }
 
 void PurePursuitNode::run(char** argv) {
-  ROS_INFO_STREAM("pure pursuit2 start");
+  ROS_INFO_STREAM("pure pursuit delivery start");
 
   // temp
   const_lookahead_distance_ = atof(argv[2]);
@@ -148,7 +152,8 @@ void PurePursuitNode::run(char** argv) {
     }
 
 
-    ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
+    // ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
+    ROS_INFO("CURRENT_INDEX : %d", pp_.current_idx);
 
     // MODE 0 - Normal 직진구간
     if(pp_.mode == 0){
@@ -162,48 +167,47 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 1) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
-      const_velocity_ = 6;
+      const_velocity_ = 8;
       final_constant = 1.5;
     }
 
-    // MODE 5 : 배달 PICK A 
+    // MODE 5 : 배달 PICK A
     if (pp_.mode == 5) {
       const_lookahead_distance_ = 6;
-      const_velocity_ = 6;
+      const_velocity_ = 8;
       final_constant = 1.2;
 
-
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
-        ROS_INFO_STREAM("DELIVERY PICKUP A");
         for (int i = 0; i < 50; i++)
         {
           pulishControlMsg(0, 0);
           // 0.1초
           usleep(100000);
         }
+        ROS_INFO("PICK-UP A : %d", pp_.current_idx);
         pp_.mission_flag = 1;
         const_velocity_ = 10;
         continue;
       }
     }
 
-    // MODE 6 : 배달 PICK B 
+    // MODE 6 : 배달 PICK B
     if (pp_.mode == 5) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 8;
       final_constant = 1.2;
 
+      if((pp_.mission_flag==1 && (pp_.a1_flag && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
+        || (pp_.mission_flag==1 && (pp_.a2_flag && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
+        || (pp_.mission_flag==1 && (pp_.a3_flag && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
 
-      if((pp_.mission_flag==1 && (pp_.a1_flag && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1)) 
-        || (pp_.mission_flag==0 && (pp_.a2_flag && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
-        || (pp_.mission_flag==0 && (pp_.a3_flag && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
-        ROS_INFO_STREAM("DELIVERY PICKUP B");
         for (int i = 0; i < 50; i++)
         {
           pulishControlMsg(0, 0);
           // 0.1초
           usleep(100000);
         }
+        ROS_INFO("PICK-UP B : %d", pp_.current_idx);
         pp_.mission_flag = 2;
         continue;
       }
@@ -405,13 +409,13 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   std::vector<darknet_ros_msgs::BoundingBox> traffic_lights;
   for(int i=0; i<yoloObjects.size(); i++){
     if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 left"
-      || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green" 
+      || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green"
       || yoloObjects[i].Class == "4 red left" || yoloObjects[i].Class == "4 left go"  || yoloObjects[i].Class == "4 red yellow"){
 
         traffic_lights.push_back(yoloObjects[i]);
 
       }
-    
+
     // 배달미션을 위한 표지판 인식
     if(yoloObjects[i].Class == "A1") pp_.a1_flag = true;
     if(yoloObjects[i].Class == "A2") pp_.a2_flag = true;
@@ -421,36 +425,6 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
     if(yoloObjects[i].Class == "B3") pp_.b3_flag = true;
 
   }
-  std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
-
-
- int index = 0;
-
-  // check mode 9 (신호등 좌회전 구간)
-  if (pp_.mode == 9) {
-    if(traffic_lights.size() > 1)
-    {
-      int first_traffic = (traffic_lights[0].xmax - traffic_lights[0].xmin) * (traffic_lights[0].ymax - traffic_lights[0].ymin);
-      int second_traffic = (traffic_lights[1].xmax - traffic_lights[1].xmin) * (traffic_lights[1].ymax - traffic_lights[1].ymin);
-
-      if(first_traffic * 0.6 < second_traffic) {
-        if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 red left" || traffic_lights[0].Class == "4 left go" ||
-          traffic_lights[1].Class == "3 left" || traffic_lights[1].Class == "4 red left" || traffic_lights[1].Class == "4 left go") {
-            pp_.left_go_flag = true;
-        }
-        else {
-          pp_.left_go_flag = false;
-        }
-
-        if (pp_.left_go_flag) {
-          std::cout << "mode 9 left go" << std::endl;
-        }
-        return;
-      }
-    } 
- }
-
-
 
 }
 
@@ -482,3 +456,4 @@ bool compare(darknet_ros_msgs::BoundingBox a, darknet_ros_msgs::BoundingBox b) {
 }
 
 }  // namespace waypoint_follower
+

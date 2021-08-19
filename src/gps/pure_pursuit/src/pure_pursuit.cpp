@@ -5,7 +5,7 @@ namespace waypoint_follower
 // Constructor
 PurePursuit::PurePursuit() : 
   next_waypoint_number_(-1), current_idx(-1), lookahead_distance_(0), mode(0), mission_flag(0), 
-  is_obstacle_detected(0), static_obstacle_flag(0), straight_go_flag(false), 
+  is_obstacle_detected(0), static_obstacle_flag(0), straight_go_flag(true),
   left_go_flag(false), is_obstacle_detected_8m(0), is_finish(false) {}
 
 // Destructor
@@ -75,7 +75,8 @@ void PurePursuit::getNextWaypoint()
     if (getPlaneDistance(waypoints.at(i).first, current_pose_.position) > 4) {
       int path_size2 = static_cast<int>(waypoints.size());
       float min_distance2 = 9999999;
-      for (int j = 0; j < path_size2; j++) {
+//      for (int j = 0; j < path_size2; j++) {
+        for (int j = i; j < path_size2; j++) {
         float current_distance2 = getPlaneDistance(waypoints.at(j).first, current_pose_.position);
         if (min_distance2 > current_distance2) {
           min_distance2 = current_distance2;
@@ -142,7 +143,7 @@ bool PurePursuit::canGetCurvature(double* output_kappa)
 bool PurePursuit::reachMissionIdx(int misson_idx) {
   geometry_msgs::Point mission_position = waypoints.at(misson_idx).first;
   double distance = getPlaneDistance(mission_position, current_pose_.position);
-  if (distance < 1.0)
+  if (distance < 1.0 && abs(current_idx-misson_idx) <= 300) // 1.0
    return true;
   else
    return false;
@@ -182,3 +183,4 @@ tf::Vector3 point2vector(geometry_msgs::Point point)
 }
 
 }  // namespace waypoint_follower
+
