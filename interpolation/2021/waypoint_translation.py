@@ -44,6 +44,7 @@ if __name__ == "__main__":
 
     # school_start_position = np.array([955566.644773, 1956921.99891, 0],np.float64) # school(center)
     # school_start_position = np.array([955576.601804, 1956925.47369, 0],np.float64) # school(corner-up)
+    school_start_position = np.array([955560.312455, 1956901.52949, 0],np.float64) # school(corner-down)
 
     print("k_city_start_position : {}".format(k_city_start_position))
     print("school_start_position : {}".format(school_start_position))
@@ -54,8 +55,8 @@ if __name__ == "__main__":
     print("offset : {}".format(offset))
     
     #### for rotation ####
-    # final1(100), final2(80), parking(0), delivery(60)
-    theta = 60; # degree
+    # final1(100), final2(80), parking(0), delivery(50)
+    theta = 50; # degree
     theta = theta * np.pi / 180
     rotation_matrix = np.array([[np.cos(theta), np.sin(theta), 0],[-np.sin(theta), np.cos(theta), 0], [0, 0, 1]], np.float64)
 
