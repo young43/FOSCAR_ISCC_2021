@@ -79,11 +79,14 @@ public:
   bool b2_flag = false;
   bool b3_flag = false;
 
-  int a1_cnt = 0;
-  int a2_cnt = 0;
-  int a3_cnt = 0;
+  std::vector<int> a_cnt = std::vector<int>(3,0);
+  std::vector<bool> a_flag= std::vector<bool>(3,false);
+  // int a1_cnt = 0;
+  // int a2_cnt = 0;
+  // int a3_cnt = 0;
 
   std::vector<Obstacle> obstacles;
+
 
   
 

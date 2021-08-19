@@ -42,6 +42,15 @@ float min_dist = 1.0;
 int obs_cnt = 0;
 std::chrono::system_clock::time_point obs_start;
 
+//******************* Delivery Valuable *********************// 
+
+// max index of pp_.a_cnt array
+int a_max_index=-1;
+// calc max index flag
+bool a_cnt_flag = false;
+
+//***********************************************************//
+
 /* traffic Index manager */
 // 1,2,3,4,7 직진
 // 5(비보호 좌회전), 6(좌회전)
@@ -177,24 +186,25 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 8;
       final_constant = 1.2;
 
-      ROS_INFO("PICK-UP A1 : %d", pp_.a1_cnt);
-      ROS_INFO("PICK-UP A2 : %d", pp_.a2_cnt);
-      ROS_INFO("PICK-UP A3 : %d", pp_.a3_cnt);
+      // ROS_INFO("PICK-UP A1 : %d", pp_.a1_cnt);
+      // ROS_INFO("PICK-UP A2 : %d", pp_.a2_cnt);
+      // ROS_INFO("PICK-UP A3 : %d", pp_.a3_cnt);
 
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++) //정지
         {
           pulishControlMsg(0, 0);
           // 0.1초
           usleep(100000);
         }
         
-        if(pp_.a1_flag)
-          ROS_INFO("PICK-UP A1 : %d", pp_.current_idx);
-        else if(pp_.a2_flag)
-          ROS_INFO("PICK-UP A2 : %d", pp_.current_idx);
-        else if(pp_.a3_flag)
-          ROS_INFO("PICK-UP A3 : %d", pp_.current_idx);
+        // if(pp_.a1_flag)
+        //   ROS_INFO("PICK-UP A1 : %d", pp_.current_idx);
+        // else if(pp_.a2_flag)
+        //   ROS_INFO("PICK-UP A2 : %d", pp_.current_idx);
+        // else if(pp_.a3_flag)
+        //   ROS_INFO("PICK-UP A3 : %d", pp_.current_idx);
+        
         pp_.mission_flag = 1;
         const_velocity_ = 10;
         continue;
@@ -202,14 +212,24 @@ void PurePursuitNode::run(char** argv) {
     }
 
     // MODE 6 : 배달 PICK B
-    if (pp_.mode == 5) {
+    if (pp_.mode == 6) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 8;
       final_constant = 1.2;
-
-      if((pp_.mission_flag==1 && (pp_.a1_flag && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
-        || (pp_.mission_flag==1 && (pp_.a2_flag && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
-        || (pp_.mission_flag==1 && (pp_.a3_flag && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
+      
+      // if not calculated a_max_index
+      if (!a_cnt_flag){
+        // Calc max_index
+        a_max_index = max_element(pp_.a_cnt.begin(),pp_.a_cnt.end())-pp_.a_cnt.begin();
+        // Max flag on
+        pp_.a_flag[a_max_index] = true;
+        // Lock the a_cnt_flag
+        a_cnt_flag = true;
+      }
+      
+      if((pp_.mission_flag==1 && (pp_.a_flag[0] && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
+        || (pp_.mission_flag==1 && (pp_.a_flag[1] && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
+        || (pp_.mission_flag==1 && (pp_.a_flag[2] && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
 
         for (int i = 0; i < 50; i++)
         {
@@ -423,31 +443,36 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   // 신호등 객체만 따로 검출함 (원근법 알고리즘 적용위함)
   std::vector<darknet_ros_msgs::BoundingBox> traffic_lights;
   for(int i=0; i<yoloObjects.size(); i++){
-    if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 left"
+    if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 redleft"
       || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green"
-      || yoloObjects[i].Class == "4 red left" || yoloObjects[i].Class == "4 left go"  || yoloObjects[i].Class == "4 red yellow"){
+      || yoloObjects[i].Class == "4 redleft" || yoloObjects[i].Class == "4 greenleft"  || yoloObjects[i].Class == "4 redyellow"){
 
         traffic_lights.push_back(yoloObjects[i]);
 
       }
 
     // 배달미션을 위한 표지판 인식
-    if(yoloObjects[i].Class == "A1")
-    { 
-      //pp_.a1_flag = true;
-      pp_.a1_cnt+=1;
+    if (pp_.mode==5){
+      if(yoloObjects[i].Class == "A1")
+      { 
+        //pp_.a1_flag = true;
+        pp_.a_cnt[0]+=1;
+      }
+      if(yoloObjects[i].Class == "A2")
+      { 
+        //pp_.a2_flag = true;
+        pp_.a_cnt[1]+=1;
+      }
+      
+      if(yoloObjects[i].Class == "A3")
+      { 
+        //pp_.a3_flag = true;
+        pp_.a_cnt[2]+=1;
+      }
     }
-    if(yoloObjects[i].Class == "A2")
-    { 
-      //pp_.a2_flag = true;
-      pp_.a2_cnt+=1;
-    }
+
+
     
-    if(yoloObjects[i].Class == "A3")
-    { 
-      //pp_.a3_flag = true;
-      pp_.a3_cnt+=1;
-    }
     if(yoloObjects[i].Class == "B1") pp_.b1_flag = true;
     if(yoloObjects[i].Class == "B2") pp_.b2_flag = true;
     if(yoloObjects[i].Class == "B3") pp_.b3_flag = true;

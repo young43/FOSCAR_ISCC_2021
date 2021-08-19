@@ -402,7 +402,8 @@ void PurePursuitNode::run(char** argv) {
         continue;
       }
     }
-
+    
+    /*
     // MODE 6 : 배달 PICK B 
     if (pp_.mode == 6) {
       const_lookahead_distance_ = 6;
@@ -423,6 +424,7 @@ void PurePursuitNode::run(char** argv) {
         continue;
       }
     }
+    */
 
     // MODE 7 - 차선 변경
     if (pp_.mode == 7) {
@@ -643,6 +645,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
       }
     
     // 배달미션을 위한 표지판 인식
+    
     if(yoloObjects[i].Class == "A1") pp_.a1_flag = true;
     if(yoloObjects[i].Class == "A2") pp_.a2_flag = true;
     if(yoloObjects[i].Class == "A3") pp_.a3_flag = true;
