@@ -64,10 +64,10 @@ const int tf_idx_7 = 5285; // 5285
 
 
 // kcity 0.68배
-const int dv_a_idx_1 = 390;
-const int dv_b_idx_1 = 2483;
-const int dv_b_idx_2 = 2525;
-const int dv_b_idx_3 = 2565;
+const int dv_a_idx_1 = 395;  // 414
+const int dv_b_idx_1 = 2493;
+const int dv_b_idx_2 = 2535;
+const int dv_b_idx_3 = 2575;
 
 /*************************/
 
@@ -153,7 +153,7 @@ void PurePursuitNode::run(char** argv) {
 
 
     // ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
-    ROS_INFO("CURRENT_INDEX : %d", pp_.current_idx);
+    // ROS_INFO("CURRENT_INDEX : %d", pp_.current_idx);
 
     // MODE 0 - Normal 직진구간
     if(pp_.mode == 0){
@@ -177,6 +177,10 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 8;
       final_constant = 1.2;
 
+      ROS_INFO("PICK-UP A1 : %d", pp_.a1_cnt);
+      ROS_INFO("PICK-UP A2 : %d", pp_.a2_cnt);
+      ROS_INFO("PICK-UP A3 : %d", pp_.a3_cnt);
+
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
         for (int i = 0; i < 50; i++)
         {
@@ -184,7 +188,13 @@ void PurePursuitNode::run(char** argv) {
           // 0.1초
           usleep(100000);
         }
-        ROS_INFO("PICK-UP A : %d", pp_.current_idx);
+        
+        if(pp_.a1_flag)
+          ROS_INFO("PICK-UP A1 : %d", pp_.current_idx);
+        else if(pp_.a2_flag)
+          ROS_INFO("PICK-UP A2 : %d", pp_.current_idx);
+        else if(pp_.a3_flag)
+          ROS_INFO("PICK-UP A3 : %d", pp_.current_idx);
         pp_.mission_flag = 1;
         const_velocity_ = 10;
         continue;
@@ -207,7 +217,12 @@ void PurePursuitNode::run(char** argv) {
           // 0.1초
           usleep(100000);
         }
-        ROS_INFO("PICK-UP B : %d", pp_.current_idx);
+        if(pp_.b1_flag)
+          ROS_INFO("PICK-UP B1 : %d", pp_.current_idx);
+        else if(pp_.b2_flag)
+          ROS_INFO("PICK-UP B2 : %d", pp_.current_idx);
+        else if(pp_.b3_flag)
+          ROS_INFO("PICK-UP B3 : %d", pp_.current_idx);
         pp_.mission_flag = 2;
         continue;
       }
@@ -417,9 +432,22 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
       }
 
     // 배달미션을 위한 표지판 인식
-    if(yoloObjects[i].Class == "A1") pp_.a1_flag = true;
-    if(yoloObjects[i].Class == "A2") pp_.a2_flag = true;
-    if(yoloObjects[i].Class == "A3") pp_.a3_flag = true;
+    if(yoloObjects[i].Class == "A1")
+    { 
+      //pp_.a1_flag = true;
+      pp_.a1_cnt+=1;
+    }
+    if(yoloObjects[i].Class == "A2")
+    { 
+      //pp_.a2_flag = true;
+      pp_.a2_cnt+=1;
+    }
+    
+    if(yoloObjects[i].Class == "A3")
+    { 
+      //pp_.a3_flag = true;
+      pp_.a3_cnt+=1;
+    }
     if(yoloObjects[i].Class == "B1") pp_.b1_flag = true;
     if(yoloObjects[i].Class == "B2") pp_.b2_flag = true;
     if(yoloObjects[i].Class == "B3") pp_.b3_flag = true;
