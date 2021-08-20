@@ -98,7 +98,7 @@ void PurePursuit::getNextWaypoint()
     {
     if (i == (path_size - 1))
     {
-      ROS_INFO("search waypoint is the last");
+      //ROS_INFO("search waypoint is the last");
       next_waypoint_number_ = i;
       is_finish = true;
       return;

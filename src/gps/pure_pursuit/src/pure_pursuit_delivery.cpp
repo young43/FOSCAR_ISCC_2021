@@ -156,7 +156,7 @@ void PurePursuitNode::run(char** argv) {
     // 마지막 waypoint 에 다다랐으면 멈추기
     if(pp_.is_finish){
       pulishControlMsg(0,0);
-      ROS_INFO_STREAM("Finish Pure Pursuit");
+      // ROS_INFO_STREAM("Finish Pure Pursuit");
       continue;
     }
 
@@ -198,12 +198,9 @@ void PurePursuitNode::run(char** argv) {
           usleep(100000);
         }
         
-        // if(pp_.a1_flag)
-        //   ROS_INFO("PICK-UP A1 : %d", pp_.current_idx);
-        // else if(pp_.a2_flag)
-        //   ROS_INFO("PICK-UP A2 : %d", pp_.current_idx);
-        // else if(pp_.a3_flag)
-        //   ROS_INFO("PICK-UP A3 : %d", pp_.current_idx);
+        // Calc max_index
+        // a_max_index = max_element(pp_.a_cnt.begin(),pp_.a_cnt.end())-pp_.a_cnt.begin();
+        // ROS_INFO("A INDEX : %d",a_max_index);
         
         pp_.mission_flag = 1;
         const_velocity_ = 10;
@@ -221,10 +218,13 @@ void PurePursuitNode::run(char** argv) {
       if (!a_cnt_flag){
         // Calc max_index
         a_max_index = max_element(pp_.a_cnt.begin(),pp_.a_cnt.end())-pp_.a_cnt.begin();
+        ROS_INFO("A INDEX : %d",a_max_index);
         // Max flag on
         pp_.a_flag[a_max_index] = true;
         // Lock the a_cnt_flag
         a_cnt_flag = true;
+        ROS_INFO("A1_f %d A2_f %d A3_f %d",pp_.a_flag[0],pp_.a_flag[1],pp_.a_flag[2]);
+        
       }
       
       if((pp_.mission_flag==1 && (pp_.a_flag[0] && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
@@ -237,11 +237,14 @@ void PurePursuitNode::run(char** argv) {
           // 0.1초
           usleep(100000);
         }
-        if(pp_.b1_flag)
+        
+        ROS_INFO("B1_f %d B2_f %d B3_f %d",pp_.b1_flag,pp_.b2_flag,pp_.b3_flag);
+
+        if(pp_.a_flag[0] && pp_.b1_flag)
           ROS_INFO("PICK-UP B1 : %d", pp_.current_idx);
-        else if(pp_.b2_flag)
+        if(pp_.a_flag[1] && pp_.b2_flag)
           ROS_INFO("PICK-UP B2 : %d", pp_.current_idx);
-        else if(pp_.b3_flag)
+        if(pp_.a_flag[2] && pp_.b3_flag)
           ROS_INFO("PICK-UP B3 : %d", pp_.current_idx);
         pp_.mission_flag = 2;
         continue;
@@ -443,7 +446,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   // 신호등 객체만 따로 검출함 (원근법 알고리즘 적용위함)
   std::vector<darknet_ros_msgs::BoundingBox> traffic_lights;
   for(int i=0; i<yoloObjects.size(); i++){
-    if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 redleft"
+    if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 left"
       || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green"
       || yoloObjects[i].Class == "4 redleft" || yoloObjects[i].Class == "4 greenleft"  || yoloObjects[i].Class == "4 redyellow"){
 
@@ -471,8 +474,6 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
       }
     }
 
-
-    
     if(yoloObjects[i].Class == "B1") pp_.b1_flag = true;
     if(yoloObjects[i].Class == "B2") pp_.b2_flag = true;
     if(yoloObjects[i].Class == "B3") pp_.b3_flag = true;
