@@ -22,7 +22,11 @@ def parse_txt(path):
 
     data = data.split('\n')
     data = [x.split(' ') for x in data]
-    data = np.array(data, np.float64)
+    data.pop()
+    # data = np.array(data, np.float64)
+    for i in data:
+        i = np.array(i, dtype=np.float64)
+    data = np.array(data)
 
     if d_trig:
         print(data)
@@ -68,6 +72,9 @@ if __name__ == "__main__":
     path = parse_txt(file_name)
 
     x, y = path[:, 0], path[:, 1]
+    x = x.astype(np.float64)
+    y = y.astype(np.float64)
+    print("x is this~", x)
     t = np.arange(0,len(path),1)
     tr = np.linspace(0,len(path)-1,500)
     print(t)
@@ -97,7 +104,8 @@ if __name__ == "__main__":
     print(len(path))
     if o_trig == True:
         print('out trigger')
-        f = open(file_name.split('.')[0]+'.itp.txt','w')
+        print('file_name')
+        f = open(file_name.split('.')[0]+'_itp.txt','w')
         out_str = ''
         for point in path:
             print(point)
@@ -107,4 +115,3 @@ if __name__ == "__main__":
 
     if g_trig == True:
         graph_path(x,y,xr,yr)
-
