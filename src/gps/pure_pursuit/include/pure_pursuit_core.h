@@ -67,6 +67,7 @@ private:
   double const_lookahead_distance_;  // meter
   double const_velocity_;            // km/h
   double final_constant;
+  int parking_num;
   int obs_is_left;
 
   std::vector<std::pair<geometry_msgs::Point, int>> global_path;
