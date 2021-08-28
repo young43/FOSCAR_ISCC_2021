@@ -52,6 +52,15 @@ const int tf_idx_4 = 2987; // 2990
 const int tf_idx_5 = 3403; // 3406
 const int tf_idx_6 = 5052; // 5055
 const int tf_idx_7 = 5285; // 5285
+
+bool tf_flag = false;
+const float tf_coord1[2] = {935575.213544702, 1915926.09913091};
+const float tf_coord2[2] = {935601.125, 1915974.5};
+const float tf_coord3[2] = {935650.3125, 1916100.5};
+const float tf_coord4[2] = {935655.875, 1916205.75};
+const float tf_coord5[2] = {935648.625, 1916343.25};
+const float tf_coord6[2] = {935581.6875, 1916251.625};
+const float tf_coord7[2] = {935642.9375, 1916131.125};
 /*************************/
 
 
@@ -61,6 +70,17 @@ const int dv_b_idx_1 = 1000;
 const int dv_b_idx_2 = 1000;
 const int dv_b_idx_3 = 1000;
 /*************************/
+
+/* Parking manager */
+const float pk_coord1[2] = {935534.247324, 1915849.29071};
+const float pk_coord2[2] = {935536.127777, 1915852.74891};
+const float pk_coord3[2] = {935537.027791, 1915854.43949};
+const float pk_coord4[2] = {935539.530479, 1915859.22427};
+const float pk_coord5[2] = {935540.465801, 1915860.89238};
+const float pk_coord6[2] = {935541.86021, 1915863.43345};
+/*************************/
+
+
 
 // float tmp_distance = 100.0;
 ///////////////////////////////
@@ -153,7 +173,22 @@ void PurePursuitNode::run(char** argv) {
     }
 
 
-    ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
+    // ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
+    // int temp_idx = pp_.getPosIndex(935658.25, 1916136.625);
+    // int temp_idx = pp_.getPosIndex(tf_coord1[0], tf_coord1[1]);
+
+    // Traffic Light Index 한번만 초기화
+    if(!tf_flag){
+      tf_flag = true;
+      tf_idx_1 = pp_.getPosIndex(tf_coord1[0], tf_coord1[1]);
+      tf_idx_2 = pp_.getPosIndex(tf_coord2[0], tf_coord2[1]);
+      tf_idx_3 = pp_.getPosIndex(tf_coord3[0], tf_coord3[1]);
+      tf_idx_4 = pp_.getPosIndex(tf_coord4[0], tf_coord4[1], 1); // 혹시나 배달구간 겹칠 수 있기때문에..
+      tf_idx_5 = pp_.getPosIndex(tf_coord5[0], tf_coord5[1]);
+      tf_idx_6 = pp_.getPosIndex(tf_coord6[0], tf_coord6[1]);
+      tf_idx_7 = pp_.getPosIndex(tf_coord7[0], tf_coord7[1]);
+    }
+    
 
     // MODE 0 - Normal 직진구간
     if(pp_.mode == 0){
@@ -183,38 +218,44 @@ void PurePursuitNode::run(char** argv) {
       }
 
       // first
-      // int start_parking_idx = 260;
+      // int start_parking_idx = 260
+      // int start_parking_idx = pp_.getPosIndex(pk_coord1[0], pk_coord1[1]);
       // int end_parking_idx = 120;
       // int end_parking_backward_idx = 100;
       // int end_parking_full_steer_backward_idx = 75;
 
        // second
-       int start_parking_idx = 280;
+       // int start_parking_idx = 280;
+       int start_parking_idx = pp_.getPosIndex(pk_coord2[0], pk_coord2[1]);
        int end_parking_idx = 87;
        int end_parking_backward_idx = 55;
        int end_parking_full_steer_backward_idx = 25;
 
 
-      // third
-//      int start_parking_idx = 290;
-//      int end_parking_idx = 145;
-//      int end_parking_backward_idx = 117; // 120
-//      int end_parking_full_steer_backward_idx = 90;
+       // third
+       // int start_parking_idx = 290;
+       // int start_parking_idx = pp_.getPosIndex(pk_coord3[0], pk_coord3[1]);
+       // int end_parking_idx = 145;
+       // int end_parking_backward_idx = 117; // 120
+       // int end_parking_full_steer_backward_idx = 90;
 
       // forth
       // int start_parking_idx = 320;
+      // int start_parking_idx = pp_.getPosIndex(pk_coord4[0], pk_coord4[1]);
       // int end_parking_idx = 88;
       // int end_parking_backward_idx = 55;
       // int end_parking_full_steer_backward_idx = 23;
 
       // fifth
       // int start_parking_idx = 330;
+      // int start_parking_idx = pp_.getPosIndex(pk_coord5[0], pk_coord5[1]);
       // int end_parking_idx = 80;
       // int end_parking_backward_idx = 50;
       // int end_parking_full_steer_backward_idx = 23;
 
       //sixth
       // int start_parking_idx = 345;
+      // int start_parking_idx = pp_.getPosIndex(pk_coord6[0], pk_coord6[1]);
       // int end_parking_idx = 75;
       // int end_parking_backward_idx = 55;
       // int end_parking_full_steer_backward_idx = 25;

@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
-  "obstacle_detector_gui_autogen"
-  "CMakeFiles/obstacle_detector_gui_autogen.dir/AutogenOldSettings.cmake"
+  "obstacle_detector_gui_automoc.cpp"
 )
 
 # Per-language clean rules from dependency scanning.

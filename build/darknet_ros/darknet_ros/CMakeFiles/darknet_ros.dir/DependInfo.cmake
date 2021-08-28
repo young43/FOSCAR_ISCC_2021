@@ -4,14 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros/src/yolo_object_detector_node.cpp" "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros.dir/src/yolo_object_detector_node.cpp.o"
+  "/home/young43/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros/src/yolo_object_detector_node.cpp" "/home/young43/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros.dir/src/yolo_object_detector_node.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
-  "DARKNET_FILE_PATH=\"/home/foscar/ISCC_2021/src/darknet_ros/darknet\""
-  "GPU"
+  "DARKNET_FILE_PATH=\"/home/young43/FOSCAR_ISCC_2021/src/darknet_ros/darknet\""
   "OPENCV"
   "ROSCONSOLE_BACKEND_LOG4CXX"
   "ROS_BUILD_SHARED_LIBS=1"
@@ -20,19 +19,19 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/include/opencv"
-  "/home/foscar/ISCC_2021/src/darknet_ros/darknet/src"
-  "/home/foscar/ISCC_2021/src/darknet_ros/darknet/include"
-  "/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros/include"
-  "/home/foscar/ISCC_2021/devel/include"
-  "/opt/ros/melodic/include"
-  "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
-  "/usr/local/cuda-10.2/include"
+  "/opt/ros/kinetic/include/opencv-3.3.1-dev"
+  "/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv"
+  "/home/young43/FOSCAR_ISCC_2021/src/darknet_ros/darknet/src"
+  "/home/young43/FOSCAR_ISCC_2021/src/darknet_ros/darknet/include"
+  "/home/young43/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros/include"
+  "/home/young43/FOSCAR_ISCC_2021/devel/include"
+  "/opt/ros/kinetic/include"
+  "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/DependInfo.cmake"
+  "/home/young43/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

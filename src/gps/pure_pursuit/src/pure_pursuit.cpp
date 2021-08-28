@@ -31,6 +31,60 @@ double PurePursuit::calcCurvature(geometry_msgs::Point target) const
   return kappa;
 }
 
+// PATH WayPoint중에서 (x,y) 좌표와 가장 가까운 지점의 Index를 찾아주는 함수
+// 배달의 경우, 겹치는 구간이 있어 mode로 구분될 수 있게 함.
+// mode default값은 0
+int PurePursuit::getPosIndex(float x, float y, int mode)
+{
+  geometry_msgs::Point point;
+  point.x = x;
+  point.y = y;
+  point.z = 0;
+
+  std::vector<int> idx_list;
+  
+  int path_size = static_cast<int>(waypoints.size());
+  float min_dist = 9999999;
+  int index = -1;
+  
+  for(int i=0; i<path_size; i++){
+    float current_distance = getPlaneDistance(waypoints.at(i).first, point);
+    // 겹치는 구간에 대한 예외처리
+    if(current_distance < 1 && abs(index-i) > 100) idx_list.push_back(i);
+
+    if(min_dist > current_distance){
+      min_dist = current_distance;
+      index = i;
+    }
+  }
+
+  int index2 = -1;
+  if(idx_list.size() > 0){
+    float min_dist = 9999999;
+    for(int i=0; i<idx_list.size(); i++){
+      float current_distance = getPlaneDistance(waypoints.at(i).first, point); 
+      if(min_dist > current_distance){
+        min_dist = current_distance;
+        index2 = idx_list[i];
+      }
+    }
+  }
+
+  // for(int i=0; i<idx_list.size(); i++) ROS_INFO("INDEX : %d", idx_list[i]);
+  // if(index != -1) ROS_INFO("INDEX1 : %d", index);
+  // if(index2 != -1) ROS_INFO("INDEX2 : %d", index2);
+
+  // 배달관련 예외처리
+  // mode=0, 더 앞에있는 Index를 리턴
+  // mode=1, 뒤에 있는 Index를 리턴
+  if(index2 != -1){
+    if(mode == 0) return index < index2? index : index2;
+    if(mode == 1) return index < index2? index2 : index;
+  }
+  
+  return index;
+}
+
 void PurePursuit::getNextWaypoint()
 {
   int path_size = static_cast<int>(waypoints.size());

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/test_shadow_detector.dir/test/test_shadow_detector.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/laser_filters/test_shadow_detector.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/laser_filters/test_shadow_detector"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/laser_filters/test_shadow_detector.pdb"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/laser_filters/test_shadow_detector"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/foscar/ISCC_2021/src/serial/tests/unit/unix_timer_tests.cc" "/home/foscar/ISCC_2021/build/serial/tests/CMakeFiles/serial-test-timer.dir/unit/unix_timer_tests.cc.o"
+  "/home/young43/FOSCAR_ISCC_2021/src/serial/tests/unit/unix_timer_tests.cc" "/home/young43/FOSCAR_ISCC_2021/build/serial/tests/CMakeFiles/serial-test-timer.dir/unit/unix_timer_tests.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,14 +15,13 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/foscar/ISCC_2021/src/serial/include"
-  "/usr/src/googletest/googletest/include"
+  "/home/young43/FOSCAR_ISCC_2021/src/serial/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/foscar/ISCC_2021/build/gtest/googlemock/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
-  "/home/foscar/ISCC_2021/build/serial/CMakeFiles/serial.dir/DependInfo.cmake"
+  "/home/young43/FOSCAR_ISCC_2021/build/gtest/gtest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "/home/young43/FOSCAR_ISCC_2021/build/serial/CMakeFiles/serial.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/avoid_obstacle/obs_sub.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/avoid_obstacle/obs_sub"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/avoid_obstacle/obs_sub.pdb"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/avoid_obstacle/obs_sub"
 )
 
 # Per-language clean rules from dependency scanning.

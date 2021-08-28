@@ -96,7 +96,7 @@ public:
   // functions
   double calcCurvature(geometry_msgs::Point target) const;
   void getNextWaypoint();
-
+  int getPosIndex(float x, float y, int mode=0);
 
   bool reachMissionIdx(int target_idx);
 };
@@ -105,6 +105,7 @@ public:
 geometry_msgs::Point calcRelativeCoordinate(geometry_msgs::Point point_msg, geometry_msgs::Pose current_pose);
 double getPlaneDistance(geometry_msgs::Point target1, geometry_msgs::Point target2);
 tf::Vector3 point2vector(geometry_msgs::Point point);
+
 
 }  // namespace waypoint_follower
 
