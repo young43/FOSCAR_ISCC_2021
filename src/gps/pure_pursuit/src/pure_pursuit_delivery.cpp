@@ -164,72 +164,83 @@ void PurePursuitNode::run(char** argv) {
     // ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
     // ROS_INFO("CURRENT_INDEX : %d", pp_.current_idx);
 
-    // MODE 0 - Normal 직진구간
-    if(pp_.mode == 0){
+    // Normal 직진구간
+    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17 
+       || pp_.mode == 22 || pp_.mode == 25 || pp_.mode == 27 || pp_.mode == 30 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 10;
+      const_velocity_ = 12;
       final_constant = 1.2;
     }
 
-    // MODE 1 - Normal 커브구간
-    if (pp_.mode == 1) {
+    // Normal 커브구간
+    if (pp_.mode == 12 || pp_.mode == 14 || pp_.mode == 16 || pp_.mode == 18 || pp_.mode == 24 || pp_.mode == 26 || pp_.mode == 29 || pp_.mode == 31) {
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 4;
+      const_velocity_ = 10;
+      final_constant = 1.5;
+    }
+
+    // MODE 9 : 배달 A 전 진입구간
+    if (pp_.mode == 9){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
       const_velocity_ = 8;
       final_constant = 1.5;
     }
 
-    // MODE 5 : 배달 PICK A
-    if (pp_.mode == 5) {
+
+    // MODE 10 : 배달 PICK A 
+    if (pp_.mode == 10) {
       const_lookahead_distance_ = 6;
-      const_velocity_ = 8;
+      const_velocity_ = 6;
       final_constant = 1.2;
 
-      // ROS_INFO("PICK-UP A1 : %d", pp_.a1_cnt);
-      // ROS_INFO("PICK-UP A2 : %d", pp_.a2_cnt);
-      // ROS_INFO("PICK-UP A3 : %d", pp_.a3_cnt);
-
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
-        for (int i = 0; i < 50; i++) //정지
+        for (int i = 0; i < 50; i++)
         {
           pulishControlMsg(0, 0);
           // 0.1초
           usleep(100000);
         }
-        
-        // Calc max_index
-        // a_max_index = max_element(pp_.a_cnt.begin(),pp_.a_cnt.end())-pp_.a_cnt.begin();
-        // ROS_INFO("A INDEX : %d",a_max_index);
-        
         pp_.mission_flag = 1;
         const_velocity_ = 10;
         continue;
       }
     }
 
-    // MODE 6 : 배달 PICK B
-    if (pp_.mode == 6) {
-      const_lookahead_distance_ = 6;
+    // 배달 A 구간 끝나고 바로 A_INDEX 계산함
+    if (pp_.mode == 11 && !a_cnt_flag){
+      // if not calculated a_max_index
+      // Calc max_index
+      a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
+      ROS_INFO("A INDEX : %d",a_max_index);
+
+      // Max flag on
+      pp_.a_flag[a_max_index] = true;
+
+      // Lock the a_cnt_flag
+      a_cnt_flag = true;
+      ROS_INFO("A1_f %d A2_f %d A3_f %d",pp_.a_flag[0], pp_.a_flag[1], pp_.a_flag[2]);
+    }
+
+     // MODE 19 : 배달 B 전 진입구간
+    if (pp_.mode == 19){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 4;
       const_velocity_ = 8;
+      final_constant = 1.5;
+    }
+    
+    // MODE 19 : 배달 PICK B
+    if (pp_.mode == 20) {
+      const_lookahead_distance_ = 6;
+      const_velocity_ = 6;
       final_constant = 1.2;
       
-      // if not calculated a_max_index
-      if (!a_cnt_flag){
-        // Calc max_index
-        a_max_index = max_element(pp_.a_cnt.begin(),pp_.a_cnt.end())-pp_.a_cnt.begin();
-        ROS_INFO("A INDEX : %d",a_max_index);
-        // Max flag on
-        pp_.a_flag[a_max_index] = true;
-        // Lock the a_cnt_flag
-        a_cnt_flag = true;
-        ROS_INFO("A1_f %d A2_f %d A3_f %d",pp_.a_flag[0],pp_.a_flag[1],pp_.a_flag[2]);
-        
-      }
-      
-      if((pp_.mission_flag==1 && (pp_.a_flag[0] && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
-        || (pp_.mission_flag==1 && (pp_.a_flag[1] && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
-        || (pp_.mission_flag==1 && (pp_.a_flag[2] && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
+      if((pp_.mission_flag==0 && (pp_.a_flag[0] && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
+        || (pp_.mission_flag==0 && (pp_.a_flag[1] && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
+        || (pp_.mission_flag==0 && (pp_.a_flag[2] && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
 
         for (int i = 0; i < 50; i++)
         {
@@ -238,7 +249,7 @@ void PurePursuitNode::run(char** argv) {
           usleep(100000);
         }
         
-        ROS_INFO("B1_f %d B2_f %d B3_f %d",pp_.b1_flag,pp_.b2_flag,pp_.b3_flag);
+        ROS_INFO("B1_f %d B2_f %d B3_f %d",pp_.b1_flag, pp_.b2_flag, pp_.b3_flag);
 
         if(pp_.a_flag[0] && pp_.b1_flag)
           ROS_INFO("PICK-UP B1 : %d", pp_.current_idx);
@@ -246,7 +257,7 @@ void PurePursuitNode::run(char** argv) {
           ROS_INFO("PICK-UP B2 : %d", pp_.current_idx);
         if(pp_.a_flag[2] && pp_.b3_flag)
           ROS_INFO("PICK-UP B3 : %d", pp_.current_idx);
-        pp_.mission_flag = 2;
+        pp_.mission_flag = 1;
         continue;
       }
     }

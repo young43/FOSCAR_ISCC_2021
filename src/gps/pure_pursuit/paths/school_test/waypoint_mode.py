@@ -58,7 +58,7 @@ if __name__ == "__main__":
     if (range_from == 0 and range_to == 0):
         path[:,2]=mode
     else:
-        path[range_from-1:range_to,2]=mode
+        path=path[range_from-1:range_to]
 
     print(len(path))
     f = open(file_name.split('.')[0]+'.md.txt','w')

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- encoding: utf-8 -*-
 
 import sys
 import numpy as np
@@ -35,15 +36,32 @@ def read_path(path):
 
   return n_data
 
-def getWaypointIndex(dx, dy):
+def getWaypointIndex(dx, dy, mode=0):
+  tmp_lst = []
   min_dist = 999999
   min_index = 0
   for i in range(len(map_xs)):
     dist = ((map_xs[i]-dx)**2 + (map_ys[i]-dy)**2) ** 0.5
+
+    if dist < 1 and abs(min_index-i) > 100: tmp_lst.append(i)
     
     if min_dist > dist:
       min_dist = dist
       min_index = i
+
+  index2 = -1
+  min_dist = 999999
+  for i in range(len(tmp_lst)):
+    dist = ((map_xs[i]-dx)**2 + (map_ys[i]-dy)**2) ** 0.5
+    if min_dist > dist:
+      min_dist = dist
+      index2 = tmp_lst[i]
+
+  if index2 != -1:
+    print("{}(mode={}) : {}".format(min_index, mode, tmp_lst))
+    if mode == 0: return min(min_index, index2)
+    elif mode == 1: return max(min_index, index2)
+    
 
   return min_index
 
@@ -80,7 +98,12 @@ if __name__ == "__main__":
     if len(idx_list) == 0:
       idx_list.append([0, mode])
       continue
-    idx_list.append([getWaypointIndex(x, y), mode])
+
+    # 배달 겹치는 구간 예외처리
+    if 17 <= mode <= 22:
+      idx_list.append([getWaypointIndex(x, y, 1), mode])
+    else:
+      idx_list.append([getWaypointIndex(x, y), mode])
 
   print(idx_list)
   for i in range(len(idx_list)-1):

@@ -46,17 +46,16 @@ std::chrono::system_clock::time_point obs_start;
 /* traffic Index manager */
 // 1,2,3,4,7 직진
 // 5(비보호 좌회전), 6(좌회전)
-const int tf_idx_1 = 1177; // 1180
-const int tf_idx_2 = 1452; // 1455
-const int tf_idx_3 = 2497; // 2500
-const int tf_idx_4 = 2987; // 2990
-const int tf_idx_5 = 3403; // 3406
-const int tf_idx_6 = 5052; // 5055
-const int tf_idx_7 = 5285; // 5285
+int tf_idx_1 = 1177; // 1180
+int tf_idx_2 = 1452; // 1455
+int tf_idx_3 = 2497; // 2500
+int tf_idx_4 = 2987; // 2990
+int tf_idx_5 = 3403; // 3406
+int tf_idx_6 = 5052; // 5055
+int tf_idx_7 = 5285; // 5285
 
-const int tf_idx_8 = 5052; // 5055
-const int tf_idx_9 = 5285; // 5285
-
+int tf_idx_8 = 5052; // 5055
+int tf_idx_9 = 5285; // 5285
 
 
 bool tf_flag = false;
@@ -88,6 +87,10 @@ bool a_cnt_flag = false;
 /*************************/
 
 /* Parking manager */
+int start_parking_idx = 0;
+int end_parking_idx = 0;
+int end_parking_backward_idx = 0;
+int end_parking_full_steer_backward_idx = 0;
 const float pk_coord1[2] = {935534.247324, 1915849.29071};
 const float pk_coord2[2] = {935536.127777, 1915852.74891};
 const float pk_coord3[2] = {935537.027791, 1915854.43949};
@@ -143,7 +146,7 @@ void PurePursuitNode::run(char** argv) {
   const_lookahead_distance_ = atof(argv[2]);
   const_velocity_ = atof(argv[3]);
   final_constant = atof(argv[4]);
-  parking_num = atoi(argv[5])
+  parking_num = atoi(argv[5]);
   //////////////////////////
 
   ros::Rate loop_rate(LOOP_RATE_);
@@ -170,20 +173,8 @@ void PurePursuitNode::run(char** argv) {
     publishCurrentPointVisualizationMsg();
 
 
-    // geometry_msgs::Point green_point = pp_.waypoints.at(pp_.current_idx).first;
-    // geometry_msgs::Point pink_point = pp_.waypoints.at(pp_.next_waypoint_number_).first;
-    // double yaw = atan2(2.0 * (pp_.current_pose_.orientation.w * pp_.current_pose_.orientation.z + pp_.current_pose_.orientation.x * pp_.current_pose_.orientation.y), 1.0 - 2.0 * (pp_.current_pose_.orientation.y * pp_.current_pose_.orientation.y + pp_.current_pose_.orientation.z * pp_.current_pose_.orientation.z));
-    // double map_yaw = atan2(pink_point.y - green_point.y, pink_point.x - green_point.x);
-    // double diff_yaw = fabs(yaw - map_yaw);
-
-    // double map_car_yaw =atan2(pink_point.y - pp_.current_pose_.position.y, pink_point.x - pp_.current_pose_.position.x);
-    // double sinTheta =sin(fabs(map_yaw-map_car_yaw));
-    // double temp_distance = sqrt(pow(green_point.x - pp_.current_pose_.position.x, 2) + pow(green_point.y - pp_.current_pose_.position.y, 2));
-    // double distance_from_car = fabs(sinTheta*temp_distance);
-
-
     // 마지막 waypoint 에 다다랐으면 멈추기
-    if(pp_.is_finish && pp_.mode == 8){
+    if(pp_.is_finish && pp_.mode == 38){
       pulishControlMsg(0,0);
       ROS_INFO_STREAM("Finish Pure Pursuit");
       continue;
@@ -211,8 +202,8 @@ void PurePursuitNode::run(char** argv) {
     
 
     // Normal 직진구간
-    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 10 || pp_.mode == 12 || pp_.mode == 14 || pp_.mode == 16 
-       || pp_.mode == 21 || pp_.mode == 24 || pp_.mode == 26 || pp_.mode == 29 || pp_.mode == 31 || pp_.mode == 35 || pp_.mode == 35){
+    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17 
+       || pp_.mode == 22 || pp_.mode == 25 || pp_.mode == 27 || pp_.mode == 30 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
       const_velocity_ = 12;
@@ -220,7 +211,7 @@ void PurePursuitNode::run(char** argv) {
     }
 
     // Normal 커브구간
-    if (pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17 || pp_.mode == 23 || pp_.mode == 25 || pp_.mode == 28 || pp_.mode == 30) {
+    if (pp_.mode == 12 || pp_.mode == 14 || pp_.mode == 16 || pp_.mode == 18 || pp_.mode == 24 || pp_.mode == 26 || pp_.mode == 29 || pp_.mode == 31) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
       const_velocity_ = 10;
@@ -241,55 +232,55 @@ void PurePursuitNode::run(char** argv) {
       // first
       if (parking_num == 1){
         // int start_parking_idx = 260
-        int start_parking_idx = pp_.getPosIndex(pk_coord1[0], pk_coord1[1]);
-        int end_parking_idx = 120;
-        int end_parking_backward_idx = 100;
-        int end_parking_full_steer_backward_idx = 75;
+        start_parking_idx = pp_.getPosIndex(pk_coord1[0], pk_coord1[1]);
+        end_parking_idx = 120;
+        end_parking_backward_idx = 100;
+        end_parking_full_steer_backward_idx = 75;
       }
     
        // second
        if (parking_num == 2){
         // int start_parking_idx = 280;
-        int start_parking_idx = pp_.getPosIndex(pk_coord2[0], pk_coord2[1]);
-        int end_parking_idx = 87;
-        int end_parking_backward_idx = 55;
-        int end_parking_full_steer_backward_idx = 25;
+        start_parking_idx = pp_.getPosIndex(pk_coord2[0], pk_coord2[1]);
+        end_parking_idx = 87;
+        end_parking_backward_idx = 55;
+        end_parking_full_steer_backward_idx = 25;
        }
 
        // third
        if (parking_num == 3){
         // int start_parking_idx = 290;
-        int start_parking_idx = pp_.getPosIndex(pk_coord3[0], pk_coord3[1]);
-        int end_parking_idx = 145;
-        int end_parking_backward_idx = 117; // 120
-        int end_parking_full_steer_backward_idx = 90;
+        start_parking_idx = pp_.getPosIndex(pk_coord3[0], pk_coord3[1]);
+        end_parking_idx = 145;
+        end_parking_backward_idx = 117; // 120
+        end_parking_full_steer_backward_idx = 90;
        }
 
       // forth
       if (parking_num == 4){
         // int start_parking_idx = 320;
-        int start_parking_idx = pp_.getPosIndex(pk_coord4[0], pk_coord4[1]);
-        int end_parking_idx = 88;
-        int end_parking_backward_idx = 55;
-        int end_parking_full_steer_backward_idx = 23;
+        start_parking_idx = pp_.getPosIndex(pk_coord4[0], pk_coord4[1]);
+        end_parking_idx = 88;
+        end_parking_backward_idx = 55;
+        end_parking_full_steer_backward_idx = 23;
       }
 
       // fifth
       if (parking_num == 5){
         // int start_parking_idx = 330;
-        int start_parking_idx = pp_.getPosIndex(pk_coord5[0], pk_coord5[1]);
-        int end_parking_idx = 80;
-        int end_parking_backward_idx = 50;
-        int end_parking_full_steer_backward_idx = 23;
+        start_parking_idx = pp_.getPosIndex(pk_coord5[0], pk_coord5[1]);
+        end_parking_idx = 80;
+        end_parking_backward_idx = 50;
+        end_parking_full_steer_backward_idx = 23;
       }
 
       //sixth
       if (parking_num == 6){
         // int start_parking_idx = 345;
-        int start_parking_idx = pp_.getPosIndex(pk_coord6[0], pk_coord6[1]);
-        int end_parking_idx = 75;
-        int end_parking_backward_idx = 55;
-        int end_parking_full_steer_backward_idx = 25;
+        start_parking_idx = pp_.getPosIndex(pk_coord6[0], pk_coord6[1]);
+        end_parking_idx = 75;
+        end_parking_backward_idx = 55;
+        end_parking_full_steer_backward_idx = 25;
       }
 
 
@@ -350,8 +341,8 @@ void PurePursuitNode::run(char** argv) {
     }
 
 
-    // MODE 3,5,8,32 : 신호등 (직진구간)
-    if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 32) {
+    // MODE 3,5,8,33 : 신호등 (직진구간)
+    if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 33) {
       pp_.mission_flag = 0; 
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
@@ -365,8 +356,8 @@ void PurePursuitNode::run(char** argv) {
       }
     }
 
-    // MODE 34,36 : 신호등(무시할지결정바람)
-    if (pp_.mode == 34 || pp_.mode == 36) {
+    // MODE 35,37 : 신호등(무시할지결정바람)
+    if (pp_.mode == 35 || pp_.mode == 37) {
       pp_.mission_flag = 0; 
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
@@ -378,8 +369,8 @@ void PurePursuitNode::run(char** argv) {
       }
     }
 
-    // MODE 20 : 신호등 & 커브
-    if (pp_.mode == 20){
+    // MODE 21 : 신호등 & 커브
+    if (pp_.mode == 21){
       pp_.mission_flag = 0; 
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
@@ -391,8 +382,8 @@ void PurePursuitNode::run(char** argv) {
       }
     }
 
-    // MODE 22, 27 : 신호등 (비보호 좌회전 신호)
-    if (pp_.mode == 22 || pp_.mode == 27) {
+    // MODE 23, 28 : 신호등 (비보호 좌회전 신호)
+    if (pp_.mode == 23 || pp_.mode == 28) {
       pp_.mission_flag = 0; 
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
@@ -480,11 +471,17 @@ void PurePursuitNode::run(char** argv) {
 
     }
 
-    
+    // MODE 9 : 배달 A 전 진입구간
+    if (pp_.mode == 9){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 4;
+      const_velocity_ = 8;
+      final_constant = 1.5;
+    }
 
 
-    // MODE 9 : 배달 PICK A 
-    if (pp_.mode == 9) {
+    // MODE 10 : 배달 PICK A 
+    if (pp_.mode == 10) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
       final_constant = 1.2;
@@ -503,7 +500,7 @@ void PurePursuitNode::run(char** argv) {
     }
 
     // 배달 A 구간 끝나고 바로 A_INDEX 계산함
-    if (pp_.mode == 10 && !a_cnt_flag){
+    if (pp_.mode == 11 && !a_cnt_flag){
       // if not calculated a_max_index
       // Calc max_index
       a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
@@ -517,8 +514,8 @@ void PurePursuitNode::run(char** argv) {
       ROS_INFO("A1_f %d A2_f %d A3_f %d",pp_.a_flag[0], pp_.a_flag[1], pp_.a_flag[2]);
     }
 
-    // MODE 18 : 배달 B 전 진입구간
-    if (pp_.mode == 18){
+    // MODE 19 : 배달 B 전 진입구간
+    if (pp_.mode == 19){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
       const_velocity_ = 8;
@@ -526,7 +523,7 @@ void PurePursuitNode::run(char** argv) {
     }
     
     // MODE 19 : 배달 PICK B
-    if (pp_.mode == 19) {
+    if (pp_.mode == 20) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
       final_constant = 1.2;
@@ -556,8 +553,8 @@ void PurePursuitNode::run(char** argv) {
     }
 
 
-    // MODE 37 - 직선 구간 (부스터)
-    if(pp_.mode == 37){
+    // MODE 38 - 직선 구간 (부스터)
+    if(pp_.mode == 38){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
       const_velocity_ = 15;
@@ -571,6 +568,7 @@ void PurePursuitNode::run(char** argv) {
     loop_rate.sleep();
   }
 }
+
 
 void PurePursuitNode::publishPurePursuitDriveMsg(const bool& can_get_curvature, const double& kappa) const {
   double throttle_ = can_get_curvature ? const_velocity_ : 0;
