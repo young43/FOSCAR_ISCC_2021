@@ -11,3 +11,6 @@
 ./buld/*
 ./devel/*
 
+
+# vscode
+./.vscode/*
