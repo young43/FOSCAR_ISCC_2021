@@ -124,68 +124,6 @@ struct MonHW6_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(A_STATUS_INIT)
-  #undef A_STATUS_INIT
-#endif
-#if defined(_WIN32) && defined(A_STATUS_UNKNOWN)
-  #undef A_STATUS_UNKNOWN
-#endif
-#if defined(_WIN32) && defined(A_STATUS_OK)
-  #undef A_STATUS_OK
-#endif
-#if defined(_WIN32) && defined(A_STATUS_SHORT)
-  #undef A_STATUS_SHORT
-#endif
-#if defined(_WIN32) && defined(A_STATUS_OPEN)
-  #undef A_STATUS_OPEN
-#endif
-#if defined(_WIN32) && defined(A_POWER_OFF)
-  #undef A_POWER_OFF
-#endif
-#if defined(_WIN32) && defined(A_POWER_ON)
-  #undef A_POWER_ON
-#endif
-#if defined(_WIN32) && defined(A_POWER_UNKNOWN)
-  #undef A_POWER_UNKNOWN
-#endif
-#if defined(_WIN32) && defined(FLAGS_RTC_CALIB)
-  #undef FLAGS_RTC_CALIB
-#endif
-#if defined(_WIN32) && defined(FLAGS_SAFE_BOOT)
-  #undef FLAGS_SAFE_BOOT
-#endif
-#if defined(_WIN32) && defined(FLAGS_JAMMING_STATE_MASK)
-  #undef FLAGS_JAMMING_STATE_MASK
-#endif
-#if defined(_WIN32) && defined(JAMMING_STATE_UNKNOWN_OR_DISABLED)
-  #undef JAMMING_STATE_UNKNOWN_OR_DISABLED
-#endif
-#if defined(_WIN32) && defined(JAMMING_STATE_OK)
-  #undef JAMMING_STATE_OK
-#endif
-#if defined(_WIN32) && defined(JAMMING_STATE_WARNING)
-  #undef JAMMING_STATE_WARNING
-#endif
-#if defined(_WIN32) && defined(JAMMING_STATE_CRITICAL)
-  #undef JAMMING_STATE_CRITICAL
-#endif
-#if defined(_WIN32) && defined(FLAGS_XTAL_ABSENT)
-  #undef FLAGS_XTAL_ABSENT
-#endif
-#if defined(_WIN32) && defined(JAM_IND_NONE)
-  #undef JAM_IND_NONE
-#endif
-#if defined(_WIN32) && defined(JAM_IND_STRONG)
-  #undef JAM_IND_STRONG
-#endif
-
   enum {
     CLASS_ID = 10u,
     MESSAGE_ID = 9u,
@@ -271,36 +209,6 @@ ros::message_operations::Printer< ::ublox_msgs::MonHW6_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::MonHW6_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonHW6_<ContainerAllocator2> & rhs)
-{
-  return lhs.pinSel == rhs.pinSel &&
-    lhs.pinBank == rhs.pinBank &&
-    lhs.pinDir == rhs.pinDir &&
-    lhs.pinVal == rhs.pinVal &&
-    lhs.noisePerMS == rhs.noisePerMS &&
-    lhs.agcCnt == rhs.agcCnt &&
-    lhs.aStatus == rhs.aStatus &&
-    lhs.aPower == rhs.aPower &&
-    lhs.flags == rhs.flags &&
-    lhs.reserved0 == rhs.reserved0 &&
-    lhs.usedMask == rhs.usedMask &&
-    lhs.VP == rhs.VP &&
-    lhs.jamInd == rhs.jamInd &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.pinIrq == rhs.pinIrq &&
-    lhs.pullH == rhs.pullH &&
-    lhs.pullL == rhs.pullL;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::MonHW6_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonHW6_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -308,6 +216,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -372,65 +286,65 @@ struct Definition< ::ublox_msgs::MonHW6_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# MON-HW (0x0A 0x09)\n"
-"# Hardware Status\n"
-"# Firmware 6\n"
-"#\n"
-"# Status of different aspect of the hardware, such as Antenna, PIO/Peripheral \n"
-"# Pins, Noise Level, Automatic Gain Control (AGC)\n"
-"#\n"
-"# WARNING: this message is a different length than the MonHW message for\n"
-"# firmware version 7 & 8\n"
-"\n"
-"uint8 CLASS_ID = 10\n"
-"uint8 MESSAGE_ID = 9\n"
-"\n"
-"uint32 pinSel                 # Mask of Pins Set as Peripheral/PIO\n"
-"uint32 pinBank                # Mask of Pins Set as Bank A/B\n"
-"uint32 pinDir                 # Mask of Pins Set as Input/Output\n"
-"uint32 pinVal                 # Mask of Pins Value Low/High\n"
-"uint16 noisePerMS             # Noise Level as measured by the GPS Core\n"
-"uint16 agcCnt                 # AGC Monitor (counts SIGHI xor SIGLO, \n"
-"                              # range 0 to 8191)\n"
-"uint8 aStatus                 # Status of the Antenna Supervisor State Machine \n"
-"uint8 A_STATUS_INIT = 0\n"
-"uint8 A_STATUS_UNKNOWN = 1\n"
-"uint8 A_STATUS_OK = 2\n"
-"uint8 A_STATUS_SHORT = 3\n"
-"uint8 A_STATUS_OPEN = 4\n"
-"\n"
-"uint8 aPower                  # Current PowerStatus of Antenna \n"
-"uint8 A_POWER_OFF = 0 \n"
-"uint8 A_POWER_ON = 1\n"
-"uint8 A_POWER_UNKNOWN = 2\n"
-"\n"
-"uint8 flags                   # Flags:\n"
-"uint8 FLAGS_RTC_CALIB = 1            # RTC is calibrated\n"
-"uint8 FLAGS_SAFE_BOOT =  2           # Safe boot mode (0 = inactive, 1 = active)\n"
-"uint8 FLAGS_JAMMING_STATE_MASK = 12  # output from Jamming/Interference Monitor: \n"
-"uint8 JAMMING_STATE_UNKNOWN_OR_DISABLED = 0   # unknown or feature disabled\n"
-"uint8 JAMMING_STATE_OK = 4                    # ok - no significant jamming\n"
-"uint8 JAMMING_STATE_WARNING = 8               # interference visible but fix OK\n"
-"uint8 JAMMING_STATE_CRITICAL = 12             # interference visible and no fix\n"
-"uint8 FLAGS_XTAL_ABSENT =  16        # RTC XTAL is absent\n"
-"                                     # (not supported in protocol versions < 18)\n"
-"uint8 reserved0               # Reserved\n"
-"uint32 usedMask               # Mask of Pins that are used by the Virtual Pin \n"
-"                              # Manager\n"
-"uint8[25] VP                  # Array of Pin Mappings for each of the 25  \n"
-"                              # Physical Pins\n"
-"uint8 jamInd                  # CW Jamming indicator, scaled:\n"
-"uint8 JAM_IND_NONE = 0          # No CW Jamming\n"
-"uint8 JAM_IND_STRONG = 255      # Strong CW Jamming    \n"
-"\n"
-"uint8[2] reserved1            # Reserved\n"
-"\n"
-"uint32 pinIrq                 # Mask of Pins Value using the PIO Irq\n"
-"uint32 pullH                  # Mask of Pins Value using the PIO Pull High \n"
-"                              # Resistor\n"
-"uint32 pullL                  # Mask of Pins Value using the PIO Pull Low \n"
-"                              # Resistor\n"
-;
+    return "# MON-HW (0x0A 0x09)\n\
+# Hardware Status\n\
+# Firmware 6\n\
+#\n\
+# Status of different aspect of the hardware, such as Antenna, PIO/Peripheral \n\
+# Pins, Noise Level, Automatic Gain Control (AGC)\n\
+#\n\
+# WARNING: this message is a different length than the MonHW message for\n\
+# firmware version 7 & 8\n\
+\n\
+uint8 CLASS_ID = 10\n\
+uint8 MESSAGE_ID = 9\n\
+\n\
+uint32 pinSel                 # Mask of Pins Set as Peripheral/PIO\n\
+uint32 pinBank                # Mask of Pins Set as Bank A/B\n\
+uint32 pinDir                 # Mask of Pins Set as Input/Output\n\
+uint32 pinVal                 # Mask of Pins Value Low/High\n\
+uint16 noisePerMS             # Noise Level as measured by the GPS Core\n\
+uint16 agcCnt                 # AGC Monitor (counts SIGHI xor SIGLO, \n\
+                              # range 0 to 8191)\n\
+uint8 aStatus                 # Status of the Antenna Supervisor State Machine \n\
+uint8 A_STATUS_INIT = 0\n\
+uint8 A_STATUS_UNKNOWN = 1\n\
+uint8 A_STATUS_OK = 2\n\
+uint8 A_STATUS_SHORT = 3\n\
+uint8 A_STATUS_OPEN = 4\n\
+\n\
+uint8 aPower                  # Current PowerStatus of Antenna \n\
+uint8 A_POWER_OFF = 0 \n\
+uint8 A_POWER_ON = 1\n\
+uint8 A_POWER_UNKNOWN = 2\n\
+\n\
+uint8 flags                   # Flags:\n\
+uint8 FLAGS_RTC_CALIB = 1            # RTC is calibrated\n\
+uint8 FLAGS_SAFE_BOOT =  2           # Safe boot mode (0 = inactive, 1 = active)\n\
+uint8 FLAGS_JAMMING_STATE_MASK = 12  # output from Jamming/Interference Monitor: \n\
+uint8 JAMMING_STATE_UNKNOWN_OR_DISABLED = 0   # unknown or feature disabled\n\
+uint8 JAMMING_STATE_OK = 4                    # ok - no significant jamming\n\
+uint8 JAMMING_STATE_WARNING = 8               # interference visible but fix OK\n\
+uint8 JAMMING_STATE_CRITICAL = 12             # interference visible and no fix\n\
+uint8 FLAGS_XTAL_ABSENT =  16        # RTC XTAL is absent\n\
+                                     # (not supported in protocol versions < 18)\n\
+uint8 reserved0               # Reserved\n\
+uint32 usedMask               # Mask of Pins that are used by the Virtual Pin \n\
+                              # Manager\n\
+uint8[25] VP                  # Array of Pin Mappings for each of the 25  \n\
+                              # Physical Pins\n\
+uint8 jamInd                  # CW Jamming indicator, scaled:\n\
+uint8 JAM_IND_NONE = 0          # No CW Jamming\n\
+uint8 JAM_IND_STRONG = 255      # Strong CW Jamming    \n\
+\n\
+uint8[2] reserved1            # Reserved\n\
+\n\
+uint32 pinIrq                 # Mask of Pins Value using the PIO Irq\n\
+uint32 pullH                  # Mask of Pins Value using the PIO Pull High \n\
+                              # Resistor\n\
+uint32 pullL                  # Mask of Pins Value using the PIO Pull Low \n\
+                              # Resistor\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::MonHW6_<ContainerAllocator>&) { return value(); }

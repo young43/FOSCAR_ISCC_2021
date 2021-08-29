@@ -60,17 +60,6 @@ struct RxmRTCM_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(FLAGS_CRC_FAILED)
-  #undef FLAGS_CRC_FAILED
-#endif
-
   enum {
     CLASS_ID = 2u,
     MESSAGE_ID = 50u,
@@ -105,24 +94,6 @@ ros::message_operations::Printer< ::ublox_msgs::RxmRTCM_<ContainerAllocator> >::
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::RxmRTCM_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRTCM_<ContainerAllocator2> & rhs)
-{
-  return lhs.version == rhs.version &&
-    lhs.flags == rhs.flags &&
-    lhs.reserved0 == rhs.reserved0 &&
-    lhs.refStation == rhs.refStation &&
-    lhs.msgType == rhs.msgType;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::RxmRTCM_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRTCM_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -130,6 +101,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -194,28 +171,28 @@ struct Definition< ::ublox_msgs::RxmRTCM_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# RXM-RTCM (0x02 0x32)\n"
-"# RTCM input status\n"
-"#\n"
-"# Output upon processing of an RTCM input message\n"
-"# Supported on:\n"
-"# - u-blox 8 / u-blox M8 from protocol version 20.01 up to version 23.01\n"
-"# \n"
-"\n"
-"uint8 CLASS_ID = 2\n"
-"uint8 MESSAGE_ID = 50\n"
-"\n"
-"uint8 version                 # Message version (0x02 for this version)\n"
-"uint8 flags                   # RTCM input status flags\n"
-"uint8 FLAGS_CRC_FAILED = 1    # 0 when RTCM message received and passed CRC \n"
-"                              # check, 1 when failed in which case refStation\n"
-"                              # and msgType might be corrupted and misleading\n"
-"\n"
-"uint8[2] reserved0            # Reserved\n"
-"\n"
-"uint16 refStation             # Reference station ID\n"
-"uint16 msgType                # Message type\n"
-;
+    return "# RXM-RTCM (0x02 0x32)\n\
+# RTCM input status\n\
+#\n\
+# Output upon processing of an RTCM input message\n\
+# Supported on:\n\
+# - u-blox 8 / u-blox M8 from protocol version 20.01 up to version 23.01\n\
+# \n\
+\n\
+uint8 CLASS_ID = 2\n\
+uint8 MESSAGE_ID = 50\n\
+\n\
+uint8 version                 # Message version (0x02 for this version)\n\
+uint8 flags                   # RTCM input status flags\n\
+uint8 FLAGS_CRC_FAILED = 1    # 0 when RTCM message received and passed CRC \n\
+                              # check, 1 when failed in which case refStation\n\
+                              # and msgType might be corrupted and misleading\n\
+\n\
+uint8[2] reserved0            # Reserved\n\
+\n\
+uint16 refStation             # Reference station ID\n\
+uint16 msgType                # Message type\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::RxmRTCM_<ContainerAllocator>&) { return value(); }

@@ -101,28 +101,6 @@ ros::message_operations::Printer< ::ublox_msgs::NavSBAS_SV_<ContainerAllocator> 
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::NavSBAS_SV_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSBAS_SV_<ContainerAllocator2> & rhs)
-{
-  return lhs.svid == rhs.svid &&
-    lhs.flags == rhs.flags &&
-    lhs.udre == rhs.udre &&
-    lhs.svSys == rhs.svSys &&
-    lhs.svService == rhs.svService &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.prc == rhs.prc &&
-    lhs.reserved2 == rhs.reserved2 &&
-    lhs.ic == rhs.ic;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::NavSBAS_SV_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSBAS_SV_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -130,6 +108,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -194,19 +178,19 @@ struct Definition< ::ublox_msgs::NavSBAS_SV_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# see message NavSBAS\n"
-"#\n"
-"\n"
-"uint8 svid              # SV Id\n"
-"uint8 flags             # Flags for this SV\n"
-"uint8 udre              # Monitoring status\n"
-"uint8 svSys             # System (WAAS/EGNOS/...), same as SYS\n"
-"uint8 svService         # Services available, same as SERVICE\n"
-"uint8 reserved1         # Reserved\n"
-"int16 prc               # Pseudo Range correction in [cm]\n"
-"uint16 reserved2        # Reserved\n"
-"int16 ic                # Ionosphere correction in [cm]\n"
-;
+    return "# see message NavSBAS\n\
+#\n\
+\n\
+uint8 svid              # SV Id\n\
+uint8 flags             # Flags for this SV\n\
+uint8 udre              # Monitoring status\n\
+uint8 svSys             # System (WAAS/EGNOS/...), same as SYS\n\
+uint8 svService         # Services available, same as SERVICE\n\
+uint8 reserved1         # Reserved\n\
+int16 prc               # Pseudo Range correction in [cm]\n\
+uint16 reserved2        # Reserved\n\
+int16 ic                # Ionosphere correction in [cm]\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::NavSBAS_SV_<ContainerAllocator>&) { return value(); }

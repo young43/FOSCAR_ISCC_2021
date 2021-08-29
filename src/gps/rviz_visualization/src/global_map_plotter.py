@@ -65,29 +65,29 @@ while path_len > count:
   marker.color.g = 1.0
   marker.color.b = 1.0
 
-  # if modes[count]%2 == 0:
-  #   marker.color.r = 1
-  #   marker.color.g = 0.5
-  #   marker.color.b = 0
-
-  # if modes[count]%2 == 1:
-  #   marker.color.b = 0.0
-
-  if modes[count] == 0:
+  if modes[count]%2 == 0:
     marker.color.r = 1
     marker.color.g = 0.5
     marker.color.b = 0
 
-  elif modes[count] == 1:
-    marker.color.r = 0
-    marker.color.g = 1
-    marker.color.b = 0
+  if modes[count]%2 == 1:
+    marker.color.b = 0.0
 
-  else:
+  # if modes[count] == 0:
+  #   marker.color.r = 1
+  #   marker.color.g = 0.5
+  #   marker.color.b = 0
 
-    marker.color.r = 1
-    marker.color.g = 0
-    marker.color.b = 1
+  # elif modes[count] == 1:
+  #   marker.color.r = 0
+  #   marker.color.g = 1
+  #   marker.color.b = 0
+
+  # else:
+
+  #   marker.color.r = 1
+  #   marker.color.g = 0
+  #   marker.color.b = 1
 
 
   marker.pose.orientation.w = 1.0

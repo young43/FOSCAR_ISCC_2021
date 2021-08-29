@@ -45,14 +45,6 @@ struct CfgHNR_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 92u,
@@ -84,21 +76,6 @@ ros::message_operations::Printer< ::ublox_msgs::CfgHNR_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::CfgHNR_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgHNR_<ContainerAllocator2> & rhs)
-{
-  return lhs.highNavRate == rhs.highNavRate &&
-    lhs.reserved0 == rhs.reserved0;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::CfgHNR_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgHNR_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -106,6 +83,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -170,26 +153,26 @@ struct Definition< ::ublox_msgs::CfgHNR_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-HNR (0x06 0x5C)\n"
-"# High Navigation Rate Settings\n"
-"#\n"
-"# The u-blox receivers support high rates of navigation update up to 30 Hz. \n"
-"# The navigation solution output (NAV-HNR) will not be aligned to the top of a\n"
-"# second.\n"
-"# The update rate has a direct influence on the power consumption. The more\n"
-"# fixes that are required, the more CPU power and communication resources are \n"
-"# required.\n"
-"# For most applications a 1 Hz update rate would be sufficient.\n"
-"#\n"
-"# (only with ADR or UDR products)\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 6\n"
-"uint8 MESSAGE_ID = 92\n"
-"\n"
-"uint8 highNavRate     # Rate of navigation solution output [Hz]\n"
-"uint8[3] reserved0    # Reserved\n"
-;
+    return "# CFG-HNR (0x06 0x5C)\n\
+# High Navigation Rate Settings\n\
+#\n\
+# The u-blox receivers support high rates of navigation update up to 30 Hz. \n\
+# The navigation solution output (NAV-HNR) will not be aligned to the top of a\n\
+# second.\n\
+# The update rate has a direct influence on the power consumption. The more\n\
+# fixes that are required, the more CPU power and communication resources are \n\
+# required.\n\
+# For most applications a 1 Hz update rate would be sufficient.\n\
+#\n\
+# (only with ADR or UDR products)\n\
+#\n\
+\n\
+uint8 CLASS_ID = 6\n\
+uint8 MESSAGE_ID = 92\n\
+\n\
+uint8 highNavRate     # Rate of navigation solution output [Hz]\n\
+uint8[3] reserved0    # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::CfgHNR_<ContainerAllocator>&) { return value(); }

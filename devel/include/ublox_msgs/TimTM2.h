@@ -83,38 +83,6 @@ struct TimTM2_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(FLAGS_MODE_RUNNING)
-  #undef FLAGS_MODE_RUNNING
-#endif
-#if defined(_WIN32) && defined(FLAGS_RUN)
-  #undef FLAGS_RUN
-#endif
-#if defined(_WIN32) && defined(FLAGS_NEWFALLINGEDGE)
-  #undef FLAGS_NEWFALLINGEDGE
-#endif
-#if defined(_WIN32) && defined(FLAGS_TIMEBASE_GNSS)
-  #undef FLAGS_TIMEBASE_GNSS
-#endif
-#if defined(_WIN32) && defined(FLAGS_TIMEBASE_UTC)
-  #undef FLAGS_TIMEBASE_UTC
-#endif
-#if defined(_WIN32) && defined(FLAGS_UTC_AVAIL)
-  #undef FLAGS_UTC_AVAIL
-#endif
-#if defined(_WIN32) && defined(FLAGS_TIME_VALID)
-  #undef FLAGS_TIME_VALID
-#endif
-#if defined(_WIN32) && defined(FLAGS_NEWRISINGEDGE)
-  #undef FLAGS_NEWRISINGEDGE
-#endif
-
   enum {
     CLASS_ID = 13u,
     MESSAGE_ID = 3u,
@@ -170,29 +138,6 @@ ros::message_operations::Printer< ::ublox_msgs::TimTM2_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::TimTM2_<ContainerAllocator1> & lhs, const ::ublox_msgs::TimTM2_<ContainerAllocator2> & rhs)
-{
-  return lhs.ch == rhs.ch &&
-    lhs.flags == rhs.flags &&
-    lhs.risingEdgeCount == rhs.risingEdgeCount &&
-    lhs.wnR == rhs.wnR &&
-    lhs.wnF == rhs.wnF &&
-    lhs.towMsR == rhs.towMsR &&
-    lhs.towSubMsR == rhs.towSubMsR &&
-    lhs.towMsF == rhs.towMsF &&
-    lhs.towSubMsF == rhs.towSubMsF &&
-    lhs.accEst == rhs.accEst;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::TimTM2_<ContainerAllocator1> & lhs, const ::ublox_msgs::TimTM2_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -200,6 +145,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -264,39 +215,39 @@ struct Definition< ::ublox_msgs::TimTM2_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# TIM-TM2 (0x0D, 0x03)\n"
-"# Time mark data \n"
-"#\n"
-"# Description for details.\n"
-"# \n"
-"# Supported on:\n"
-"#  - u-blox 8 / u-blox M8 with protocol version 22 (only with Timing Products)\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 13 \n"
-"uint8 MESSAGE_ID = 3\n"
-"\n"
-"uint8 ch                     # Channel (i.e. EXTINT) upon which the pulse was measured\n"
-"\n"
-"uint8 flags                   # Bitmask [newRisingEdge, time, utc, timeBase, , newFallingEdge, run, mode]\n"
-"uint8 FLAGS_MODE_RUNNING = 1  # single = 0, running = 1\n"
-"uint8 FLAGS_RUN = 2		# armed = 0, stopped = 1\n"
-"uint8 FLAGS_NEWFALLINGEDGE = 4 	# new falling edge detected\n"
-"uint8 FLAGS_TIMEBASE_GNSS = 8	# 0 = time base is receiver time, 1 = time base is GNSS Time (according to the configuration in CFG-TP5 for tpldx= 0)\n"
-"uint8 FLAGS_TIMEBASE_UTC = 16	# Time Base is UTC (the variant according to the configuration in CFG-NAV5\n"
-"uint8 FLAGS_UTC_AVAIL = 32	# 0 = utc not available, 1 = utc available\n"
-"uint8 FLAGS_TIME_VALID = 64	# 0 = time is not valid, 1 time is valid\n"
-"uint8 FLAGS_NEWRISINGEDGE = 128	# new rising edge detected\n"
-"\n"
-"uint16 risingEdgeCount		# rising edge count\n"
-"uint16 wnR			# week number of last rising edge\n"
-"uint16 wnF			# week number of last falling edge\n"
-"uint32 towMsR			# Tow of rising edge \n"
-"uint32 towSubMsR		# Millisecond Fraction of Tow of rising edge in nanoseconds\n"
-"uint32 towMsF			# tow of falling edge\n"
-"uint32 towSubMsF		# millisecond fraction of tow of falling edge in nanoseconds\n"
-"uint32 accEst			# Accuracy estimate\n"
-;
+    return "# TIM-TM2 (0x0D, 0x03)\n\
+# Time mark data \n\
+#\n\
+# Description for details.\n\
+# \n\
+# Supported on:\n\
+#  - u-blox 8 / u-blox M8 with protocol version 22 (only with Timing Products)\n\
+#\n\
+\n\
+uint8 CLASS_ID = 13 \n\
+uint8 MESSAGE_ID = 3\n\
+\n\
+uint8 ch                     # Channel (i.e. EXTINT) upon which the pulse was measured\n\
+\n\
+uint8 flags                   # Bitmask [newRisingEdge, time, utc, timeBase, , newFallingEdge, run, mode]\n\
+uint8 FLAGS_MODE_RUNNING = 1  # single = 0, running = 1\n\
+uint8 FLAGS_RUN = 2		# armed = 0, stopped = 1\n\
+uint8 FLAGS_NEWFALLINGEDGE = 4 	# new falling edge detected\n\
+uint8 FLAGS_TIMEBASE_GNSS = 8	# 0 = time base is receiver time, 1 = time base is GNSS Time (according to the configuration in CFG-TP5 for tpldx= 0)\n\
+uint8 FLAGS_TIMEBASE_UTC = 16	# Time Base is UTC (the variant according to the configuration in CFG-NAV5\n\
+uint8 FLAGS_UTC_AVAIL = 32	# 0 = utc not available, 1 = utc available\n\
+uint8 FLAGS_TIME_VALID = 64	# 0 = time is not valid, 1 time is valid\n\
+uint8 FLAGS_NEWRISINGEDGE = 128	# new rising edge detected\n\
+\n\
+uint16 risingEdgeCount		# rising edge count\n\
+uint16 wnR			# week number of last rising edge\n\
+uint16 wnF			# week number of last falling edge\n\
+uint32 towMsR			# Tow of rising edge \n\
+uint32 towSubMsR		# Millisecond Fraction of Tow of rising edge in nanoseconds\n\
+uint32 towMsF			# tow of falling edge\n\
+uint32 towSubMsF		# millisecond fraction of tow of falling edge in nanoseconds\n\
+uint32 accEst			# Accuracy estimate\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::TimTM2_<ContainerAllocator>&) { return value(); }

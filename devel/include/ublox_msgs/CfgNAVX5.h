@@ -151,41 +151,6 @@ struct CfgNAVX5_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(MASK1_MIN_MAX)
-  #undef MASK1_MIN_MAX
-#endif
-#if defined(_WIN32) && defined(MASK1_MIN_CNO)
-  #undef MASK1_MIN_CNO
-#endif
-#if defined(_WIN32) && defined(MASK1_INITIAL_FIX_3D)
-  #undef MASK1_INITIAL_FIX_3D
-#endif
-#if defined(_WIN32) && defined(MASK1_WKN_ROLL)
-  #undef MASK1_WKN_ROLL
-#endif
-#if defined(_WIN32) && defined(MASK1_ACK_AID)
-  #undef MASK1_ACK_AID
-#endif
-#if defined(_WIN32) && defined(MASK1_PPP)
-  #undef MASK1_PPP
-#endif
-#if defined(_WIN32) && defined(MASK1_AOP)
-  #undef MASK1_AOP
-#endif
-#if defined(_WIN32) && defined(MASK2_ADR)
-  #undef MASK2_ADR
-#endif
-#if defined(_WIN32) && defined(MASK2_SIG_ATTEN_COMP_MODE)
-  #undef MASK2_SIG_ATTEN_COMP_MODE
-#endif
-
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 35u,
@@ -244,39 +209,6 @@ ros::message_operations::Printer< ::ublox_msgs::CfgNAVX5_<ContainerAllocator> >:
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::CfgNAVX5_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgNAVX5_<ContainerAllocator2> & rhs)
-{
-  return lhs.version == rhs.version &&
-    lhs.mask1 == rhs.mask1 &&
-    lhs.mask2 == rhs.mask2 &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.minSVs == rhs.minSVs &&
-    lhs.maxSVs == rhs.maxSVs &&
-    lhs.minCNO == rhs.minCNO &&
-    lhs.reserved2 == rhs.reserved2 &&
-    lhs.iniFix3D == rhs.iniFix3D &&
-    lhs.reserved3 == rhs.reserved3 &&
-    lhs.ackAiding == rhs.ackAiding &&
-    lhs.wknRollover == rhs.wknRollover &&
-    lhs.sigAttenCompMode == rhs.sigAttenCompMode &&
-    lhs.reserved4 == rhs.reserved4 &&
-    lhs.usePPP == rhs.usePPP &&
-    lhs.aopCfg == rhs.aopCfg &&
-    lhs.reserved5 == rhs.reserved5 &&
-    lhs.aopOrbMaxErr == rhs.aopOrbMaxErr &&
-    lhs.reserved6 == rhs.reserved6 &&
-    lhs.useAdr == rhs.useAdr;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::CfgNAVX5_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgNAVX5_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -284,6 +216,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -348,74 +286,74 @@ struct Definition< ::ublox_msgs::CfgNAVX5_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-NAVX5 (0x06 0x23)\n"
-"# Navigation Engine Expert Settings\n"
-"#\n"
-"# Warning: Refer to u-blox protocol spec before changing these settings.\n"
-"\n"
-"uint8 CLASS_ID = 6\n"
-"uint8 MESSAGE_ID = 35\n"
-"\n"
-"uint16 version        # Message version (set to 0)\n"
-"\n"
-"uint16 mask1          # First parameters bitmask (possible values below)\n"
-"uint16 MASK1_MIN_MAX        = 4        # apply min/max SVs settings\n"
-"uint16 MASK1_MIN_CNO        = 8        # apply minimum C/N0 setting\n"
-"uint16 MASK1_INITIAL_FIX_3D = 64       # apply initial 3D fix settings\n"
-"uint16 MASK1_WKN_ROLL       = 512      # apply GPS week number rollover settings\n"
-"uint16 MASK1_ACK_AID        = 1024     # apply assistance acknowledgment \n"
-"                                       # settings\n"
-"uint16 MASK1_PPP            = 8192     # apply usePPP flag\n"
-"uint16 MASK1_AOP            = 16384    # apply aopCfg (useAOP flag) and \n"
-"                                       # aopOrbMaxErr settings\n"
-"                                       # (AssistNow Autonomous)\n"
-"\n"
-"uint32 mask2          # Second parameters bitmask (possible values below)\n"
-"                      # Firmware >=8 only\n"
-"uint32 MASK2_ADR = 64                    # Apply ADR sensor fusion on/off \n"
-"                                         # setting\n"
-"uint32 MASK2_SIG_ATTEN_COMP_MODE = 128   # Apply signal attenuation \n"
-"                                         # compensation feature settings\n"
-"\n"
-"uint8[2] reserved1      # Always set to zero\n"
-"\n"
-"uint8 minSVs            # Minimum number of satellites for navigation\n"
-"uint8 maxSVs            # Maximum number of satellites for navigation\n"
-"uint8 minCNO            # Minimum satellite signal level for navigation [dBHz]\n"
-"\n"
-"uint8 reserved2         # Always set to zero\n"
-"\n"
-"uint8 iniFix3D          # If set to 1, initial fix must be 3D\n"
-"\n"
-"uint8[2] reserved3      # Always set to zero\n"
-"\n"
-"uint8 ackAiding         # If set to 1, issue acknowledgments for assistance\n"
-"uint16 wknRollover      # GPS week rollover number, GPS week numbers will be set \n"
-"                        # correctly from this week up to 1024 weeks after this \n"
-"                        # week\n"
-"uint8 sigAttenCompMode  # Permanently attenuated signal compensation [dBHz]\n"
-"                        # 0 = disabled, 255 = automatic\n"
-"                        # 1..63 = maximum expected C/N0 value\n"
-"                        # Firmware 8 only\n"
-"\n"
-"uint8[5] reserved4      # Always set to zero\n"
-"\n"
-"uint8 usePPP            # Enable/disable PPP (on supported units)\n"
-"uint8 aopCfg            # AssistNow Autonomous configuration, 1: enabled\n"
-"\n"
-"uint8[2] reserved5      # Always set to zero\n"
-"\n"
-"uint16 aopOrbMaxErr     # Maximum acceptable (modeled) autonomous orbit \n"
-"                        # error [m]\n"
-"                        # valid range = 5..1000\n"
-"                        # 0 = reset to firmware default\n"
-"\n"
-"uint8[7] reserved6      # Always set to zero\n"
-"\n"
-"uint8 useAdr            # Enable/disable ADR sensor fusion \n"
-"                        # 1: enabled, 0: disabled\n"
-"                        # Only supported on certain products \n"
-;
+    return "# CFG-NAVX5 (0x06 0x23)\n\
+# Navigation Engine Expert Settings\n\
+#\n\
+# Warning: Refer to u-blox protocol spec before changing these settings.\n\
+\n\
+uint8 CLASS_ID = 6\n\
+uint8 MESSAGE_ID = 35\n\
+\n\
+uint16 version        # Message version (set to 0)\n\
+\n\
+uint16 mask1          # First parameters bitmask (possible values below)\n\
+uint16 MASK1_MIN_MAX        = 4        # apply min/max SVs settings\n\
+uint16 MASK1_MIN_CNO        = 8        # apply minimum C/N0 setting\n\
+uint16 MASK1_INITIAL_FIX_3D = 64       # apply initial 3D fix settings\n\
+uint16 MASK1_WKN_ROLL       = 512      # apply GPS week number rollover settings\n\
+uint16 MASK1_ACK_AID        = 1024     # apply assistance acknowledgment \n\
+                                       # settings\n\
+uint16 MASK1_PPP            = 8192     # apply usePPP flag\n\
+uint16 MASK1_AOP            = 16384    # apply aopCfg (useAOP flag) and \n\
+                                       # aopOrbMaxErr settings\n\
+                                       # (AssistNow Autonomous)\n\
+\n\
+uint32 mask2          # Second parameters bitmask (possible values below)\n\
+                      # Firmware >=8 only\n\
+uint32 MASK2_ADR = 64                    # Apply ADR sensor fusion on/off \n\
+                                         # setting\n\
+uint32 MASK2_SIG_ATTEN_COMP_MODE = 128   # Apply signal attenuation \n\
+                                         # compensation feature settings\n\
+\n\
+uint8[2] reserved1      # Always set to zero\n\
+\n\
+uint8 minSVs            # Minimum number of satellites for navigation\n\
+uint8 maxSVs            # Maximum number of satellites for navigation\n\
+uint8 minCNO            # Minimum satellite signal level for navigation [dBHz]\n\
+\n\
+uint8 reserved2         # Always set to zero\n\
+\n\
+uint8 iniFix3D          # If set to 1, initial fix must be 3D\n\
+\n\
+uint8[2] reserved3      # Always set to zero\n\
+\n\
+uint8 ackAiding         # If set to 1, issue acknowledgments for assistance\n\
+uint16 wknRollover      # GPS week rollover number, GPS week numbers will be set \n\
+                        # correctly from this week up to 1024 weeks after this \n\
+                        # week\n\
+uint8 sigAttenCompMode  # Permanently attenuated signal compensation [dBHz]\n\
+                        # 0 = disabled, 255 = automatic\n\
+                        # 1..63 = maximum expected C/N0 value\n\
+                        # Firmware 8 only\n\
+\n\
+uint8[5] reserved4      # Always set to zero\n\
+\n\
+uint8 usePPP            # Enable/disable PPP (on supported units)\n\
+uint8 aopCfg            # AssistNow Autonomous configuration, 1: enabled\n\
+\n\
+uint8[2] reserved5      # Always set to zero\n\
+\n\
+uint16 aopOrbMaxErr     # Maximum acceptable (modeled) autonomous orbit \n\
+                        # error [m]\n\
+                        # valid range = 5..1000\n\
+                        # 0 = reset to firmware default\n\
+\n\
+uint8[7] reserved6      # Always set to zero\n\
+\n\
+uint8 useAdr            # Enable/disable ADR sensor fusion \n\
+                        # 1: enabled, 0: disabled\n\
+                        # Only supported on certain products \n\
+";
   }
 
   static const char* value(const ::ublox_msgs::CfgNAVX5_<ContainerAllocator>&) { return value(); }

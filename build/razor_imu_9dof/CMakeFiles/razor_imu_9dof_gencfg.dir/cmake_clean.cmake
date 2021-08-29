@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/razor_imu_9dof_gencfg"
-  "/home/foscar/ISCC_2021/devel/include/razor_imu_9dof/imuConfig.h"
-  "/home/foscar/ISCC_2021/devel/share/razor_imu_9dof/docs/imuConfig.dox"
-  "/home/foscar/ISCC_2021/devel/share/razor_imu_9dof/docs/imuConfig-usage.dox"
-  "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/razor_imu_9dof/cfg/imuConfig.py"
-  "/home/foscar/ISCC_2021/devel/share/razor_imu_9dof/docs/imuConfig.wikidoc"
+  "/home/young43/FOSCAR_ISCC_2021/devel/include/razor_imu_9dof/imuConfig.h"
+  "/home/young43/FOSCAR_ISCC_2021/devel/share/razor_imu_9dof/docs/imuConfig.dox"
+  "/home/young43/FOSCAR_ISCC_2021/devel/share/razor_imu_9dof/docs/imuConfig-usage.dox"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/razor_imu_9dof/cfg/imuConfig.py"
+  "/home/young43/FOSCAR_ISCC_2021/devel/share/razor_imu_9dof/docs/imuConfig.wikidoc"
 )
 
 # Per-language clean rules from dependency scanning.

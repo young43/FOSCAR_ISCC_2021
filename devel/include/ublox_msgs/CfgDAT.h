@@ -90,20 +90,6 @@ struct CfgDAT_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(DATUM_NUM_WGS84)
-  #undef DATUM_NUM_WGS84
-#endif
-#if defined(_WIN32) && defined(DATUM_NUM_USER)
-  #undef DATUM_NUM_USER
-#endif
-
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 6u,
@@ -141,30 +127,6 @@ ros::message_operations::Printer< ::ublox_msgs::CfgDAT_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::CfgDAT_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgDAT_<ContainerAllocator2> & rhs)
-{
-  return lhs.datumNum == rhs.datumNum &&
-    lhs.datumName == rhs.datumName &&
-    lhs.majA == rhs.majA &&
-    lhs.flat == rhs.flat &&
-    lhs.dX == rhs.dX &&
-    lhs.dY == rhs.dY &&
-    lhs.dZ == rhs.dZ &&
-    lhs.rotX == rhs.rotX &&
-    lhs.rotY == rhs.rotY &&
-    lhs.rotZ == rhs.rotZ &&
-    lhs.scale == rhs.scale;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::CfgDAT_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgDAT_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -172,6 +134,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -236,44 +204,44 @@ struct Definition< ::ublox_msgs::CfgDAT_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-DAT (0x06 0x06)\n"
-"# Set User-defined Datum\n"
-"# \n"
-"# For more information see the description of Geodetic Systems and Frames.\n"
-"# \n"
-"\n"
-"uint8 CLASS_ID = 6\n"
-"uint8 MESSAGE_ID = 6\n"
-"\n"
-"# Only for GET, these values are not used for write\n"
-"uint16 datumNum       # Datum Number: 0 = WGS84, 0xFFFF = user-defined\n"
-"uint16 DATUM_NUM_WGS84 = 0\n"
-"uint16 DATUM_NUM_USER = 65535\n"
-"\n"
-"uint8[6] datumName    # ASCII String: WGS84 or USER\n"
-"\n"
-"float64 majA          # Semi-major Axis [m]\n"
-"                      # accepted range = 6,300,000.0 to 6,500,000.0 meters \n"
-"float64 flat          # 1.0 / Flattening \n"
-"                      # accepted range is 0.0 to 500.0\n"
-"\n"
-"float32 dX            # X Axis shift at the origin [m]\n"
-"                      # accepted range is +/- 5000.0 meters \n"
-"float32 dY            # Y Axis shift at the origin [m]\n"
-"                      # accepted range is +/- 5000.0 meters \n"
-"float32 dZ            # Z Axis shift at the origin [m]\n"
-"                      # accepted range is +/- 5000.0 meters \n"
-"\n"
-"float32 rotX          # Rotation about the X Axis [s]\n"
-"                      # accepted range is +/- 20.0 milli-arc seconds \n"
-"float32 rotY          # Rotation about the Y Axis [s]\n"
-"                      # accepted range is +/- 20.0 milli-arc seconds \n"
-"float32 rotZ          # Rotation about the Z Axis [s]\n"
-"                      # accepted range is +/- 20.0 milli-arc seconds\n"
-"\n"
-"float32 scale         # Scale change [ppm]\n"
-"                      # accepted range is 0.0 to 50.0 parts per million\n"
-;
+    return "# CFG-DAT (0x06 0x06)\n\
+# Set User-defined Datum\n\
+# \n\
+# For more information see the description of Geodetic Systems and Frames.\n\
+# \n\
+\n\
+uint8 CLASS_ID = 6\n\
+uint8 MESSAGE_ID = 6\n\
+\n\
+# Only for GET, these values are not used for write\n\
+uint16 datumNum       # Datum Number: 0 = WGS84, 0xFFFF = user-defined\n\
+uint16 DATUM_NUM_WGS84 = 0\n\
+uint16 DATUM_NUM_USER = 65535\n\
+\n\
+uint8[6] datumName    # ASCII String: WGS84 or USER\n\
+\n\
+float64 majA          # Semi-major Axis [m]\n\
+                      # accepted range = 6,300,000.0 to 6,500,000.0 meters \n\
+float64 flat          # 1.0 / Flattening \n\
+                      # accepted range is 0.0 to 500.0\n\
+\n\
+float32 dX            # X Axis shift at the origin [m]\n\
+                      # accepted range is +/- 5000.0 meters \n\
+float32 dY            # Y Axis shift at the origin [m]\n\
+                      # accepted range is +/- 5000.0 meters \n\
+float32 dZ            # Z Axis shift at the origin [m]\n\
+                      # accepted range is +/- 5000.0 meters \n\
+\n\
+float32 rotX          # Rotation about the X Axis [s]\n\
+                      # accepted range is +/- 20.0 milli-arc seconds \n\
+float32 rotY          # Rotation about the Y Axis [s]\n\
+                      # accepted range is +/- 20.0 milli-arc seconds \n\
+float32 rotZ          # Rotation about the Z Axis [s]\n\
+                      # accepted range is +/- 20.0 milli-arc seconds\n\
+\n\
+float32 scale         # Scale change [ppm]\n\
+                      # accepted range is 0.0 to 50.0 parts per million\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::CfgDAT_<ContainerAllocator>&) { return value(); }

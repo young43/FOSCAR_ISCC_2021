@@ -134,92 +134,6 @@ struct CfgNAV5_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(MASK_DYN)
-  #undef MASK_DYN
-#endif
-#if defined(_WIN32) && defined(MASK_MIN_EL)
-  #undef MASK_MIN_EL
-#endif
-#if defined(_WIN32) && defined(MASK_FIX_MODE)
-  #undef MASK_FIX_MODE
-#endif
-#if defined(_WIN32) && defined(MASK_DR_LIM)
-  #undef MASK_DR_LIM
-#endif
-#if defined(_WIN32) && defined(MASK_POS_MASK)
-  #undef MASK_POS_MASK
-#endif
-#if defined(_WIN32) && defined(MASK_TIME_MASK)
-  #undef MASK_TIME_MASK
-#endif
-#if defined(_WIN32) && defined(MASK_STATIC_HOLD_MASK)
-  #undef MASK_STATIC_HOLD_MASK
-#endif
-#if defined(_WIN32) && defined(MASK_DGPS_MASK)
-  #undef MASK_DGPS_MASK
-#endif
-#if defined(_WIN32) && defined(MASK_CNO)
-  #undef MASK_CNO
-#endif
-#if defined(_WIN32) && defined(MASK_UTC)
-  #undef MASK_UTC
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_PORTABLE)
-  #undef DYN_MODEL_PORTABLE
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_STATIONARY)
-  #undef DYN_MODEL_STATIONARY
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_PEDESTRIAN)
-  #undef DYN_MODEL_PEDESTRIAN
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_AUTOMOTIVE)
-  #undef DYN_MODEL_AUTOMOTIVE
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_SEA)
-  #undef DYN_MODEL_SEA
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_AIRBORNE_1G)
-  #undef DYN_MODEL_AIRBORNE_1G
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_AIRBORNE_2G)
-  #undef DYN_MODEL_AIRBORNE_2G
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_AIRBORNE_4G)
-  #undef DYN_MODEL_AIRBORNE_4G
-#endif
-#if defined(_WIN32) && defined(DYN_MODEL_WRIST_WATCH)
-  #undef DYN_MODEL_WRIST_WATCH
-#endif
-#if defined(_WIN32) && defined(FIX_MODE_2D_ONLY)
-  #undef FIX_MODE_2D_ONLY
-#endif
-#if defined(_WIN32) && defined(FIX_MODE_3D_ONLY)
-  #undef FIX_MODE_3D_ONLY
-#endif
-#if defined(_WIN32) && defined(FIX_MODE_AUTO)
-  #undef FIX_MODE_AUTO
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_AUTOMATIC)
-  #undef UTC_STANDARD_AUTOMATIC
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_GPS)
-  #undef UTC_STANDARD_GPS
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_GLONASS)
-  #undef UTC_STANDARD_GLONASS
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_BEIDOU)
-  #undef UTC_STANDARD_BEIDOU
-#endif
-
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 36u,
@@ -329,38 +243,6 @@ ros::message_operations::Printer< ::ublox_msgs::CfgNAV5_<ContainerAllocator> >::
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::CfgNAV5_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgNAV5_<ContainerAllocator2> & rhs)
-{
-  return lhs.mask == rhs.mask &&
-    lhs.dynModel == rhs.dynModel &&
-    lhs.fixMode == rhs.fixMode &&
-    lhs.fixedAlt == rhs.fixedAlt &&
-    lhs.fixedAltVar == rhs.fixedAltVar &&
-    lhs.minElev == rhs.minElev &&
-    lhs.drLimit == rhs.drLimit &&
-    lhs.pDop == rhs.pDop &&
-    lhs.tDop == rhs.tDop &&
-    lhs.pAcc == rhs.pAcc &&
-    lhs.tAcc == rhs.tAcc &&
-    lhs.staticHoldThresh == rhs.staticHoldThresh &&
-    lhs.dgnssTimeOut == rhs.dgnssTimeOut &&
-    lhs.cnoThreshNumSvs == rhs.cnoThreshNumSvs &&
-    lhs.cnoThresh == rhs.cnoThresh &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.staticHoldMaxDist == rhs.staticHoldMaxDist &&
-    lhs.utcStandard == rhs.utcStandard &&
-    lhs.reserved2 == rhs.reserved2;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::CfgNAV5_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgNAV5_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -368,6 +250,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -432,73 +320,73 @@ struct Definition< ::ublox_msgs::CfgNAV5_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-NAV5 (0x06 0x24)\n"
-"# Navigation Engine Settings\n"
-"\n"
-"uint8 CLASS_ID = 6\n"
-"uint8 MESSAGE_ID = 36\n"
-"\n"
-"uint16 mask             # Parameters Bitmask. Only the masked\n"
-"                        # parameters will be applied.\n"
-"uint16 MASK_DYN = 1                 # Apply dynamic model settings\n"
-"uint16 MASK_MIN_EL = 2              # Apply minimum elevation settings\n"
-"uint16 MASK_FIX_MODE = 4            # Apply fix mode settings\n"
-"uint16 MASK_DR_LIM = 8              # Apply DR limit settings\n"
-"uint16 MASK_POS_MASK = 16           # Apply position mask settings\n"
-"uint16 MASK_TIME_MASK = 32          # Apply time mask settings\n"
-"uint16 MASK_STATIC_HOLD_MASK = 64   # Apply static hold settings\n"
-"uint16 MASK_DGPS_MASK = 128         # Apply DGPS settings, firmware >= 7 only\n"
-"uint16 MASK_CNO = 256               # Apply CNO threshold settings\n"
-"uint16 MASK_UTC = 1024              # Apply UTC settings, protocol >= 16 only\n"
-"\n"
-"uint8 dynModel          # Dynamic Platform model:\n"
-"uint8 DYN_MODEL_PORTABLE = 0        # Portable\n"
-"uint8 DYN_MODEL_STATIONARY = 2      # Stationary\n"
-"uint8 DYN_MODEL_PEDESTRIAN = 3      # Pedestrian\n"
-"uint8 DYN_MODEL_AUTOMOTIVE = 4      # Automotive\n"
-"uint8 DYN_MODEL_SEA = 5             # Sea\n"
-"uint8 DYN_MODEL_AIRBORNE_1G = 6     # Airborne with <1g Acceleration\n"
-"uint8 DYN_MODEL_AIRBORNE_2G = 7     # Airborne with <2g Acceleration\n"
-"uint8 DYN_MODEL_AIRBORNE_4G = 8     # Airborne with <4g Acceleration\n"
-"uint8 DYN_MODEL_WRIST_WATCH = 9     # Wrist watch, protocol >= 18\n"
-"\n"
-"uint8 fixMode           # Position Fixing Mode.\n"
-"uint8 FIX_MODE_2D_ONLY = 1          # 2D only\n"
-"uint8 FIX_MODE_3D_ONLY = 2          # 3D only\n"
-"uint8 FIX_MODE_AUTO = 3             # Auto 2D/3D\n"
-"\n"
-"int32 fixedAlt          # Fixed altitude (mean sea level) for 2D fix mode. \n"
-"                        # [m / 0.01]\n"
-"uint32 fixedAltVar      # Fixed altitude variance for 2D mode. [m^2 / 0.0001]\n"
-"int8 minElev            # Minimum Elevation for a GNSS satellite to be used in \n"
-"                        # NAV [deg]\n"
-"uint8 drLimit           # Maximum time to perform dead reckoning [s]\n"
-"                        # (linear extrapolation) in case of GPS signal loss\n"
-"uint16 pDop             # Position DOP Mask to use [1 / 0.1]\n"
-"uint16 tDop             # Time DOP Mask to use [1 / 0.1]\n"
-"uint16 pAcc             # Position Accuracy Mask [m]\n"
-"uint16 tAcc             # Time Accuracy Mask [m]\n"
-"uint8 staticHoldThresh  # Static hold threshold [cm/s]\n"
-"uint8 dgnssTimeOut      # DGNSS timeout, firmware 7 and newer only [s]\n"
-"\n"
-"uint8 cnoThreshNumSvs   # Number of satellites required to have C/N0 above \n"
-"                        # cnoThresh for a fix to be attempted\n"
-"uint8 cnoThresh         # C/N0 threshold for deciding whether to attempt a fix\n"
-"                        # [dBHz]\n"
-"uint8[2] reserved1      # Reserved\n"
-"\n"
-"uint16 staticHoldMaxDist  # Static hold distance threshold (before quitting \n"
-"                          # static hold) [m]\n"
-"uint8 utcStandard       # UTC standard to be used:\n"
-"uint8 UTC_STANDARD_AUTOMATIC = 0 # receiver selects based on GNSS configuration\n"
-"uint8 UTC_STANDARD_GPS = 3       # UTC as operated by the U.S. Naval Observatory \n"
-"                                 # (USNO); derived from GPS time\n"
-"uint8 UTC_STANDARD_GLONASS = 6   # UTC as operated by the former Soviet Union;\n"
-"                                 # derived from GLONASS time\n"
-"uint8 UTC_STANDARD_BEIDOU = 7    # UTC as operated by the National Time Service\n"
-"                                 # Center, China; derived from BeiDou time\n"
-"uint8[5] reserved2      # Reserved\n"
-;
+    return "# CFG-NAV5 (0x06 0x24)\n\
+# Navigation Engine Settings\n\
+\n\
+uint8 CLASS_ID = 6\n\
+uint8 MESSAGE_ID = 36\n\
+\n\
+uint16 mask             # Parameters Bitmask. Only the masked\n\
+                        # parameters will be applied.\n\
+uint16 MASK_DYN = 1                 # Apply dynamic model settings\n\
+uint16 MASK_MIN_EL = 2              # Apply minimum elevation settings\n\
+uint16 MASK_FIX_MODE = 4            # Apply fix mode settings\n\
+uint16 MASK_DR_LIM = 8              # Apply DR limit settings\n\
+uint16 MASK_POS_MASK = 16           # Apply position mask settings\n\
+uint16 MASK_TIME_MASK = 32          # Apply time mask settings\n\
+uint16 MASK_STATIC_HOLD_MASK = 64   # Apply static hold settings\n\
+uint16 MASK_DGPS_MASK = 128         # Apply DGPS settings, firmware >= 7 only\n\
+uint16 MASK_CNO = 256               # Apply CNO threshold settings\n\
+uint16 MASK_UTC = 1024              # Apply UTC settings, protocol >= 16 only\n\
+\n\
+uint8 dynModel          # Dynamic Platform model:\n\
+uint8 DYN_MODEL_PORTABLE = 0        # Portable\n\
+uint8 DYN_MODEL_STATIONARY = 2      # Stationary\n\
+uint8 DYN_MODEL_PEDESTRIAN = 3      # Pedestrian\n\
+uint8 DYN_MODEL_AUTOMOTIVE = 4      # Automotive\n\
+uint8 DYN_MODEL_SEA = 5             # Sea\n\
+uint8 DYN_MODEL_AIRBORNE_1G = 6     # Airborne with <1g Acceleration\n\
+uint8 DYN_MODEL_AIRBORNE_2G = 7     # Airborne with <2g Acceleration\n\
+uint8 DYN_MODEL_AIRBORNE_4G = 8     # Airborne with <4g Acceleration\n\
+uint8 DYN_MODEL_WRIST_WATCH = 9     # Wrist watch, protocol >= 18\n\
+\n\
+uint8 fixMode           # Position Fixing Mode.\n\
+uint8 FIX_MODE_2D_ONLY = 1          # 2D only\n\
+uint8 FIX_MODE_3D_ONLY = 2          # 3D only\n\
+uint8 FIX_MODE_AUTO = 3             # Auto 2D/3D\n\
+\n\
+int32 fixedAlt          # Fixed altitude (mean sea level) for 2D fix mode. \n\
+                        # [m / 0.01]\n\
+uint32 fixedAltVar      # Fixed altitude variance for 2D mode. [m^2 / 0.0001]\n\
+int8 minElev            # Minimum Elevation for a GNSS satellite to be used in \n\
+                        # NAV [deg]\n\
+uint8 drLimit           # Maximum time to perform dead reckoning [s]\n\
+                        # (linear extrapolation) in case of GPS signal loss\n\
+uint16 pDop             # Position DOP Mask to use [1 / 0.1]\n\
+uint16 tDop             # Time DOP Mask to use [1 / 0.1]\n\
+uint16 pAcc             # Position Accuracy Mask [m]\n\
+uint16 tAcc             # Time Accuracy Mask [m]\n\
+uint8 staticHoldThresh  # Static hold threshold [cm/s]\n\
+uint8 dgnssTimeOut      # DGNSS timeout, firmware 7 and newer only [s]\n\
+\n\
+uint8 cnoThreshNumSvs   # Number of satellites required to have C/N0 above \n\
+                        # cnoThresh for a fix to be attempted\n\
+uint8 cnoThresh         # C/N0 threshold for deciding whether to attempt a fix\n\
+                        # [dBHz]\n\
+uint8[2] reserved1      # Reserved\n\
+\n\
+uint16 staticHoldMaxDist  # Static hold distance threshold (before quitting \n\
+                          # static hold) [m]\n\
+uint8 utcStandard       # UTC standard to be used:\n\
+uint8 UTC_STANDARD_AUTOMATIC = 0 # receiver selects based on GNSS configuration\n\
+uint8 UTC_STANDARD_GPS = 3       # UTC as operated by the U.S. Naval Observatory \n\
+                                 # (USNO); derived from GPS time\n\
+uint8 UTC_STANDARD_GLONASS = 6   # UTC as operated by the former Soviet Union;\n\
+                                 # derived from GLONASS time\n\
+uint8 UTC_STANDARD_BEIDOU = 7    # UTC as operated by the National Time Service\n\
+                                 # Center, China; derived from BeiDou time\n\
+uint8[5] reserved2      # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::CfgNAV5_<ContainerAllocator>&) { return value(); }

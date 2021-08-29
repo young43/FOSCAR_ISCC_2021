@@ -76,20 +76,6 @@ struct RxmRAWX_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(REC_STAT_LEAP_SEC)
-  #undef REC_STAT_LEAP_SEC
-#endif
-#if defined(_WIN32) && defined(REC_STAT_CLK_RESET)
-  #undef REC_STAT_CLK_RESET
-#endif
-
   enum {
     CLASS_ID = 2u,
     MESSAGE_ID = 21u,
@@ -127,27 +113,6 @@ ros::message_operations::Printer< ::ublox_msgs::RxmRAWX_<ContainerAllocator> >::
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::RxmRAWX_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAWX_<ContainerAllocator2> & rhs)
-{
-  return lhs.rcvTOW == rhs.rcvTOW &&
-    lhs.week == rhs.week &&
-    lhs.leapS == rhs.leapS &&
-    lhs.numMeas == rhs.numMeas &&
-    lhs.recStat == rhs.recStat &&
-    lhs.version == rhs.version &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.meas == rhs.meas;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::RxmRAWX_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAWX_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -155,6 +120,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -219,91 +190,91 @@ struct Definition< ::ublox_msgs::RxmRAWX_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# RXM-RAWX (0x02 0x15)\n"
-"# Multi-GNSS Raw Measurement Data\n"
-"#\n"
-"# This message contains the information needed to be able to generate a RINEX 3\n"
-"# multi-GNSS observation file.\n"
-"# This message contains pseudorange, Doppler, carrier phase, phase lock and\n"
-"# signal quality information for GNSS satellites once signals have been\n"
-"# synchronized. This message supports all active GNSS.\n"
-"# \n"
-"\n"
-"uint8 CLASS_ID = 2\n"
-"uint8 MESSAGE_ID = 21\n"
-"\n"
-"float64 rcvTOW          # Measurement time of week in receiver local time [s]\n"
-"                        # approximately aligned to the GPS time system. The\n"
-"                        # receiver local time of week number and leap second\n"
-"                        # information can be used to translate the time to other \n"
-"                        # time systems. More information about the difference in\n"
-"                        # time systems can be found in RINEX 3 documentation. \n"
-"                        # For a receiver operating in GLONASS only mode, UTC\n"
-"                        # time can be determined by subtracting the leapS field \n"
-"                        # from GPS time regardless of whether the GPS leap\n"
-"                        # seconds are valid. \n"
-"uint16 week             # GPS week number in receiver local time. [weeks]\n"
-"int8 leapS              # GPS leap seconds (GPS-UTC). [s]\n"
-"                        # This field represents the receiver's best knowledge of\n"
-"                        # the leap seconds offset. A flag is given in the\n"
-"                        # recStat bitfield to indicate if the leap seconds \n"
-"                        # are known.\n"
-"uint8 numMeas           # # of measurements to follow\n"
-"uint8 recStat           # Receiver tracking status bitfield\n"
-"uint8 REC_STAT_LEAP_SEC = 1   # Leap seconds have been determined\n"
-"uint8 REC_STAT_CLK_RESET = 2  # Clock reset applied. Typically the receiver  \n"
-"                              # clock is changed in increments of integer\n"
-"                              # milliseconds.\n"
-"uint8 version           # Message version (0x01 for this version).\n"
-"uint8[2] reserved1      # Reserved\n"
-"\n"
-"RxmRAWX_Meas[] meas\n"
-"\n"
-"================================================================================\n"
-"MSG: ublox_msgs/RxmRAWX_Meas\n"
-"# see message RxmRAWX\n"
-"#\n"
-"\n"
-"float64 prMes             # Pseudorange measurement [m]. GLONASS inter frequency\n"
-"                          # channel delays are compensated with an internal\n"
-"                          # calibration table.\n"
-"float64 cpMes             # Carrier phase measurement [L1 cycles]. The carrier\n"
-"                          # phase initial ambiguity is initialized using an\n"
-"                          # approximate value to make the magnitude of\n"
-"                          # the phase close to the pseudorange\n"
-"                          # measurement. Clock resets are applied to both\n"
-"                          # phase and code measurements in accordance\n"
-"                          # with the RINEX specification.\n"
-"float32 doMes             # Doppler measurement [Hz] (positive sign for\n"
-"                          # approaching satellites)\n"
-"uint8 gnssId              # GNSS identifier (see CfgGNSS for constants)\n"
-"\n"
-"uint8 svId                # Satellite identifier (see Satellite Numbering)\n"
-"\n"
-"uint8 reserved0           # Reserved\n"
-"\n"
-"uint8 freqId              # Only used for GLONASS: This is the frequency\n"
-"                          # slot + 7 (range from 0 to 13)\n"
-"uint16 locktime           # Carrier phase locktime counter [ms] \n"
-"                          # (maximum 64500 ms)\n"
-"int8 cno                  # Carrier-to-noise density ratio (signal strength) \n"
-"                          # [dB-Hz]\n"
-"uint8 prStdev             # Estimated pseudorange measurement standard\n"
-"                          # deviation [m / 0.01*2^n]\n"
-"uint8 cpStdev             # Estimated carrier phase measurement standard\n"
-"                          # deviation (note a raw value of 0x0F indicates the\n"
-"                          # value is invalid) [cycles / 0.004]\n"
-"uint8 doStdev             # Estimated Doppler measurement standard deviation \n"
-"                          # [Hz / 0.002*2^n]\n"
-"\n"
-"uint8 trkStat             # Tracking status bitfield\n"
-"uint8 TRK_STAT_PR_VALID = 1       # Pseudorange valid\n"
-"uint8 TRK_STAT_CP_VALID = 2       # Carrier phase valid\n"
-"uint8 TRK_STAT_HALF_CYC = 4       # Half cycle valid\n"
-"uint8 TRK_STAT_SUB_HALF_CYC = 8   # Half cycle subtracted from phase\n"
-"\n"
-"uint8 reserved1           # Reserved\n"
-;
+    return "# RXM-RAWX (0x02 0x15)\n\
+# Multi-GNSS Raw Measurement Data\n\
+#\n\
+# This message contains the information needed to be able to generate a RINEX 3\n\
+# multi-GNSS observation file.\n\
+# This message contains pseudorange, Doppler, carrier phase, phase lock and\n\
+# signal quality information for GNSS satellites once signals have been\n\
+# synchronized. This message supports all active GNSS.\n\
+# \n\
+\n\
+uint8 CLASS_ID = 2\n\
+uint8 MESSAGE_ID = 21\n\
+\n\
+float64 rcvTOW          # Measurement time of week in receiver local time [s]\n\
+                        # approximately aligned to the GPS time system. The\n\
+                        # receiver local time of week number and leap second\n\
+                        # information can be used to translate the time to other \n\
+                        # time systems. More information about the difference in\n\
+                        # time systems can be found in RINEX 3 documentation. \n\
+                        # For a receiver operating in GLONASS only mode, UTC\n\
+                        # time can be determined by subtracting the leapS field \n\
+                        # from GPS time regardless of whether the GPS leap\n\
+                        # seconds are valid. \n\
+uint16 week             # GPS week number in receiver local time. [weeks]\n\
+int8 leapS              # GPS leap seconds (GPS-UTC). [s]\n\
+                        # This field represents the receiver's best knowledge of\n\
+                        # the leap seconds offset. A flag is given in the\n\
+                        # recStat bitfield to indicate if the leap seconds \n\
+                        # are known.\n\
+uint8 numMeas           # # of measurements to follow\n\
+uint8 recStat           # Receiver tracking status bitfield\n\
+uint8 REC_STAT_LEAP_SEC = 1   # Leap seconds have been determined\n\
+uint8 REC_STAT_CLK_RESET = 2  # Clock reset applied. Typically the receiver  \n\
+                              # clock is changed in increments of integer\n\
+                              # milliseconds.\n\
+uint8 version           # Message version (0x01 for this version).\n\
+uint8[2] reserved1      # Reserved\n\
+\n\
+RxmRAWX_Meas[] meas\n\
+\n\
+================================================================================\n\
+MSG: ublox_msgs/RxmRAWX_Meas\n\
+# see message RxmRAWX\n\
+#\n\
+\n\
+float64 prMes             # Pseudorange measurement [m]. GLONASS inter frequency\n\
+                          # channel delays are compensated with an internal\n\
+                          # calibration table.\n\
+float64 cpMes             # Carrier phase measurement [L1 cycles]. The carrier\n\
+                          # phase initial ambiguity is initialized using an\n\
+                          # approximate value to make the magnitude of\n\
+                          # the phase close to the pseudorange\n\
+                          # measurement. Clock resets are applied to both\n\
+                          # phase and code measurements in accordance\n\
+                          # with the RINEX specification.\n\
+float32 doMes             # Doppler measurement [Hz] (positive sign for\n\
+                          # approaching satellites)\n\
+uint8 gnssId              # GNSS identifier (see CfgGNSS for constants)\n\
+\n\
+uint8 svId                # Satellite identifier (see Satellite Numbering)\n\
+\n\
+uint8 reserved0           # Reserved\n\
+\n\
+uint8 freqId              # Only used for GLONASS: This is the frequency\n\
+                          # slot + 7 (range from 0 to 13)\n\
+uint16 locktime           # Carrier phase locktime counter [ms] \n\
+                          # (maximum 64500 ms)\n\
+int8 cno                  # Carrier-to-noise density ratio (signal strength) \n\
+                          # [dB-Hz]\n\
+uint8 prStdev             # Estimated pseudorange measurement standard\n\
+                          # deviation [m / 0.01*2^n]\n\
+uint8 cpStdev             # Estimated carrier phase measurement standard\n\
+                          # deviation (note a raw value of 0x0F indicates the\n\
+                          # value is invalid) [cycles / 0.004]\n\
+uint8 doStdev             # Estimated Doppler measurement standard deviation \n\
+                          # [Hz / 0.002*2^n]\n\
+\n\
+uint8 trkStat             # Tracking status bitfield\n\
+uint8 TRK_STAT_PR_VALID = 1       # Pseudorange valid\n\
+uint8 TRK_STAT_CP_VALID = 2       # Carrier phase valid\n\
+uint8 TRK_STAT_HALF_CYC = 4       # Half cycle valid\n\
+uint8 TRK_STAT_SUB_HALF_CYC = 8   # Half cycle subtracted from phase\n\
+\n\
+uint8 reserved1           # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::RxmRAWX_<ContainerAllocator>&) { return value(); }

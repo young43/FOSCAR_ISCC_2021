@@ -1,8 +1,8 @@
-# Install script for directory: /home/foscar/ISCC_2021/src/gps/ublox/ublox_serialization
+# Install script for directory: /home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_serialization
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/foscar/ISCC_2021/install")
+  set(CMAKE_INSTALL_PREFIX "/home/young43/FOSCAR_ISCC_2021/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,27 +32,22 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-# Is this installation the result of a crosscompile?
-if(NOT DEFINED CMAKE_CROSSCOMPILING)
-  set(CMAKE_CROSSCOMPILING "FALSE")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/build/gps/ublox/ublox_serialization/catkin_generated/installspace/ublox_serialization.pc")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/foscar/ISCC_2021/build/gps/ublox/ublox_serialization/catkin_generated/installspace/ublox_serialization.pc")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ublox_serialization/cmake" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/build/gps/ublox/ublox_serialization/catkin_generated/installspace/ublox_serializationConfig.cmake"
-    "/home/foscar/ISCC_2021/build/gps/ublox/ublox_serialization/catkin_generated/installspace/ublox_serializationConfig-version.cmake"
+    "/home/young43/FOSCAR_ISCC_2021/build/gps/ublox/ublox_serialization/catkin_generated/installspace/ublox_serializationConfig.cmake"
+    "/home/young43/FOSCAR_ISCC_2021/build/gps/ublox/ublox_serialization/catkin_generated/installspace/ublox_serializationConfig-version.cmake"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ublox_serialization" TYPE FILE FILES "/home/foscar/ISCC_2021/src/gps/ublox/ublox_serialization/package.xml")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ublox_serialization" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_serialization/package.xml")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/src/gps/ublox/ublox_serialization/include/" REGEX "/\\.svn$" EXCLUDE)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_serialization/include/" REGEX "/\\.svn$" EXCLUDE)
 endif()
 

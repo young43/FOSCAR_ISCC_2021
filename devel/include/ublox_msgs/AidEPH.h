@@ -58,14 +58,6 @@ struct AidEPH_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 11u,
     MESSAGE_ID = 49u,
@@ -97,24 +89,6 @@ ros::message_operations::Printer< ::ublox_msgs::AidEPH_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::AidEPH_<ContainerAllocator1> & lhs, const ::ublox_msgs::AidEPH_<ContainerAllocator2> & rhs)
-{
-  return lhs.svid == rhs.svid &&
-    lhs.how == rhs.how &&
-    lhs.sf1d == rhs.sf1d &&
-    lhs.sf2d == rhs.sf2d &&
-    lhs.sf3d == rhs.sf3d;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::AidEPH_<ContainerAllocator1> & lhs, const ::ublox_msgs::AidEPH_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -122,6 +96,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -186,40 +166,40 @@ struct Definition< ::ublox_msgs::AidEPH_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# AID-EPH (0x0B 0x31)\n"
-"# GPS Aiding Ephemeris Input/Output Message\n"
-"#\n"
-"# All UBX-AID messages are deprecated; use UBX-MGA messages instead\n"
-"# - SF1D0 to SF3D7 is only sent if ephemeris is available for this SV. If not, the payload may\n"
-"#   be reduced to 8 Bytes, or all bytes are set to zero, indicating that this SV Number does\n"
-"#   not have valid ephemeris for the moment. This may happen even if NAV-SVINFO and\n"
-"#   RXM-SVSI are indicating ephemeris availability as the internal data may not represent the\n"
-"#   content of an original broadcast ephemeris (or only parts thereof).\n"
-"# - SF1D0 to SF3D7 contain the 24 words following the Hand-Over Word ( HOW ) from the\n"
-"#   GPS navigation message, subframes 1 to 3. The Truncated TOW Count is not valid and\n"
-"#   cannot be used. See IS-GPS-200 for a full description of the contents of the Subframes.\n"
-"# - In SF1D0 to SF3D7, the parity bits have been removed, and the 24 bits of data are\n"
-"#   located in Bits 0 to 23. Bits 24 to 31 shall be ignored.\n"
-"# - When polled, the data contained in this message does not represent the full original\n"
-"#   ephemeris broadcast. Some fields that are irrelevant to u-blox receivers may be missing.\n"
-"#   The week number in Subframe 1 has already been modified to match the Time Of\n"
-"#   Ephemeris (TOE).\n"
-"\n"
-"uint8 CLASS_ID = 11\n"
-"uint8 MESSAGE_ID = 49\n"
-"\n"
-"uint32 svid             # SV ID for which this ephemeris data is \n"
-"                        # (Valid Range: 1 .. 32).\n"
-"uint32 how              # Hand-Over Word of first Subframe. This is\n"
-"                        # required if data is sent to the receiver.\n"
-"                        # 0 indicates that no Ephemeris Data is following.\n"
-"\n"
-"# Start of optional block\n"
-"uint32[] sf1d          # Subframe 1 Words 3..10 (SF1D0..SF1D7)\n"
-"uint32[] sf2d          # Subframe 2 Words 3..10 (SF2D0..SF2D7)\n"
-"uint32[] sf3d          # Subframe 3 Words 3..10 (SF3D0..SF3D7)\n"
-"# End of optional block\n"
-;
+    return "# AID-EPH (0x0B 0x31)\n\
+# GPS Aiding Ephemeris Input/Output Message\n\
+#\n\
+# All UBX-AID messages are deprecated; use UBX-MGA messages instead\n\
+# - SF1D0 to SF3D7 is only sent if ephemeris is available for this SV. If not, the payload may\n\
+#   be reduced to 8 Bytes, or all bytes are set to zero, indicating that this SV Number does\n\
+#   not have valid ephemeris for the moment. This may happen even if NAV-SVINFO and\n\
+#   RXM-SVSI are indicating ephemeris availability as the internal data may not represent the\n\
+#   content of an original broadcast ephemeris (or only parts thereof).\n\
+# - SF1D0 to SF3D7 contain the 24 words following the Hand-Over Word ( HOW ) from the\n\
+#   GPS navigation message, subframes 1 to 3. The Truncated TOW Count is not valid and\n\
+#   cannot be used. See IS-GPS-200 for a full description of the contents of the Subframes.\n\
+# - In SF1D0 to SF3D7, the parity bits have been removed, and the 24 bits of data are\n\
+#   located in Bits 0 to 23. Bits 24 to 31 shall be ignored.\n\
+# - When polled, the data contained in this message does not represent the full original\n\
+#   ephemeris broadcast. Some fields that are irrelevant to u-blox receivers may be missing.\n\
+#   The week number in Subframe 1 has already been modified to match the Time Of\n\
+#   Ephemeris (TOE).\n\
+\n\
+uint8 CLASS_ID = 11\n\
+uint8 MESSAGE_ID = 49\n\
+\n\
+uint32 svid             # SV ID for which this ephemeris data is \n\
+                        # (Valid Range: 1 .. 32).\n\
+uint32 how              # Hand-Over Word of first Subframe. This is\n\
+                        # required if data is sent to the receiver.\n\
+                        # 0 indicates that no Ephemeris Data is following.\n\
+\n\
+# Start of optional block\n\
+uint32[] sf1d          # Subframe 1 Words 3..10 (SF1D0..SF1D7)\n\
+uint32[] sf2d          # Subframe 2 Words 3..10 (SF2D0..SF2D7)\n\
+uint32[] sf3d          # Subframe 3 Words 3..10 (SF3D0..SF3D7)\n\
+# End of optional block\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::AidEPH_<ContainerAllocator>&) { return value(); }

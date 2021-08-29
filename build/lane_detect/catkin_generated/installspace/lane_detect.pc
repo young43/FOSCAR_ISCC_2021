@@ -1,4 +1,4 @@
-prefix=/home/foscar/ISCC_2021/install
+prefix=/home/young43/FOSCAR_ISCC_2021/install
 
 Name: lane_detect
 Description: Description of lane_detect

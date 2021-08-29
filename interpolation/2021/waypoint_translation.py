@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     f = open(file_name.split('.')[0]+'.trs.txt','w')
     out_str = ''
-    for point in new_path:
-        out_str += str(point[0]) + ' ' + str(point[1]) + ' ' + str(int(point[2])) + '\n'
+    for idx, point in enumerate(new_path):
+        out_str += str(point[0]) + ' ' + str(point[1]) + ' ' + str(int(path[idx][2])) + '\n'
     f.write(out_str)
     f.close()

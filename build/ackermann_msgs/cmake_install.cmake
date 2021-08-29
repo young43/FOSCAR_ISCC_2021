@@ -1,8 +1,8 @@
-# Install script for directory: /home/foscar/ISCC_2021/src/ackermann_msgs
+# Install script for directory: /home/young43/FOSCAR_ISCC_2021/src/ackermann_msgs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/foscar/ISCC_2021/install")
+  set(CMAKE_INSTALL_PREFIX "/home/young43/FOSCAR_ISCC_2021/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,62 +32,57 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-# Is this installation the result of a crosscompile?
-if(NOT DEFINED CMAKE_CROSSCOMPILING)
-  set(CMAKE_CROSSCOMPILING "FALSE")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs/msg" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/src/ackermann_msgs/msg/AckermannDrive.msg"
-    "/home/foscar/ISCC_2021/src/ackermann_msgs/msg/AckermannDriveStamped.msg"
+    "/home/young43/FOSCAR_ISCC_2021/src/ackermann_msgs/msg/AckermannDrive.msg"
+    "/home/young43/FOSCAR_ISCC_2021/src/ackermann_msgs/msg/AckermannDriveStamped.msg"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgs-msg-paths.cmake")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs/cmake" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgs-msg-paths.cmake")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/include/ackermann_msgs")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/include/ackermann_msgs")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/roseus/ros/ackermann_msgs")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/share/roseus/ros/ackermann_msgs")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/ackermann_msgs")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/share/common-lisp/ros/ackermann_msgs")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/ackermann_msgs")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/ackermann_msgs")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/ackermann_msgs")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/young43/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/ackermann_msgs")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/ackermann_msgs")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/ackermann_msgs")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/foscar/ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgs.pc")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgs.pc")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgs-msg-extras.cmake")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs/cmake" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgs-msg-extras.cmake")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs/cmake" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgsConfig.cmake"
-    "/home/foscar/ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgsConfig-version.cmake"
+    "/home/young43/FOSCAR_ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgsConfig.cmake"
+    "/home/young43/FOSCAR_ISCC_2021/build/ackermann_msgs/catkin_generated/installspace/ackermann_msgsConfig-version.cmake"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs" TYPE FILE FILES "/home/foscar/ISCC_2021/src/ackermann_msgs/package.xml")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ackermann_msgs" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/src/ackermann_msgs/package.xml")
 endif()
 

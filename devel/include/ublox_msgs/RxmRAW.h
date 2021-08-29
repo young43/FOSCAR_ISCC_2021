@@ -59,14 +59,6 @@ struct RxmRAW_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 2u,
     MESSAGE_ID = 16u,
@@ -98,24 +90,6 @@ ros::message_operations::Printer< ::ublox_msgs::RxmRAW_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::RxmRAW_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAW_<ContainerAllocator2> & rhs)
-{
-  return lhs.rcvTOW == rhs.rcvTOW &&
-    lhs.week == rhs.week &&
-    lhs.numSV == rhs.numSV &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.sv == rhs.sv;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::RxmRAW_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAW_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -123,6 +97,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -187,46 +167,46 @@ struct Definition< ::ublox_msgs::RxmRAW_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# RXM-RAW (0x02 0x10)\n"
-"# Raw Measurement Data\n"
-"#\n"
-"# Supported up to ublox 7 firmware. See RxmRAWX for ublox 8\n"
-"# This message contains all information needed to be able to generate a RINEX \n"
-"# observation file.\n"
-"# This message outputs pseudorange, doppler and carrier phase measurements for \n"
-"# GPS satellites once signals have been synchronised. No other GNSS types are \n"
-"# currently supported.\n"
-"# \n"
-"\n"
-"uint8 CLASS_ID = 2\n"
-"uint8 MESSAGE_ID = 16\n"
-"\n"
-"int32 rcvTOW            # Measurement time of week in receiver local time [s]\n"
-"int16 week              # Measurement week number in receiver local time [weeks]\n"
-"\n"
-"uint8 numSV             # # of satellites following\n"
-"uint8 reserved1         # Reserved\n"
-"\n"
-"RxmRAW_SV[] sv          # numSV times\n"
-"\n"
-"================================================================================\n"
-"MSG: ublox_msgs/RxmRAW_SV\n"
-"# see message RxmRAW\n"
-"#\n"
-"\n"
-"float64 cpMes             # Carrier phase measurement [L1 cycles]\n"
-"float64 prMes             # Pseudorange measurement [m]\n"
-"float32 doMes             # Doppler measurement [Hz]\n"
-"\n"
-"uint8 sv                  # Space Vehicle Number\n"
-"int8 mesQI                # Nav Measurements Quality Indicator\n"
-"                          #  >=4 : PR+DO OK\n"
-"                          #  >=5 : PR+DO+CP OK\n"
-"                          #  <6 : likely loss of carrier lock in previous \n"
-"                          #       interval\n"
-"int8 cno                  # Signal strength C/No. [dbHz]\n"
-"uint8 lli                 # Loss of lock indicator (RINEX definition)\n"
-;
+    return "# RXM-RAW (0x02 0x10)\n\
+# Raw Measurement Data\n\
+#\n\
+# Supported up to ublox 7 firmware. See RxmRAWX for ublox 8\n\
+# This message contains all information needed to be able to generate a RINEX \n\
+# observation file.\n\
+# This message outputs pseudorange, doppler and carrier phase measurements for \n\
+# GPS satellites once signals have been synchronised. No other GNSS types are \n\
+# currently supported.\n\
+# \n\
+\n\
+uint8 CLASS_ID = 2\n\
+uint8 MESSAGE_ID = 16\n\
+\n\
+int32 rcvTOW            # Measurement time of week in receiver local time [s]\n\
+int16 week              # Measurement week number in receiver local time [weeks]\n\
+\n\
+uint8 numSV             # # of satellites following\n\
+uint8 reserved1         # Reserved\n\
+\n\
+RxmRAW_SV[] sv          # numSV times\n\
+\n\
+================================================================================\n\
+MSG: ublox_msgs/RxmRAW_SV\n\
+# see message RxmRAW\n\
+#\n\
+\n\
+float64 cpMes             # Carrier phase measurement [L1 cycles]\n\
+float64 prMes             # Pseudorange measurement [m]\n\
+float32 doMes             # Doppler measurement [Hz]\n\
+\n\
+uint8 sv                  # Space Vehicle Number\n\
+int8 mesQI                # Nav Measurements Quality Indicator\n\
+                          #  >=4 : PR+DO OK\n\
+                          #  >=5 : PR+DO+CP OK\n\
+                          #  <6 : likely loss of carrier lock in previous \n\
+                          #       interval\n\
+int8 cno                  # Signal strength C/No. [dbHz]\n\
+uint8 lli                 # Loss of lock indicator (RINEX definition)\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::RxmRAW_<ContainerAllocator>&) { return value(); }

@@ -76,53 +76,6 @@ struct NavSBAS_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(MODE_DISABLED)
-  #undef MODE_DISABLED
-#endif
-#if defined(_WIN32) && defined(MODE_ENABLED_INTEGRITY)
-  #undef MODE_ENABLED_INTEGRITY
-#endif
-#if defined(_WIN32) && defined(MODE_ENABLED_TESTMODE)
-  #undef MODE_ENABLED_TESTMODE
-#endif
-#if defined(_WIN32) && defined(SYS_UNKNOWN)
-  #undef SYS_UNKNOWN
-#endif
-#if defined(_WIN32) && defined(SYS_WAAS)
-  #undef SYS_WAAS
-#endif
-#if defined(_WIN32) && defined(SYS_EGNOS)
-  #undef SYS_EGNOS
-#endif
-#if defined(_WIN32) && defined(SYS_MSAS)
-  #undef SYS_MSAS
-#endif
-#if defined(_WIN32) && defined(SYS_GAGAN)
-  #undef SYS_GAGAN
-#endif
-#if defined(_WIN32) && defined(SYS_GPS)
-  #undef SYS_GPS
-#endif
-#if defined(_WIN32) && defined(SERVICE_RANGING)
-  #undef SERVICE_RANGING
-#endif
-#if defined(_WIN32) && defined(SERVICE_CORRECTIONS)
-  #undef SERVICE_CORRECTIONS
-#endif
-#if defined(_WIN32) && defined(SERVICE_INTEGRITY)
-  #undef SERVICE_INTEGRITY
-#endif
-#if defined(_WIN32) && defined(SERVICE_TESTMODE)
-  #undef SERVICE_TESTMODE
-#endif
-
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 50u,
@@ -193,27 +146,6 @@ ros::message_operations::Printer< ::ublox_msgs::NavSBAS_<ContainerAllocator> >::
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::NavSBAS_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSBAS_<ContainerAllocator2> & rhs)
-{
-  return lhs.iTOW == rhs.iTOW &&
-    lhs.geo == rhs.geo &&
-    lhs.mode == rhs.mode &&
-    lhs.sys == rhs.sys &&
-    lhs.service == rhs.service &&
-    lhs.cnt == rhs.cnt &&
-    lhs.reserved0 == rhs.reserved0 &&
-    lhs.sv == rhs.sv;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::NavSBAS_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSBAS_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -221,6 +153,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -285,59 +223,59 @@ struct Definition< ::ublox_msgs::NavSBAS_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-SBAS (0x01 0x32)\n"
-"# SBAS Status Data\n"
-"#\n"
-"# This message outputs the status of the SBAS sub system\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 1\n"
-"uint8 MESSAGE_ID = 50\n"
-"\n"
-"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
-"\n"
-"uint8 geo               # PRN Number of the GEO where correction and integrity \n"
-"                        # data is used from\n"
-"\n"
-"uint8 mode              # SBAS Mode\n"
-"uint8 MODE_DISABLED = 0\n"
-"uint8 MODE_ENABLED_INTEGRITY = 1\n"
-"uint8 MODE_ENABLED_TESTMODE = 3\n"
-"\n"
-"int8 sys                # SBAS System (WAAS/EGNOS/...)\n"
-"int8 SYS_UNKNOWN = -1\n"
-"int8 SYS_WAAS = 0\n"
-"int8 SYS_EGNOS = 1\n"
-"int8 SYS_MSAS = 2\n"
-"int8 SYS_GAGAN = 3\n"
-"int8 SYS_GPS = 16\n"
-"\n"
-"uint8 service           # SBAS Services available\n"
-"uint8 SERVICE_RANGING = 1\n"
-"uint8 SERVICE_CORRECTIONS = 2\n"
-"uint8 SERVICE_INTEGRITY = 4\n"
-"uint8 SERVICE_TESTMODE = 8\n"
-"\n"
-"uint8 cnt               # Number of SV data following\n"
-"uint8[3] reserved0      # Reserved\n"
-"\n"
-"NavSBAS_SV[] sv\n"
-"\n"
-"================================================================================\n"
-"MSG: ublox_msgs/NavSBAS_SV\n"
-"# see message NavSBAS\n"
-"#\n"
-"\n"
-"uint8 svid              # SV Id\n"
-"uint8 flags             # Flags for this SV\n"
-"uint8 udre              # Monitoring status\n"
-"uint8 svSys             # System (WAAS/EGNOS/...), same as SYS\n"
-"uint8 svService         # Services available, same as SERVICE\n"
-"uint8 reserved1         # Reserved\n"
-"int16 prc               # Pseudo Range correction in [cm]\n"
-"uint16 reserved2        # Reserved\n"
-"int16 ic                # Ionosphere correction in [cm]\n"
-;
+    return "# NAV-SBAS (0x01 0x32)\n\
+# SBAS Status Data\n\
+#\n\
+# This message outputs the status of the SBAS sub system\n\
+#\n\
+\n\
+uint8 CLASS_ID = 1\n\
+uint8 MESSAGE_ID = 50\n\
+\n\
+uint32 iTOW             # GPS Millisecond time of week [ms]\n\
+\n\
+uint8 geo               # PRN Number of the GEO where correction and integrity \n\
+                        # data is used from\n\
+\n\
+uint8 mode              # SBAS Mode\n\
+uint8 MODE_DISABLED = 0\n\
+uint8 MODE_ENABLED_INTEGRITY = 1\n\
+uint8 MODE_ENABLED_TESTMODE = 3\n\
+\n\
+int8 sys                # SBAS System (WAAS/EGNOS/...)\n\
+int8 SYS_UNKNOWN = -1\n\
+int8 SYS_WAAS = 0\n\
+int8 SYS_EGNOS = 1\n\
+int8 SYS_MSAS = 2\n\
+int8 SYS_GAGAN = 3\n\
+int8 SYS_GPS = 16\n\
+\n\
+uint8 service           # SBAS Services available\n\
+uint8 SERVICE_RANGING = 1\n\
+uint8 SERVICE_CORRECTIONS = 2\n\
+uint8 SERVICE_INTEGRITY = 4\n\
+uint8 SERVICE_TESTMODE = 8\n\
+\n\
+uint8 cnt               # Number of SV data following\n\
+uint8[3] reserved0      # Reserved\n\
+\n\
+NavSBAS_SV[] sv\n\
+\n\
+================================================================================\n\
+MSG: ublox_msgs/NavSBAS_SV\n\
+# see message NavSBAS\n\
+#\n\
+\n\
+uint8 svid              # SV Id\n\
+uint8 flags             # Flags for this SV\n\
+uint8 udre              # Monitoring status\n\
+uint8 svSys             # System (WAAS/EGNOS/...), same as SYS\n\
+uint8 svService         # Services available, same as SERVICE\n\
+uint8 reserved1         # Reserved\n\
+int16 prc               # Pseudo Range correction in [cm]\n\
+uint16 reserved2        # Reserved\n\
+int16 ic                # Ionosphere correction in [cm]\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::NavSBAS_<ContainerAllocator>&) { return value(); }

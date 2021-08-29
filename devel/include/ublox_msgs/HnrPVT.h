@@ -164,59 +164,6 @@ struct HnrPVT_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(VALID_DATE)
-  #undef VALID_DATE
-#endif
-#if defined(_WIN32) && defined(VALID_TIME)
-  #undef VALID_TIME
-#endif
-#if defined(_WIN32) && defined(VALID_FULLY_RESOLVED)
-  #undef VALID_FULLY_RESOLVED
-#endif
-#if defined(_WIN32) && defined(VALID_MAG)
-  #undef VALID_MAG
-#endif
-#if defined(_WIN32) && defined(FIX_TYPE_NO_FIX)
-  #undef FIX_TYPE_NO_FIX
-#endif
-#if defined(_WIN32) && defined(FIX_TYPE_DEAD_RECKONING_ONLY)
-  #undef FIX_TYPE_DEAD_RECKONING_ONLY
-#endif
-#if defined(_WIN32) && defined(FIX_TYPE_2D)
-  #undef FIX_TYPE_2D
-#endif
-#if defined(_WIN32) && defined(FIX_TYPE_3D)
-  #undef FIX_TYPE_3D
-#endif
-#if defined(_WIN32) && defined(FIX_TYPE_GPS_DEAD_RECKONING_COMBINED)
-  #undef FIX_TYPE_GPS_DEAD_RECKONING_COMBINED
-#endif
-#if defined(_WIN32) && defined(FIX_TYPE_TIME_ONLY)
-  #undef FIX_TYPE_TIME_ONLY
-#endif
-#if defined(_WIN32) && defined(FLAGS_GNSS_FIX_OK)
-  #undef FLAGS_GNSS_FIX_OK
-#endif
-#if defined(_WIN32) && defined(FLAGS_DIFF_SOLN)
-  #undef FLAGS_DIFF_SOLN
-#endif
-#if defined(_WIN32) && defined(FLAGS_WKN_SET)
-  #undef FLAGS_WKN_SET
-#endif
-#if defined(_WIN32) && defined(FLAGS_TOW_SET)
-  #undef FLAGS_TOW_SET
-#endif
-#if defined(_WIN32) && defined(FLAGS_HEAD_VEH_VALID)
-  #undef FLAGS_HEAD_VEH_VALID
-#endif
-
   enum {
     CLASS_ID = 40u,
     MESSAGE_ID = 0u,
@@ -293,44 +240,6 @@ ros::message_operations::Printer< ::ublox_msgs::HnrPVT_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::HnrPVT_<ContainerAllocator1> & lhs, const ::ublox_msgs::HnrPVT_<ContainerAllocator2> & rhs)
-{
-  return lhs.iTOW == rhs.iTOW &&
-    lhs.year == rhs.year &&
-    lhs.month == rhs.month &&
-    lhs.day == rhs.day &&
-    lhs.hour == rhs.hour &&
-    lhs.min == rhs.min &&
-    lhs.sec == rhs.sec &&
-    lhs.valid == rhs.valid &&
-    lhs.nano == rhs.nano &&
-    lhs.gpsFix == rhs.gpsFix &&
-    lhs.flags == rhs.flags &&
-    lhs.reserved0 == rhs.reserved0 &&
-    lhs.lon == rhs.lon &&
-    lhs.lat == rhs.lat &&
-    lhs.height == rhs.height &&
-    lhs.hMSL == rhs.hMSL &&
-    lhs.gSpeed == rhs.gSpeed &&
-    lhs.speed == rhs.speed &&
-    lhs.headMot == rhs.headMot &&
-    lhs.headVeh == rhs.headVeh &&
-    lhs.hAcc == rhs.hAcc &&
-    lhs.vAcc == rhs.vAcc &&
-    lhs.sAcc == rhs.sAcc &&
-    lhs.headAcc == rhs.headAcc &&
-    lhs.reserved1 == rhs.reserved1;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::HnrPVT_<ContainerAllocator1> & lhs, const ::ublox_msgs::HnrPVT_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -338,6 +247,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -402,74 +317,74 @@ struct Definition< ::ublox_msgs::HnrPVT_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# HNR-PVT (0x28 0x00)\n"
-"# High Rate Output of PVT Solution\n"
-"#\n"
-"# Note that during a leap second there may be more (or less) than 60 seconds in\n"
-"# a minute; see the description of leap seconds for details.\n"
-"#\n"
-"# This message provides the position, velocity and time solution with high \n"
-"# output rate.\n"
-"#\n"
-"# Supported on ADR and UDR products.\n"
-"#\n"
-"uint8 CLASS_ID = 40\n"
-"uint8 MESSAGE_ID = 0\n"
-"\n"
-"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
-"uint16 year             # Year (UTC)\n"
-"uint8 month             # Month, range 1..12 (UTC)\n"
-"uint8 day               # Day of month, range 1..31 (UTC)\n"
-"uint8 hour              # Hour of day, range 0..23 (UTC)\n"
-"uint8 min               # Minute of hour, range 0..59 (UTC)\n"
-"uint8 sec               # Seconds of minute, range 0..60 (UTC)\n"
-"\n"
-"uint8 valid             # Validity flags\n"
-"uint8 VALID_DATE = 1            # Valid UTC Date\n"
-"uint8 VALID_TIME = 2            # Valid \n"
-"uint8 VALID_FULLY_RESOLVED = 4  # UTC time of day has been fully resolved \n"
-"                                # (no seconds uncertainty)\n"
-"uint8 VALID_MAG = 8             # Valid Magnetic Declination\n"
-"\n"
-"int32 nano              # fraction of a second [ns], range -1e9 .. 1e9 (UTC)\n"
-"\n"
-"uint8 gpsFix            # GPS fix Type, range 0..5\n"
-"uint8 FIX_TYPE_NO_FIX = 0\n"
-"uint8 FIX_TYPE_DEAD_RECKONING_ONLY = 1\n"
-"uint8 FIX_TYPE_2D = 2                           # Signal from only 3 SVs, \n"
-"                                                # constant altitude assumed\n"
-"uint8 FIX_TYPE_3D = 3\n"
-"uint8 FIX_TYPE_GPS_DEAD_RECKONING_COMBINED = 4  # GPS + Dead reckoning\n"
-"uint8 FIX_TYPE_TIME_ONLY = 5                    # Time only fix \n"
-"\n"
-"uint8 flags             # Fix Status Flags\n"
-"uint8 FLAGS_GNSS_FIX_OK = 1          # i.e. within DOP & accuracy masks\n"
-"uint8 FLAGS_DIFF_SOLN = 2            # DGPS used\n"
-"uint8 FLAGS_WKN_SET = 4              # Valid GPS week number\n"
-"uint8 FLAGS_TOW_SET = 8              # Valid GPS time of week (iTOW & fTOW)\n"
-"uint8 FLAGS_HEAD_VEH_VALID = 32      # heading of vehicle is valid\n"
-"\n"
-"uint8[2] reserved0      # Reserved\n"
-"\n"
-"int32 lon               # Longitude [deg / 1e-7]\n"
-"int32 lat               # Latitude [deg / 1e-7]\n"
-"int32 height            # Height above Ellipsoid [mm]\n"
-"int32 hMSL              # Height above mean sea level [mm]\n"
-"\n"
-"int32 gSpeed            # Ground Speed (2-D) [mm/s]\n"
-"int32 speed             # Speed (3-D) [mm/s]\n"
-"\n"
-"int32 headMot           # Heading of motion (2-D) [deg / 1e-5]\n"
-"int32 headVeh           # Heading of vehicle (2-D) [deg / 1e-5]\n"
-"\n"
-"uint32 hAcc             # Horizontal Accuracy Estimate [mm]\n"
-"uint32 vAcc             # Vertical Accuracy Estimate [mm]\n"
-"uint32 sAcc             # Speed Accuracy Estimate [mm/s]\n"
-"uint32 headAcc          # Heading Accuracy Estimate (both motion & vehicle) \n"
-"                        # [deg / 1e-5]\n"
-"\n"
-"uint8[4] reserved1      # Reserved\n"
-;
+    return "# HNR-PVT (0x28 0x00)\n\
+# High Rate Output of PVT Solution\n\
+#\n\
+# Note that during a leap second there may be more (or less) than 60 seconds in\n\
+# a minute; see the description of leap seconds for details.\n\
+#\n\
+# This message provides the position, velocity and time solution with high \n\
+# output rate.\n\
+#\n\
+# Supported on ADR and UDR products.\n\
+#\n\
+uint8 CLASS_ID = 40\n\
+uint8 MESSAGE_ID = 0\n\
+\n\
+uint32 iTOW             # GPS Millisecond time of week [ms]\n\
+uint16 year             # Year (UTC)\n\
+uint8 month             # Month, range 1..12 (UTC)\n\
+uint8 day               # Day of month, range 1..31 (UTC)\n\
+uint8 hour              # Hour of day, range 0..23 (UTC)\n\
+uint8 min               # Minute of hour, range 0..59 (UTC)\n\
+uint8 sec               # Seconds of minute, range 0..60 (UTC)\n\
+\n\
+uint8 valid             # Validity flags\n\
+uint8 VALID_DATE = 1            # Valid UTC Date\n\
+uint8 VALID_TIME = 2            # Valid \n\
+uint8 VALID_FULLY_RESOLVED = 4  # UTC time of day has been fully resolved \n\
+                                # (no seconds uncertainty)\n\
+uint8 VALID_MAG = 8             # Valid Magnetic Declination\n\
+\n\
+int32 nano              # fraction of a second [ns], range -1e9 .. 1e9 (UTC)\n\
+\n\
+uint8 gpsFix            # GPS fix Type, range 0..5\n\
+uint8 FIX_TYPE_NO_FIX = 0\n\
+uint8 FIX_TYPE_DEAD_RECKONING_ONLY = 1\n\
+uint8 FIX_TYPE_2D = 2                           # Signal from only 3 SVs, \n\
+                                                # constant altitude assumed\n\
+uint8 FIX_TYPE_3D = 3\n\
+uint8 FIX_TYPE_GPS_DEAD_RECKONING_COMBINED = 4  # GPS + Dead reckoning\n\
+uint8 FIX_TYPE_TIME_ONLY = 5                    # Time only fix \n\
+\n\
+uint8 flags             # Fix Status Flags\n\
+uint8 FLAGS_GNSS_FIX_OK = 1          # i.e. within DOP & accuracy masks\n\
+uint8 FLAGS_DIFF_SOLN = 2            # DGPS used\n\
+uint8 FLAGS_WKN_SET = 4              # Valid GPS week number\n\
+uint8 FLAGS_TOW_SET = 8              # Valid GPS time of week (iTOW & fTOW)\n\
+uint8 FLAGS_HEAD_VEH_VALID = 32      # heading of vehicle is valid\n\
+\n\
+uint8[2] reserved0      # Reserved\n\
+\n\
+int32 lon               # Longitude [deg / 1e-7]\n\
+int32 lat               # Latitude [deg / 1e-7]\n\
+int32 height            # Height above Ellipsoid [mm]\n\
+int32 hMSL              # Height above mean sea level [mm]\n\
+\n\
+int32 gSpeed            # Ground Speed (2-D) [mm/s]\n\
+int32 speed             # Speed (3-D) [mm/s]\n\
+\n\
+int32 headMot           # Heading of motion (2-D) [deg / 1e-5]\n\
+int32 headVeh           # Heading of vehicle (2-D) [deg / 1e-5]\n\
+\n\
+uint32 hAcc             # Horizontal Accuracy Estimate [mm]\n\
+uint32 vAcc             # Vertical Accuracy Estimate [mm]\n\
+uint32 sAcc             # Speed Accuracy Estimate [mm/s]\n\
+uint32 headAcc          # Heading Accuracy Estimate (both motion & vehicle) \n\
+                        # [deg / 1e-5]\n\
+\n\
+uint8[4] reserved1      # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::HnrPVT_<ContainerAllocator>&) { return value(); }

@@ -105,29 +105,6 @@ struct CfgTMODE3_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(FLAGS_MODE_MASK)
-  #undef FLAGS_MODE_MASK
-#endif
-#if defined(_WIN32) && defined(FLAGS_MODE_DISABLED)
-  #undef FLAGS_MODE_DISABLED
-#endif
-#if defined(_WIN32) && defined(FLAGS_MODE_SURVEY_IN)
-  #undef FLAGS_MODE_SURVEY_IN
-#endif
-#if defined(_WIN32) && defined(FLAGS_MODE_FIXED)
-  #undef FLAGS_MODE_FIXED
-#endif
-#if defined(_WIN32) && defined(FLAGS_LLA)
-  #undef FLAGS_LLA
-#endif
-
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 113u,
@@ -174,33 +151,6 @@ ros::message_operations::Printer< ::ublox_msgs::CfgTMODE3_<ContainerAllocator> >
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::CfgTMODE3_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgTMODE3_<ContainerAllocator2> & rhs)
-{
-  return lhs.version == rhs.version &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.flags == rhs.flags &&
-    lhs.ecefXOrLat == rhs.ecefXOrLat &&
-    lhs.ecefYOrLon == rhs.ecefYOrLon &&
-    lhs.ecefZOrAlt == rhs.ecefZOrAlt &&
-    lhs.ecefXOrLatHP == rhs.ecefXOrLatHP &&
-    lhs.ecefYOrLonHP == rhs.ecefYOrLonHP &&
-    lhs.ecefZOrAltHP == rhs.ecefZOrAltHP &&
-    lhs.reserved2 == rhs.reserved2 &&
-    lhs.fixedPosAcc == rhs.fixedPosAcc &&
-    lhs.svinMinDur == rhs.svinMinDur &&
-    lhs.svinAccLimit == rhs.svinAccLimit &&
-    lhs.reserved3 == rhs.reserved3;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::CfgTMODE3_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgTMODE3_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -208,6 +158,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -272,75 +228,75 @@ struct Definition< ::ublox_msgs::CfgTMODE3_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-TMODE3 (0x06, 0x71)\n"
-"# Time Mode Settings 3\n"
-"#\n"
-"# Configures the receiver to be in Time Mode. The position referred to in this\n"
-"# message is that of the Antenna Reference Point (ARP). See the Time Mode \n"
-"# Description for details.\n"
-"# \n"
-"# Supported on:\n"
-"#  - u-blox 8 / u-blox M8 with protocol version 20 (only with High Precision\n"
-"#    GNSS products)\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 6\n"
-"uint8 MESSAGE_ID = 113\n"
-"\n"
-"uint8 version                     # Message version (0x00 for this version)\n"
-"uint8 reserved1                   # Reserved\n"
-"\n"
-"uint16 flags\n"
-"uint16 FLAGS_MODE_MASK = 255      # Receiver Mode:\n"
-"uint16 FLAGS_MODE_DISABLED = 0      # Disabled\n"
-"uint16 FLAGS_MODE_SURVEY_IN = 1     # Survey In\n"
-"uint16 FLAGS_MODE_FIXED = 2         # Fixed Mode (true ARP position required)\n"
-"uint16 FLAGS_LLA = 256            # Position is given in LAT/LON/ALT \n"
-"                                  # (default is ECEF)\n"
-"\n"
-"int32 ecefXOrLat                  # WGS84 ECEF X coordinate (or latitude) of\n"
-"                                  # the ARP position, depending on flags above\n"
-"                                  # [cm] or [deg / 1e-7]\n"
-"int32 ecefYOrLon                  # WGS84 ECEF Y coordinate (or longitude) of\n"
-"                                  # the ARP position, depending on flags above\n"
-"                                  # [cm] or [deg / 1e-7]\n"
-"int32 ecefZOrAlt                  # WGS84 ECEF Z coordinate (or altitude) of\n"
-"                                  # the ARP position, depending on flags above\n"
-"                                  # [cm]\n"
-"int8 ecefXOrLatHP                 # High-precision WGS84 ECEF X coordinate (or\n"
-"                                  # latitude) of the ARP position, depending on\n"
-"                                  # flags above. Must be in the range -99..+99.\n"
-"                                  # The precise WGS84 ECEF X coordinate in units\n"
-"                                  # of cm, or the precise WGS84 ECEF latitude in\n"
-"                                  # units of 1e-7 degrees, is given by\n"
-"                                  # ecefXOrLat + (ecefXOrLatHP * 1e-2)\n"
-"                                  # [0.1 mm] or [deg * 1e-9]\n"
-"int8 ecefYOrLonHP                 # High-precision WGS84 ECEF Y coordinate (or\n"
-"                                  # longitude) of the ARP position, depending on\n"
-"                                  # flags above. Must be in the range -99..+99.\n"
-"                                  # The precise WGS84 ECEF Y coordinate in units\n"
-"                                  # of cm, or the precise WGS84 ECEF longitude \n"
-"                                  # in units of 1e-7 degrees, is given by\n"
-"                                  # ecefYOrLon + (ecefYOrLonHP * 1e-2)\n"
-"                                  # [0.1 mm] or [deg * 1e-9]\n"
-"int8 ecefZOrAltHP                 # High-precision WGS84 ECEF Z coordinate (or\n"
-"                                  # altitude) of the ARP position, depending on\n"
-"                                  # flags above. Must be in the range -99..+99.\n"
-"                                  # The precise WGS84 ECEF Z coordinate, or\n"
-"                                  # altitude coordinate, in units of cm is given\n"
-"                                  # by ecefZOrAlt + (ecefZOrAltHP * 1e-2)\n"
-"                                  # [0.1 mm]\n"
-"uint8 reserved2                   # Reserved\n"
-"\n"
-"uint32 fixedPosAcc                # Fixed position 3D accuracy\n"
-"                                  # [0.1 mm]\n"
-"uint32 svinMinDur                 # Survey-in minimum duration\n"
-"                                  # [s]\n"
-"uint32 svinAccLimit               # Survey-in position accuracy limit\n"
-"                                  # [0.1 mm]\n"
-"\n"
-"uint8[8] reserved3                # Reserved\n"
-;
+    return "# CFG-TMODE3 (0x06, 0x71)\n\
+# Time Mode Settings 3\n\
+#\n\
+# Configures the receiver to be in Time Mode. The position referred to in this\n\
+# message is that of the Antenna Reference Point (ARP). See the Time Mode \n\
+# Description for details.\n\
+# \n\
+# Supported on:\n\
+#  - u-blox 8 / u-blox M8 with protocol version 20 (only with High Precision\n\
+#    GNSS products)\n\
+#\n\
+\n\
+uint8 CLASS_ID = 6\n\
+uint8 MESSAGE_ID = 113\n\
+\n\
+uint8 version                     # Message version (0x00 for this version)\n\
+uint8 reserved1                   # Reserved\n\
+\n\
+uint16 flags\n\
+uint16 FLAGS_MODE_MASK = 255      # Receiver Mode:\n\
+uint16 FLAGS_MODE_DISABLED = 0      # Disabled\n\
+uint16 FLAGS_MODE_SURVEY_IN = 1     # Survey In\n\
+uint16 FLAGS_MODE_FIXED = 2         # Fixed Mode (true ARP position required)\n\
+uint16 FLAGS_LLA = 256            # Position is given in LAT/LON/ALT \n\
+                                  # (default is ECEF)\n\
+\n\
+int32 ecefXOrLat                  # WGS84 ECEF X coordinate (or latitude) of\n\
+                                  # the ARP position, depending on flags above\n\
+                                  # [cm] or [deg / 1e-7]\n\
+int32 ecefYOrLon                  # WGS84 ECEF Y coordinate (or longitude) of\n\
+                                  # the ARP position, depending on flags above\n\
+                                  # [cm] or [deg / 1e-7]\n\
+int32 ecefZOrAlt                  # WGS84 ECEF Z coordinate (or altitude) of\n\
+                                  # the ARP position, depending on flags above\n\
+                                  # [cm]\n\
+int8 ecefXOrLatHP                 # High-precision WGS84 ECEF X coordinate (or\n\
+                                  # latitude) of the ARP position, depending on\n\
+                                  # flags above. Must be in the range -99..+99.\n\
+                                  # The precise WGS84 ECEF X coordinate in units\n\
+                                  # of cm, or the precise WGS84 ECEF latitude in\n\
+                                  # units of 1e-7 degrees, is given by\n\
+                                  # ecefXOrLat + (ecefXOrLatHP * 1e-2)\n\
+                                  # [0.1 mm] or [deg * 1e-9]\n\
+int8 ecefYOrLonHP                 # High-precision WGS84 ECEF Y coordinate (or\n\
+                                  # longitude) of the ARP position, depending on\n\
+                                  # flags above. Must be in the range -99..+99.\n\
+                                  # The precise WGS84 ECEF Y coordinate in units\n\
+                                  # of cm, or the precise WGS84 ECEF longitude \n\
+                                  # in units of 1e-7 degrees, is given by\n\
+                                  # ecefYOrLon + (ecefYOrLonHP * 1e-2)\n\
+                                  # [0.1 mm] or [deg * 1e-9]\n\
+int8 ecefZOrAltHP                 # High-precision WGS84 ECEF Z coordinate (or\n\
+                                  # altitude) of the ARP position, depending on\n\
+                                  # flags above. Must be in the range -99..+99.\n\
+                                  # The precise WGS84 ECEF Z coordinate, or\n\
+                                  # altitude coordinate, in units of cm is given\n\
+                                  # by ecefZOrAlt + (ecefZOrAltHP * 1e-2)\n\
+                                  # [0.1 mm]\n\
+uint8 reserved2                   # Reserved\n\
+\n\
+uint32 fixedPosAcc                # Fixed position 3D accuracy\n\
+                                  # [0.1 mm]\n\
+uint32 svinMinDur                 # Survey-in minimum duration\n\
+                                  # [s]\n\
+uint32 svinAccLimit               # Survey-in position accuracy limit\n\
+                                  # [0.1 mm]\n\
+\n\
+uint8[8] reserved3                # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::CfgTMODE3_<ContainerAllocator>&) { return value(); }

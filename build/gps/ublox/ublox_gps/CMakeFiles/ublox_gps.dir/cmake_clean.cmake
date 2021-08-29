@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ublox_gps.dir/src/gps.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/libublox_gps.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/libublox_gps.so"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libublox_gps.pdb"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libublox_gps.so"
 )
 
 # Per-language clean rules from dependency scanning.

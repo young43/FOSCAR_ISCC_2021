@@ -39,14 +39,6 @@ struct CfgINF_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 2u,
@@ -78,20 +70,6 @@ ros::message_operations::Printer< ::ublox_msgs::CfgINF_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::CfgINF_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgINF_<ContainerAllocator2> & rhs)
-{
-  return lhs.blocks == rhs.blocks;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::CfgINF_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgINF_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -99,6 +77,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -163,50 +147,50 @@ struct Definition< ::ublox_msgs::CfgINF_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-INF  (0x06 0x02)\n"
-"# Information message configuration\n"
-"#\n"
-"# The value of infMsgMask[x] below are that each bit represents one of the INF \n"
-"# class messages (Bit 0 for ERROR, Bit 1 for WARNING and so on.). For a complete \n"
-"# list, see the Message Class INF. Several configurations can be concatenated to \n"
-"# one input message.\n"
-"# In this case the payload length can be a multiple of the normal length. Output \n"
-"# messages from the module contain only one configuration unit. Note that I/O \n"
-"# Ports 1 and 2 correspond to serial ports 1 and 2. I/O port 0 is DDC. I/O port \n"
-"# 3 is USB. I/O port 4 is SPI. I/O port 5 is reserved for future use\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 6\n"
-"uint8 MESSAGE_ID = 2\n"
-"\n"
-"# start of repeated block\n"
-"CfgINF_Block[] blocks\n"
-"# end of repeated block\n"
-"\n"
-"================================================================================\n"
-"MSG: ublox_msgs/CfgINF_Block\n"
-"# See CfgINF message\n"
-"#\n"
-"\n"
-"uint8 protocolID          # Protocol Identifier, identifying for which\n"
-"                          # protocol the configuration is set/get. The\n"
-"                          # following are valid Protocol Identifiers:\n"
-"                          # 0: UBX Protocol\n"
-"                          # 1: NMEA Protocol\n"
-"                          # 2-255: Reserved\n"
-"uint8 PROTOCOL_ID_UBX = 0\n"
-"uint8 PROTOCOL_ID_NMEA = 1\n"
-"\n"
-"uint8[3] reserved1        # Reserved\n"
-"\n"
-"uint8[6] infMsgMask       # A bit mask, saying which information messages\n"
-"                          # are enabled on each I/O port\n"
-"uint8 INF_MSG_ERROR = 1              # enable ERROR\n"
-"uint8 INF_MSG_WARNING = 2            # enable WARNING\n"
-"uint8 INF_MSG_NOTICE = 4             # enable NOTICE\n"
-"uint8 INF_MSG_TEST = 8               # enable TEST\n"
-"uint8 INF_MSG_DEBUG = 16             # enable DEBUG\n"
-;
+    return "# CFG-INF  (0x06 0x02)\n\
+# Information message configuration\n\
+#\n\
+# The value of infMsgMask[x] below are that each bit represents one of the INF \n\
+# class messages (Bit 0 for ERROR, Bit 1 for WARNING and so on.). For a complete \n\
+# list, see the Message Class INF. Several configurations can be concatenated to \n\
+# one input message.\n\
+# In this case the payload length can be a multiple of the normal length. Output \n\
+# messages from the module contain only one configuration unit. Note that I/O \n\
+# Ports 1 and 2 correspond to serial ports 1 and 2. I/O port 0 is DDC. I/O port \n\
+# 3 is USB. I/O port 4 is SPI. I/O port 5 is reserved for future use\n\
+#\n\
+\n\
+uint8 CLASS_ID = 6\n\
+uint8 MESSAGE_ID = 2\n\
+\n\
+# start of repeated block\n\
+CfgINF_Block[] blocks\n\
+# end of repeated block\n\
+\n\
+================================================================================\n\
+MSG: ublox_msgs/CfgINF_Block\n\
+# See CfgINF message\n\
+#\n\
+\n\
+uint8 protocolID          # Protocol Identifier, identifying for which\n\
+                          # protocol the configuration is set/get. The\n\
+                          # following are valid Protocol Identifiers:\n\
+                          # 0: UBX Protocol\n\
+                          # 1: NMEA Protocol\n\
+                          # 2-255: Reserved\n\
+uint8 PROTOCOL_ID_UBX = 0\n\
+uint8 PROTOCOL_ID_NMEA = 1\n\
+\n\
+uint8[3] reserved1        # Reserved\n\
+\n\
+uint8[6] infMsgMask       # A bit mask, saying which information messages\n\
+                          # are enabled on each I/O port\n\
+uint8 INF_MSG_ERROR = 1              # enable ERROR\n\
+uint8 INF_MSG_WARNING = 2            # enable WARNING\n\
+uint8 INF_MSG_NOTICE = 4             # enable NOTICE\n\
+uint8 INF_MSG_TEST = 8               # enable TEST\n\
+uint8 INF_MSG_DEBUG = 16             # enable DEBUG\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::CfgINF_<ContainerAllocator>&) { return value(); }

@@ -50,14 +50,6 @@ struct RxmSFRB_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 2u,
     MESSAGE_ID = 17u,
@@ -89,22 +81,6 @@ ros::message_operations::Printer< ::ublox_msgs::RxmSFRB_<ContainerAllocator> >::
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::RxmSFRB_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmSFRB_<ContainerAllocator2> & rhs)
-{
-  return lhs.chn == rhs.chn &&
-    lhs.svid == rhs.svid &&
-    lhs.dwrd == rhs.dwrd;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::RxmSFRB_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmSFRB_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -112,6 +88,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -176,31 +158,31 @@ struct Definition< ::ublox_msgs::RxmSFRB_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# RXM-SFRB (0x02 0x11)\n"
-"# Subframe Buffer\n"
-"#\n"
-"# The content of one single subframe buffer\n"
-"# For GPS satellites, the 10 dwrd values contain the parity checked subframe \n"
-"# data for 10 Words. Each dwrd has 24 Bits with valid data (Bits 23 to 0). The \n"
-"# remaining 8 bits (31 to 24) have an undefined value. The direction within the \n"
-"# Word is that the higher order bits are received from the SV first. Example: \n"
-"# The Preamble can be found in dwrd[0], at bit position 23 down to 16. For more \n"
-"# details on the data format please refer to the ICD-GPS-200C\n"
-"# Interface document.\n"
-"# For SBAS satellites, the 250 Bit message block can be found in dwrd[0] to \n"
-"# dwrd[6] for the first 224 bits. The remaining 26 bits are in dwrd[7], whereas\n"
-"# Bits 25 and 24 are the last two data bits, and Bits 23 down to 0 are the\n"
-"# parity bits. For more information on SBAS data format, please refer to \n"
-"# RTCA/DO-229C (MOPS), Appendix A.\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 2\n"
-"uint8 MESSAGE_ID = 17\n"
-"\n"
-"uint8 chn               # Channel Number\n"
-"uint8 svid              # ID of Satellite transmitting Subframe\n"
-"uint32[10] dwrd         # Words of Data\n"
-;
+    return "# RXM-SFRB (0x02 0x11)\n\
+# Subframe Buffer\n\
+#\n\
+# The content of one single subframe buffer\n\
+# For GPS satellites, the 10 dwrd values contain the parity checked subframe \n\
+# data for 10 Words. Each dwrd has 24 Bits with valid data (Bits 23 to 0). The \n\
+# remaining 8 bits (31 to 24) have an undefined value. The direction within the \n\
+# Word is that the higher order bits are received from the SV first. Example: \n\
+# The Preamble can be found in dwrd[0], at bit position 23 down to 16. For more \n\
+# details on the data format please refer to the ICD-GPS-200C\n\
+# Interface document.\n\
+# For SBAS satellites, the 250 Bit message block can be found in dwrd[0] to \n\
+# dwrd[6] for the first 224 bits. The remaining 26 bits are in dwrd[7], whereas\n\
+# Bits 25 and 24 are the last two data bits, and Bits 23 down to 0 are the\n\
+# parity bits. For more information on SBAS data format, please refer to \n\
+# RTCA/DO-229C (MOPS), Appendix A.\n\
+#\n\
+\n\
+uint8 CLASS_ID = 2\n\
+uint8 MESSAGE_ID = 17\n\
+\n\
+uint8 chn               # Channel Number\n\
+uint8 svid              # ID of Satellite transmitting Subframe\n\
+uint32[10] dwrd         # Words of Data\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::RxmSFRB_<ContainerAllocator>&) { return value(); }

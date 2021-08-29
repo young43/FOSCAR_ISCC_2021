@@ -1,8 +1,8 @@
-# Install script for directory: /home/foscar/ISCC_2021/src/avoid_obstacle
+# Install script for directory: /home/young43/FOSCAR_ISCC_2021/src/avoid_obstacle
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/foscar/ISCC_2021/install")
+  set(CMAKE_INSTALL_PREFIX "/home/young43/FOSCAR_ISCC_2021/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,63 +32,58 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-# Is this installation the result of a crosscompile?
-if(NOT DEFINED CMAKE_CROSSCOMPILING)
-  set(CMAKE_CROSSCOMPILING "FALSE")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle/msg" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
-    "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
-    "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
+    "/home/young43/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+    "/home/young43/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
+    "/home/young43/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacle-msg-paths.cmake")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle/cmake" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacle-msg-paths.cmake")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/include/avoid_obstacle")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/include/avoid_obstacle")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/roseus/ros/avoid_obstacle")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/share/roseus/ros/avoid_obstacle")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/avoid_obstacle")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/share/common-lisp/ros/avoid_obstacle")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/avoid_obstacle")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/avoid_obstacle")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/avoid_obstacle")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/young43/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/avoid_obstacle")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/avoid_obstacle")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/young43/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/avoid_obstacle")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/foscar/ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacle.pc")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacle.pc")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacle-msg-extras.cmake")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle/cmake" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacle-msg-extras.cmake")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle/cmake" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacleConfig.cmake"
-    "/home/foscar/ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacleConfig-version.cmake"
+    "/home/young43/FOSCAR_ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacleConfig.cmake"
+    "/home/young43/FOSCAR_ISCC_2021/build/avoid_obstacle/catkin_generated/installspace/avoid_obstacleConfig-version.cmake"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle" TYPE FILE FILES "/home/foscar/ISCC_2021/src/avoid_obstacle/package.xml")
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/avoid_obstacle" TYPE FILE FILES "/home/young43/FOSCAR_ISCC_2021/src/avoid_obstacle/package.xml")
 endif()
 

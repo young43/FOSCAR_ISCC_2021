@@ -18,8 +18,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/sick_scan_lib.dir/driver/src/sick_scan_common_nw.cpp.o"
   "CMakeFiles/sick_scan_lib.dir/driver/src/sick_scan_config_internal.cpp.o"
   "CMakeFiles/sick_scan_lib.dir/driver/src/softwarePLL.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/libsick_scan_lib.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/libsick_scan_lib.so"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libsick_scan_lib.pdb"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libsick_scan_lib.so"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -75,26 +75,6 @@ struct EsfSTATUS_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(FUSION_MODE_INIT)
-  #undef FUSION_MODE_INIT
-#endif
-#if defined(_WIN32) && defined(FUSION_MODE_FUSION)
-  #undef FUSION_MODE_FUSION
-#endif
-#if defined(_WIN32) && defined(FUSION_MODE_SUSPENDED)
-  #undef FUSION_MODE_SUSPENDED
-#endif
-#if defined(_WIN32) && defined(FUSION_MODE_DISABLED)
-  #undef FUSION_MODE_DISABLED
-#endif
-
   enum {
     CLASS_ID = 16u,
     MESSAGE_ID = 16u,
@@ -138,26 +118,6 @@ ros::message_operations::Printer< ::ublox_msgs::EsfSTATUS_<ContainerAllocator> >
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::EsfSTATUS_<ContainerAllocator1> & lhs, const ::ublox_msgs::EsfSTATUS_<ContainerAllocator2> & rhs)
-{
-  return lhs.iTOW == rhs.iTOW &&
-    lhs.version == rhs.version &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.fusionMode == rhs.fusionMode &&
-    lhs.reserved2 == rhs.reserved2 &&
-    lhs.numSens == rhs.numSens &&
-    lhs.sens == rhs.sens;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::EsfSTATUS_<ContainerAllocator1> & lhs, const ::ublox_msgs::EsfSTATUS_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -165,6 +125,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -229,50 +195,50 @@ struct Definition< ::ublox_msgs::EsfSTATUS_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# ESF-STATUS (0x10 0x10)\n"
-"# External Sensor Fusion (ESF) status information\n"
-"#\n"
-"# Supported on UDR/ADR products\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 16\n"
-"uint8 MESSAGE_ID = 16\n"
-"\n"
-"uint32 iTOW                   # GPS time of week of the navigation epoch [ms]\n"
-"uint8 version                 # Message version (2 for this version)\n"
-"\n"
-"uint8[7] reserved1            # Reserved\n"
-"\n"
-"uint8 fusionMode              # Fusion mode:\n"
-"uint8 FUSION_MODE_INIT = 0        # receiver is initializing some unknown values\n"
-"                                  # required for doing sensor fusion\n"
-"uint8 FUSION_MODE_FUSION = 1      # GNSS and sensor data are \n"
-"                                  # used for navigation solution computation\n"
-"uint8 FUSION_MODE_SUSPENDED = 2   # sensor fusion is temporarily disabled \n"
-"                                  # due to e.g. invalid sensor data or detected \n"
-"                                  # ferry\n"
-"uint8 FUSION_MODE_DISABLED = 3    # sensor fusion is permanently disabled \n"
-"                                  # until receiver reset due e.g. to sensor \n"
-"                                  # error\n"
-"\n"
-"uint8[2] reserved2            # Reserved\n"
-"\n"
-"uint8 numSens                 # Number of sensors\n"
-"\n"
-"\n"
-"# Start of repeated block (numSens times)\n"
-"EsfSTATUS_Sens[] sens\n"
-"# End of repeated block\n"
-"================================================================================\n"
-"MSG: ublox_msgs/EsfSTATUS_Sens\n"
-"# See Esf-STATUS\n"
-"#\n"
-"\n"
-"uint8 sensStatus1   # Sensor status, part 1 (see graphic below)\n"
-"uint8 sensStatus2   # Sensor status, part 2 (see graphic below)\n"
-"uint8 freq          # Observation frequency [Hz]\n"
-"uint8 faults        # Sensor faults (see graphic below)\n"
-;
+    return "# ESF-STATUS (0x10 0x10)\n\
+# External Sensor Fusion (ESF) status information\n\
+#\n\
+# Supported on UDR/ADR products\n\
+#\n\
+\n\
+uint8 CLASS_ID = 16\n\
+uint8 MESSAGE_ID = 16\n\
+\n\
+uint32 iTOW                   # GPS time of week of the navigation epoch [ms]\n\
+uint8 version                 # Message version (2 for this version)\n\
+\n\
+uint8[7] reserved1            # Reserved\n\
+\n\
+uint8 fusionMode              # Fusion mode:\n\
+uint8 FUSION_MODE_INIT = 0        # receiver is initializing some unknown values\n\
+                                  # required for doing sensor fusion\n\
+uint8 FUSION_MODE_FUSION = 1      # GNSS and sensor data are \n\
+                                  # used for navigation solution computation\n\
+uint8 FUSION_MODE_SUSPENDED = 2   # sensor fusion is temporarily disabled \n\
+                                  # due to e.g. invalid sensor data or detected \n\
+                                  # ferry\n\
+uint8 FUSION_MODE_DISABLED = 3    # sensor fusion is permanently disabled \n\
+                                  # until receiver reset due e.g. to sensor \n\
+                                  # error\n\
+\n\
+uint8[2] reserved2            # Reserved\n\
+\n\
+uint8 numSens                 # Number of sensors\n\
+\n\
+\n\
+# Start of repeated block (numSens times)\n\
+EsfSTATUS_Sens[] sens\n\
+# End of repeated block\n\
+================================================================================\n\
+MSG: ublox_msgs/EsfSTATUS_Sens\n\
+# See Esf-STATUS\n\
+#\n\
+\n\
+uint8 sensStatus1   # Sensor status, part 1 (see graphic below)\n\
+uint8 sensStatus2   # Sensor status, part 2 (see graphic below)\n\
+uint8 freq          # Observation frequency [Hz]\n\
+uint8 faults        # Sensor faults (see graphic below)\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::EsfSTATUS_<ContainerAllocator>&) { return value(); }

@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ublox_logger_node.dir/src/logger_node_pa.cpp.o"
   "CMakeFiles/ublox_logger_node.dir/src/raw_data_pa.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/ublox_gps/ublox_logger.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/ublox_gps/ublox_logger"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/ublox_gps/ublox_logger.pdb"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/ublox_gps/ublox_logger"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -21,6 +21,7 @@ PurePursuitNode::PurePursuitNode()
   , const_lookahead_distance_(4.0)
   , const_velocity_(3.0)
   , final_constant(1.5)
+  , parking_num(1)
 {
   initForROS();
 }
@@ -45,13 +46,30 @@ std::chrono::system_clock::time_point obs_start;
 /* traffic Index manager */
 // 1,2,3,4,7 직진
 // 5(비보호 좌회전), 6(좌회전)
-const int tf_idx_1 = 1177; // 1180
-const int tf_idx_2 = 1452; // 1455
-const int tf_idx_3 = 2497; // 2500
-const int tf_idx_4 = 2987; // 2990
-const int tf_idx_5 = 3403; // 3406
-const int tf_idx_6 = 5052; // 5055
-const int tf_idx_7 = 5285; // 5285
+int tf_idx_1 = 1177; // 1180
+int tf_idx_2 = 1452; // 1455
+int tf_idx_3 = 2497; // 2500
+int tf_idx_4 = 2987; // 2990
+int tf_idx_5 = 3403; // 3406
+int tf_idx_6 = 5052; // 5055
+int tf_idx_7 = 5285; // 5285
+
+int tf_idx_8 = 5052; // 5055
+int tf_idx_9 = 5285; // 5285
+
+
+bool tf_flag = false;
+const float tf_coord1[2] = {935575.213544702, 1915926.09913091};
+const float tf_coord2[2] = {935601.125, 1915974.5};
+const float tf_coord3[2] = {935650.3125, 1916100.5};
+const float tf_coord4[2] = {935655.875, 1916205.75};
+const float tf_coord5[2] = {935648.625, 1916343.25};
+const float tf_coord6[2] = {935581.6875, 1916251.625};
+const float tf_coord7[2] = {935642.9375, 1916131.125};
+
+// 무시할지결정해야
+const float tf_coord8[2] = {935642.9375, 1916131.125};
+const float tf_coord9[2] = {935642.9375, 1916131.125};
 /*************************/
 
 
@@ -60,7 +78,36 @@ const int dv_a_idx_1 = 1000;
 const int dv_b_idx_1 = 1000;
 const int dv_b_idx_2 = 1000;
 const int dv_b_idx_3 = 1000;
+
+// max index of pp_.a_cnt array
+int a_max_index = -1;
+// calc max index flag
+bool a_cnt_flag = false;
+
 /*************************/
+
+/* Parking manager */
+int start_parking_idx = 0;
+int end_parking_idx = 0;
+int end_parking_backward_idx = 0;
+int end_parking_full_steer_backward_idx = 0;
+// const float pk_coord1[2] = {935534.247324, 1915849.29071};
+// const float pk_coord2[2] = {935536.127777, 1915852.74891};
+// const float pk_coord3[2] = {935537.027791, 1915854.43949};
+// const float pk_coord4[2] = {935539.530479, 1915859.22427};
+// const float pk_coord5[2] = {935540.465801, 1915860.89238};
+// const float pk_coord6[2] = {935541.86021, 1915863.43345};
+
+// For School Test
+const float pk_coord1[2] = {955565.3630135682, 1956933.4946035568};
+const float pk_coord2[2] = {955564.96476695, 1956933.8079647133};
+const float pk_coord3[2] = {955564.6498305532, 1956934.0536339642};
+const float pk_coord4[2] = {955564.018495136, 1956934.5500655076};
+const float pk_coord5[2] = {955563.8305732157, 1956934.6975132197};
+const float pk_coord6[2] = {955563.4789975542, 1956934.971366751};
+/*************************/
+
+
 
 // float tmp_distance = 100.0;
 ///////////////////////////////
@@ -107,6 +154,7 @@ void PurePursuitNode::run(char** argv) {
   const_lookahead_distance_ = atof(argv[2]);
   const_velocity_ = atof(argv[3]);
   final_constant = atof(argv[4]);
+  parking_num = atoi(argv[5]);
   //////////////////////////
 
   ros::Rate loop_rate(LOOP_RATE_);
@@ -133,48 +181,67 @@ void PurePursuitNode::run(char** argv) {
     publishCurrentPointVisualizationMsg();
 
 
-    // geometry_msgs::Point green_point = pp_.waypoints.at(pp_.current_idx).first;
-    // geometry_msgs::Point pink_point = pp_.waypoints.at(pp_.next_waypoint_number_).first;
-    // double yaw = atan2(2.0 * (pp_.current_pose_.orientation.w * pp_.current_pose_.orientation.z + pp_.current_pose_.orientation.x * pp_.current_pose_.orientation.y), 1.0 - 2.0 * (pp_.current_pose_.orientation.y * pp_.current_pose_.orientation.y + pp_.current_pose_.orientation.z * pp_.current_pose_.orientation.z));
-    // double map_yaw = atan2(pink_point.y - green_point.y, pink_point.x - green_point.x);
-    // double diff_yaw = fabs(yaw - map_yaw);
-
-    // double map_car_yaw =atan2(pink_point.y - pp_.current_pose_.position.y, pink_point.x - pp_.current_pose_.position.x);
-    // double sinTheta =sin(fabs(map_yaw-map_car_yaw));
-    // double temp_distance = sqrt(pow(green_point.x - pp_.current_pose_.position.x, 2) + pow(green_point.y - pp_.current_pose_.position.y, 2));
-    // double distance_from_car = fabs(sinTheta*temp_distance);
-
-
     // 마지막 waypoint 에 다다랐으면 멈추기
-    if(pp_.is_finish && pp_.mode == 8){
+    if(pp_.is_finish && pp_.mode == 38){
       pulishControlMsg(0,0);
       ROS_INFO_STREAM("Finish Pure Pursuit");
       continue;
     }
 
 
-    ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
+    // ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
+    // int temp_idx = pp_.getPosIndex(935658.25, 1916136.625);
+    
+    // int temp_idx = pp_.getPosIndex(pk_coord1[0], pk_coord1[1]);
+    // if(parking_num == 1) ROS_INFO("PARKING_POINT1 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord2[0], pk_coord2[1]);
+    // if(parking_num == 2) ROS_INFO("PARKING_POINT2 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord3[0], pk_coord3[1]);
+    // if(parking_num == 3) ROS_INFO("PARKING_POINT3 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord4[0], pk_coord4[1]);
+    // if(parking_num == 4) ROS_INFO("PARKING_POINT4 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord5[0], pk_coord5[1]);
+    // if(parking_num == 5) ROS_INFO("PARKING_POINT5 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord6[0], pk_coord6[1]);
+    // if(parking_num == 6) ROS_INFO("PARKING_POINT6 : %d", temp_idx);
 
-    // MODE 0 - Normal 직진구간
-    if(pp_.mode == 0){
+    // Traffic Light Index 한번만 초기화
+    if(!tf_flag){
+      tf_flag = true;
+      tf_idx_1 = pp_.getPosIndex(tf_coord1[0], tf_coord1[1]);
+      tf_idx_2 = pp_.getPosIndex(tf_coord2[0], tf_coord2[1]);
+      tf_idx_3 = pp_.getPosIndex(tf_coord3[0], tf_coord3[1]);
+      tf_idx_4 = pp_.getPosIndex(tf_coord4[0], tf_coord4[1], 1); // 혹시나 배달구간 겹칠 수 있기때문에..
+      tf_idx_5 = pp_.getPosIndex(tf_coord5[0], tf_coord5[1]);
+      tf_idx_6 = pp_.getPosIndex(tf_coord6[0], tf_coord6[1]);
+      tf_idx_7 = pp_.getPosIndex(tf_coord7[0], tf_coord7[1]);
+      
+      tf_idx_8 = pp_.getPosIndex(tf_coord8[0], tf_coord8[1]);
+      tf_idx_9 = pp_.getPosIndex(tf_coord9[0], tf_coord9[1]);
+    }
+    
+
+    // Normal 직진구간
+    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17 
+       || pp_.mode == 22 || pp_.mode == 25 || pp_.mode == 27 || pp_.mode == 30 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 10;
+      const_velocity_ = 12;
       final_constant = 1.2;
     }
 
-    // MODE 1 - Normal 커브구간
-    if (pp_.mode == 1) {
+    // Normal 커브구간
+    if (pp_.mode == 12 || pp_.mode == 14 || pp_.mode == 16 || pp_.mode == 18 || pp_.mode == 24 || pp_.mode == 26 || pp_.mode == 29 || pp_.mode == 31) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
-      const_velocity_ = 8;
+      const_velocity_ = 10;
       final_constant = 1.5;
     }
 
 
-    // MODE 2 - 주차
+    // MODE 1 - 주차
     // 주차 구간
-    if (pp_.mode == 2) {
+    if (pp_.mode == 1) {
       pp_.is_finish = false;
 
       if (pp_.mission_flag == 3 || pp_.mission_flag == 0) {
@@ -183,41 +250,58 @@ void PurePursuitNode::run(char** argv) {
       }
 
       // first
-      // int start_parking_idx = 260;
-      // int end_parking_idx = 120;
-      // int end_parking_backward_idx = 100;
-      // int end_parking_full_steer_backward_idx = 75;
-
+      if (parking_num == 1){
+        // int start_parking_idx = 260
+        start_parking_idx = pp_.getPosIndex(pk_coord1[0], pk_coord1[1]);
+        end_parking_idx = 120;
+        end_parking_backward_idx = 100;
+        end_parking_full_steer_backward_idx = 75;
+      }
+    
        // second
-       int start_parking_idx = 280;
-       int end_parking_idx = 87;
-       int end_parking_backward_idx = 55;
-       int end_parking_full_steer_backward_idx = 25;
+       if (parking_num == 2){
+        // int start_parking_idx = 280;
+        start_parking_idx = pp_.getPosIndex(pk_coord2[0], pk_coord2[1]);
+        end_parking_idx = 87;
+        end_parking_backward_idx = 55;
+        end_parking_full_steer_backward_idx = 25;
+       }
 
-
-      // third
-//      int start_parking_idx = 290;
-//      int end_parking_idx = 145;
-//      int end_parking_backward_idx = 117; // 120
-//      int end_parking_full_steer_backward_idx = 90;
+       // third
+       if (parking_num == 3){
+        // int start_parking_idx = 290;
+        start_parking_idx = pp_.getPosIndex(pk_coord3[0], pk_coord3[1]);
+        end_parking_idx = 145;
+        end_parking_backward_idx = 117; // 120
+        end_parking_full_steer_backward_idx = 90;
+       }
 
       // forth
-      // int start_parking_idx = 320;
-      // int end_parking_idx = 88;
-      // int end_parking_backward_idx = 55;
-      // int end_parking_full_steer_backward_idx = 23;
+      if (parking_num == 4){
+        // int start_parking_idx = 320;
+        start_parking_idx = pp_.getPosIndex(pk_coord4[0], pk_coord4[1]);
+        end_parking_idx = 88;
+        end_parking_backward_idx = 55;
+        end_parking_full_steer_backward_idx = 23;
+      }
 
       // fifth
-      // int start_parking_idx = 330;
-      // int end_parking_idx = 80;
-      // int end_parking_backward_idx = 50;
-      // int end_parking_full_steer_backward_idx = 23;
+      if (parking_num == 5){
+        // int start_parking_idx = 330;
+        start_parking_idx = pp_.getPosIndex(pk_coord5[0], pk_coord5[1]);
+        end_parking_idx = 80;
+        end_parking_backward_idx = 50;
+        end_parking_full_steer_backward_idx = 23;
+      }
 
       //sixth
-      // int start_parking_idx = 345;
-      // int end_parking_idx = 75;
-      // int end_parking_backward_idx = 55;
-      // int end_parking_full_steer_backward_idx = 25;
+      if (parking_num == 6){
+        // int start_parking_idx = 345;
+        start_parking_idx = pp_.getPosIndex(pk_coord6[0], pk_coord6[1]);
+        end_parking_idx = 75;
+        end_parking_backward_idx = 55;
+        end_parking_full_steer_backward_idx = 25;
+      }
 
 
       // backward_speed : -7
@@ -277,31 +361,53 @@ void PurePursuitNode::run(char** argv) {
     }
 
 
-    // MODE 3 : 신호등 (직진구간)
-    if (pp_.mode == 3) {
+    // MODE 3,5,8,33 : 신호등 (직진구간)
+    if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 33) {
       pp_.mission_flag = 0; 
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
       final_constant = 1.2;
      
 
-      // 1,2,3,4,7번 직진신호등 멈춤
-      if((pp_.reachMissionIdx(tf_idx_1) || pp_.reachMissionIdx(tf_idx_2) || pp_.reachMissionIdx(tf_idx_3)
-          || pp_.reachMissionIdx(tf_idx_4) || pp_.reachMissionIdx(tf_idx_7)) && !pp_.straight_go_flag) {
+      // 1,2,3,7번 직진신호등 멈춤
+      if((pp_.reachMissionIdx(tf_idx_1) || pp_.reachMissionIdx(tf_idx_2) || pp_.reachMissionIdx(tf_idx_3) || pp_.reachMissionIdx(tf_idx_7)) && !pp_.straight_go_flag) {
         pulishControlMsg(0,0);
         continue;
       }
-
-
-
     }
 
-    // MODE 9 : 신호등 (좌회전)
-    if (pp_.mode == 9) {
+    // MODE 35,37 : 신호등(무시할지결정바람)
+    if (pp_.mode == 35 || pp_.mode == 37) {
+      pp_.mission_flag = 0; 
+      const_lookahead_distance_ = 5;
+      const_velocity_ = 8;
+      final_constant = 1.2;
+
+      if((pp_.reachMissionIdx(tf_idx_8) || pp_.reachMissionIdx(tf_idx_9)) && !pp_.straight_go_flag) {
+        pulishControlMsg(0,0);
+        continue;
+      }
+    }
+
+    // MODE 21 : 신호등 & 커브
+    if (pp_.mode == 21){
       pp_.mission_flag = 0; 
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
       final_constant = 1.5;
+
+      if((pp_.reachMissionIdx(tf_idx_4)) && !pp_.straight_go_flag) {
+        pulishControlMsg(0,0);
+        continue;
+      }
+    }
+
+    // MODE 23, 28 : 신호등 (비보호 좌회전 신호)
+    if (pp_.mode == 23 || pp_.mode == 28) {
+      pp_.mission_flag = 0; 
+      const_lookahead_distance_ = 5;
+      const_velocity_ = 8;
+      final_constant = 1.2;
      
 
       // 5,6번 좌회전 신호등 멈춤
@@ -311,8 +417,8 @@ void PurePursuitNode::run(char** argv) {
       }
     }
 
-    // MODE 4 : 정적 장애물 2 , Path switching  -- version 1
-    if (pp_.mode == 4) {
+    // MODE 7 : 정적 장애물 2 , Path switching  -- version 1
+    if (pp_.mode == 7) {
       if (pp_.mission_flag == 0) {
         const_lookahead_distance_ = 6;
         const_velocity_ = 8;
@@ -378,16 +484,26 @@ void PurePursuitNode::run(char** argv) {
       //final_constant = 1.5;
 
       // 세번째 신호등 인덱스 : tf_idx_3, temp comment
-      if(pp_.mission_flag == 0 && pp_.reachMissionIdx(tf_idx_3) && !pp_.straight_go_flag) {
-        pulishControlMsg(0,0);
-        continue;
-      }
+      // if(pp_.mission_flag == 0 && pp_.reachMissionIdx(tf_idx_3) && !pp_.straight_go_flag) {
+      //   pulishControlMsg(0,0);
+      //   continue;
+      // }
+
     }
 
-    // MODE 5 : 배달 PICK A 
-    if (pp_.mode == 5) {
-      const_lookahead_distance_ = 6;
+    // MODE 9 : 배달 A 전 진입구간
+    if (pp_.mode == 9){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 4;
       const_velocity_ = 8;
+      final_constant = 1.5;
+    }
+
+
+    // MODE 10 : 배달 PICK A 
+    if (pp_.mode == 10) {
+      const_lookahead_distance_ = 6;
+      const_velocity_ = 6;
       final_constant = 1.2;
 
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
@@ -402,40 +518,63 @@ void PurePursuitNode::run(char** argv) {
         continue;
       }
     }
-    
-    /*
-    // MODE 6 : 배달 PICK B 
-    if (pp_.mode == 6) {
-      const_lookahead_distance_ = 6;
-      const_velocity_ = 8;
-      final_constant = 1.2;
 
-      if((pp_.mission_flag==0 && (pp_.a1_flag && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1)) 
-        || (pp_.mission_flag==0 && (pp_.a2_flag && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
-        || (pp_.mission_flag==0 && (pp_.a3_flag && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
-        
+    // 배달 A 구간 끝나고 바로 A_INDEX 계산함
+    if (pp_.mode == 11 && !a_cnt_flag){
+      // if not calculated a_max_index
+      // Calc max_index
+      a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
+      ROS_INFO("A INDEX : %d",a_max_index);
+
+      // Max flag on
+      pp_.a_flag[a_max_index] = true;
+
+      // Lock the a_cnt_flag
+      a_cnt_flag = true;
+      ROS_INFO("A1_f %d A2_f %d A3_f %d",pp_.a_flag[0], pp_.a_flag[1], pp_.a_flag[2]);
+    }
+
+    // MODE 19 : 배달 B 전 진입구간
+    if (pp_.mode == 19){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 4;
+      const_velocity_ = 8;
+      final_constant = 1.5;
+    }
+    
+    // MODE 19 : 배달 PICK B
+    if (pp_.mode == 20) {
+      const_lookahead_distance_ = 6;
+      const_velocity_ = 6;
+      final_constant = 1.2;
+      
+      if((pp_.mission_flag==0 && (pp_.a_flag[0] && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
+        || (pp_.mission_flag==0 && (pp_.a_flag[1] && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
+        || (pp_.mission_flag==0 && (pp_.a_flag[2] && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
+
         for (int i = 0; i < 50; i++)
         {
           pulishControlMsg(0, 0);
           // 0.1초
           usleep(100000);
         }
+        
+        ROS_INFO("B1_f %d B2_f %d B3_f %d",pp_.b1_flag, pp_.b2_flag, pp_.b3_flag);
+
+        if(pp_.a_flag[0] && pp_.b1_flag)
+          ROS_INFO("PICK-UP B1 : %d", pp_.current_idx);
+        if(pp_.a_flag[1] && pp_.b2_flag)
+          ROS_INFO("PICK-UP B2 : %d", pp_.current_idx);
+        if(pp_.a_flag[2] && pp_.b3_flag)
+          ROS_INFO("PICK-UP B3 : %d", pp_.current_idx);
         pp_.mission_flag = 1;
         continue;
       }
     }
-    */
 
-    // MODE 7 - 차선 변경
-    if (pp_.mode == 7) {
-      pp_.mission_flag = 0;
-      const_lookahead_distance_ = 4;
-      const_velocity_ = 8;
-      final_constant = 1.5;
-    }
 
-    // MODE 8 - 직선 구간 (부스터)
-    if(pp_.mode == 8){
+    // MODE 38 - 직선 구간 (부스터)
+    if(pp_.mode == 38){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
       const_velocity_ = 15;
@@ -449,6 +588,7 @@ void PurePursuitNode::run(char** argv) {
     loop_rate.sleep();
   }
 }
+
 
 void PurePursuitNode::publishPurePursuitDriveMsg(const bool& can_get_curvature, const double& kappa) const {
   double throttle_ = can_get_curvature ? const_velocity_ : 0;
@@ -637,38 +777,50 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   std::vector<darknet_ros_msgs::BoundingBox> traffic_lights;
   for(int i=0; i<yoloObjects.size(); i++){
     if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 left"
-      || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green" 
-      || yoloObjects[i].Class == "4 red left" || yoloObjects[i].Class == "4 left go"  || yoloObjects[i].Class == "4 red yellow"){
+      || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green"
+      || yoloObjects[i].Class == "4 redleft" || yoloObjects[i].Class == "4 greenleft"  || yoloObjects[i].Class == "4 redyellow"){
 
         traffic_lights.push_back(yoloObjects[i]);
-
       }
-    
+
     // 배달미션을 위한 표지판 인식
-    
-    if(yoloObjects[i].Class == "A1") pp_.a1_flag = true;
-    if(yoloObjects[i].Class == "A2") pp_.a2_flag = true;
-    if(yoloObjects[i].Class == "A3") pp_.a3_flag = true;
+    if (pp_.mode == 9){
+      if(yoloObjects[i].Class == "A1")
+      { 
+        pp_.a_cnt[0]+=1;
+      }
+      if(yoloObjects[i].Class == "A2")
+      { 
+        pp_.a_cnt[1]+=1;
+      }
+      
+      if(yoloObjects[i].Class == "A3")
+      { 
+        pp_.a_cnt[2]+=1;
+      }
+    }
+
     if(yoloObjects[i].Class == "B1") pp_.b1_flag = true;
     if(yoloObjects[i].Class == "B2") pp_.b2_flag = true;
     if(yoloObjects[i].Class == "B3") pp_.b3_flag = true;
 
   }
+
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
 
 
  int index = 0;
 
-  // check mode 9 (신호등 좌회전 구간)
-  if (pp_.mode == 9) {
+  // check mode 22, 27 (신호등 좌회전 구간)
+  if (pp_.mode == 22 || pp_.mode == 27) {
     if(traffic_lights.size() > 1)
     {
       int first_traffic = (traffic_lights[0].xmax - traffic_lights[0].xmin) * (traffic_lights[0].ymax - traffic_lights[0].ymin);
       int second_traffic = (traffic_lights[1].xmax - traffic_lights[1].xmin) * (traffic_lights[1].ymax - traffic_lights[1].ymin);
 
       if(first_traffic * 0.6 < second_traffic) {
-        if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 red left" || traffic_lights[0].Class == "4 left go" ||
-          traffic_lights[1].Class == "3 left" || traffic_lights[1].Class == "4 red left" || traffic_lights[1].Class == "4 left go") {
+        if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 redleft" || traffic_lights[0].Class == "4 greenleft" ||
+          traffic_lights[1].Class == "3 left" || traffic_lights[1].Class == "4 redleft" || traffic_lights[1].Class == "4 greenleft") {
             pp_.left_go_flag = true;
         }
         else {
@@ -676,43 +828,37 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
         }
 
         if (pp_.left_go_flag) {
-          std::cout << "mode 9 left go" << std::endl;
+          std::cout << "left go" << std::endl;
         }
         return;
       }
     } 
- }
-
-  if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
-      traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 red yellow")
-  {
-    pp_.straight_go_flag = false;
-    pp_.left_go_flag = false;
-  }
-  else if (traffic_lights[index].Class == "3 green" || traffic_lights[index].Class == "4 green")
-  {
-    pp_.straight_go_flag = true;
-    pp_.left_go_flag = false;
-  }
-  else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 red left")
-  {
-    pp_.straight_go_flag = false;
-    pp_.left_go_flag = true;
-  }
-  else if (traffic_lights[index].Class == "4 left go")
-  {
-    pp_.straight_go_flag = true;
-    pp_.left_go_flag = true;
   }
 
-  //traffic test
-  // std::cout << "*******************" << std::endl << std::endl;
-  // if (pp_.straight_go_flag){
-  //   std::cout << "straight go" << std::endl;
-  // }
-  // if (pp_.left_go_flag) {
-  //   std::cout << "left go" << std::endl;
-  // }
+  if(traffic_lights.size() > 0){
+    if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
+      traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
+    {
+      pp_.straight_go_flag = false;
+      pp_.left_go_flag = false;
+    }
+    else if (traffic_lights[index].Class == "3 green" || traffic_lights[index].Class == "4 green")
+    {
+      pp_.straight_go_flag = true;
+      pp_.left_go_flag = false;
+    }
+    else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 redleft")
+    {
+      pp_.straight_go_flag = false;
+      pp_.left_go_flag = true;
+    }
+    else if (traffic_lights[index].Class == "4 greenleft")
+    {
+      pp_.straight_go_flag = true;
+      pp_.left_go_flag = true;
+    }
+  }
+  
 
 }
 

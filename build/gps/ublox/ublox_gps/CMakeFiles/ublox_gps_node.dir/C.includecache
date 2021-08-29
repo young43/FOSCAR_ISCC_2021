@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/src/gps/ublox/ublox_gps/include/ublox_gps/mkgmtime.h
+/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_gps/include/ublox_gps/mkgmtime.h
 time.h
 -
 
-/home/foscar/ISCC_2021/src/gps/ublox/ublox_gps/src/mkgmtime.c
+/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_gps/src/mkgmtime.c
 ublox_gps/mkgmtime.h
-/home/foscar/ISCC_2021/src/gps/ublox/ublox_gps/src/ublox_gps/mkgmtime.h
+/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_gps/src/ublox_gps/mkgmtime.h
 

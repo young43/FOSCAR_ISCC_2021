@@ -1,14 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_activation_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_crop_layer_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_avgpool_layer_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_deconvolutional_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_blas_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_dropout_layer_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_col2im_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_im2col_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_convolutional_kernels.cu.o"
-  "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_maxpool_layer_kernels.cu.o"
   "CMakeFiles/darknet_ros_lib.dir/src/YoloObjectDetector.cpp.o"
   "CMakeFiles/darknet_ros_lib.dir/src/image_interface.c.o"
   "CMakeFiles/darknet_ros_lib.dir/__/darknet/src/activation_layer.c.o"
@@ -72,8 +62,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/darknet_ros_lib.dir/__/darknet/examples/detector.c.o"
   "CMakeFiles/darknet_ros_lib.dir/__/darknet/examples/yolo.c.o"
   "CMakeFiles/darknet_ros_lib.dir/__/darknet/examples/go.c.o"
-  "/home/foscar/ISCC_2021/devel/lib/libdarknet_ros_lib.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/libdarknet_ros_lib.so"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libdarknet_ros_lib.pdb"
+  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libdarknet_ros_lib.so"
 )
 
 # Per-language clean rules from dependency scanning.
