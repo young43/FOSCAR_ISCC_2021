@@ -8,8 +8,8 @@
 *.weights
 
 # build, devel
-./buld/*
-./devel/*
+buld/*
+devel/*
 
 
 # vscode
