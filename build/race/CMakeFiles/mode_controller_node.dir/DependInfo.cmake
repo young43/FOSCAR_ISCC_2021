@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/young43/FOSCAR_ISCC_2021/src/race/src/mode_controller.cpp" "/home/young43/FOSCAR_ISCC_2021/build/race/CMakeFiles/mode_controller_node.dir/src/mode_controller.cpp.o"
+  "/home/foscar/ISCC_2021/src/race/src/mode_controller.cpp" "/home/foscar/ISCC_2021/build/race/CMakeFiles/mode_controller_node.dir/src/mode_controller.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,17 +17,16 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/young43/FOSCAR_ISCC_2021/devel/include"
-  "/home/young43/FOSCAR_ISCC_2021/src/serial/include"
-  "/opt/ros/kinetic/include"
-  "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
-  "/opt/ros/kinetic/include/opencv-3.3.1-dev"
-  "/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv"
+  "/home/foscar/ISCC_2021/devel/include"
+  "/home/foscar/ISCC_2021/src/serial/include"
+  "/opt/ros/melodic/include"
+  "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/usr/include/opencv"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/young43/FOSCAR_ISCC_2021/build/serial/CMakeFiles/serial.dir/DependInfo.cmake"
+  "/home/foscar/ISCC_2021/build/serial/CMakeFiles/serial.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

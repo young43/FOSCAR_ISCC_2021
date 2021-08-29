@@ -67,14 +67,14 @@ set(sick_scan_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(sick_scan_SOURCE_PREFIX /home/young43/FOSCAR_ISCC_2021/src/sick_scan)
-  set(sick_scan_DEVEL_PREFIX /home/young43/FOSCAR_ISCC_2021/devel)
+  set(sick_scan_SOURCE_PREFIX /home/foscar/ISCC_2021/src/sick_scan)
+  set(sick_scan_DEVEL_PREFIX /home/foscar/ISCC_2021/devel)
   set(sick_scan_INSTALL_PREFIX "")
   set(sick_scan_PREFIX ${sick_scan_DEVEL_PREFIX})
 else()
   set(sick_scan_SOURCE_PREFIX "")
   set(sick_scan_DEVEL_PREFIX "")
-  set(sick_scan_INSTALL_PREFIX /home/young43/FOSCAR_ISCC_2021/install)
+  set(sick_scan_INSTALL_PREFIX /home/foscar/ISCC_2021/install)
   set(sick_scan_PREFIX ${sick_scan_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(sick_scan_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/young43/FOSCAR_ISCC_2021/devel/include;/home/young43/FOSCAR_ISCC_2021/src/sick_scan/include;/usr/include " STREQUAL " ")
+if(NOT "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/sick_scan/include;/usr/include " STREQUAL " ")
   set(sick_scan_INCLUDE_DIRS "")
-  set(_include_dirs "/home/young43/FOSCAR_ISCC_2021/devel/include;/home/young43/FOSCAR_ISCC_2021/src/sick_scan/include;/usr/include")
+  set(_include_dirs "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/sick_scan/include;/usr/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://wiki.ros.org/sick_scan " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/young43/FOSCAR_ISCC_2021/devel/include;/home/young43/FOSCAR_ISCC_2
         message(FATAL_ERROR "Project 'sick_scan' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'sick_scan' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/young43/FOSCAR_ISCC_2021/src/sick_scan/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'sick_scan' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/foscar/ISCC_2021/src/sick_scan/${idir}'.  ${_report}")
     endif()
     _list_append_unique(sick_scan_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/young43/FOSCAR_ISCC_2021/devel/lib;/home/young43/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /home/foscar/ISCC_2021/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

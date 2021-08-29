@@ -1,4 +1,4 @@
-prefix=/home/young43/FOSCAR_ISCC_2021/devel
+prefix=/home/foscar/ISCC_2021/devel
 
 Name: stanley
 Description: Description of stanley

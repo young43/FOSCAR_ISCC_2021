@@ -2,8 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/serial.dir/src/serial.cc.o"
   "CMakeFiles/serial.dir/src/impl/unix.cc.o"
   "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libserial.pdb"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libserial.so"
+  "/home/foscar/ISCC_2021/devel/lib/libserial.pdb"
+  "/home/foscar/ISCC_2021/devel/lib/libserial.so"
 )
 
 # Per-language clean rules from dependency scanning.

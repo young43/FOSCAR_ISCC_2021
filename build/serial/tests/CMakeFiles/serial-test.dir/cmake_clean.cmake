@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/serial-test.dir/unix_serial_tests.cc.o"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/serial/serial-test.pdb"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/serial/serial-test"
+  "/home/foscar/ISCC_2021/devel/lib/serial/serial-test.pdb"
+  "/home/foscar/ISCC_2021/devel/lib/serial/serial-test"
 )
 
 # Per-language clean rules from dependency scanning.

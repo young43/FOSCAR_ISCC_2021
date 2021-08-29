@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/young43/FOSCAR_ISCC_2021/src/usb_cam/nodes/usb_cam_node.cpp" "/home/young43/FOSCAR_ISCC_2021/build/usb_cam/CMakeFiles/usb_cam_node.dir/nodes/usb_cam_node.cpp.o"
+  "/home/foscar/ISCC_2021/src/usb_cam/nodes/usb_cam_node.cpp" "/home/foscar/ISCC_2021/build/usb_cam/CMakeFiles/usb_cam_node.dir/nodes/usb_cam_node.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,15 +17,15 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/young43/FOSCAR_ISCC_2021/src/usb_cam/include"
-  "/opt/ros/kinetic/include"
-  "/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/home/foscar/ISCC_2021/src/usb_cam/include"
+  "/opt/ros/melodic/include"
+  "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/x86_64-linux-gnu"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/young43/FOSCAR_ISCC_2021/build/usb_cam/CMakeFiles/usb_cam.dir/DependInfo.cmake"
+  "/home/foscar/ISCC_2021/build/usb_cam/CMakeFiles/usb_cam.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

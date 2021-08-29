@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-ackermann_msgs:avoid_obstacle:chul:darknet_ros/darknet_ros:darknet_ros/darknet_ros_msgs:gps/pure_pursuit:gps/rviz_visualization:gps/stanley:gps/ublox/ublox:gps/ublox/ublox_gps:gps/ublox/ublox_msgs:gps/ublox/ublox_serialization:gps/utmk_coordinate:gps_common:image_pipeline/camera_calibration:image_pipeline/depth_image_proc:image_pipeline/image_pipeline:image_pipeline/image_proc:image_pipeline/image_publisher:image_pipeline/image_rotate:image_pipeline/image_view:image_pipeline/stereo_image_proc:lane_detect:laser_filters:obstacle_detector:race:razor_imu_9dof:robot_setup_tf:serial:sick_scan:usb_cam:vision_distance
+ackermann_msgs:avoid_obstacle:chul:darknet_ros/darknet_ros:darknet_ros/darknet_ros_msgs:gps/pure_pursuit:gps/rviz_visualization:gps/stanley:gps/ublox/ublox:gps/ublox/ublox_gps:gps/ublox/ublox_msgs:gps/ublox/ublox_serialization:gps/utmk_coordinate:gps_common:lane_detect:laser_filters:obstacle_detector:race:razor_imu_9dof:robot_setup_tf:serial:sick_scan:usb_cam:vision_distance
 -DCATKIN_DEVEL_PREFIX=/home/foscar/ISCC_2021/devel -DCMAKE_INSTALL_PREFIX=/home/foscar/ISCC_2021/install -G Unix Makefiles
-=======
-ackermann_msgs:avoid_obstacle:chul:darknet_ros/darknet_ros:darknet_ros/darknet_ros_msgs:gps/pure_pursuit:gps/rviz_visualization:gps/stanley:gps/ublox/ublox:gps/ublox/ublox_gps:gps/ublox/ublox_msgs:gps/ublox/ublox_serialization:gps/utmk_coordinate:gps_common:lane_detect:laser_filters:obstacle_detector:race:razor_imu_9dof:robot_setup_tf:serial:sick_scan:usb_cam
--DCATKIN_DEVEL_PREFIX=/home/young43/FOSCAR_ISCC_2021/devel -DCMAKE_INSTALL_PREFIX=/home/young43/FOSCAR_ISCC_2021/install -G Unix Makefiles
->>>>>>> 88c1d150fd12cf99168d483c271f0215be7dc2ca

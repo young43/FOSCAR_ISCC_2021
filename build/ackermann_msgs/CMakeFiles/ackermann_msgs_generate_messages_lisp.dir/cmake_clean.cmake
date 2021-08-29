@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ackermann_msgs_generate_messages_lisp"
-  "/home/young43/FOSCAR_ISCC_2021/devel/share/common-lisp/ros/ackermann_msgs/msg/AckermannDriveStamped.lisp"
-  "/home/young43/FOSCAR_ISCC_2021/devel/share/common-lisp/ros/ackermann_msgs/msg/AckermannDrive.lisp"
+  "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/ackermann_msgs/msg/AckermannDrive.lisp"
+  "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/ackermann_msgs/msg/AckermannDriveStamped.lisp"
 )
 
 # Per-language clean rules from dependency scanning.
