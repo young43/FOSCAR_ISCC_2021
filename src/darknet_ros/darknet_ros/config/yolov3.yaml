@@ -8,24 +8,5 @@ yolo_model:
     value: 0.6
   detection_classes:
     names:
-      - 3 red
-      - 3 yellow
-      - 3 green
-      - 3 left
-      - 4 red
-      - 4 green
-      - 4 yellow
-      - 4 red left
-      - 4 left go
-      - 4 red yellow
-      - stop
-      - s course
-      - slow 
-      - u turn
-      - B1
-      - traffic cone
-      - B2
-      - B3
-      - A1
-      - A2
-      - A3
+      - yellow cone
+      - blue cone
