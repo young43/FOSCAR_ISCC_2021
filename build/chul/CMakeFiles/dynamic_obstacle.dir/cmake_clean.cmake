@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/dynamic_obstacle.dir/src/obstacle_avoider.cpp.o"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/chul/dynamic_obstacle.pdb"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/chul/dynamic_obstacle"
+  "/home/foscar/ISCC_2021/devel/lib/chul/dynamic_obstacle.pdb"
+  "/home/foscar/ISCC_2021/devel/lib/chul/dynamic_obstacle"
 )
 
 # Per-language clean rules from dependency scanning.

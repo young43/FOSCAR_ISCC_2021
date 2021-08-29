@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/usb_cam.dir/src/usb_cam.cpp.o"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libusb_cam.pdb"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libusb_cam.so"
+  "/home/foscar/ISCC_2021/devel/lib/libusb_cam.pdb"
+  "/home/foscar/ISCC_2021/devel/lib/libusb_cam.so"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,8 +1,8 @@
-prefix=/home/young43/FOSCAR_ISCC_2021/devel
+prefix=/home/foscar/ISCC_2021/devel
 
 Name: usb_cam
 Description: Description of usb_cam
 Version: 0.3.6
-Cflags: -I/home/young43/FOSCAR_ISCC_2021/src/usb_cam/include
+Cflags: -I/home/foscar/ISCC_2021/src/usb_cam/include
 Libs: -L${prefix}/lib -lusb_cam
 Requires: 

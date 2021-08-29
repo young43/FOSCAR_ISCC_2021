@@ -1,4 +1,4 @@
-prefix=/home/young43/FOSCAR_ISCC_2021/install
+prefix=/home/foscar/ISCC_2021/install
 
 Name: sick_scan
 Description: Description of sick_scan

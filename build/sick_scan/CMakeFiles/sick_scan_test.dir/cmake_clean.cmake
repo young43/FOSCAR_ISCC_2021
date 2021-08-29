@@ -4,8 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/sick_scan_test.dir/driver/src/tinyxml/tinyxml.cpp.o"
   "CMakeFiles/sick_scan_test.dir/driver/src/tinyxml/tinyxmlerror.cpp.o"
   "CMakeFiles/sick_scan_test.dir/driver/src/tinyxml/tinyxmlparser.cpp.o"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/sick_scan/sick_scan_test.pdb"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/sick_scan/sick_scan_test"
+  "/home/foscar/ISCC_2021/devel/lib/sick_scan/sick_scan_test.pdb"
+  "/home/foscar/ISCC_2021/devel/lib/sick_scan/sick_scan_test"
 )
 
 # Per-language clean rules from dependency scanning.

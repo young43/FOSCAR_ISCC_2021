@@ -67,14 +67,14 @@ set(obstacle_detector_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(obstacle_detector_SOURCE_PREFIX /home/young43/FOSCAR_ISCC_2021/src/obstacle_detector)
-  set(obstacle_detector_DEVEL_PREFIX /home/young43/FOSCAR_ISCC_2021/devel)
+  set(obstacle_detector_SOURCE_PREFIX /home/foscar/ISCC_2021/src/obstacle_detector)
+  set(obstacle_detector_DEVEL_PREFIX /home/foscar/ISCC_2021/devel)
   set(obstacle_detector_INSTALL_PREFIX "")
   set(obstacle_detector_PREFIX ${obstacle_detector_DEVEL_PREFIX})
 else()
   set(obstacle_detector_SOURCE_PREFIX "")
   set(obstacle_detector_DEVEL_PREFIX "")
-  set(obstacle_detector_INSTALL_PREFIX /home/young43/FOSCAR_ISCC_2021/install)
+  set(obstacle_detector_INSTALL_PREFIX /home/foscar/ISCC_2021/install)
   set(obstacle_detector_PREFIX ${obstacle_detector_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/young43/FOSCAR_ISCC_2021/install/lib;/home/young43/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /home/foscar/ISCC_2021/install/lib;/home/foscar/ISCC_2021/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

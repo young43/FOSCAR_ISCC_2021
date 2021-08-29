@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/serial_control_node.dir/src/serial_control.cpp.o"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/race/serial_control_node.pdb"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/race/serial_control_node"
+  "/home/foscar/ISCC_2021/devel/lib/race/serial_control_node.pdb"
+  "/home/foscar/ISCC_2021/devel/lib/race/serial_control_node"
 )
 
 # Per-language clean rules from dependency scanning.

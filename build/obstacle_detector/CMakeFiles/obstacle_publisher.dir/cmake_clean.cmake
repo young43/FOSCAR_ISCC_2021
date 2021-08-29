@@ -1,8 +1,9 @@
 file(REMOVE_RECURSE
-  "obstacle_detector_gui_automoc.cpp"
+  "obstacle_detector_gui_autogen"
+  "CMakeFiles/obstacle_detector_gui_autogen.dir/AutogenOldSettings.cmake"
   "CMakeFiles/obstacle_publisher.dir/src/obstacle_publisher.cpp.o"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libobstacle_publisher.pdb"
-  "/home/young43/FOSCAR_ISCC_2021/devel/lib/libobstacle_publisher.so"
+  "/home/foscar/ISCC_2021/devel/lib/libobstacle_publisher.pdb"
+  "/home/foscar/ISCC_2021/devel/lib/libobstacle_publisher.so"
 )
 
 # Per-language clean rules from dependency scanning.
