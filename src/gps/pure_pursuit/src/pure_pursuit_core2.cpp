@@ -91,12 +91,20 @@ int start_parking_idx = 0;
 int end_parking_idx = 0;
 int end_parking_backward_idx = 0;
 int end_parking_full_steer_backward_idx = 0;
-const float pk_coord1[2] = {935534.247324, 1915849.29071};
-const float pk_coord2[2] = {935536.127777, 1915852.74891};
-const float pk_coord3[2] = {935537.027791, 1915854.43949};
-const float pk_coord4[2] = {935539.530479, 1915859.22427};
-const float pk_coord5[2] = {935540.465801, 1915860.89238};
-const float pk_coord6[2] = {935541.86021, 1915863.43345};
+// const float pk_coord1[2] = {935534.247324, 1915849.29071};
+// const float pk_coord2[2] = {935536.127777, 1915852.74891};
+// const float pk_coord3[2] = {935537.027791, 1915854.43949};
+// const float pk_coord4[2] = {935539.530479, 1915859.22427};
+// const float pk_coord5[2] = {935540.465801, 1915860.89238};
+// const float pk_coord6[2] = {935541.86021, 1915863.43345};
+
+// For School Test
+const float pk_coord1[2] = {955565.3630135682, 1956933.4946035568};
+const float pk_coord2[2] = {955564.96476695, 1956933.8079647133};
+const float pk_coord3[2] = {955564.6498305532, 1956934.0536339642};
+const float pk_coord4[2] = {955564.018495136, 1956934.5500655076};
+const float pk_coord5[2] = {955563.8305732157, 1956934.6975132197};
+const float pk_coord6[2] = {955563.4789975542, 1956934.971366751};
 /*************************/
 
 
@@ -183,7 +191,19 @@ void PurePursuitNode::run(char** argv) {
 
     // ROS_INFO("MODE: %d, MISSION: %d", pp_.mode, pp_.mission_flag);
     // int temp_idx = pp_.getPosIndex(935658.25, 1916136.625);
-    // int temp_idx = pp_.getPosIndex(tf_coord1[0], tf_coord1[1]);
+    
+    // int temp_idx = pp_.getPosIndex(pk_coord1[0], pk_coord1[1]);
+    // if(parking_num == 1) ROS_INFO("PARKING_POINT1 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord2[0], pk_coord2[1]);
+    // if(parking_num == 2) ROS_INFO("PARKING_POINT2 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord3[0], pk_coord3[1]);
+    // if(parking_num == 3) ROS_INFO("PARKING_POINT3 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord4[0], pk_coord4[1]);
+    // if(parking_num == 4) ROS_INFO("PARKING_POINT4 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord5[0], pk_coord5[1]);
+    // if(parking_num == 5) ROS_INFO("PARKING_POINT5 : %d", temp_idx);
+    // temp_idx = pp_.getPosIndex(pk_coord6[0], pk_coord6[1]);
+    // if(parking_num == 6) ROS_INFO("PARKING_POINT6 : %d", temp_idx);
 
     // Traffic Light Index 한번만 초기화
     if(!tf_flag){

@@ -2,11 +2,11 @@
 
 <launch>
   <arg name="path" />
-  <arg name="ld" />
-  <arg name="vel" />
-  <arg name="final_constant" />
+  <arg name="ld" default="5"/>
+  <arg name="vel" default="7"/>
+  <arg name="final_constant" default="1.25"/>
 
-  <include file="$(find rviz_visualization)/launch/rviz.launch">
+  <include file="$(find rviz_visualization)/launch/rviz_school.launch">
     <arg name="path2" value="$(arg path)" />
   </include>
 
@@ -28,7 +28,7 @@
               file="$(find ublox_gps)/config/$(arg param_file_name).yaml" />
   </node>
 
-  <node pkg="pure_pursuit" type="pure_pursuit" name="pure_pursuit" output="screen" args="$(arg path) $(arg ld) $(arg vel) $(arg final_constant)" />
+  <node pkg="pure_pursuit" type="pure_pursuit3" name="pure_pursuit3" output="screen" args="$(arg path) $(arg ld) $(arg vel) $(arg final_constant)" />
   <node pkg="pure_pursuit" type="coordinate2pos" name="coordinate2pos" />
   <node pkg="utmk_coordinate" type="wgs84_to_utmk.py" name="wgs84_to_utmk" />
 

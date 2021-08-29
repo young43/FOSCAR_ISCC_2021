@@ -74,20 +74,6 @@ struct NavDGPS_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(DGPS_CORRECTION_NONE)
-  #undef DGPS_CORRECTION_NONE
-#endif
-#if defined(_WIN32) && defined(DGPS_CORRECTION_PR_PRR)
-  #undef DGPS_CORRECTION_PR_PRR
-#endif
-
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 49u,
@@ -125,27 +111,6 @@ ros::message_operations::Printer< ::ublox_msgs::NavDGPS_<ContainerAllocator> >::
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::NavDGPS_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavDGPS_<ContainerAllocator2> & rhs)
-{
-  return lhs.iTOW == rhs.iTOW &&
-    lhs.age == rhs.age &&
-    lhs.baseId == rhs.baseId &&
-    lhs.baseHealth == rhs.baseHealth &&
-    lhs.numCh == rhs.numCh &&
-    lhs.status == rhs.status &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.sv == rhs.sv;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::NavDGPS_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavDGPS_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -153,6 +118,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -217,48 +188,48 @@ struct Definition< ::ublox_msgs::NavDGPS_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-DGPS (0x01 0x31)\n"
-"# DGPS Data Used for NAV\n"
-"#\n"
-"# This message outputs the Correction data as it has been applied to the current\n"
-"# NAV Solution. See also the notes on the RTCM protocol.\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 1\n"
-"uint8 MESSAGE_ID = 49\n"
-"\n"
-"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
-"\n"
-"int32 age               # Age of newest correction data [ms]\n"
-"int16 baseId            # DGPS Base Station ID\n"
-"int16 baseHealth        # DGPS Base Station Health Status\n"
-"int8 numCh              # Number of channels for which correction data is \n"
-"                        # following\n"
-"\n"
-"uint8 status            # DGPS Correction Type Status\n"
-"uint8 DGPS_CORRECTION_NONE = 0\n"
-"uint8 DGPS_CORRECTION_PR_PRR = 1\n"
-"\n"
-"uint16 reserved1        # Reserved\n"
-"\n"
-"NavDGPS_SV[] sv\n"
-"\n"
-"================================================================================\n"
-"MSG: ublox_msgs/NavDGPS_SV\n"
-"# see message NavDGPS\n"
-"\n"
-"uint8 svid              # Satellite ID\n"
-"\n"
-"uint8 flags             # Bitmask / Channel Number and Usage:\n"
-"uint8 FLAGS_CHANNEL_MASK = 15   # Bitmask for channel number, range 0..15\n"
-"                                # Channel numbers > 15 marked as 15\n"
-"uint8 FLAGS_DGPS = 16           # DGPS Used for this SV\n"
-"\n"
-"uint16 ageC             # Age of latest correction data [ms]\n"
-"float32 prc             # Pseudo Range Correction [m]\n"
-"float32 prrc            # Pseudo Range Rate Correction [m/s]\n"
-"\n"
-;
+    return "# NAV-DGPS (0x01 0x31)\n\
+# DGPS Data Used for NAV\n\
+#\n\
+# This message outputs the Correction data as it has been applied to the current\n\
+# NAV Solution. See also the notes on the RTCM protocol.\n\
+#\n\
+\n\
+uint8 CLASS_ID = 1\n\
+uint8 MESSAGE_ID = 49\n\
+\n\
+uint32 iTOW             # GPS Millisecond time of week [ms]\n\
+\n\
+int32 age               # Age of newest correction data [ms]\n\
+int16 baseId            # DGPS Base Station ID\n\
+int16 baseHealth        # DGPS Base Station Health Status\n\
+int8 numCh              # Number of channels for which correction data is \n\
+                        # following\n\
+\n\
+uint8 status            # DGPS Correction Type Status\n\
+uint8 DGPS_CORRECTION_NONE = 0\n\
+uint8 DGPS_CORRECTION_PR_PRR = 1\n\
+\n\
+uint16 reserved1        # Reserved\n\
+\n\
+NavDGPS_SV[] sv\n\
+\n\
+================================================================================\n\
+MSG: ublox_msgs/NavDGPS_SV\n\
+# see message NavDGPS\n\
+\n\
+uint8 svid              # Satellite ID\n\
+\n\
+uint8 flags             # Bitmask / Channel Number and Usage:\n\
+uint8 FLAGS_CHANNEL_MASK = 15   # Bitmask for channel number, range 0..15\n\
+                                # Channel numbers > 15 marked as 15\n\
+uint8 FLAGS_DGPS = 16           # DGPS Used for this SV\n\
+\n\
+uint16 ageC             # Age of latest correction data [ms]\n\
+float32 prc             # Pseudo Range Correction [m]\n\
+float32 prrc            # Pseudo Range Rate Correction [m/s]\n\
+\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::NavDGPS_<ContainerAllocator>&) { return value(); }

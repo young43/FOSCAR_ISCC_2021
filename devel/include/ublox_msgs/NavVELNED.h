@@ -78,14 +78,6 @@ struct NavVELNED_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 18u,
@@ -117,28 +109,6 @@ ros::message_operations::Printer< ::ublox_msgs::NavVELNED_<ContainerAllocator> >
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::NavVELNED_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavVELNED_<ContainerAllocator2> & rhs)
-{
-  return lhs.iTOW == rhs.iTOW &&
-    lhs.velN == rhs.velN &&
-    lhs.velE == rhs.velE &&
-    lhs.velD == rhs.velD &&
-    lhs.speed == rhs.speed &&
-    lhs.gSpeed == rhs.gSpeed &&
-    lhs.heading == rhs.heading &&
-    lhs.sAcc == rhs.sAcc &&
-    lhs.cAcc == rhs.cAcc;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::NavVELNED_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavVELNED_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -146,6 +116,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -210,27 +186,27 @@ struct Definition< ::ublox_msgs::NavVELNED_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-VELNED (0x01 0x12)\n"
-"# Velocity Solution in NED\n"
-"#\n"
-"# See important comments concerning validity of velocity given in section\n"
-"# Navigation Output Filters.\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 1\n"
-"uint8 MESSAGE_ID = 18\n"
-"\n"
-"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
-"\n"
-"int32 velN              # NED north velocity [cm/s]\n"
-"int32 velE              # NED east velocity [cm/s]\n"
-"int32 velD              # NED down velocity [cm/s]\n"
-"uint32 speed            # Speed (3-D) [cm/s]\n"
-"uint32 gSpeed           # Ground Speed (2-D) [cm/s]\n"
-"int32 heading           # Heading of motion 2-D [deg / 1e-5]\n"
-"uint32 sAcc             # Speed Accuracy Estimate [cm/s]\n"
-"uint32 cAcc             # Course / Heading Accuracy Estimate [deg / 1e-5]\n"
-;
+    return "# NAV-VELNED (0x01 0x12)\n\
+# Velocity Solution in NED\n\
+#\n\
+# See important comments concerning validity of velocity given in section\n\
+# Navigation Output Filters.\n\
+#\n\
+\n\
+uint8 CLASS_ID = 1\n\
+uint8 MESSAGE_ID = 18\n\
+\n\
+uint32 iTOW             # GPS Millisecond time of week [ms]\n\
+\n\
+int32 velN              # NED north velocity [cm/s]\n\
+int32 velE              # NED east velocity [cm/s]\n\
+int32 velD              # NED down velocity [cm/s]\n\
+uint32 speed            # Speed (3-D) [cm/s]\n\
+uint32 gSpeed           # Ground Speed (2-D) [cm/s]\n\
+int32 heading           # Heading of motion 2-D [deg / 1e-5]\n\
+uint32 sAcc             # Speed Accuracy Estimate [cm/s]\n\
+uint32 cAcc             # Course / Heading Accuracy Estimate [deg / 1e-5]\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::NavVELNED_<ContainerAllocator>&) { return value(); }

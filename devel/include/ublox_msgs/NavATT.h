@@ -80,14 +80,6 @@ struct NavATT_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 5u,
@@ -119,28 +111,6 @@ ros::message_operations::Printer< ::ublox_msgs::NavATT_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::NavATT_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavATT_<ContainerAllocator2> & rhs)
-{
-  return lhs.iTOW == rhs.iTOW &&
-    lhs.version == rhs.version &&
-    lhs.reserved0 == rhs.reserved0 &&
-    lhs.roll == rhs.roll &&
-    lhs.pitch == rhs.pitch &&
-    lhs.heading == rhs.heading &&
-    lhs.accRoll == rhs.accRoll &&
-    lhs.accPitch == rhs.accPitch &&
-    lhs.accHeading == rhs.accHeading;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::NavATT_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavATT_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -148,6 +118,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -212,30 +188,30 @@ struct Definition< ::ublox_msgs::NavATT_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-ATT (0x01 0x05)\n"
-"# Attitude Solution\n"
-"#\n"
-"# This message outputs the attitude solution as roll, pitch and heading angles.\n"
-"# Supported on ADR and UDR products.\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 1\n"
-"uint8 MESSAGE_ID = 5\n"
-"\n"
-"uint32 iTOW               # GPS time of week of the navigation epoch [ms]\n"
-"uint8 version             # Message version (0 for this version)\n"
-"\n"
-"uint8[3] reserved0        # Reserved\n"
-"\n"
-"int32 roll                # Vehicle roll. [deg / 1e-5]\n"
-"int32 pitch               # Vehicle pitch. [deg / 1e-5]\n"
-"int32 heading             # Vehicle heading. [deg / 1e-5]\n"
-"uint32 accRoll            # Vehicle roll accuracy (if null, roll angle is not \n"
-"                          # available). [deg / 1e-5]\n"
-"uint32 accPitch           # Vehicle pitch accuracy (if null, pitch angle is not \n"
-"                          # available). [deg / 1e-5]\n"
-"uint32 accHeading         # Vehicle heading accuracy [deg / 1e-5]\n"
-;
+    return "# NAV-ATT (0x01 0x05)\n\
+# Attitude Solution\n\
+#\n\
+# This message outputs the attitude solution as roll, pitch and heading angles.\n\
+# Supported on ADR and UDR products.\n\
+#\n\
+\n\
+uint8 CLASS_ID = 1\n\
+uint8 MESSAGE_ID = 5\n\
+\n\
+uint32 iTOW               # GPS time of week of the navigation epoch [ms]\n\
+uint8 version             # Message version (0 for this version)\n\
+\n\
+uint8[3] reserved0        # Reserved\n\
+\n\
+int32 roll                # Vehicle roll. [deg / 1e-5]\n\
+int32 pitch               # Vehicle pitch. [deg / 1e-5]\n\
+int32 heading             # Vehicle heading. [deg / 1e-5]\n\
+uint32 accRoll            # Vehicle roll accuracy (if null, roll angle is not \n\
+                          # available). [deg / 1e-5]\n\
+uint32 accPitch           # Vehicle pitch accuracy (if null, pitch angle is not \n\
+                          # available). [deg / 1e-5]\n\
+uint32 accHeading         # Vehicle heading accuracy [deg / 1e-5]\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::NavATT_<ContainerAllocator>&) { return value(); }

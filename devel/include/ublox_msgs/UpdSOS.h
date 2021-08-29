@@ -45,20 +45,6 @@ struct UpdSOS_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(CMD_FLASH_BACKUP_CREATE)
-  #undef CMD_FLASH_BACKUP_CREATE
-#endif
-#if defined(_WIN32) && defined(CMD_FLASH_BACKUP_CLEAR)
-  #undef CMD_FLASH_BACKUP_CLEAR
-#endif
-
   enum {
     CLASS_ID = 9u,
     MESSAGE_ID = 20u,
@@ -96,21 +82,6 @@ ros::message_operations::Printer< ::ublox_msgs::UpdSOS_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::UpdSOS_<ContainerAllocator1> & lhs, const ::ublox_msgs::UpdSOS_<ContainerAllocator2> & rhs)
-{
-  return lhs.cmd == rhs.cmd &&
-    lhs.reserved1 == rhs.reserved1;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::UpdSOS_<ContainerAllocator1> & lhs, const ::ublox_msgs::UpdSOS_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -118,6 +89,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -182,32 +159,32 @@ struct Definition< ::ublox_msgs::UpdSOS_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# UPD-SOS (0x09 0x14)\n"
-"#\n"
-"# Firmware Supported on:\n"
-"# u-blox 8 / u-blox M8 from protocol version 15 up to version 23.01\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 9\n"
-"uint8 MESSAGE_ID = 20\n"
-"\n"
-"uint8 cmd                   # Command\n"
-"# The host can send this message in order to save part of the BBR memory in a \n"
-"# file in flash file system. The feature is designed in order to emulate the \n"
-"# presence of the backup battery even if it is not present; the host can issue \n"
-"# the save on shutdown command before switching off the device supply. It is \n"
-"# recommended to issue a GNSS stop command before, in order to keep the BBR \n"
-"# memory content consistent.\n"
-"uint8 CMD_FLASH_BACKUP_CREATE = 0    # Create Backup File in Flash\n"
-"# The host can send this message in order to erase the backup file present in \n"
-"# flash. It is recommended that the clear operation is issued after the host has \n"
-"# received the notification that the memory has been restored after a reset. \n"
-"# Alternatively the host can parse the startup string 'Restored data saved on \n"
-"# shutdown' or poll the UBX-UPD-SOS message for getting the status.\n"
-"uint8 CMD_FLASH_BACKUP_CLEAR = 1     # Clear Backup File in Flash\n"
-"\n"
-"uint8[3] reserved1          # Reserved\n"
-;
+    return "# UPD-SOS (0x09 0x14)\n\
+#\n\
+# Firmware Supported on:\n\
+# u-blox 8 / u-blox M8 from protocol version 15 up to version 23.01\n\
+#\n\
+\n\
+uint8 CLASS_ID = 9\n\
+uint8 MESSAGE_ID = 20\n\
+\n\
+uint8 cmd                   # Command\n\
+# The host can send this message in order to save part of the BBR memory in a \n\
+# file in flash file system. The feature is designed in order to emulate the \n\
+# presence of the backup battery even if it is not present; the host can issue \n\
+# the save on shutdown command before switching off the device supply. It is \n\
+# recommended to issue a GNSS stop command before, in order to keep the BBR \n\
+# memory content consistent.\n\
+uint8 CMD_FLASH_BACKUP_CREATE = 0    # Create Backup File in Flash\n\
+# The host can send this message in order to erase the backup file present in \n\
+# flash. It is recommended that the clear operation is issued after the host has \n\
+# received the notification that the memory has been restored after a reset. \n\
+# Alternatively the host can parse the startup string 'Restored data saved on \n\
+# shutdown' or poll the UBX-UPD-SOS message for getting the status.\n\
+uint8 CMD_FLASH_BACKUP_CLEAR = 1     # Clear Backup File in Flash\n\
+\n\
+uint8[3] reserved1          # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::UpdSOS_<ContainerAllocator>&) { return value(); }

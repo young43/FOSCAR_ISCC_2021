@@ -186,8 +186,7 @@ uint32 FLAGS_DO_CORR_USED = 4194304           # whether Range rate (Doppler)
     unpack serialized message in str into this message instance
     :param str: byte array of serialized message, ``str``
     """
-    if python3:
-      codecs.lookup_error("rosmsg").msg_type = self._type
+    codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       if self.sv is None:
         self.sv = None
@@ -244,8 +243,7 @@ uint32 FLAGS_DO_CORR_USED = 4194304           # whether Range rate (Doppler)
     :param str: byte array of serialized message, ``str``
     :param numpy: numpy python module
     """
-    if python3:
-      codecs.lookup_error("rosmsg").msg_type = self._type
+    codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       if self.sv is None:
         self.sv = None

@@ -78,14 +78,6 @@ struct RxmSFRBX_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 2u,
     MESSAGE_ID = 19u,
@@ -117,28 +109,6 @@ ros::message_operations::Printer< ::ublox_msgs::RxmSFRBX_<ContainerAllocator> >:
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::RxmSFRBX_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmSFRBX_<ContainerAllocator2> & rhs)
-{
-  return lhs.gnssId == rhs.gnssId &&
-    lhs.svId == rhs.svId &&
-    lhs.reserved0 == rhs.reserved0 &&
-    lhs.freqId == rhs.freqId &&
-    lhs.numWords == rhs.numWords &&
-    lhs.chn == rhs.chn &&
-    lhs.version == rhs.version &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.dwrd == rhs.dwrd;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::RxmSFRBX_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmSFRBX_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -146,6 +116,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -210,35 +186,35 @@ struct Definition< ::ublox_msgs::RxmSFRBX_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# RXM-SFRB (0x02 0x13)\n"
-"# Subframe Buffer\n"
-"#\n"
-"# This message reports a complete subframe of broadcast navigation data decoded \n"
-"# from a single signal. The number of data words reported in each message\n"
-"# depends on the nature of the signal. See the section on Broadcast Navigation\n"
-"# Data for further details.\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 2\n"
-"uint8 MESSAGE_ID = 19\n"
-"\n"
-"uint8 gnssId            # GNSS identifier (see Cfg GNSS for constants)\n"
-"\n"
-"uint8 svId              # Satellite identifier within corresponding GNSS system\n"
-"uint8 reserved0         # Reserved\n"
-"uint8 freqId            # Only used for GLONASS: This is the frequency\n"
-"                        # slot + 7 (range from 0 to 13)\n"
-"uint8 numWords          # The number of data words contained in this message (up\n"
-"                        # to 10, for currently supported signals)\n"
-"uint8 chn               # The tracking channel number the message was received\n"
-"                        # on\n"
-"uint8 version           # Message version, (0x02 for this version)\n"
-"uint8 reserved1         # Reserved\n"
-"\n"
-"# Start of repeated block (numWords times)\n"
-"uint32[] dwrd           # The data words\n"
-"# End of repeated block\n"
-;
+    return "# RXM-SFRB (0x02 0x13)\n\
+# Subframe Buffer\n\
+#\n\
+# This message reports a complete subframe of broadcast navigation data decoded \n\
+# from a single signal. The number of data words reported in each message\n\
+# depends on the nature of the signal. See the section on Broadcast Navigation\n\
+# Data for further details.\n\
+#\n\
+\n\
+uint8 CLASS_ID = 2\n\
+uint8 MESSAGE_ID = 19\n\
+\n\
+uint8 gnssId            # GNSS identifier (see Cfg GNSS for constants)\n\
+\n\
+uint8 svId              # Satellite identifier within corresponding GNSS system\n\
+uint8 reserved0         # Reserved\n\
+uint8 freqId            # Only used for GLONASS: This is the frequency\n\
+                        # slot + 7 (range from 0 to 13)\n\
+uint8 numWords          # The number of data words contained in this message (up\n\
+                        # to 10, for currently supported signals)\n\
+uint8 chn               # The tracking channel number the message was received\n\
+                        # on\n\
+uint8 version           # Message version, (0x02 for this version)\n\
+uint8 reserved1         # Reserved\n\
+\n\
+# Start of repeated block (numWords times)\n\
+uint32[] dwrd           # The data words\n\
+# End of repeated block\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::RxmSFRBX_<ContainerAllocator>&) { return value(); }

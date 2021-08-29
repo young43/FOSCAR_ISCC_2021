@@ -46,14 +46,6 @@ struct EsfRAW_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 16u,
     MESSAGE_ID = 3u,
@@ -85,21 +77,6 @@ ros::message_operations::Printer< ::ublox_msgs::EsfRAW_<ContainerAllocator> >::s
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::EsfRAW_<ContainerAllocator1> & lhs, const ::ublox_msgs::EsfRAW_<ContainerAllocator2> & rhs)
-{
-  return lhs.reserved0 == rhs.reserved0 &&
-    lhs.blocks == rhs.blocks;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::EsfRAW_<ContainerAllocator1> & lhs, const ::ublox_msgs::EsfRAW_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -107,6 +84,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -171,35 +154,35 @@ struct Definition< ::ublox_msgs::EsfRAW_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# ESF-RAW (0x10 0x03)\n"
-"# Raw sensor measurements\n"
-"#\n"
-"# The message contains measurements from the active inertial sensors connected\n"
-"# to the GNSS chip. Possible data types for the data field are accelerometer,\n"
-"# gyroscope and temperature readings as described in the ESF Measurement Data\n"
-"# section. Note that the rate selected in CFG-MSG is not respected. If a\n"
-"# positive rate is selected then all raw measurements will be output. \n"
-"#\n"
-"# Supported on ADR/UDR products.\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 16\n"
-"uint8 MESSAGE_ID = 3\n"
-"\n"
-"uint8[4] reserved0 # Reserved\n"
-"\n"
-"EsfRAW_Block[] blocks\n"
-"================================================================================\n"
-"MSG: ublox_msgs/EsfRAW_Block\n"
-"# See ESF-RAW\n"
-"\n"
-"uint32 data      # Its scaling and unit depends on the type and is\n"
-"                # the same as in ESF-MEAS\n"
-"uint32 DATA_FIELD_MASK = 16777215\n"
-"uint32 DATA_TYPE_MASK = 4278190080    # type of data \n"
-"                                      # (0 = no data; 1..255 = data type)\n"
-"uint32 sTtag     # sensor time tag\n"
-;
+    return "# ESF-RAW (0x10 0x03)\n\
+# Raw sensor measurements\n\
+#\n\
+# The message contains measurements from the active inertial sensors connected\n\
+# to the GNSS chip. Possible data types for the data field are accelerometer,\n\
+# gyroscope and temperature readings as described in the ESF Measurement Data\n\
+# section. Note that the rate selected in CFG-MSG is not respected. If a\n\
+# positive rate is selected then all raw measurements will be output. \n\
+#\n\
+# Supported on ADR/UDR products.\n\
+#\n\
+\n\
+uint8 CLASS_ID = 16\n\
+uint8 MESSAGE_ID = 3\n\
+\n\
+uint8[4] reserved0 # Reserved\n\
+\n\
+EsfRAW_Block[] blocks\n\
+================================================================================\n\
+MSG: ublox_msgs/EsfRAW_Block\n\
+# See ESF-RAW\n\
+\n\
+uint32 data      # Its scaling and unit depends on the type and is\n\
+                # the same as in ESF-MEAS\n\
+uint32 DATA_FIELD_MASK = 16777215\n\
+uint32 DATA_TYPE_MASK = 4278190080    # type of data \n\
+                                      # (0 = no data; 1..255 = data type)\n\
+uint32 sTtag     # sensor time tag\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::EsfRAW_<ContainerAllocator>&) { return value(); }

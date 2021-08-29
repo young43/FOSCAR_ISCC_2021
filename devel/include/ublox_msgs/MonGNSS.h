@@ -65,26 +65,6 @@ struct MonGNSS_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(BIT_MASK_GPS)
-  #undef BIT_MASK_GPS
-#endif
-#if defined(_WIN32) && defined(BIT_MASK_GLONASS)
-  #undef BIT_MASK_GLONASS
-#endif
-#if defined(_WIN32) && defined(BIT_MASK_BEIDOU)
-  #undef BIT_MASK_BEIDOU
-#endif
-#if defined(_WIN32) && defined(BIT_MASK_GALILEO)
-  #undef BIT_MASK_GALILEO
-#endif
-
   enum {
     CLASS_ID = 10u,
     MESSAGE_ID = 40u,
@@ -128,25 +108,6 @@ ros::message_operations::Printer< ::ublox_msgs::MonGNSS_<ContainerAllocator> >::
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::MonGNSS_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonGNSS_<ContainerAllocator2> & rhs)
-{
-  return lhs.version == rhs.version &&
-    lhs.supported == rhs.supported &&
-    lhs.defaultGnss == rhs.defaultGnss &&
-    lhs.enabled == rhs.enabled &&
-    lhs.simultaneous == rhs.simultaneous &&
-    lhs.reserved1 == rhs.reserved1;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::MonGNSS_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonGNSS_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -154,6 +115,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -218,38 +185,38 @@ struct Definition< ::ublox_msgs::MonGNSS_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# MON-GNSS (0x0A 0x28)\n"
-"# Information message major GNSS selection\n"
-"#\n"
-"# This message reports major GNSS selection. Augmentation systems are not\n"
-"# reported.\n"
-"# \n"
-"\n"
-"uint8 CLASS_ID = 10\n"
-"uint8 MESSAGE_ID = 40\n"
-"\n"
-"uint8 version         # Message version (0x01 for this version)\n"
-"\n"
-"uint8 BIT_MASK_GPS = 1\n"
-"uint8 BIT_MASK_GLONASS = 2\n"
-"uint8 BIT_MASK_BEIDOU = 4\n"
-"uint8 BIT_MASK_GALILEO = 8\n"
-"\n"
-"uint8 supported       # The major GNSS that can be supported by this receiver\n"
-"uint8 defaultGnss     # Default major GNSS selection. If the default major GNSS \n"
-"                      # selection is currently configured in the efuse for this \n"
-"                      # receiver, it takes precedence over the default major \n"
-"                      # GNSS selection configured in the executing firmware of \n"
-"                      # this receiver.\n"
-"                      # see bit mask constants\n"
-"uint8 enabled         # Current major GNSS selection enabled for this receiver\n"
-"                      # see bit mask constants\n"
-"\n"
-"uint8 simultaneous    # Maximum number of concurrent major GNSS that can be \n"
-"                      # supported by this receiver\n"
-"\n"
-"uint8[3] reserved1    # Reserved\n"
-;
+    return "# MON-GNSS (0x0A 0x28)\n\
+# Information message major GNSS selection\n\
+#\n\
+# This message reports major GNSS selection. Augmentation systems are not\n\
+# reported.\n\
+# \n\
+\n\
+uint8 CLASS_ID = 10\n\
+uint8 MESSAGE_ID = 40\n\
+\n\
+uint8 version         # Message version (0x01 for this version)\n\
+\n\
+uint8 BIT_MASK_GPS = 1\n\
+uint8 BIT_MASK_GLONASS = 2\n\
+uint8 BIT_MASK_BEIDOU = 4\n\
+uint8 BIT_MASK_GALILEO = 8\n\
+\n\
+uint8 supported       # The major GNSS that can be supported by this receiver\n\
+uint8 defaultGnss     # Default major GNSS selection. If the default major GNSS \n\
+                      # selection is currently configured in the efuse for this \n\
+                      # receiver, it takes precedence over the default major \n\
+                      # GNSS selection configured in the executing firmware of \n\
+                      # this receiver.\n\
+                      # see bit mask constants\n\
+uint8 enabled         # Current major GNSS selection enabled for this receiver\n\
+                      # see bit mask constants\n\
+\n\
+uint8 simultaneous    # Maximum number of concurrent major GNSS that can be \n\
+                      # supported by this receiver\n\
+\n\
+uint8[3] reserved1    # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::MonGNSS_<ContainerAllocator>&) { return value(); }

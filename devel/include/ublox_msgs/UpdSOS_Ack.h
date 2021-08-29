@@ -59,38 +59,6 @@ struct UpdSOS_Ack_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(CMD_BACKUP_CREATE_ACK)
-  #undef CMD_BACKUP_CREATE_ACK
-#endif
-#if defined(_WIN32) && defined(CMD_SYSTEM_RESTORED)
-  #undef CMD_SYSTEM_RESTORED
-#endif
-#if defined(_WIN32) && defined(BACKUP_CREATE_NACK)
-  #undef BACKUP_CREATE_NACK
-#endif
-#if defined(_WIN32) && defined(BACKUP_CREATE_ACK)
-  #undef BACKUP_CREATE_ACK
-#endif
-#if defined(_WIN32) && defined(SYSTEM_RESTORED_RESPONSE_UNKNOWN)
-  #undef SYSTEM_RESTORED_RESPONSE_UNKNOWN
-#endif
-#if defined(_WIN32) && defined(SYSTEM_RESTORED_RESPONSE_FAILED)
-  #undef SYSTEM_RESTORED_RESPONSE_FAILED
-#endif
-#if defined(_WIN32) && defined(SYSTEM_RESTORED_RESPONSE_RESTORED)
-  #undef SYSTEM_RESTORED_RESPONSE_RESTORED
-#endif
-#if defined(_WIN32) && defined(SYSTEM_RESTORED_RESPONSE_NOT_RESTORED)
-  #undef SYSTEM_RESTORED_RESPONSE_NOT_RESTORED
-#endif
-
   enum {
     CLASS_ID = 9u,
     MESSAGE_ID = 20u,
@@ -146,23 +114,6 @@ ros::message_operations::Printer< ::ublox_msgs::UpdSOS_Ack_<ContainerAllocator> 
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::UpdSOS_Ack_<ContainerAllocator1> & lhs, const ::ublox_msgs::UpdSOS_Ack_<ContainerAllocator2> & rhs)
-{
-  return lhs.cmd == rhs.cmd &&
-    lhs.reserved0 == rhs.reserved0 &&
-    lhs.response == rhs.response &&
-    lhs.reserved1 == rhs.reserved1;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::UpdSOS_Ack_<ContainerAllocator1> & lhs, const ::ublox_msgs::UpdSOS_Ack_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -170,6 +121,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -234,45 +191,45 @@ struct Definition< ::ublox_msgs::UpdSOS_Ack_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# UPD-SOS (0x09 0x14)\n"
-"#\n"
-"# Backup File Creation Acknowledge / System Restored from Backup\n"
-"# \n"
-"# Firmware Supported on:\n"
-"# u-blox 8 / u-blox M8 from protocol version 15 up to version 23.01\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 9\n"
-"uint8 MESSAGE_ID = 20\n"
-"\n"
-"uint8 cmd                   # Command\n"
-"uint8 CMD_BACKUP_CREATE_ACK = 2   # Backup File Creation Acknowledge\n"
-"                                  # The message is sent from the device as \n"
-"                                  # confirmation of creation of a backup file \n"
-"                                  # in flash. The host can safely shut down the \n"
-"                                  # device after received this message.\n"
-"uint8 CMD_SYSTEM_RESTORED = 3     # System Restored from Backup\n"
-"                                  # The message is sent from the device to \n"
-"                                  # notify the host the BBR has been restored \n"
-"                                  # from a backup file in flash. The host \n"
-"                                  # should clear the backup file after \n"
-"                                  # receiving this message. If the UBX-UPD-SOS \n"
-"                                  # message is polled, this message will be \n"
-"                                  # present.\n"
-"\n"
-"uint8[3] reserved0          # Reserved\n"
-"\n"
-"uint8 response                                  # Response:\n"
-"uint8 BACKUP_CREATE_NACK = 0                      # Not acknowledged\n"
-"uint8 BACKUP_CREATE_ACK = 1                       # Acknowledged\n"
-"uint8 SYSTEM_RESTORED_RESPONSE_UNKNOWN = 0        # Unknown\n"
-"uint8 SYSTEM_RESTORED_RESPONSE_FAILED = 1         # Failed restoring from backup \n"
-"                                                  # file\n"
-"uint8 SYSTEM_RESTORED_RESPONSE_RESTORED = 2       # Restored from backup file\n"
-"uint8 SYSTEM_RESTORED_RESPONSE_NOT_RESTORED = 3   # Not restored (no backup)\n"
-"\n"
-"uint8[3] reserved1          # Reserved\n"
-;
+    return "# UPD-SOS (0x09 0x14)\n\
+#\n\
+# Backup File Creation Acknowledge / System Restored from Backup\n\
+# \n\
+# Firmware Supported on:\n\
+# u-blox 8 / u-blox M8 from protocol version 15 up to version 23.01\n\
+#\n\
+\n\
+uint8 CLASS_ID = 9\n\
+uint8 MESSAGE_ID = 20\n\
+\n\
+uint8 cmd                   # Command\n\
+uint8 CMD_BACKUP_CREATE_ACK = 2   # Backup File Creation Acknowledge\n\
+                                  # The message is sent from the device as \n\
+                                  # confirmation of creation of a backup file \n\
+                                  # in flash. The host can safely shut down the \n\
+                                  # device after received this message.\n\
+uint8 CMD_SYSTEM_RESTORED = 3     # System Restored from Backup\n\
+                                  # The message is sent from the device to \n\
+                                  # notify the host the BBR has been restored \n\
+                                  # from a backup file in flash. The host \n\
+                                  # should clear the backup file after \n\
+                                  # receiving this message. If the UBX-UPD-SOS \n\
+                                  # message is polled, this message will be \n\
+                                  # present.\n\
+\n\
+uint8[3] reserved0          # Reserved\n\
+\n\
+uint8 response                                  # Response:\n\
+uint8 BACKUP_CREATE_NACK = 0                      # Not acknowledged\n\
+uint8 BACKUP_CREATE_ACK = 1                       # Acknowledged\n\
+uint8 SYSTEM_RESTORED_RESPONSE_UNKNOWN = 0        # Unknown\n\
+uint8 SYSTEM_RESTORED_RESPONSE_FAILED = 1         # Failed restoring from backup \n\
+                                                  # file\n\
+uint8 SYSTEM_RESTORED_RESPONSE_RESTORED = 2       # Restored from backup file\n\
+uint8 SYSTEM_RESTORED_RESPONSE_NOT_RESTORED = 3   # Not restored (no backup)\n\
+\n\
+uint8[3] reserved1          # Reserved\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::UpdSOS_Ack_<ContainerAllocator>&) { return value(); }

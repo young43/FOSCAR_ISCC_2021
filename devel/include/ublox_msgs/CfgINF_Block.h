@@ -54,29 +54,6 @@ struct CfgINF_Block_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(PROTOCOL_ID_UBX)
-  #undef PROTOCOL_ID_UBX
-#endif
-#if defined(_WIN32) && defined(PROTOCOL_ID_NMEA)
-  #undef PROTOCOL_ID_NMEA
-#endif
-#if defined(_WIN32) && defined(INF_MSG_ERROR)
-  #undef INF_MSG_ERROR
-#endif
-#if defined(_WIN32) && defined(INF_MSG_WARNING)
-  #undef INF_MSG_WARNING
-#endif
-#if defined(_WIN32) && defined(INF_MSG_NOTICE)
-  #undef INF_MSG_NOTICE
-#endif
-#if defined(_WIN32) && defined(INF_MSG_TEST)
-  #undef INF_MSG_TEST
-#endif
-#if defined(_WIN32) && defined(INF_MSG_DEBUG)
-  #undef INF_MSG_DEBUG
-#endif
-
   enum {
     PROTOCOL_ID_UBX = 0u,
     PROTOCOL_ID_NMEA = 1u,
@@ -123,22 +100,6 @@ ros::message_operations::Printer< ::ublox_msgs::CfgINF_Block_<ContainerAllocator
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::CfgINF_Block_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgINF_Block_<ContainerAllocator2> & rhs)
-{
-  return lhs.protocolID == rhs.protocolID &&
-    lhs.reserved1 == rhs.reserved1 &&
-    lhs.infMsgMask == rhs.infMsgMask;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::CfgINF_Block_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgINF_Block_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -146,6 +107,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -210,28 +177,28 @@ struct Definition< ::ublox_msgs::CfgINF_Block_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# See CfgINF message\n"
-"#\n"
-"\n"
-"uint8 protocolID          # Protocol Identifier, identifying for which\n"
-"                          # protocol the configuration is set/get. The\n"
-"                          # following are valid Protocol Identifiers:\n"
-"                          # 0: UBX Protocol\n"
-"                          # 1: NMEA Protocol\n"
-"                          # 2-255: Reserved\n"
-"uint8 PROTOCOL_ID_UBX = 0\n"
-"uint8 PROTOCOL_ID_NMEA = 1\n"
-"\n"
-"uint8[3] reserved1        # Reserved\n"
-"\n"
-"uint8[6] infMsgMask       # A bit mask, saying which information messages\n"
-"                          # are enabled on each I/O port\n"
-"uint8 INF_MSG_ERROR = 1              # enable ERROR\n"
-"uint8 INF_MSG_WARNING = 2            # enable WARNING\n"
-"uint8 INF_MSG_NOTICE = 4             # enable NOTICE\n"
-"uint8 INF_MSG_TEST = 8               # enable TEST\n"
-"uint8 INF_MSG_DEBUG = 16             # enable DEBUG\n"
-;
+    return "# See CfgINF message\n\
+#\n\
+\n\
+uint8 protocolID          # Protocol Identifier, identifying for which\n\
+                          # protocol the configuration is set/get. The\n\
+                          # following are valid Protocol Identifiers:\n\
+                          # 0: UBX Protocol\n\
+                          # 1: NMEA Protocol\n\
+                          # 2-255: Reserved\n\
+uint8 PROTOCOL_ID_UBX = 0\n\
+uint8 PROTOCOL_ID_NMEA = 1\n\
+\n\
+uint8[3] reserved1        # Reserved\n\
+\n\
+uint8[6] infMsgMask       # A bit mask, saying which information messages\n\
+                          # are enabled on each I/O port\n\
+uint8 INF_MSG_ERROR = 1              # enable ERROR\n\
+uint8 INF_MSG_WARNING = 2            # enable WARNING\n\
+uint8 INF_MSG_NOTICE = 4             # enable NOTICE\n\
+uint8 INF_MSG_TEST = 8               # enable TEST\n\
+uint8 INF_MSG_DEBUG = 16             # enable DEBUG\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::CfgINF_Block_<ContainerAllocator>&) { return value(); }

@@ -83,53 +83,6 @@ struct NavTIMEUTC_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(MESSAGE_ID)
-  #undef MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(VALID_TOW)
-  #undef VALID_TOW
-#endif
-#if defined(_WIN32) && defined(VALID_WKN)
-  #undef VALID_WKN
-#endif
-#if defined(_WIN32) && defined(VALID_UTC)
-  #undef VALID_UTC
-#endif
-#if defined(_WIN32) && defined(VALID_UTC_STANDARD_MASK)
-  #undef VALID_UTC_STANDARD_MASK
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_NOT_AVAILABLE)
-  #undef UTC_STANDARD_NOT_AVAILABLE
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_CRL)
-  #undef UTC_STANDARD_CRL
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_NIST)
-  #undef UTC_STANDARD_NIST
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_USNO)
-  #undef UTC_STANDARD_USNO
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_BIPM)
-  #undef UTC_STANDARD_BIPM
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_EL)
-  #undef UTC_STANDARD_EL
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_SU)
-  #undef UTC_STANDARD_SU
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_NTSC)
-  #undef UTC_STANDARD_NTSC
-#endif
-#if defined(_WIN32) && defined(UTC_STANDARD_UNKNOWN)
-  #undef UTC_STANDARD_UNKNOWN
-#endif
-
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 33u,
@@ -200,29 +153,6 @@ ros::message_operations::Printer< ::ublox_msgs::NavTIMEUTC_<ContainerAllocator> 
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::NavTIMEUTC_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavTIMEUTC_<ContainerAllocator2> & rhs)
-{
-  return lhs.iTOW == rhs.iTOW &&
-    lhs.tAcc == rhs.tAcc &&
-    lhs.nano == rhs.nano &&
-    lhs.year == rhs.year &&
-    lhs.month == rhs.month &&
-    lhs.day == rhs.day &&
-    lhs.hour == rhs.hour &&
-    lhs.min == rhs.min &&
-    lhs.sec == rhs.sec &&
-    lhs.valid == rhs.valid;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::NavTIMEUTC_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavTIMEUTC_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -230,6 +160,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -294,42 +230,42 @@ struct Definition< ::ublox_msgs::NavTIMEUTC_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-TIMEUTC (0x01 0x21)\n"
-"# UTC Time Solution\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 1\n"
-"uint8 MESSAGE_ID = 33\n"
-"\n"
-"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
-"\n"
-"uint32 tAcc             # Time Accuracy Estimate [ns]\n"
-"int32 nano              # Fraction of second, range -1e9 .. 1e9 (UTC) [ns]\n"
-"uint16 year             # Year, range 1999..2099 (UTC) [y]\n"
-"uint8 month             # Month, range 1..12 (UTC) [month]\n"
-"uint8 day               # Day of Month, range 1..31 (UTC) [d]\n"
-"uint8 hour              # Hour of Day, range 0..23 (UTC) [h]\n"
-"uint8 min               # Minute of Hour, range 0..59 (UTC) [min]\n"
-"uint8 sec               # Seconds of Minute, range 0..60 (UTC) [s] (60 for \n"
-"                        # leap second)\n"
-"\n"
-"uint8 valid             # Validity Flags\n"
-"uint8 VALID_TOW = 1         # Valid Time of Week\n"
-"uint8 VALID_WKN = 2         # Valid Week Number\n"
-"uint8 VALID_UTC = 4         # Valid Leap Seconds, i.e. Leap Seconds already known\n"
-"uint8 VALID_UTC_STANDARD_MASK = 240  # UTC standard Identifier Bit mask:\n"
-"uint8 UTC_STANDARD_NOT_AVAILABLE = 0    # Information not available\n"
-"uint8 UTC_STANDARD_CRL = 16             # Communications Research Labratory\n"
-"uint8 UTC_STANDARD_NIST = 32            # National Institute of Standards and \n"
-"                                        # Technology (NIST)\n"
-"uint8 UTC_STANDARD_USNO = 48            # U.S. Naval Observatory (USNO)\n"
-"uint8 UTC_STANDARD_BIPM = 64            # International Bureau of Weights and \n"
-"                                        # Measures (BIPM)\n"
-"uint8 UTC_STANDARD_EL = 80              # European Laboratory (tbd)\n"
-"uint8 UTC_STANDARD_SU = 96              # Former Soviet Union (SU)\n"
-"uint8 UTC_STANDARD_NTSC = 112           # National Time Service Center, China\n"
-"uint8 UTC_STANDARD_UNKNOWN = 240\n"
-;
+    return "# NAV-TIMEUTC (0x01 0x21)\n\
+# UTC Time Solution\n\
+#\n\
+\n\
+uint8 CLASS_ID = 1\n\
+uint8 MESSAGE_ID = 33\n\
+\n\
+uint32 iTOW             # GPS Millisecond time of week [ms]\n\
+\n\
+uint32 tAcc             # Time Accuracy Estimate [ns]\n\
+int32 nano              # Fraction of second, range -1e9 .. 1e9 (UTC) [ns]\n\
+uint16 year             # Year, range 1999..2099 (UTC) [y]\n\
+uint8 month             # Month, range 1..12 (UTC) [month]\n\
+uint8 day               # Day of Month, range 1..31 (UTC) [d]\n\
+uint8 hour              # Hour of Day, range 0..23 (UTC) [h]\n\
+uint8 min               # Minute of Hour, range 0..59 (UTC) [min]\n\
+uint8 sec               # Seconds of Minute, range 0..60 (UTC) [s] (60 for \n\
+                        # leap second)\n\
+\n\
+uint8 valid             # Validity Flags\n\
+uint8 VALID_TOW = 1         # Valid Time of Week\n\
+uint8 VALID_WKN = 2         # Valid Week Number\n\
+uint8 VALID_UTC = 4         # Valid Leap Seconds, i.e. Leap Seconds already known\n\
+uint8 VALID_UTC_STANDARD_MASK = 240  # UTC standard Identifier Bit mask:\n\
+uint8 UTC_STANDARD_NOT_AVAILABLE = 0    # Information not available\n\
+uint8 UTC_STANDARD_CRL = 16             # Communications Research Labratory\n\
+uint8 UTC_STANDARD_NIST = 32            # National Institute of Standards and \n\
+                                        # Technology (NIST)\n\
+uint8 UTC_STANDARD_USNO = 48            # U.S. Naval Observatory (USNO)\n\
+uint8 UTC_STANDARD_BIPM = 64            # International Bureau of Weights and \n\
+                                        # Measures (BIPM)\n\
+uint8 UTC_STANDARD_EL = 80              # European Laboratory (tbd)\n\
+uint8 UTC_STANDARD_SU = 96              # Former Soviet Union (SU)\n\
+uint8 UTC_STANDARD_NTSC = 112           # National Time Service Center, China\n\
+uint8 UTC_STANDARD_UNKNOWN = 240\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::NavTIMEUTC_<ContainerAllocator>&) { return value(); }

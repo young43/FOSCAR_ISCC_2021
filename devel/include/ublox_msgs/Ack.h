@@ -43,17 +43,6 @@ struct Ack_
 
 
 
-// reducing the odds to have name collisions with Windows.h 
-#if defined(_WIN32) && defined(CLASS_ID)
-  #undef CLASS_ID
-#endif
-#if defined(_WIN32) && defined(NACK_MESSAGE_ID)
-  #undef NACK_MESSAGE_ID
-#endif
-#if defined(_WIN32) && defined(ACK_MESSAGE_ID)
-  #undef ACK_MESSAGE_ID
-#endif
-
   enum {
     CLASS_ID = 5u,
     NACK_MESSAGE_ID = 0u,
@@ -88,21 +77,6 @@ ros::message_operations::Printer< ::ublox_msgs::Ack_<ContainerAllocator> >::stre
 return s;
 }
 
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator==(const ::ublox_msgs::Ack_<ContainerAllocator1> & lhs, const ::ublox_msgs::Ack_<ContainerAllocator2> & rhs)
-{
-  return lhs.clsID == rhs.clsID &&
-    lhs.msgID == rhs.msgID;
-}
-
-template<typename ContainerAllocator1, typename ContainerAllocator2>
-bool operator!=(const ::ublox_msgs::Ack_<ContainerAllocator1> & lhs, const ::ublox_msgs::Ack_<ContainerAllocator2> & rhs)
-{
-  return !(lhs == rhs);
-}
-
-
 } // namespace ublox_msgs
 
 namespace ros
@@ -110,6 +84,12 @@ namespace ros
 namespace message_traits
 {
 
+
+
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
+
+// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -174,19 +154,19 @@ struct Definition< ::ublox_msgs::Ack_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# ACK (0x05)\n"
-"# Message Acknowledged / Not-Acknowledged\n"
-"#\n"
-"# Output upon processing of an input message\n"
-"#\n"
-"\n"
-"uint8 CLASS_ID = 5\n"
-"uint8 NACK_MESSAGE_ID = 0\n"
-"uint8 ACK_MESSAGE_ID = 1\n"
-"\n"
-"uint8 clsID   # Class ID of the (Not-)Acknowledged Message\n"
-"uint8 msgID   # Message ID of the (Not-)Acknowledged Message\n"
-;
+    return "# ACK (0x05)\n\
+# Message Acknowledged / Not-Acknowledged\n\
+#\n\
+# Output upon processing of an input message\n\
+#\n\
+\n\
+uint8 CLASS_ID = 5\n\
+uint8 NACK_MESSAGE_ID = 0\n\
+uint8 ACK_MESSAGE_ID = 1\n\
+\n\
+uint8 clsID   # Class ID of the (Not-)Acknowledged Message\n\
+uint8 msgID   # Message ID of the (Not-)Acknowledged Message\n\
+";
   }
 
   static const char* value(const ::ublox_msgs::Ack_<ContainerAllocator>&) { return value(); }
