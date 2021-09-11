@@ -548,7 +548,6 @@ void PurePursuitNode::run(char** argv) {
     }
     
     // MODE 20 : 배달 PICK B
-    // MODE 20 : 배달 PICK B
     if (pp_.mode == 20) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
@@ -569,7 +568,6 @@ void PurePursuitNode::run(char** argv) {
             // 0.1초 
           usleep(100000);
         }
-        
 
         if(pp_.a_flag[0] && pp_.b_flag[0])
           ROS_INFO("PICK-UP B1 : %d", pp_.current_idx);
@@ -580,6 +578,9 @@ void PurePursuitNode::run(char** argv) {
         pp_.mission_flag = 1;
         continue;
       }
+
+      pulishControlMsg(const_velocity_, 0);
+
     }
 
     // MODE 38 - 직선 구간 (부스터)
@@ -775,58 +776,45 @@ void PurePursuitNode::callbackFromObstacle2(const avoid_obstacle::DetectedObstac
 }
 
 
+/*************************************************************************************************************/
+
 void PurePursuitNode::callbackFromDelivery(const vision_distance::DeliveryArray& msg){
   std::vector<vision_distance::Delivery> deliverySign = msg.visions;
   
   // 450 
-  for(int i = 0; i < deliverySign.size(); i++) {
-    // 배달미션을 위한 표지판 인식
-    // if (pp_.mode == 19 || pp_.mode == 20) {
-    //   if(deliverySign[i].flag == 1)
-    //   { 
-    //     pp_.a_cnt[0] += 1;
-    //   }
-    //   if(deliverySign[i].flag == "A2")
-    //   {
-    //     pp_.a_cnt[1] += 1;
-    //   }
-    //   if(deliverySign[i].flag == "A3")
-    //   {
-    //     pp_.a_cnt[2] += 1;
-    //   }
-    // }
-
-    if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  
-      if (deliverySign[i].flag == 1) 
-      {
-          pp_.b_cnt[0] += 1;
-      }
-      if (deliverySign[i].flag == 2) 
-      {
-          pp_.b_cnt[0] += 1;
-      }
-      if (deliverySign[i].flag == 3)
-      {
-	  pp_.b_cnt[0] += 1;
+  if (pp_.mode == 19 || pp_.mode == 20) {
+    for(int i = 0; i < deliverySign.size(); i++) {
+      ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
+      if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  // dist 수정하기 
+        if (deliverySign[i].flag == 1) 
+        {
+            pp_.b_cnt[0] += 1;
+        }
+        if (deliverySign[i].flag == 2) 
+        {
+            pp_.b_cnt[0] += 1;
+        }
+        if (deliverySign[i].flag == 3)
+        {
+            pp_.b_cnt[0] += 1;
+        }
       }
     }
-  }
-  // Calc max_index
-  b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
-  ROS_INFO("B INDEX : %d", b_max_index);
+    // Calc max_index
+    b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
+    ROS_INFO("B INDEX : %d", b_max_index);
 
-  if (a_max_index == b_max_index) {
-    // Max flag on
-    pp_.b_flag[b_max_index] = true;
+    if (a_max_index == b_max_index) {
+      // Max flag on
+      pp_.b_flag[b_max_index] = true;
+    }
+    else {
+      std::vector<int> b_cnt = {0,0,0};
+    }
   }
-  else {
-    std::vector<int> b_cnt = {0,0,0};
-  }
-  
 }
 
 
-/*************************************************************************************************************/
 void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingBoxes& msg) {
   // std::vector<darknet_ros_msgs::BoundingBox> traffic_lights = msg.bounding_boxes;
   // std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
@@ -859,10 +847,6 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
         pp_.a_cnt[2]+=1;
       }
     }
-
-    if(yoloObjects[i].Class == "B1") pp_.b1_flag = true;
-    if(yoloObjects[i].Class == "B2") pp_.b2_flag = true;
-    if(yoloObjects[i].Class == "B3") pp_.b3_flag = true;
   }
 
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
