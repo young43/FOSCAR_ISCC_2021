@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <!-- yolo -->
+  <include file="$(find darknet_ros)/launch/darknet_ros_track.launch" /> 
+
+  <!-- rosbag play -->
+  <node pkg="rosbag" type="play" name="rosbag_play" 
+          args="$(find vision_distance)/bagfiles/school_track_0905.bag" />
+  
+	<!-- track_mission.py -->>
+  <node pkg="vision_distance" type="track_mission.py" name="track_mission"/>
+
+</launch>

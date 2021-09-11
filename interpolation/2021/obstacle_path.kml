@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Placemark id="3">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="2">
+                <coordinates>126.9965616,37.6106556,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="5">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="4">
+                <coordinates>126.996547538,37.6106632635,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="7">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="6">
+                <coordinates>126.996537368,37.6106687802,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="9">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="8">
+                <coordinates>126.996523103,37.6106764595,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="11">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="10">
+                <coordinates>126.996508838,37.6106841388,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="13">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="12">
+                <coordinates>126.996494642,37.6106916454,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="15">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="14">
+                <coordinates>126.996480445,37.6106991432,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="17">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="16">
+                <coordinates>126.996459361,37.6107102407,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="19">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="18">
+                <coordinates>126.996430988,37.610724641,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="21">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="20">
+                <coordinates>126.996416109,37.6107319308,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="23">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="22">
+                <coordinates>126.996401229,37.6107392207,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="25">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="24">
+                <coordinates>126.996372521,37.6107531333,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="27">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="26">
+                <coordinates>126.996357632,37.6107599595,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="29">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="28">
+                <coordinates>126.996342752,37.6107667753,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="31">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="30">
+                <coordinates>126.996313537,37.6107802581,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="33">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="32">
+                <coordinates>126.996298258,37.6107873235,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="35">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="34">
+                <coordinates>126.996283117,37.6107938525,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="37">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="36">
+                <coordinates>126.996267964,37.6108003829,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="39">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="38">
+                <coordinates>126.996252723,37.6108066961,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="41">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="40">
+                <coordinates>126.996237483,37.6108130183,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="43">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="42">
+                <coordinates>126.996231363,37.6108155484,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="45">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="44">
+                <coordinates>126.996215979,37.6108216604,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="47">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="46">
+                <coordinates>126.996200596,37.6108277723,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="49">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="48">
+                <coordinates>126.996195476,37.6108297327,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="51">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="50">
+                <coordinates>126.9961648,37.610841125,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="53">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="52">
+                <coordinates>126.996143991,37.6108488611,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="55">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="54">
+                <coordinates>126.996128348,37.6108544581,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="57">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="56">
+                <coordinates>126.996112717,37.6108600626,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="59">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="58">
+                <coordinates>126.996109639,37.610861152,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="61">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="60">
+                <coordinates>126.996092872,37.6108661577,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="63">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="62">
+                <coordinates>126.996076105,37.6108711635,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="65">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="64">
+                <coordinates>126.996067105,37.6108736738,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="67">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="66">
+                <coordinates>126.996035311,37.6108816117,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="69">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="68">
+                <coordinates>126.996018363,37.6108853908,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="71">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="70">
+                <coordinates>126.996001415,37.6108891698,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="73">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="72">
+                <coordinates>126.995973529,37.6108946945,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="75">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="74">
+                <coordinates>126.995940571,37.6109006513,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="77">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="76">
+                <coordinates>126.995936442,37.6109013959,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="79">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="78">
+                <coordinates>126.995919622,37.6109041837,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="81">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="80">
+                <coordinates>126.995902802,37.6109069716,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="83">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="82">
+                <coordinates>126.995882056,37.6109103697,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="85">
+            <name>(lat/long)</name>
+            <description>lt/longt</description>
+            <Point id="84">
+                <coordinates>126.995857599,37.6109142513,0.0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>
