@@ -56,6 +56,13 @@ add_executable(
   src/pure_pursuit_delivery.cpp
 )
 
+add_executable(
+  pure_pursuit_2_delivery
+  src/pure_pursuit_node.cpp
+  src/pure_pursuit.cpp
+  src/pure_pursuit_core2_vision.cpp
+)
+
 target_link_libraries(pure_pursuit ${catkin_LIBRARIES})
 add_dependencies(pure_pursuit ${catkin_EXPORTED_TARGETS})
 
@@ -64,6 +71,9 @@ add_dependencies(pure_pursuit2 ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(pure_pursuit3 ${catkin_LIBRARIES})
 add_dependencies(pure_pursuit3 ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(pure_pursuit_2_delivery ${catkin_LIBRARIES})
+add_dependencies(pure_pursuit_2_delivery ${catkin_EXPORTED_TARGETS})
 
 add_executable(coordinate2pos src/coordinate2pos.cpp)
 target_link_libraries(coordinate2pos ${catkin_LIBRARIES})

@@ -605,7 +605,9 @@ void image_into_ipl(image im,IplImage * dst){
 }
 void ipl_into_image(IplImage* src, image im)
 {
-    unsigned char *data = (unsigned char *)src->imageData;
+    IplImage* temp = cvCloneImage(src);
+    //unsigned char *data = (unsigned char *)src->imageData;
+    unsigned char *data = (unsigned char *)temp->imageData;
     int h = src->height;
     int w = src->width;
     int c = src->nChannels;
@@ -619,6 +621,7 @@ void ipl_into_image(IplImage* src, image im)
             }
         }
     }
+    cvReleaseImage(&temp);
 }
 
 image ipl_to_image(IplImage* src)

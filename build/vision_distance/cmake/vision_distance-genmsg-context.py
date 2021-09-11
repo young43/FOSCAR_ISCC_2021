@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg;/home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg"
+messages_str = "/home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg;/home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg;/home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg;/home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg;/home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg;/home/foscar/ISCC_2021/src/vision_distance/msg/DeliveryArray.msg"
 services_str = ""
 pkg_name = "vision_distance"
 dependencies_str = "std_msgs"

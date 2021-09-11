@@ -1,7 +1,11 @@
 file(REMOVE_RECURSE
   "CMakeFiles/vision_distance_generate_messages_lisp"
   "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/vision_distance/msg/Colorcone.lisp"
+  "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/vision_distance/msg/Colorcone_lidar.lisp"
+  "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/vision_distance/msg/DeliveryArray.lisp"
   "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/vision_distance/msg/ColorconeArray.lisp"
+  "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/vision_distance/msg/ColorconeArray_lidar.lisp"
+  "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/vision_distance/msg/Delivery.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

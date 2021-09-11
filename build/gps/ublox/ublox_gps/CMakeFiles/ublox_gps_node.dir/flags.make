@@ -3,13 +3,13 @@
 
 # compile C with /usr/bin/cc
 # compile CXX with /usr/bin/c++
-C_FLAGS =  
+C_FLAGS = -O3 -DNDEBUG  
 
 C_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"ublox_gps\"
 
 C_INCLUDES = -I/home/foscar/ISCC_2021/src/gps/ublox/ublox_gps/include -I/home/foscar/ISCC_2021/devel/include -I/home/foscar/ISCC_2021/src/gps/ublox/ublox_msgs/include -I/home/foscar/ISCC_2021/src/gps/ublox/ublox_serialization/include -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp 
 
-CXX_FLAGS =  -std=c++11 -pthread  
+CXX_FLAGS =  -std=c++11 -pthread -O3 -DNDEBUG  
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"ublox_gps\"
 

@@ -55,7 +55,7 @@ include obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/progress.
 
 obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target obstacle_detector_gui"
-	cd /home/foscar/ISCC_2021/build/obstacle_detector && /usr/bin/cmake -E cmake_autogen /home/foscar/ISCC_2021/build/obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir ""
+	cd /home/foscar/ISCC_2021/build/obstacle_detector && /usr/bin/cmake -E cmake_autogen /home/foscar/ISCC_2021/build/obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir Release
 
 obstacle_detector_gui_autogen: obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen
 obstacle_detector_gui_autogen: obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/build.make

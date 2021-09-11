@@ -47,6 +47,10 @@ std::chrono::system_clock::time_point obs_start;
 const int tf_idx_1 = 1000; // 1180
 const int tf_idx_2 = 1000; // 1455
 
+bool tf_flag = false;
+const float tf_coord1[2] = {935575.213544702, 1915926.09913091};
+const float tf_coord2[2] = {935601.125, 1915974.5};
+
 /*************************/
 
 // float tmp_distance = 100.0;
@@ -128,11 +132,17 @@ void PurePursuitNode::run(char** argv) {
     publishTargetPointVisualizationMsg();
     publishCurrentPointVisualizationMsg();
 
+    if(!tf_flag){
+      tf_flag = true;
+      tf_idx_1 = pp_.getPosIndex(tf_coord1[0], tf_coord1[1]);
+      tf_idx_2 = pp_.getPosIndex(tf_coord2[0], tf_coord2[1]);
+    }
+
 
     // 마지막 waypoint 에 다다랐으면 멈추기
     if(pp_.is_finish){
       pulishControlMsg(0,0);
-      ROS_INFO_STREAM("Finish Pure Pursuit");
+      // ROS_INFO_STREAM("Finish Pure Pursuit");
       continue;
     }
 
@@ -200,7 +210,14 @@ void PurePursuitNode::run(char** argv) {
 
       }
 
+    // 정적장애물 전 직진
+    if (pp_.mode == 6){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 6;
+      const_velocity_ = 6;
+      final_constant = 1.2;
 
+    }
 
 
 /*************************************************************************************************************/
@@ -209,6 +226,8 @@ void PurePursuitNode::run(char** argv) {
       const_lookahead_distance_ = 3;
       const_velocity_ = 5;
       final_constant = 1.2;
+
+      ROS_INFO("OBS_FLAG : %d", obs_is_left);
 
       // 왼 오
       if(obs_is_left){
@@ -615,36 +634,29 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
     }
  }
 
-  if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
-      traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 red yellow")
-  {
-    pp_.straight_go_flag = false;
-    pp_.left_go_flag = false;
+  if(traffic_lights.size() > 0){
+    if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
+        traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 red yellow")
+    {
+      pp_.straight_go_flag = false;
+      pp_.left_go_flag = false;
+    }
+    else if (traffic_lights[index].Class == "3 green" || traffic_lights[index].Class == "4 green")
+    {
+      pp_.straight_go_flag = true;
+      pp_.left_go_flag = false;
+    }
+    else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 red left")
+    {
+      pp_.straight_go_flag = false;
+      pp_.left_go_flag = true;
+    }
+    else if (traffic_lights[index].Class == "4 left go")
+    {
+      pp_.straight_go_flag = true;
+      pp_.left_go_flag = true;
+    }
   }
-  else if (traffic_lights[index].Class == "3 green" || traffic_lights[index].Class == "4 green")
-  {
-    pp_.straight_go_flag = true;
-    pp_.left_go_flag = false;
-  }
-  else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 red left")
-  {
-    pp_.straight_go_flag = false;
-    pp_.left_go_flag = true;
-  }
-  else if (traffic_lights[index].Class == "4 left go")
-  {
-    pp_.straight_go_flag = true;
-    pp_.left_go_flag = true;
-  }
-
-  //traffic test
-  // std::cout << "*******************" << std::endl << std::endl;
-  // if (pp_.straight_go_flag){
-  //   std::cout << "straight go" << std::endl;
-  // }
-  // if (pp_.left_go_flag) {
-  //   std::cout << "left go" << std::endl;
-  // }
 
 }
 // void callbackFromLane(const {msg_type}& msg)

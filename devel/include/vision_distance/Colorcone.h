@@ -25,13 +25,13 @@ struct Colorcone_
 
   Colorcone_()
     : flag(0)
-    , dist_x(0.0)
-    , dist_y(0.0)  {
+    , x(0.0)
+    , y(0.0)  {
     }
   Colorcone_(const ContainerAllocator& _alloc)
     : flag(0)
-    , dist_x(0.0)
-    , dist_y(0.0)  {
+    , x(0.0)
+    , y(0.0)  {
   (void)_alloc;
     }
 
@@ -40,11 +40,11 @@ struct Colorcone_
    typedef int32_t _flag_type;
   _flag_type flag;
 
-   typedef double _dist_x_type;
-  _dist_x_type dist_x;
+   typedef double _x_type;
+  _x_type x;
 
-   typedef double _dist_y_type;
-  _dist_y_type dist_y;
+   typedef double _y_type;
+  _y_type y;
 
 
 
@@ -76,8 +76,8 @@ template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::vision_distance::Colorcone_<ContainerAllocator1> & lhs, const ::vision_distance::Colorcone_<ContainerAllocator2> & rhs)
 {
   return lhs.flag == rhs.flag &&
-    lhs.dist_x == rhs.dist_x &&
-    lhs.dist_y == rhs.dist_y;
+    lhs.x == rhs.x &&
+    lhs.y == rhs.y;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -134,12 +134,12 @@ struct MD5Sum< ::vision_distance::Colorcone_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "f94403809a4a82603b54e67d56403620";
+    return "d2c9ea7b706b77c8e5621805ab397745";
   }
 
   static const char* value(const ::vision_distance::Colorcone_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xf94403809a4a8260ULL;
-  static const uint64_t static_value2 = 0x3b54e67d56403620ULL;
+  static const uint64_t static_value1 = 0xd2c9ea7b706b77c8ULL;
+  static const uint64_t static_value2 = 0xe5621805ab397745ULL;
 };
 
 template<class ContainerAllocator>
@@ -159,8 +159,8 @@ struct Definition< ::vision_distance::Colorcone_<ContainerAllocator> >
   static const char* value()
   {
     return "int32 flag\n"
-"float64 dist_x\n"
-"float64 dist_y\n"
+"float64 x\n"
+"float64 y\n"
 ;
   }
 
@@ -180,8 +180,8 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.flag);
-      stream.next(m.dist_x);
-      stream.next(m.dist_y);
+      stream.next(m.x);
+      stream.next(m.y);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -202,10 +202,10 @@ struct Printer< ::vision_distance::Colorcone_<ContainerAllocator> >
   {
     s << indent << "flag: ";
     Printer<int32_t>::stream(s, indent + "  ", v.flag);
-    s << indent << "dist_x: ";
-    Printer<double>::stream(s, indent + "  ", v.dist_x);
-    s << indent << "dist_y: ";
-    Printer<double>::stream(s, indent + "  ", v.dist_y);
+    s << indent << "x: ";
+    Printer<double>::stream(s, indent + "  ", v.x);
+    s << indent << "y: ";
+    Printer<double>::stream(s, indent + "  ", v.y);
   }
 };
 

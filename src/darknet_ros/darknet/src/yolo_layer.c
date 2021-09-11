@@ -333,6 +333,7 @@ int get_yolo_detections(layer l, int w, int h, int netw, int neth, float thresh,
             for(j = 0; j < l.classes; ++j){
                 int class_index = entry_index(l, 0, n*l.w*l.h + i, 4 + 1 + j);
                 float prob = objectness*predictions[class_index];
+		if(isnan(prob)) continue;
                 dets[count].prob[j] = (prob > thresh) ? prob : 0;
             }
             ++count;

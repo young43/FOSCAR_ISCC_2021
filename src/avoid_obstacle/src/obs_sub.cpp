@@ -4,6 +4,7 @@
 #include <vector>
 #include <race/drive_values.h>
 #include <math.h>
+#include <vision_distance/ColorconeArray_lidar.h>
 
 using namespace std;
 
@@ -21,6 +22,10 @@ float target_dist = 3.0;
 
 int cnt = 0;
 float tmp_yaw_rate = 0.0;
+
+vector<vision_distance::Colorcone_lidar> cone;
+int flag = 0;
+
 
 class My_Vector{
     public:
@@ -81,6 +86,12 @@ void publishControlValue(int throttle, double steering) {
 
 }
 
+void callbackFromCone(const vision_distance::ColorconeArray_lidar& msg) {
+	vector<vision_distance::Colorcone_lidar> cone = msg.colorcone;
+
+}
+
+
 void detectedCallback(const avoid_obstacle::DetectedObstacles& msg) {
     tmp_yaw_rate = 0.0;
     vector<Obstacle> obstacles;
@@ -100,20 +111,24 @@ void detectedCallback(const avoid_obstacle::DetectedObstacles& msg) {
         if(obstacles[i].yaw_rate > 0 && obstacles[i].yaw_rate < 60.0)
         {
             if (obstacles[i].dist < target_dist){
+		if (cone.size() == 1 && cone[0].flag == 0) {
                 // ROS_INFO("Point [X,Y] : [%f, %f]", obstacles[i].x, obstacles[i].y);
                 // ROS_INFO("Distance : [%f]     Yaw_Rate : [%f]", obstacles[i].dist, obstacles[i].yaw_rate);
                 left_detected = true;
                 tmp_yaw_rate = obstacles[i].yaw_rate;
+		}
             }
         }
         if(left_avoid && obstacles[i].yaw_rate > -45.0 && obstacles[i].yaw_rate <= 0)
         {
             if(obstacles[i].dist < target_dist)
             {
+		if (cone.size()  == 1 && cone[0].flag == 1) {
                 // ROS_INFO("Point [X,Y] : [%f, %f]", obstacles[i].x, obstacles[i].y);
                 // ROS_INFO("Distance : [%f]     Yaw_Rate : [%f]", obstacles[i].dist, obstacles[i].yaw_rate);
                 right_detected = true;
                 tmp_yaw_rate = obstacles[i].yaw_rate;
+		}
             }
         }
     }
@@ -132,6 +147,9 @@ int main(int argc, char **argv)
     ros::Subscriber sub1 = node.subscribe("/detected_obs", 10, detectedCallback);
     ros::Subscriber sub2 = node.subscribe("/true_obs", 10, trueCallback);
     drive_msg_pub = node.advertise<race::drive_values>("control_value", 1);
+
+    // Color cone Subscriber
+    ros::Subscriber cone_sub = node.subscribe("color_cone",10, callbackFromCone);
     
     ros::Rate loop_rate(30);
     while(ros::ok())

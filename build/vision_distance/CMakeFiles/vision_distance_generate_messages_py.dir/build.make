@@ -54,7 +54,11 @@ CMAKE_BINARY_DIR = /home/foscar/ISCC_2021/build
 include vision_distance/CMakeFiles/vision_distance_generate_messages_py.dir/progress.make
 
 vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone.py
+vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone_lidar.py
+vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_DeliveryArray.py
 vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray.py
+vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray_lidar.py
+vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Delivery.py
 vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py
 
 
@@ -63,21 +67,51 @@ vision_distance/CMakeFiles/vision_distance_generate_messages_py: /home/foscar/IS
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG vision_distance/Colorcone"
 	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg
 
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone_lidar.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone_lidar.py: /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG vision_distance/Colorcone_lidar"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg
+
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_DeliveryArray.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_DeliveryArray.py: /home/foscar/ISCC_2021/src/vision_distance/msg/DeliveryArray.msg
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_DeliveryArray.py: /home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG vision_distance/DeliveryArray"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/foscar/ISCC_2021/src/vision_distance/msg/DeliveryArray.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg
+
 /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
 /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray.py: /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg
 /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray.py: /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG vision_distance/ColorconeArray"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG vision_distance/ColorconeArray"
 	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg
+
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray_lidar.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray_lidar.py: /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray_lidar.py: /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python from MSG vision_distance/ColorconeArray_lidar"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg
+
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Delivery.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Delivery.py: /home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python from MSG vision_distance/Delivery"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg
 
 /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py: /opt/ros/melodic/lib/genpy/genmsg_py.py
 /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone.py
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone_lidar.py
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_DeliveryArray.py
 /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python msg __init__.py for vision_distance"
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray_lidar.py
+/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Delivery.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python msg __init__.py for vision_distance"
 	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg --initpy
 
 vision_distance_generate_messages_py: vision_distance/CMakeFiles/vision_distance_generate_messages_py
 vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone.py
+vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Colorcone_lidar.py
+vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_DeliveryArray.py
 vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray.py
+vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_ColorconeArray_lidar.py
+vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/_Delivery.py
 vision_distance_generate_messages_py: /home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance/msg/__init__.py
 vision_distance_generate_messages_py: vision_distance/CMakeFiles/vision_distance_generate_messages_py.dir/build.make
 

@@ -123,12 +123,12 @@ struct MD5Sum< ::vision_distance::ColorconeArray_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "feb4980b2e15e2383a554067acde5244";
+    return "ac69fdcb59f6be81c060279a9cb29dcb";
   }
 
   static const char* value(const ::vision_distance::ColorconeArray_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xfeb4980b2e15e238ULL;
-  static const uint64_t static_value2 = 0x3a554067acde5244ULL;
+  static const uint64_t static_value1 = 0xac69fdcb59f6be81ULL;
+  static const uint64_t static_value2 = 0xc060279a9cb29dcbULL;
 };
 
 template<class ContainerAllocator>
@@ -152,8 +152,8 @@ struct Definition< ::vision_distance::ColorconeArray_<ContainerAllocator> >
 "================================================================================\n"
 "MSG: vision_distance/Colorcone\n"
 "int32 flag\n"
-"float64 dist_x\n"
-"float64 dist_y\n"
+"float64 x\n"
+"float64 y\n"
 ;
   }
 

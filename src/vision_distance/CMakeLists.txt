@@ -13,6 +13,10 @@ add_message_files(
   FILES
   Colorcone.msg
   ColorconeArray.msg
+  Colorcone_lidar.msg
+  ColorconeArray_lidar.msg
+  Delivery.msg
+  DeliveryArray.msg
 )
 
 generate_messages(

@@ -113,9 +113,9 @@ void PurePursuitNode::run(char** argv) {
     publishTargetPointVisualizationMsg();
     publishCurrentPointVisualizationMsg();
 
-    // std::cout << "*******************************" << std::endl;
-    // std::cout << "current index : " << pp_.current_idx << std::endl;
-    // std::cout << "current mode : " << pp_.mode << std::endl;
+    std::cout << "*******************************" << std::endl;
+    std::cout << "current index : " << pp_.current_idx << std::endl;
+    std::cout << "current mode : " << pp_.mode << std::endl;
     // std::cout << "target index : " << pp_.next_waypoint_number_ << std::endl;
 
     // if (pp_.mode == 1) {

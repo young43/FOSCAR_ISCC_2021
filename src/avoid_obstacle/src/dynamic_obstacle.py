@@ -3,6 +3,7 @@
 import rospy
 from obstacle_detector.msg import Obstacles
 from avoid_obstacle.msg import PointObstacles, DetectedObstacles, TrueObstacles
+from vision_distance.msg import Colorcone_lidar, ColorconeArray_lidar 
 
 from race.msg import lane_info, drive_values
 
@@ -16,9 +17,30 @@ trueObs_pub = rospy.Publisher('true_obs', TrueObstacles, queue_size=1)
 trueObs_pub_long = rospy.Publisher('true_obs_long', TrueObstacles, queue_size=1)
 
 sec = 0
+yellow_cone=[]
+blue_cone=[]
+
+
+def colorcone_callback(msg):
+	global flag, dist_x, dist_y
+	global yellow_cone, blue_cone
+	colorcone = msg.colorcone
+	
+
+	sorted_colorcone = sorted(colorcone, key=lambda x:(x.dist_y,x.dist_x,x.flag))
+	sorted_colorcone = sorted_colorcone[:4]
+	#print("colorcone_array" , sorted_colorcone)
+	for i in range (len(sorted_colorcone)):
+		if sorted_colorcone[i].flag==0:
+			yellow_cone.append(sorted_colorcone[i])
+		else:
+			blue_cone.append(sorted_colorcone[i])
+
+
 
 def callback(msg):
       global sec
+      global yellow_cone, blue_cone
       center = []
 
       drive_value = drive_values()
@@ -73,8 +95,10 @@ def callback(msg):
 def listener():
       rospy.init_node('dynamic_obstacles')
       rospy.Subscriber("raw_obstacles", Obstacles, callback)
+      rospy.Subscriber("color_cone", ColorconeArray_lidar, colorcone_callback)
 
 if __name__=='__main__':
+      global yellow_cone, blue_cone
       listener()
       rospy.spin()
 

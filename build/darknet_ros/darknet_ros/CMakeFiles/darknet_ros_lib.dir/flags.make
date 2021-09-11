@@ -3,13 +3,13 @@
 
 # compile C with /usr/bin/cc
 # compile CXX with /usr/bin/c++
-C_FLAGS = -fPIC   -O4 -g
+C_FLAGS = -O3 -DNDEBUG -fPIC   -O4 -g
 
 C_DEFINES = -DDARKNET_FILE_PATH=\"/home/foscar/ISCC_2021/src/darknet_ros/darknet\" -DGPU -DOPENCV -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"darknet_ros\" -Ddarknet_ros_lib_EXPORTS
 
 C_INCLUDES = -isystem /usr/include/opencv -I/home/foscar/ISCC_2021/src/darknet_ros/darknet/src -I/home/foscar/ISCC_2021/src/darknet_ros/darknet/include -I/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros/include -I/home/foscar/ISCC_2021/devel/include -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/local/cuda-10.2/include 
 
-CXX_FLAGS = -std=c++11  -fPIC   -O4 -g
+CXX_FLAGS = -std=c++11  -O3 -DNDEBUG -fPIC   -O4 -g
 
 CXX_DEFINES = -DDARKNET_FILE_PATH=\"/home/foscar/ISCC_2021/src/darknet_ros/darknet\" -DGPU -DOPENCV -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"darknet_ros\" -Ddarknet_ros_lib_EXPORTS
 

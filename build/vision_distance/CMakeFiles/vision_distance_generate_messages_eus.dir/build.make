@@ -54,7 +54,11 @@ CMAKE_BINARY_DIR = /home/foscar/ISCC_2021/build
 include vision_distance/CMakeFiles/vision_distance_generate_messages_eus.dir/progress.make
 
 vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Colorcone.l
+vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Colorcone_lidar.l
+vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/DeliveryArray.l
 vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray.l
+vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray_lidar.l
+vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Delivery.l
 vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/manifest.l
 
 
@@ -63,19 +67,45 @@ vision_distance/CMakeFiles/vision_distance_generate_messages_eus: /home/foscar/I
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from vision_distance/Colorcone.msg"
 	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg
 
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Colorcone_lidar.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Colorcone_lidar.l: /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from vision_distance/Colorcone_lidar.msg"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg
+
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/DeliveryArray.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/DeliveryArray.l: /home/foscar/ISCC_2021/src/vision_distance/msg/DeliveryArray.msg
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/DeliveryArray.l: /home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from vision_distance/DeliveryArray.msg"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/foscar/ISCC_2021/src/vision_distance/msg/DeliveryArray.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg
+
 /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray.l: /opt/ros/melodic/lib/geneus/gen_eus.py
 /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray.l: /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg
 /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray.l: /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from vision_distance/ColorconeArray.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from vision_distance/ColorconeArray.msg"
 	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg
 
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray_lidar.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray_lidar.l: /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray_lidar.l: /home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from vision_distance/ColorconeArray_lidar.msg"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg
+
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Delivery.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Delivery.l: /home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp code from vision_distance/Delivery.msg"
+	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg -Ivision_distance:/home/foscar/ISCC_2021/src/vision_distance/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p vision_distance -o /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg
+
 /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/manifest.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp manifest code for vision_distance"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating EusLisp manifest code for vision_distance"
 	cd /home/foscar/ISCC_2021/build/vision_distance && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance vision_distance std_msgs
 
 vision_distance_generate_messages_eus: vision_distance/CMakeFiles/vision_distance_generate_messages_eus
 vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Colorcone.l
+vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Colorcone_lidar.l
+vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/DeliveryArray.l
 vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray.l
+vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/ColorconeArray_lidar.l
+vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/msg/Delivery.l
 vision_distance_generate_messages_eus: /home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance/manifest.l
 vision_distance_generate_messages_eus: vision_distance/CMakeFiles/vision_distance_generate_messages_eus.dir/build.make
 

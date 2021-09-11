@@ -9,7 +9,7 @@ import struct
 import vision_distance.msg
 
 class ColorconeArray(genpy.Message):
-  _md5sum = "feb4980b2e15e2383a554067acde5244"
+  _md5sum = "ac69fdcb59f6be81c060279a9cb29dcb"
   _type = "vision_distance/ColorconeArray"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """vision_distance/Colorcone[] visions
@@ -17,8 +17,8 @@ class ColorconeArray(genpy.Message):
 ================================================================================
 MSG: vision_distance/Colorcone
 int32 flag
-float64 dist_x
-float64 dist_y
+float64 x
+float64 y
 """
   __slots__ = ['visions']
   _slot_types = ['vision_distance/Colorcone[]']
@@ -61,7 +61,7 @@ float64 dist_y
       buff.write(_struct_I.pack(length))
       for val1 in self.visions:
         _x = val1
-        buff.write(_get_struct_i2d().pack(_x.flag, _x.dist_x, _x.dist_y))
+        buff.write(_get_struct_i2d().pack(_x.flag, _x.x, _x.y))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -85,7 +85,7 @@ float64 dist_y
         _x = val1
         start = end
         end += 20
-        (_x.flag, _x.dist_x, _x.dist_y,) = _get_struct_i2d().unpack(str[start:end])
+        (_x.flag, _x.x, _x.y,) = _get_struct_i2d().unpack(str[start:end])
         self.visions.append(val1)
       return self
     except struct.error as e:
@@ -103,7 +103,7 @@ float64 dist_y
       buff.write(_struct_I.pack(length))
       for val1 in self.visions:
         _x = val1
-        buff.write(_get_struct_i2d().pack(_x.flag, _x.dist_x, _x.dist_y))
+        buff.write(_get_struct_i2d().pack(_x.flag, _x.x, _x.y))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -128,7 +128,7 @@ float64 dist_y
         _x = val1
         start = end
         end += 20
-        (_x.flag, _x.dist_x, _x.dist_y,) = _get_struct_i2d().unpack(str[start:end])
+        (_x.flag, _x.x, _x.y,) = _get_struct_i2d().unpack(str[start:end])
         self.visions.append(val1)
       return self
     except struct.error as e:

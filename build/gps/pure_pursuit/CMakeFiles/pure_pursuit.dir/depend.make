@@ -3,6 +3,8 @@
 
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o: /home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBox.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o: /home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBoxes.h
+gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/Delivery.h
+gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/DeliveryArray.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/obstacles.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/src/pure_pursuit.cpp
@@ -92,6 +94,8 @@ gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBox.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBoxes.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/devel/include/race/drive_values.h
+gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/Delivery.h
+gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/DeliveryArray.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/obstacles.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_core.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit_core.h
@@ -203,6 +207,8 @@ gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBox.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBoxes.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/devel/include/race/drive_values.h
+gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/Delivery.h
+gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/DeliveryArray.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/obstacles.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit.h
 gps/pure_pursuit/CMakeFiles/pure_pursuit.dir/src/pure_pursuit_node.cpp.o: /home/foscar/ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit_core.h

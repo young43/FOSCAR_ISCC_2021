@@ -61,7 +61,7 @@
    self)
   )
 
-(setf (get vision_distance::ColorconeArray :md5sum-) "feb4980b2e15e2383a554067acde5244")
+(setf (get vision_distance::ColorconeArray :md5sum-) "ac69fdcb59f6be81c060279a9cb29dcb")
 (setf (get vision_distance::ColorconeArray :datatype-) "vision_distance/ColorconeArray")
 (setf (get vision_distance::ColorconeArray :definition-)
       "vision_distance/Colorcone[] visions
@@ -69,13 +69,13 @@
 ================================================================================
 MSG: vision_distance/Colorcone
 int32 flag
-float64 dist_x
-float64 dist_y
+float64 x
+float64 y
 
 ")
 
 
 
-(provide :vision_distance/ColorconeArray "feb4980b2e15e2383a554067acde5244")
+(provide :vision_distance/ColorconeArray "ac69fdcb59f6be81c060279a9cb29dcb")
 
 

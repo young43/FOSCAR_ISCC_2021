@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "Release")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -41,6 +41,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance/msg" TYPE FILE FILES
     "/home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg"
     "/home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg"
+    "/home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg"
+    "/home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg"
+    "/home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg"
+    "/home/foscar/ISCC_2021/src/vision_distance/msg/DeliveryArray.msg"
     )
 endif()
 

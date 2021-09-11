@@ -58,16 +58,16 @@
   "vision_distance/ColorconeArray")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ColorconeArray>)))
   "Returns md5sum for a message object of type '<ColorconeArray>"
-  "feb4980b2e15e2383a554067acde5244")
+  "ac69fdcb59f6be81c060279a9cb29dcb")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ColorconeArray)))
   "Returns md5sum for a message object of type 'ColorconeArray"
-  "feb4980b2e15e2383a554067acde5244")
+  "ac69fdcb59f6be81c060279a9cb29dcb")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ColorconeArray>)))
   "Returns full string definition for message of type '<ColorconeArray>"
-  (cl:format cl:nil "vision_distance/Colorcone[] visions~%~%================================================================================~%MSG: vision_distance/Colorcone~%int32 flag~%float64 dist_x~%float64 dist_y~%~%~%"))
+  (cl:format cl:nil "vision_distance/Colorcone[] visions~%~%================================================================================~%MSG: vision_distance/Colorcone~%int32 flag~%float64 x~%float64 y~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'ColorconeArray)))
   "Returns full string definition for message of type 'ColorconeArray"
-  (cl:format cl:nil "vision_distance/Colorcone[] visions~%~%================================================================================~%MSG: vision_distance/Colorcone~%int32 flag~%float64 dist_x~%float64 dist_y~%~%~%"))
+  (cl:format cl:nil "vision_distance/Colorcone[] visions~%~%================================================================================~%MSG: vision_distance/Colorcone~%int32 flag~%float64 x~%float64 y~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <ColorconeArray>))
   (cl:+ 0
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'visions) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ (roslisp-msg-protocol:serialization-length ele))))

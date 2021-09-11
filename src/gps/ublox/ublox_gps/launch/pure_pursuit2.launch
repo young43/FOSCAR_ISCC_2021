@@ -32,4 +32,7 @@
 
   <node pkg="race" type="serial_control_node" name="serial_control_node" />
 
+<!-- lidar(obstacle) -->
+  <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" />
+
 </launch>

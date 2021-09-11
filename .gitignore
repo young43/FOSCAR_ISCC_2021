@@ -3,13 +3,16 @@
 *.bag.active
 *.avi
 *.mov
+*.mp4
+*.wmv
+*.mkv
 
 # weights파일
 *.weights
 
 # build, devel
-build/*
-devel/*
+./build/*
+./devel/*
 
 
 # vscode

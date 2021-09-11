@@ -91,6 +91,7 @@ int start_parking_idx = 0;
 int end_parking_idx = 0;
 int end_parking_backward_idx = 0;
 int end_parking_full_steer_backward_idx = 0;
+// For kcity
 // const float pk_coord1[2] = {935534.247324, 1915849.29071};
 // const float pk_coord2[2] = {935536.127777, 1915852.74891};
 // const float pk_coord3[2] = {935537.027791, 1915854.43949};
@@ -803,7 +804,6 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
     if(yoloObjects[i].Class == "B1") pp_.b1_flag = true;
     if(yoloObjects[i].Class == "B2") pp_.b2_flag = true;
     if(yoloObjects[i].Class == "B3") pp_.b3_flag = true;
-
   }
 
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);

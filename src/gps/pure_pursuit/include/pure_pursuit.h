@@ -13,6 +13,7 @@
 #include <obstacles.h>
 #include <darknet_ros_msgs/BoundingBox.h>
 #include <darknet_ros_msgs/BoundingBoxes.h>
+#include <vision_distance/DeliveryArray.h>
 
 namespace waypoint_follower
 {
@@ -80,7 +81,9 @@ public:
   bool b3_flag = false;
 
   std::vector<int> a_cnt = std::vector<int>(3,0);
+  std::vector<int> b_cnt = std::vector<int>(3,0);
   std::vector<bool> a_flag= std::vector<bool>(3,false);
+  std::vector<bool> b_flag= std::vector<bool>(3,false);
   // int a1_cnt = 0;
   // int a2_cnt = 0;
   // int a3_cnt = 0;

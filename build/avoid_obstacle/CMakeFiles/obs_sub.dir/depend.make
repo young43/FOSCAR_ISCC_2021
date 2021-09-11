@@ -5,6 +5,8 @@ avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /home/foscar/ISCC_2021/
 avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /home/foscar/ISCC_2021/devel/include/avoid_obstacle/PointObstacles.h
 avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /home/foscar/ISCC_2021/devel/include/avoid_obstacle/TrueObstacles.h
 avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /home/foscar/ISCC_2021/devel/include/race/drive_values.h
+avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/ColorconeArray_lidar.h
+avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /home/foscar/ISCC_2021/devel/include/vision_distance/Colorcone_lidar.h
 avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /home/foscar/ISCC_2021/src/avoid_obstacle/src/obs_sub.cpp
 avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /opt/ros/melodic/include/ros/advertise_options.h
 avoid_obstacle/CMakeFiles/obs_sub.dir/src/obs_sub.cpp.o: /opt/ros/melodic/include/ros/advertise_service_options.h

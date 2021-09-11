@@ -17,7 +17,6 @@ def parse_txt(path):
     data = data.rstrip().split('\n')
     data = [x.split(' ')[:3]+[mode] for x in data]
     print(data)
-
     return data
 
 

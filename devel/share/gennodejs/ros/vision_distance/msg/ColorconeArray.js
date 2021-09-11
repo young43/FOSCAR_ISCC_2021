@@ -69,7 +69,7 @@ class ColorconeArray {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'feb4980b2e15e2383a554067acde5244';
+    return 'ac69fdcb59f6be81c060279a9cb29dcb';
   }
 
   static messageDefinition() {
@@ -80,8 +80,8 @@ class ColorconeArray {
     ================================================================================
     MSG: vision_distance/Colorcone
     int32 flag
-    float64 dist_x
-    float64 dist_y
+    float64 x
+    float64 y
     
     `;
   }
