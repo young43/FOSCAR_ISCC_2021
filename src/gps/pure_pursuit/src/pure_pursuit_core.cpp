@@ -44,8 +44,8 @@ int obs_cnt = 0;
 std::chrono::system_clock::time_point obs_start;
 
 /* traffic Index manager */
-const int tf_idx_1 = 1000; // 1180
-const int tf_idx_2 = 1000; // 1455
+int tf_idx_1 = 1000; // 1180
+int tf_idx_2 = 1000; // 1455
 
 bool tf_flag = false;
 const float tf_coord1[2] = {935575.213544702, 1915926.09913091};

@@ -81,9 +81,10 @@ const int dv_b_idx_3 = 1000;
 
 // max index of pp_.a_cnt array
 int a_max_index = -1;
+int b_max_index = -1;
 // calc max index flag
 bool a_cnt_flag = false;
-
+bool b_cnt_flag = false;
 /*************************/
 
 /* Parking manager */
@@ -92,20 +93,20 @@ int end_parking_idx = 0;
 int end_parking_backward_idx = 0;
 int end_parking_full_steer_backward_idx = 0;
 // For kcity
-// const float pk_coord1[2] = {935534.247324, 1915849.29071};
-// const float pk_coord2[2] = {935536.127777, 1915852.74891};
-// const float pk_coord3[2] = {935537.027791, 1915854.43949};
-// const float pk_coord4[2] = {935539.530479, 1915859.22427};
-// const float pk_coord5[2] = {935540.465801, 1915860.89238};
-// const float pk_coord6[2] = {935541.86021, 1915863.43345};
+const float pk_coord1[2] = {935534.247324, 1915849.29071};
+const float pk_coord2[2] = {935536.127777, 1915852.74891};
+const float pk_coord3[2] = {935537.027791, 1915854.43949};
+const float pk_coord4[2] = {935539.530479, 1915859.22427};
+const float pk_coord5[2] = {935540.465801, 1915860.89238};
+const float pk_coord6[2] = {935541.86021, 1915863.43345};
 
 // For School Test
-const float pk_coord1[2] = {955565.3630135682, 1956933.4946035568};
-const float pk_coord2[2] = {955564.96476695, 1956933.8079647133};
-const float pk_coord3[2] = {955564.6498305532, 1956934.0536339642};
-const float pk_coord4[2] = {955564.018495136, 1956934.5500655076};
-const float pk_coord5[2] = {955563.8305732157, 1956934.6975132197};
-const float pk_coord6[2] = {955563.4789975542, 1956934.971366751};
+// const float pk_coord1[2] = {955565.3630135682, 1956933.4946035568};
+// const float pk_coord2[2] = {955564.96476695, 1956933.8079647133};
+// const float pk_coord3[2] = {955564.6498305532, 1956934.0536339642};
+// const float pk_coord4[2] = {955564.018495136, 1956934.5500655076};
+// const float pk_coord5[2] = {955563.8305732157, 1956934.6975132197};
+// const float pk_coord6[2] = {955563.4789975542, 1956934.971366751};
 /*************************/
 
 
@@ -137,6 +138,9 @@ void PurePursuitNode::initForROS()
     &PurePursuitNode::callbackFromTrafficLight, this);
   // obstacle_sub = nh_.subscribe("{lane_topic_name}", 1,
   //   &PurePursuitNode::callbackFromLane, this);
+
+  //delivery subscriber
+  delivery_sub = nh_.subscribe("delivery", 1, &PurePursuitNode::callbackFromDelivery, this);
 
 
   // setup publisher
@@ -764,6 +768,57 @@ void PurePursuitNode::callbackFromObstacle2(const avoid_obstacle::DetectedObstac
       //   right_avoid = true;
       // }
   }
+}
+
+
+void PurePursuitNode::callbackFromDelivery(const vision_distance::DeliveryArray& msg){
+  std::vector<vision_distance::Delivery> deliverySign = msg.visions;
+  
+  // 450 
+  for(int i = 0; i < deliverySign.size(); i++) {
+    // 배달미션을 위한 표지판 인식
+    // if (pp_.mode == 19 || pp_.mode == 20) {
+    //   if(deliverySign[i].flag == 1)
+    //   { 
+    //     pp_.a_cnt[0] += 1;
+    //   }
+    //   if(deliverySign[i].flag == "A2")
+    //   {
+    //     pp_.a_cnt[1] += 1;
+    //   }
+    //   if(deliverySign[i].flag == "A3")
+    //   {
+    //     pp_.a_cnt[2] += 1;
+    //   }
+    // }
+
+    if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  
+      if (deliverySign[i].flag == 1) 
+      {
+          pp_.b_cnt[0] += 1;
+      }
+      if (deliverySign[i].flag == 2) 
+      {
+          pp_.b_cnt[0] += 1;
+      }
+      if (deliverySign[i].flag == 3)
+      {
+	  pp_.b_cnt[0] += 1;
+      }
+    }
+  }
+  // Calc max_index
+  b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
+  ROS_INFO("B INDEX : %d", b_max_index);
+
+  if (a_max_index == b_max_index) {
+    // Max flag on
+    pp_.b_flag[b_max_index] = true;
+  }
+  else {
+    std::vector<int> b_cnt = {0,0,0};
+  }
+  
 }
 
 
