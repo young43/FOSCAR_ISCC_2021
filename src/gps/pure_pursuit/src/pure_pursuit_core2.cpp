@@ -547,36 +547,40 @@ void PurePursuitNode::run(char** argv) {
       final_constant = 1.5;
     }
     
-    // MODE 19 : 배달 PICK B
+    // MODE 20 : 배달 PICK B
+    // MODE 20 : 배달 PICK B
     if (pp_.mode == 20) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
       final_constant = 1.2;
       
-      if((pp_.mission_flag==0 && (pp_.a_flag[0] && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
+      /*if((pp_.mission_flag==0 && (pp_.a_flag[0] && pp_.b1_flag) && pp_.reachMissionIdx(dv_b_idx_1))
         || (pp_.mission_flag==0 && (pp_.a_flag[1] && pp_.b2_flag) && pp_.reachMissionIdx(dv_b_idx_2))
-        || (pp_.mission_flag==0 && (pp_.a_flag[2] && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {
+        || (pp_.mission_flag==0 && (pp_.a_flag[2] && pp_.b3_flag) && pp_.reachMissionIdx(dv_b_idx_3))) {*/
+	    if((pp_.mission_flag==0 && (pp_.a_flag[0] && pp_.b_flag[0]))
+        || (pp_.mission_flag==0 && (pp_.a_flag[1] && pp_.b_flag[1]))
+        || (pp_.mission_flag==0 && (pp_.a_flag[2] && pp_.b_flag[2]))) {
 
-        for (int i = 0; i < 50; i++)
+        
+	      for (int i = 0; i < 50; i++)
         {
-          pulishControlMsg(0, 0);
-          // 0.1초
+          usleep(50000); // 2.5초 직진 
+	        pulishControlMsg(0, 0);
+            // 0.1초 
           usleep(100000);
         }
         
-        ROS_INFO("B1_f %d B2_f %d B3_f %d",pp_.b1_flag, pp_.b2_flag, pp_.b3_flag);
 
-        if(pp_.a_flag[0] && pp_.b1_flag)
+        if(pp_.a_flag[0] && pp_.b_flag[0])
           ROS_INFO("PICK-UP B1 : %d", pp_.current_idx);
-        if(pp_.a_flag[1] && pp_.b2_flag)
+        if(pp_.a_flag[1] && pp_.b_flag[1])
           ROS_INFO("PICK-UP B2 : %d", pp_.current_idx);
-        if(pp_.a_flag[2] && pp_.b3_flag)
+        if(pp_.a_flag[2] && pp_.b_flag[2])
           ROS_INFO("PICK-UP B3 : %d", pp_.current_idx);
         pp_.mission_flag = 1;
         continue;
       }
     }
-
 
     // MODE 38 - 직선 구간 (부스터)
     if(pp_.mode == 38){
