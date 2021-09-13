@@ -599,7 +599,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   for(int i=0; i<yoloObjects.size(); i++){
     if(yoloObjects[i].Class == "3 red" || yoloObjects[i].Class == "3 yellow" || yoloObjects[i].Class == "3 green" || yoloObjects[i].Class == "3 left"
       || yoloObjects[i].Class == "4 red" || yoloObjects[i].Class == "4 yellow" || yoloObjects[i].Class == "4 green"
-      || yoloObjects[i].Class == "4 red left" || yoloObjects[i].Class == "4 left go"  || yoloObjects[i].Class == "4 red yellow"){
+      || yoloObjects[i].Class == "4 redleft" || yoloObjects[i].Class == "4 greenleft"  || yoloObjects[i].Class == "4 redyellow"){
 
         traffic_lights.push_back(yoloObjects[i]);
 
@@ -618,8 +618,8 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
       int second_traffic = (traffic_lights[1].xmax - traffic_lights[1].xmin) * (traffic_lights[1].ymax - traffic_lights[1].ymin);
 
       if(first_traffic * 0.6 < second_traffic) {
-        if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 red left" || traffic_lights[0].Class == "4 left go" ||
-          traffic_lights[1].Class == "3 left" || traffic_lights[1].Class == "4 red left" || traffic_lights[1].Class == "4 left go") {
+        if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 redleft" || traffic_lights[0].Class == "4 greenleft" ||
+          traffic_lights[1].Class == "3 left" || traffic_lights[1].Class == "4 redleft" || traffic_lights[1].Class == "4 greenleft") {
             pp_.left_go_flag = true;
         }
         else {
@@ -636,7 +636,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
 
   if(traffic_lights.size() > 0){
     if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
-        traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 red yellow")
+        traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
     {
       pp_.straight_go_flag = false;
       pp_.left_go_flag = false;
@@ -646,12 +646,12 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
       pp_.straight_go_flag = true;
       pp_.left_go_flag = false;
     }
-    else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 red left")
+    else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 redleft")
     {
       pp_.straight_go_flag = false;
       pp_.left_go_flag = true;
     }
-    else if (traffic_lights[index].Class == "4 left go")
+    else if (traffic_lights[index].Class == "4 greenleft")
     {
       pp_.straight_go_flag = true;
       pp_.left_go_flag = true;

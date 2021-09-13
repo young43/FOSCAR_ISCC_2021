@@ -18,14 +18,14 @@ slidingwindow = SlidingWindow()
 img = np.empty(shape=[0])
 
 pixel = 80.0/200.0 # 0.4cm
-invisible_distance = 366
+invisible_distance = 430#366
 center = np.array([320,480,1], np.float32)
 
 # black square points
-up_left = [268,297]
-up_right = [365,297]
-down_left = [260,318]
-down_right = [377,318]
+up_left = [223,381]
+up_right = [369,381]
+down_left = [217,422]
+down_right = [407,422]
 corner_points_array = np.float32([up_left,up_right,down_left,down_right])
 
 box_class = None

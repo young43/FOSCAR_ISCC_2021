@@ -6,7 +6,8 @@
         <arg name="camera_name" value="videofile" />
         <!-- full path to the video file -->
         <!-- wget http://techslides.com/demos/sample-videos/small.mp4 -O /tmp/small.mp4 -->
-        <arg name="video_stream_provider" value="/home/foscar/ISCC_2021/src/vision_distance/src/9-8/origin_2021-9-8-16-28.avi" />
+<!--       <arg name="video_stream_provider" value="/home/foscar/ISCC_2021/src/vision_distance/src/9-8/origin_2021-9-8-16-28.avi" /> -->
+	<arg name="video_stream_provider" value="/home/foscar/ISCC_2021/src/vision_distance/src/traffic.mp4" />
         <!-- set camera fps to (video files not affected) -->
         <!-- <arg name="set_camera_fps" value="30"/> -->
         <!-- set buffer queue size of frame capturing to -->

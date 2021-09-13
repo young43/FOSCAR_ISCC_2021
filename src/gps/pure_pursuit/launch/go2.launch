@@ -19,7 +19,7 @@
   <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" />
   
   <!-- yolo -->  
-  <include file="$(find darknet_ros)/launch/darknet_ros.launch" />
+  <include file="$(find darknet_ros)/launch/darknet_ros_final.launch" />
 
   <!-- usb_cam node-->
   <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
@@ -27,6 +27,7 @@
     <param name="image_width" value="640" />
     <param name="image_height" value="480" />
     <param name="pixel_format" value="yuyv" />
+    <param name="framerate" value="25"/>
     <param name="camera_frame_id" value="usb_cam" />
     <param name="io_method" value="mmap"/>
   </node>

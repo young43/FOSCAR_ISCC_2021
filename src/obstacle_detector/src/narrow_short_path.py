@@ -13,6 +13,13 @@ from math import atan2, degrees
 drive_speed=8
 drive_values_pub = rospy.Publisher('control_value', drive_values, queue_size=1)
 
+is_car_start=False
+prev_steering=0.0
+is_first_drive=True
+
+
+
+
 def cal_distance(x,y):
 	return (math.sqrt(x**2+y**2))
 
@@ -37,12 +44,19 @@ def liner_acceleration(flag):
 def drive(angle, flag):
 	global drive_values_pub
 	global drive_speed
+	global is_car_start
+	global is_first_drive
+	global prev_steering
 	drive_value = drive_values()
 	drive_value.steering = angle
 	standard_angle=18
+	check_start=0.00000001
+	if (is_first_drive):
+		prev_steering=drive_value.steering
+		is_first_drive=False
 	
-	if (drive_value.throttle==0):
-		drive_value.throttle=drive_speed
+	
+
 	if (drive_value.steering>standard_angle or flag==True):
 		
 		drive_value.throttle=liner_acceleration(False)
@@ -55,8 +69,20 @@ def drive(angle, flag):
 		
 		drive_value.throttle=liner_acceleration(True)
 	
-	drive_values_pub.publish(drive_value)
+	print("prev",int(prev_steering))
+	print("steer",int(drive_value.steering))
+	print(is_first_drive,is_car_start)
+	if (not(is_car_start)):
+		print("###############################################")
+		if(abs(prev_steering-drive_value.steering)):
+			drive_value.throttle=8
+		else:
+			drive_value.throttle=8
+			is_car_start=True
+	prev_steering=drive_value.steering
 
+	drive_values_pub.publish(drive_value)
+	
 	#print("steer : ", drive_value.steering)
 	print("throttle : ", drive_value.throttle)
 class point:
@@ -178,17 +204,17 @@ class point:
 	def circle(self):
 		print("CNT:",len(self.obData.circles))
 		if len(self.obData.circles) == 0:
-			print("zero obstacle")
+			#print("zero obstacle")
 			drive(0,False)
 
 		elif len(self.obData.circles) == 1:
 			circles=self.obData.circles
 			if(circles[0].center.y > 0.0003):
 				drive(-25,True)
-				print("one obstacle detected && left steering")
+				#print("one obstacle detected && left steering")
 			elif(circles[0].center.y < 0.0003):
 				drive(25,True)
-				print("one obstacle detected && right steering")
+				#print("one obstacle detected && right steering")
 
 
 
@@ -280,10 +306,10 @@ class point:
 				self.calc_angle()
 				min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
 				#print("avoid:",min_list[1].y)
-				print('center_y:' ,self.center_y)
+				#print('center_y:' ,self.center_y)
 				if(min_list[0]<1.3 and abs(min_list[1].y)<1.1):
 					self.avoid_collision(min_list)
-					print('front_avoid')
+					#print('front_avoid')
 
 				
 				else:

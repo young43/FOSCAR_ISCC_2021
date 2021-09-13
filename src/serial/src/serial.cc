@@ -17,6 +17,7 @@
 #include "serial/impl/unix.h"
 #endif
 
+
 using std::invalid_argument;
 using std::min;
 using std::numeric_limits;

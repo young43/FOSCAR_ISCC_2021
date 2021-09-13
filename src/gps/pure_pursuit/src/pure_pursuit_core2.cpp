@@ -450,6 +450,7 @@ void PurePursuitNode::run(char** argv) {
       else if (pp_.mission_flag == 1 && !pp_.is_obstacle_detected) {
         pp_.setWaypoints(avoidance_path);
         pp_.mission_flag = 2;
+        ROS_INFO("PATH SWITCHING");
         //pulishControlMsg(0, 0);
       
         // for test
