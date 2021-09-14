@@ -916,7 +916,16 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
     } 
   }
 
+ 
+
   if(traffic_lights.size() > 0){
+
+     // debug
+    if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 21 || pp_.mode == 33){
+      ROS_INFO("TRAFFIC_LIGHT_SIZE : %d", traffic_lights.size());
+      ROS_INFO("TRAFFIC : %s", traffic_lights[0].Class);
+    }
+
     if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
       traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
     {

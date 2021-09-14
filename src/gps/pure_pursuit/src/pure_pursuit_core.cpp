@@ -166,9 +166,8 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 2) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
-      const_velocity_ = 10;
+      const_velocity_ = 8;
       final_constant = 1.2;
-
 
       // 첫 신호등 인덱스 : tf_idx_1
       if(pp_.reachMissionIdx(tf_idx_1) && !pp_.straight_go_flag) {
@@ -180,13 +179,13 @@ void PurePursuitNode::run(char** argv) {
 
     // MODE 3 : 동적 장애물 & 신호등
       if (pp_.mode == 3) {
-        pp_.mission_flag = 0;
-        const_lookahead_distance_ = 4;
-        const_velocity_ = 6;
+        const_lookahead_distance_ = 6;
         final_constant = 1.2;
 
+        if(pp_.mission_flag == 0) const_velocity_ = 6;
+
         // 장애물 멈추기
-        if (pp_.is_obstacle_detected)
+        if (pp_.mission_flag == 0 && pp_.is_obstacle_detected)
         {
           while(pp_.is_obstacle_detected) {
 
@@ -199,6 +198,8 @@ void PurePursuitNode::run(char** argv) {
             ros::spinOnce();
             loop_rate.sleep();
           }
+          pp_.mission_flag = 1;
+          const_velocity_ = 8;
         }
 
         // 두번째 신호등 인덱스
@@ -608,7 +609,11 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
 
   
   if(pp_.mode == 2 || pp_.mode == 3){
+    ROS_INFO("TRAFFIC_LIGHT_SIZE : %d", traffic_lights.size());
+
     if(traffic_lights.size() > 0){
+      ROS_INFO("TRAFFIC : %s", traffic_lights[0].Class);
+      
       if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
           traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
       {
