@@ -1,8 +1,0 @@
-prefix=/home/young/FOSCAR_ISCC_2021/install
-
-Name: lane_detect
-Description: Description of lane_detect
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

@@ -11,9 +11,9 @@
 *.weights
 
 # build, devel
-./build/*
-./devel/*
+build/
+devel/
 
 
 # vscode
-./.vscode/*
+.vscode/
