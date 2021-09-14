@@ -333,7 +333,7 @@ void PurePursuitNode::run(char** argv) {
     if(pp_.mode == 5){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 15;
+      const_velocity_ = 17;
       final_constant = 1.2;
 
       geometry_msgs::Point green_point = pp_.waypoints.at(pp_.current_idx).first;
@@ -362,10 +362,6 @@ void PurePursuitNode::publishPurePursuitDriveMsg(const bool& can_get_curvature, 
 
   double steering_radian = convertCurvatureToSteeringAngle(wheel_base_, kappa);
   double steering_ = can_get_curvature ? (steering_radian * 180.0 / M_PI) * -1 * final_constant: 0;
-
-  // 더하기
-  steering_ += 0;
-
 
   // std::cout << "steering : " << steering_ << "\tkappa : " << kappa <<std::endl;
   pulishControlMsg(throttle_, steering_);

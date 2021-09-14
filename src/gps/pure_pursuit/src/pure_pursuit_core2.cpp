@@ -664,9 +664,6 @@ void PurePursuitNode::publishPurePursuitDriveMsg(const bool& can_get_curvature, 
   double steering_radian = convertCurvatureToSteeringAngle(wheel_base_, kappa);
   double steering_ = can_get_curvature ? (steering_radian * 180.0 / M_PI) * -1 * final_constant: 0;
 
-  // 더하기
-  steering_ += 0;
-
 
   // std::cout << "steering : " << steering_ << "\tkappa : " << kappa <<std::endl;
   pulishControlMsg(throttle_, steering_);
