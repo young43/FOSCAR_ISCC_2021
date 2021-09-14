@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/foscar/ISCC_2021/src/race/src/lane_detector.cpp" "/home/foscar/ISCC_2021/build/race/CMakeFiles/lane_detector_node.dir/src/lane_detector.cpp.o"
+  "/home/young/FOSCAR_ISCC_2021/src/race/src/lane_detector.cpp" "/home/young/FOSCAR_ISCC_2021/build/race/CMakeFiles/lane_detector_node.dir/src/lane_detector.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,8 +17,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/foscar/ISCC_2021/devel/include"
-  "/home/foscar/ISCC_2021/src/serial/include"
+  "/home/young/FOSCAR_ISCC_2021/devel/include"
+  "/home/young/FOSCAR_ISCC_2021/src/serial/include"
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/opencv"
@@ -26,7 +26,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/foscar/ISCC_2021/build/serial/CMakeFiles/serial.dir/DependInfo.cmake"
+  "/home/young/FOSCAR_ISCC_2021/build/serial/CMakeFiles/serial.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -1,12 +1,12 @@
 
 "use strict";
 
-let PointObstacles = require('./PointObstacles.js');
-let DetectedObstacles = require('./DetectedObstacles.js');
 let TrueObstacles = require('./TrueObstacles.js');
+let DetectedObstacles = require('./DetectedObstacles.js');
+let PointObstacles = require('./PointObstacles.js');
 
 module.exports = {
-  PointObstacles: PointObstacles,
-  DetectedObstacles: DetectedObstacles,
   TrueObstacles: TrueObstacles,
+  DetectedObstacles: DetectedObstacles,
+  PointObstacles: PointObstacles,
 };

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/foscar/ISCC_2021/src
+CMAKE_SOURCE_DIR = /home/young/FOSCAR_ISCC_2021/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/foscar/ISCC_2021/build
+CMAKE_BINARY_DIR = /home/young/FOSCAR_ISCC_2021/build
 
 # Utility rule file for race_generate_messages.
 
@@ -63,10 +63,10 @@ race/CMakeFiles/race_generate_messages.dir/build: race_generate_messages
 .PHONY : race/CMakeFiles/race_generate_messages.dir/build
 
 race/CMakeFiles/race_generate_messages.dir/clean:
-	cd /home/foscar/ISCC_2021/build/race && $(CMAKE_COMMAND) -P CMakeFiles/race_generate_messages.dir/cmake_clean.cmake
+	cd /home/young/FOSCAR_ISCC_2021/build/race && $(CMAKE_COMMAND) -P CMakeFiles/race_generate_messages.dir/cmake_clean.cmake
 .PHONY : race/CMakeFiles/race_generate_messages.dir/clean
 
 race/CMakeFiles/race_generate_messages.dir/depend:
-	cd /home/foscar/ISCC_2021/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/foscar/ISCC_2021/src /home/foscar/ISCC_2021/src/race /home/foscar/ISCC_2021/build /home/foscar/ISCC_2021/build/race /home/foscar/ISCC_2021/build/race/CMakeFiles/race_generate_messages.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/young/FOSCAR_ISCC_2021/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/young/FOSCAR_ISCC_2021/src /home/young/FOSCAR_ISCC_2021/src/race /home/young/FOSCAR_ISCC_2021/build /home/young/FOSCAR_ISCC_2021/build/race /home/young/FOSCAR_ISCC_2021/build/race/CMakeFiles/race_generate_messages.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : race/CMakeFiles/race_generate_messages.dir/depend
 

@@ -1,8 +1,8 @@
-# Install script for directory: /home/foscar/ISCC_2021/src/darknet_ros/darknet_ros_msgs
+# Install script for directory: /home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros_msgs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/foscar/ISCC_2021/install")
+  set(CMAKE_INSTALL_PREFIX "/home/young/FOSCAR_ISCC_2021/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Release")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -39,71 +39,71 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/msg" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros_msgs/msg/BoundingBox.msg"
-    "/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros_msgs/msg/BoundingBoxes.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros_msgs/msg/BoundingBox.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros_msgs/msg/BoundingBoxes.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/action" TYPE FILE FILES "/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros_msgs/action/CheckForObjects.action")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/action" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros_msgs/action/CheckForObjects.action")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/msg" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsAction.msg"
-    "/home/foscar/ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsActionGoal.msg"
-    "/home/foscar/ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsActionResult.msg"
-    "/home/foscar/ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsActionFeedback.msg"
-    "/home/foscar/ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsGoal.msg"
-    "/home/foscar/ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsResult.msg"
-    "/home/foscar/ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsFeedback.msg"
+    "/home/young/FOSCAR_ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsAction.msg"
+    "/home/young/FOSCAR_ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsActionGoal.msg"
+    "/home/young/FOSCAR_ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsActionResult.msg"
+    "/home/young/FOSCAR_ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsActionFeedback.msg"
+    "/home/young/FOSCAR_ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsGoal.msg"
+    "/home/young/FOSCAR_ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsResult.msg"
+    "/home/young/FOSCAR_ISCC_2021/devel/share/darknet_ros_msgs/msg/CheckForObjectsFeedback.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgs-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/cmake" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgs-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/include/darknet_ros_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/include/darknet_ros_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/roseus/ros/darknet_ros_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/share/roseus/ros/darknet_ros_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/darknet_ros_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/share/common-lisp/ros/darknet_ros_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/darknet_ros_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/darknet_ros_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/darknet_ros_msgs")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/young/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/darknet_ros_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/darknet_ros_msgs")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/darknet_ros_msgs")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgs.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgs.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgs-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/cmake" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgs-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs/cmake" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgsConfig.cmake"
-    "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgsConfig-version.cmake"
+    "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgsConfig.cmake"
+    "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros_msgs/catkin_generated/installspace/darknet_ros_msgsConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs" TYPE FILE FILES "/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros_msgs/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/darknet_ros_msgs" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros_msgs/package.xml")
 endif()
 

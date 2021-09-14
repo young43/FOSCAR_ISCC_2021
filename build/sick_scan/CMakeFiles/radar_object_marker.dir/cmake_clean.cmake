@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/radar_object_marker.dir/tools/radar_object_marker/src/radar_object_marker.cpp.o"
   "CMakeFiles/radar_object_marker.dir/tools/pcl_converter/src/gnuplotPaletteReader.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/sick_scan/radar_object_marker.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/sick_scan/radar_object_marker"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/sick_scan/radar_object_marker.pdb"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/sick_scan/radar_object_marker"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/foscar/ISCC_2021/src
+CMAKE_SOURCE_DIR = /home/young/FOSCAR_ISCC_2021/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/foscar/ISCC_2021/build
+CMAKE_BINARY_DIR = /home/young/FOSCAR_ISCC_2021/build
 
 # Utility rule file for vision_distance_genlisp.
 
@@ -63,10 +63,10 @@ vision_distance/CMakeFiles/vision_distance_genlisp.dir/build: vision_distance_ge
 .PHONY : vision_distance/CMakeFiles/vision_distance_genlisp.dir/build
 
 vision_distance/CMakeFiles/vision_distance_genlisp.dir/clean:
-	cd /home/foscar/ISCC_2021/build/vision_distance && $(CMAKE_COMMAND) -P CMakeFiles/vision_distance_genlisp.dir/cmake_clean.cmake
+	cd /home/young/FOSCAR_ISCC_2021/build/vision_distance && $(CMAKE_COMMAND) -P CMakeFiles/vision_distance_genlisp.dir/cmake_clean.cmake
 .PHONY : vision_distance/CMakeFiles/vision_distance_genlisp.dir/clean
 
 vision_distance/CMakeFiles/vision_distance_genlisp.dir/depend:
-	cd /home/foscar/ISCC_2021/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/foscar/ISCC_2021/src /home/foscar/ISCC_2021/src/vision_distance /home/foscar/ISCC_2021/build /home/foscar/ISCC_2021/build/vision_distance /home/foscar/ISCC_2021/build/vision_distance/CMakeFiles/vision_distance_genlisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/young/FOSCAR_ISCC_2021/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/young/FOSCAR_ISCC_2021/src /home/young/FOSCAR_ISCC_2021/src/vision_distance /home/young/FOSCAR_ISCC_2021/build /home/young/FOSCAR_ISCC_2021/build/vision_distance /home/young/FOSCAR_ISCC_2021/build/vision_distance/CMakeFiles/vision_distance_genlisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : vision_distance/CMakeFiles/vision_distance_genlisp.dir/depend
 

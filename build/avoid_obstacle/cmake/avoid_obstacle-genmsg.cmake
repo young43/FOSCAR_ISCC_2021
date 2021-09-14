@@ -2,7 +2,7 @@
 
 message(STATUS "avoid_obstacle: 3 messages, 0 services")
 
-set(MSG_I_FLAGS "-Iavoid_obstacle:/home/foscar/ISCC_2021/src/avoid_obstacle/msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Iavoid_obstacle:/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,19 +17,19 @@ add_custom_target(avoid_obstacle_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
 add_custom_target(_avoid_obstacle_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "avoid_obstacle" "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" "avoid_obstacle/PointObstacles"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "avoid_obstacle" "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" ""
 )
 
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
 add_custom_target(_avoid_obstacle_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "avoid_obstacle" "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "avoid_obstacle" "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" "avoid_obstacle/PointObstacles"
 )
 
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
 add_custom_target(_avoid_obstacle_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "avoid_obstacle" "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "avoid_obstacle" "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" ""
 )
 
 #
@@ -39,19 +39,19 @@ add_custom_target(_avoid_obstacle_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
-  "${MSG_I_FLAGS}"
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/avoid_obstacle
-)
-_generate_msg_cpp(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/avoid_obstacle
 )
 _generate_msg_cpp(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
+  "${MSG_I_FLAGS}"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/avoid_obstacle
+)
+_generate_msg_cpp(avoid_obstacle
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/avoid_obstacle
@@ -71,11 +71,11 @@ add_custom_target(avoid_obstacle_generate_messages_cpp
 add_dependencies(avoid_obstacle_generate_messages avoid_obstacle_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_cpp _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_cpp _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_cpp _avoid_obstacle_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -88,19 +88,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS avoid_obstacle_generate_messages_cp
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
-  "${MSG_I_FLAGS}"
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
-  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/avoid_obstacle
-)
-_generate_msg_eus(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/avoid_obstacle
 )
 _generate_msg_eus(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
+  "${MSG_I_FLAGS}"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/avoid_obstacle
+)
+_generate_msg_eus(avoid_obstacle
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/avoid_obstacle
@@ -120,11 +120,11 @@ add_custom_target(avoid_obstacle_generate_messages_eus
 add_dependencies(avoid_obstacle_generate_messages avoid_obstacle_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_eus _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_eus _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_eus _avoid_obstacle_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -137,19 +137,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS avoid_obstacle_generate_messages_eu
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
-  "${MSG_I_FLAGS}"
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/avoid_obstacle
-)
-_generate_msg_lisp(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/avoid_obstacle
 )
 _generate_msg_lisp(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
+  "${MSG_I_FLAGS}"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/avoid_obstacle
+)
+_generate_msg_lisp(avoid_obstacle
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/avoid_obstacle
@@ -169,11 +169,11 @@ add_custom_target(avoid_obstacle_generate_messages_lisp
 add_dependencies(avoid_obstacle_generate_messages avoid_obstacle_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_lisp _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_lisp _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_lisp _avoid_obstacle_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -186,19 +186,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS avoid_obstacle_generate_messages_li
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
-  "${MSG_I_FLAGS}"
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/avoid_obstacle
-)
-_generate_msg_nodejs(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/avoid_obstacle
 )
 _generate_msg_nodejs(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
+  "${MSG_I_FLAGS}"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/avoid_obstacle
+)
+_generate_msg_nodejs(avoid_obstacle
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/avoid_obstacle
@@ -218,11 +218,11 @@ add_custom_target(avoid_obstacle_generate_messages_nodejs
 add_dependencies(avoid_obstacle_generate_messages avoid_obstacle_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_nodejs _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_nodejs _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_nodejs _avoid_obstacle_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -235,19 +235,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS avoid_obstacle_generate_messages_no
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
-  "${MSG_I_FLAGS}"
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/avoid_obstacle
-)
-_generate_msg_py(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/avoid_obstacle
 )
 _generate_msg_py(avoid_obstacle
-  "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg"
+  "${MSG_I_FLAGS}"
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/avoid_obstacle
+)
+_generate_msg_py(avoid_obstacle
+  "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/avoid_obstacle
@@ -267,11 +267,11 @@ add_custom_target(avoid_obstacle_generate_messages_py
 add_dependencies(avoid_obstacle_generate_messages avoid_obstacle_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_py _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/TrueObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/DetectedObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_py _avoid_obstacle_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/foscar/ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
+get_filename_component(_filename "/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/msg/PointObstacles.msg" NAME_WE)
 add_dependencies(avoid_obstacle_generate_messages_py _avoid_obstacle_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

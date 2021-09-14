@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/devel/include/avoid_obstacle/DetectedObstacles.h
+/home/young/FOSCAR_ISCC_2021/devel/include/avoid_obstacle/DetectedObstacles.h
 string
 -
 vector
@@ -24,7 +24,7 @@ ros/message_operations.h
 avoid_obstacle/PointObstacles.h
 -
 
-/home/foscar/ISCC_2021/devel/include/avoid_obstacle/PointObstacles.h
+/home/young/FOSCAR_ISCC_2021/devel/include/avoid_obstacle/PointObstacles.h
 string
 -
 vector
@@ -40,7 +40,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/avoid_obstacle/TrueObstacles.h
+/home/young/FOSCAR_ISCC_2021/devel/include/avoid_obstacle/TrueObstacles.h
 string
 -
 vector
@@ -56,7 +56,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBox.h
+/home/young/FOSCAR_ISCC_2021/devel/include/darknet_ros_msgs/BoundingBox.h
 string
 -
 vector
@@ -72,7 +72,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/darknet_ros_msgs/BoundingBoxes.h
+/home/young/FOSCAR_ISCC_2021/devel/include/darknet_ros_msgs/BoundingBoxes.h
 string
 -
 vector
@@ -94,7 +94,7 @@ std_msgs/Header.h
 darknet_ros_msgs/BoundingBox.h
 -
 
-/home/foscar/ISCC_2021/devel/include/race/drive_values.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/drive_values.h
 string
 -
 vector
@@ -110,7 +110,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/vision_distance/Delivery.h
+/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/Delivery.h
 string
 -
 vector
@@ -126,7 +126,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/vision_distance/DeliveryArray.h
+/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/DeliveryArray.h
 string
 -
 vector
@@ -144,13 +144,13 @@ ros/message_operations.h
 vision_distance/Delivery.h
 -
 
-/home/foscar/ISCC_2021/src/gps/pure_pursuit/include/obstacles.h
+/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/include/obstacles.h
 ros/ros.h
 -
 math.h
 -
 
-/home/foscar/ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit.h
+/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit.h
 ros/ros.h
 -
 geometry_msgs/PoseStamped.h
@@ -170,7 +170,7 @@ darknet_ros_msgs/BoundingBoxes.h
 vision_distance/DeliveryArray.h
 -
 
-/home/foscar/ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit_core.h
+/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/include/pure_pursuit_core.h
 geometry_msgs/PoseStamped.h
 -
 geometry_msgs/TwistStamped.h
@@ -196,11 +196,11 @@ memory
 string
 -
 
-/home/foscar/ISCC_2021/src/gps/pure_pursuit/src/pure_pursuit.cpp
+/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/src/pure_pursuit.cpp
 pure_pursuit.h
 -
 
-/home/foscar/ISCC_2021/src/gps/pure_pursuit/src/pure_pursuit_core2_vision.cpp
+/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/src/pure_pursuit_core2_vision.cpp
 vector
 -
 pure_pursuit_core.h
@@ -220,7 +220,7 @@ algorithm
 tf/transform_broadcaster.h
 -
 
-/home/foscar/ISCC_2021/src/gps/pure_pursuit/src/pure_pursuit_node.cpp
+/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/src/pure_pursuit_node.cpp
 ros/ros.h
 -
 pure_pursuit_core.h

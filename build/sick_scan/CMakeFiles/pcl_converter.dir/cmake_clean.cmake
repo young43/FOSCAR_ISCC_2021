@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pcl_converter.dir/tools/pcl_converter/src/pcl_converter.cpp.o"
   "CMakeFiles/pcl_converter.dir/tools/pcl_converter/src/gnuplotPaletteReader.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/sick_scan/pcl_converter.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/sick_scan/pcl_converter"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/sick_scan/pcl_converter.pdb"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/sick_scan/pcl_converter"
 )
 
 # Per-language clean rules from dependency scanning.

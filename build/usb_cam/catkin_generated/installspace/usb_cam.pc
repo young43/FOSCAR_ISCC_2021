@@ -1,4 +1,4 @@
-prefix=/home/foscar/ISCC_2021/install
+prefix=/home/young/FOSCAR_ISCC_2021/install
 
 Name: usb_cam
 Description: Description of usb_cam

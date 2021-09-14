@@ -72,8 +72,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/darknet_ros_lib.dir/__/darknet/examples/detector.c.o"
   "CMakeFiles/darknet_ros_lib.dir/__/darknet/examples/yolo.c.o"
   "CMakeFiles/darknet_ros_lib.dir/__/darknet/examples/go.c.o"
-  "/home/foscar/ISCC_2021/devel/lib/libdarknet_ros_lib.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/libdarknet_ros_lib.so"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/libdarknet_ros_lib.pdb"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/libdarknet_ros_lib.so"
 )
 
 # Per-language clean rules from dependency scanning.

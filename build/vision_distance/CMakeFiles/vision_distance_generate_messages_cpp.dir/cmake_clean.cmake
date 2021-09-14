@@ -1,11 +1,11 @@
 file(REMOVE_RECURSE
   "CMakeFiles/vision_distance_generate_messages_cpp"
-  "/home/foscar/ISCC_2021/devel/include/vision_distance/Colorcone.h"
-  "/home/foscar/ISCC_2021/devel/include/vision_distance/Colorcone_lidar.h"
-  "/home/foscar/ISCC_2021/devel/include/vision_distance/DeliveryArray.h"
-  "/home/foscar/ISCC_2021/devel/include/vision_distance/ColorconeArray.h"
-  "/home/foscar/ISCC_2021/devel/include/vision_distance/ColorconeArray_lidar.h"
-  "/home/foscar/ISCC_2021/devel/include/vision_distance/Delivery.h"
+  "/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/ColorconeArray_lidar.h"
+  "/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/Colorcone.h"
+  "/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/Delivery.h"
+  "/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/Colorcone_lidar.h"
+  "/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/DeliveryArray.h"
+  "/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/ColorconeArray.h"
 )
 
 # Per-language clean rules from dependency scanning.

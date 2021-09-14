@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/src/sick_scan/include/pcl_converter/gnuplotPaletteReader.h
+/home/young/FOSCAR_ISCC_2021/src/sick_scan/include/pcl_converter/gnuplotPaletteReader.h
 
-/home/foscar/ISCC_2021/src/sick_scan/tools/pcl_converter/src/gnuplotPaletteReader.cpp
+/home/young/FOSCAR_ISCC_2021/src/sick_scan/tools/pcl_converter/src/gnuplotPaletteReader.cpp
 stdio.h
 -
 string
@@ -20,9 +20,9 @@ assert.h
 cstdlib
 -
 pcl_converter/gnuplotPaletteReader.h
-/home/foscar/ISCC_2021/src/sick_scan/tools/pcl_converter/src/pcl_converter/gnuplotPaletteReader.h
+/home/young/FOSCAR_ISCC_2021/src/sick_scan/tools/pcl_converter/src/pcl_converter/gnuplotPaletteReader.h
 
-/home/foscar/ISCC_2021/src/sick_scan/tools/pcl_converter/src/pcl_converter.cpp
+/home/young/FOSCAR_ISCC_2021/src/sick_scan/tools/pcl_converter/src/pcl_converter.cpp
 ros/ros.h
 -
 ros/package.h
@@ -38,7 +38,7 @@ pcl/point_types.h
 math.h
 -
 pcl_converter/gnuplotPaletteReader.h
-/home/foscar/ISCC_2021/src/sick_scan/tools/pcl_converter/src/pcl_converter/gnuplotPaletteReader.h
+/home/young/FOSCAR_ISCC_2021/src/sick_scan/tools/pcl_converter/src/pcl_converter/gnuplotPaletteReader.h
 
 /opt/ros/melodic/include/pcl_conversions/pcl_conversions.h
 vector

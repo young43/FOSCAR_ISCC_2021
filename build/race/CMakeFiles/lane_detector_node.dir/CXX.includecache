@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/devel/include/race/lane_info.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/lane_info.h
 string
 -
 vector
@@ -22,25 +22,25 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/src/race/src/lane_detector.cpp
+/home/young/FOSCAR_ISCC_2021/src/race/src/lane_detector.cpp
 ros/ros.h
-/home/foscar/ISCC_2021/src/race/src/ros/ros.h
+/home/young/FOSCAR_ISCC_2021/src/race/src/ros/ros.h
 std_msgs/String.h
-/home/foscar/ISCC_2021/src/race/src/std_msgs/String.h
+/home/young/FOSCAR_ISCC_2021/src/race/src/std_msgs/String.h
 std_msgs/Int32.h
-/home/foscar/ISCC_2021/src/race/src/std_msgs/Int32.h
+/home/young/FOSCAR_ISCC_2021/src/race/src/std_msgs/Int32.h
 std_msgs/Int16.h
-/home/foscar/ISCC_2021/src/race/src/std_msgs/Int16.h
+/home/young/FOSCAR_ISCC_2021/src/race/src/std_msgs/Int16.h
 race/lane_info.h
-/home/foscar/ISCC_2021/src/race/src/race/lane_info.h
+/home/young/FOSCAR_ISCC_2021/src/race/src/race/lane_info.h
 opencv2/opencv.hpp
-/home/foscar/ISCC_2021/src/race/src/opencv2/opencv.hpp
+/home/young/FOSCAR_ISCC_2021/src/race/src/opencv2/opencv.hpp
 opencv2/objdetect.hpp
-/home/foscar/ISCC_2021/src/race/src/opencv2/objdetect.hpp
+/home/young/FOSCAR_ISCC_2021/src/race/src/opencv2/objdetect.hpp
 opencv2/highgui.hpp
-/home/foscar/ISCC_2021/src/race/src/opencv2/highgui.hpp
+/home/young/FOSCAR_ISCC_2021/src/race/src/opencv2/highgui.hpp
 opencv2/imgproc.hpp
-/home/foscar/ISCC_2021/src/race/src/opencv2/imgproc.hpp
+/home/young/FOSCAR_ISCC_2021/src/race/src/opencv2/imgproc.hpp
 iostream
 -
 vector

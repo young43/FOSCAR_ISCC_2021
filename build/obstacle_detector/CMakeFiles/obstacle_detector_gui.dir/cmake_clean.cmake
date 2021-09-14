@@ -9,8 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/obstacle_detector_gui.dir/src/panels/obstacle_tracker_panel.cpp.o"
   "CMakeFiles/obstacle_detector_gui.dir/src/panels/obstacle_publisher_panel.cpp.o"
   "CMakeFiles/obstacle_detector_gui.dir/obstacle_detector_gui_autogen/mocs_compilation.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/libobstacle_detector_gui.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/libobstacle_detector_gui.so"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/libobstacle_detector_gui.pdb"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/libobstacle_detector_gui.so"
 )
 
 # Per-language clean rules from dependency scanning.

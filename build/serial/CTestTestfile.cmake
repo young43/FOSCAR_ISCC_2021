@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/foscar/ISCC_2021/src/serial
-# Build directory: /home/foscar/ISCC_2021/build/serial
+# Source directory: /home/young/FOSCAR_ISCC_2021/src/serial
+# Build directory: /home/young/FOSCAR_ISCC_2021/build/serial
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

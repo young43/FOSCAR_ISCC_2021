@@ -1,4 +1,4 @@
-prefix=/home/foscar/ISCC_2021/install
+prefix=/home/young/FOSCAR_ISCC_2021/install
 
 Name: rviz_visualization
 Description: Description of rviz_visualization

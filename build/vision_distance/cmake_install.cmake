@@ -1,8 +1,8 @@
-# Install script for directory: /home/foscar/ISCC_2021/src/vision_distance
+# Install script for directory: /home/young/FOSCAR_ISCC_2021/src/vision_distance
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/foscar/ISCC_2021/install")
+  set(CMAKE_INSTALL_PREFIX "/home/young/FOSCAR_ISCC_2021/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Release")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -39,59 +39,59 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance/msg" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone.msg"
-    "/home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray.msg"
-    "/home/foscar/ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg"
-    "/home/foscar/ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg"
-    "/home/foscar/ISCC_2021/src/vision_distance/msg/Delivery.msg"
-    "/home/foscar/ISCC_2021/src/vision_distance/msg/DeliveryArray.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/vision_distance/msg/Colorcone.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/vision_distance/msg/ColorconeArray.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/vision_distance/msg/Colorcone_lidar.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/vision_distance/msg/ColorconeArray_lidar.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/vision_distance/msg/Delivery.msg"
+    "/home/young/FOSCAR_ISCC_2021/src/vision_distance/msg/DeliveryArray.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distance-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance/cmake" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distance-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/include/vision_distance")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/roseus/ros/vision_distance")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/share/roseus/ros/vision_distance")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/common-lisp/ros/vision_distance")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/share/common-lisp/ros/vision_distance")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/vision_distance")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/vision_distance")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/young/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/foscar/ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/young/FOSCAR_ISCC_2021/devel/lib/python2.7/dist-packages/vision_distance")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/foscar/ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distance.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distance.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance/cmake" TYPE FILE FILES "/home/foscar/ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distance-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance/cmake" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distance-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance/cmake" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distanceConfig.cmake"
-    "/home/foscar/ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distanceConfig-version.cmake"
+    "/home/young/FOSCAR_ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distanceConfig.cmake"
+    "/home/young/FOSCAR_ISCC_2021/build/vision_distance/catkin_generated/installspace/vision_distanceConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance" TYPE FILE FILES "/home/foscar/ISCC_2021/src/vision_distance/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vision_distance" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/src/vision_distance/package.xml")
 endif()
 

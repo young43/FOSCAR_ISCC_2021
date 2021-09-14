@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/foscar/ISCC_2021/src
+CMAKE_SOURCE_DIR = /home/young/FOSCAR_ISCC_2021/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/foscar/ISCC_2021/build
+CMAKE_BINARY_DIR = /home/young/FOSCAR_ISCC_2021/build
 
 # Utility rule file for obstacle_detector_gui_autogen.
 
@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /home/foscar/ISCC_2021/build
 include obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/progress.make
 
 obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/foscar/ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target obstacle_detector_gui"
-	cd /home/foscar/ISCC_2021/build/obstacle_detector && /usr/bin/cmake -E cmake_autogen /home/foscar/ISCC_2021/build/obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir Release
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/young/FOSCAR_ISCC_2021/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target obstacle_detector_gui"
+	cd /home/young/FOSCAR_ISCC_2021/build/obstacle_detector && /usr/bin/cmake -E cmake_autogen /home/young/FOSCAR_ISCC_2021/build/obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir ""
 
 obstacle_detector_gui_autogen: obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen
 obstacle_detector_gui_autogen: obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/build.make
@@ -68,10 +68,10 @@ obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/build: obstacle_d
 .PHONY : obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/build
 
 obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/clean:
-	cd /home/foscar/ISCC_2021/build/obstacle_detector && $(CMAKE_COMMAND) -P CMakeFiles/obstacle_detector_gui_autogen.dir/cmake_clean.cmake
+	cd /home/young/FOSCAR_ISCC_2021/build/obstacle_detector && $(CMAKE_COMMAND) -P CMakeFiles/obstacle_detector_gui_autogen.dir/cmake_clean.cmake
 .PHONY : obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/clean
 
 obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/depend:
-	cd /home/foscar/ISCC_2021/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/foscar/ISCC_2021/src /home/foscar/ISCC_2021/src/obstacle_detector /home/foscar/ISCC_2021/build /home/foscar/ISCC_2021/build/obstacle_detector /home/foscar/ISCC_2021/build/obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/young/FOSCAR_ISCC_2021/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/young/FOSCAR_ISCC_2021/src /home/young/FOSCAR_ISCC_2021/src/obstacle_detector /home/young/FOSCAR_ISCC_2021/build /home/young/FOSCAR_ISCC_2021/build/obstacle_detector /home/young/FOSCAR_ISCC_2021/build/obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : obstacle_detector/CMakeFiles/obstacle_detector_gui_autogen.dir/depend
 

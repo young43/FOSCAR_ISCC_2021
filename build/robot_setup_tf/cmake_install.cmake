@@ -1,8 +1,8 @@
-# Install script for directory: /home/foscar/ISCC_2021/src/robot_setup_tf
+# Install script for directory: /home/young/FOSCAR_ISCC_2021/src/robot_setup_tf
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/foscar/ISCC_2021/install")
+  set(CMAKE_INSTALL_PREFIX "/home/young/FOSCAR_ISCC_2021/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Release")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/foscar/ISCC_2021/build/robot_setup_tf/catkin_generated/installspace/robot_setup_tf.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/build/robot_setup_tf/catkin_generated/installspace/robot_setup_tf.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_setup_tf/cmake" TYPE FILE FILES
-    "/home/foscar/ISCC_2021/build/robot_setup_tf/catkin_generated/installspace/robot_setup_tfConfig.cmake"
-    "/home/foscar/ISCC_2021/build/robot_setup_tf/catkin_generated/installspace/robot_setup_tfConfig-version.cmake"
+    "/home/young/FOSCAR_ISCC_2021/build/robot_setup_tf/catkin_generated/installspace/robot_setup_tfConfig.cmake"
+    "/home/young/FOSCAR_ISCC_2021/build/robot_setup_tf/catkin_generated/installspace/robot_setup_tfConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_setup_tf" TYPE FILE FILES "/home/foscar/ISCC_2021/src/robot_setup_tf/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_setup_tf" TYPE FILE FILES "/home/young/FOSCAR_ISCC_2021/src/robot_setup_tf/package.xml")
 endif()
 

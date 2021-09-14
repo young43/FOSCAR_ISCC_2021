@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/devel/include/avoid_obstacle/DetectedObstacles.h
+/home/young/FOSCAR_ISCC_2021/devel/include/avoid_obstacle/DetectedObstacles.h
 string
 -
 vector
@@ -24,7 +24,7 @@ ros/message_operations.h
 avoid_obstacle/PointObstacles.h
 -
 
-/home/foscar/ISCC_2021/devel/include/avoid_obstacle/PointObstacles.h
+/home/young/FOSCAR_ISCC_2021/devel/include/avoid_obstacle/PointObstacles.h
 string
 -
 vector
@@ -40,7 +40,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/avoid_obstacle/TrueObstacles.h
+/home/young/FOSCAR_ISCC_2021/devel/include/avoid_obstacle/TrueObstacles.h
 string
 -
 vector
@@ -56,7 +56,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/race/drive_values.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/drive_values.h
 string
 -
 vector
@@ -72,7 +72,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/vision_distance/ColorconeArray_lidar.h
+/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/ColorconeArray_lidar.h
 string
 -
 vector
@@ -90,7 +90,7 @@ ros/message_operations.h
 vision_distance/Colorcone_lidar.h
 -
 
-/home/foscar/ISCC_2021/devel/include/vision_distance/Colorcone_lidar.h
+/home/young/FOSCAR_ISCC_2021/devel/include/vision_distance/Colorcone_lidar.h
 string
 -
 vector
@@ -106,7 +106,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/src/avoid_obstacle/src/obs_sub.cpp
+/home/young/FOSCAR_ISCC_2021/src/avoid_obstacle/src/obs_sub.cpp
 ros/ros.h
 -
 avoid_obstacle/DetectedObstacles.h

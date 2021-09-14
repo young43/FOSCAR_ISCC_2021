@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/src/chul/src/obstacle_avoider.cpp
+/home/young/FOSCAR_ISCC_2021/src/chul/src/obstacle_avoider.cpp
 ros/ros.h
 -
 sensor_msgs/LaserScan.h
-/home/foscar/ISCC_2021/src/chul/src/sensor_msgs/LaserScan.h
+/home/young/FOSCAR_ISCC_2021/src/chul/src/sensor_msgs/LaserScan.h
 cstdlib
 -
 iostream

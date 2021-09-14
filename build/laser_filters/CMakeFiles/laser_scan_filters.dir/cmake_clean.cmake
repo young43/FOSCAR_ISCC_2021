@@ -7,8 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/laser_scan_filters.dir/src/speckle_filter.cpp.o"
   "CMakeFiles/laser_scan_filters.dir/src/intensity_filter.cpp.o"
   "CMakeFiles/laser_scan_filters.dir/src/sector_filter.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/liblaser_scan_filters.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/liblaser_scan_filters.so"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/liblaser_scan_filters.pdb"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/liblaser_scan_filters.so"
 )
 
 # Per-language clean rules from dependency scanning.

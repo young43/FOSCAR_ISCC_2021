@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/lane_detector_node.dir/src/lane_detector.cpp.o"
-  "/home/foscar/ISCC_2021/devel/lib/race/lane_detector_node.pdb"
-  "/home/foscar/ISCC_2021/devel/lib/race/lane_detector_node"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/race/lane_detector_node.pdb"
+  "/home/young/FOSCAR_ISCC_2021/devel/lib/race/lane_detector_node"
 )
 
 # Per-language clean rules from dependency scanning.

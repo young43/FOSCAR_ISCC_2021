@@ -48,8 +48,8 @@ int tf_idx_1 = 1000; // 1180
 int tf_idx_2 = 1000; // 1455
 
 bool tf_flag = false;
-const float tf_coord1[2] = {935575.213544702, 1915926.09913091};
-const float tf_coord2[2] = {935601.125, 1915974.5};
+const float tf_coord1[2] = {935574.25, 1915924.125};
+const float tf_coord2[2] = {935625.375, 1915922.75};
 
 /*************************/
 
@@ -608,53 +608,32 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
 
 
- int index = 0;
+  int index = 0;
 
-  // check mode 9 (신호등 좌회전 구간)
-  if (pp_.mode == 9) {
-    if(traffic_lights.size() > 1)
-    {
-      int first_traffic = (traffic_lights[0].xmax - traffic_lights[0].xmin) * (traffic_lights[0].ymax - traffic_lights[0].ymin);
-      int second_traffic = (traffic_lights[1].xmax - traffic_lights[1].xmin) * (traffic_lights[1].ymax - traffic_lights[1].ymin);
-
-      if(first_traffic * 0.6 < second_traffic) {
-        if (traffic_lights[0].Class == "3 left" || traffic_lights[0].Class == "4 redleft" || traffic_lights[0].Class == "4 greenleft" ||
-          traffic_lights[1].Class == "3 left" || traffic_lights[1].Class == "4 redleft" || traffic_lights[1].Class == "4 greenleft") {
-            pp_.left_go_flag = true;
-        }
-        else {
-          pp_.left_go_flag = false;
-        }
-
-        if (pp_.left_go_flag) {
-          std::cout << "mode 9 left go" << std::endl;
-        }
-        return;
+  
+  if(pp_.mode == 2 || pp_.mode == 3){
+    if(traffic_lights.size() > 0){
+      if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
+          traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
+      {
+        pp_.straight_go_flag = false;
+        pp_.left_go_flag = false;
       }
-    }
- }
-
-  if(traffic_lights.size() > 0){
-    if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
-        traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
-    {
-      pp_.straight_go_flag = false;
-      pp_.left_go_flag = false;
-    }
-    else if (traffic_lights[index].Class == "3 green" || traffic_lights[index].Class == "4 green")
-    {
-      pp_.straight_go_flag = true;
-      pp_.left_go_flag = false;
-    }
-    else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 redleft")
-    {
-      pp_.straight_go_flag = false;
-      pp_.left_go_flag = true;
-    }
-    else if (traffic_lights[index].Class == "4 greenleft")
-    {
-      pp_.straight_go_flag = true;
-      pp_.left_go_flag = true;
+      else if (traffic_lights[index].Class == "3 green" || traffic_lights[index].Class == "4 green")
+      {
+        pp_.straight_go_flag = true;
+        pp_.left_go_flag = false;
+      }
+      else if (traffic_lights[index].Class == "3 left" || traffic_lights[index].Class == "4 redleft")
+      {
+        pp_.straight_go_flag = false;
+        pp_.left_go_flag = true;
+      }
+      else if (traffic_lights[index].Class == "4 greenleft")
+      {
+        pp_.straight_go_flag = true;
+        pp_.left_go_flag = true;
+      }
     }
   }
 

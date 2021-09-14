@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/devel/include/obstacle_detector/CircleObstacle.h
+/home/young/FOSCAR_ISCC_2021/devel/include/obstacle_detector/CircleObstacle.h
 string
 -
 vector
@@ -26,7 +26,7 @@ geometry_msgs/Point.h
 geometry_msgs/Vector3.h
 -
 
-/home/foscar/ISCC_2021/devel/include/obstacle_detector/Obstacles.h
+/home/young/FOSCAR_ISCC_2021/devel/include/obstacle_detector/Obstacles.h
 string
 -
 vector
@@ -48,7 +48,7 @@ obstacle_detector/SegmentObstacle.h
 obstacle_detector/CircleObstacle.h
 -
 
-/home/foscar/ISCC_2021/devel/include/obstacle_detector/SegmentObstacle.h
+/home/young/FOSCAR_ISCC_2021/devel/include/obstacle_detector/SegmentObstacle.h
 string
 -
 vector
@@ -68,7 +68,7 @@ geometry_msgs/Point.h
 geometry_msgs/Point.h
 -
 
-/home/foscar/ISCC_2021/devel/include/race/drive_values.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/drive_values.h
 string
 -
 vector
@@ -84,7 +84,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/race/lane_info.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/lane_info.h
 string
 -
 vector
@@ -100,7 +100,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/race/mode.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/mode.h
 string
 -
 vector
@@ -116,7 +116,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/src/race/src/central_controller2.cpp
+/home/young/FOSCAR_ISCC_2021/src/race/src/central_controller2.cpp
 ros/ros.h
 -
 race/lane_info.h

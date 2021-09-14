@@ -126,8 +126,7 @@ int64 ymax
     unpack serialized message in str into this message instance
     :param str: byte array of serialized message, ``str``
     """
-    if python3:
-      codecs.lookup_error("rosmsg").msg_type = self._type
+    codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       if self.bounding_boxes is None:
         self.bounding_boxes = darknet_ros_msgs.msg.BoundingBoxes()
@@ -226,8 +225,7 @@ int64 ymax
     :param str: byte array of serialized message, ``str``
     :param numpy: numpy python module
     """
-    if python3:
-      codecs.lookup_error("rosmsg").msg_type = self._type
+    codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       if self.bounding_boxes is None:
         self.bounding_boxes = darknet_ros_msgs.msg.BoundingBoxes()

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/devel/include/video_stream_opencv/VideoStreamConfig.h
+/home/young/FOSCAR_ISCC_2021/devel/include/video_stream_opencv/VideoStreamConfig.h
 dynamic_reconfigure/config_tools.h
 -
 limits
@@ -24,7 +24,7 @@ dynamic_reconfigure/config_init_mutex.h
 boost/any.hpp
 -
 
-/home/foscar/ISCC_2021/src/video_stream_opencv-master/src/video_stream.cpp
+/home/young/FOSCAR_ISCC_2021/src/video_stream_opencv-master/src/video_stream.cpp
 ros/ros.h
 -
 nodelet/nodelet.h

@@ -1,4 +1,4 @@
-prefix=/home/foscar/ISCC_2021/install
+prefix=/home/young/FOSCAR_ISCC_2021/install
 
 Name: razor_imu_9dof
 Description: Description of razor_imu_9dof

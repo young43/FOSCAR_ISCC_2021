@@ -7,5 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export LD_LIBRARY_PATH='/home/foscar/ISCC_2021/devel/lib:/opt/ros/melodic/lib:/usr/local/cuda-10.2/lib64'
-export PWD='/home/foscar/ISCC_2021/build'
+export PWD='/home/young/FOSCAR_ISCC_2021/build'

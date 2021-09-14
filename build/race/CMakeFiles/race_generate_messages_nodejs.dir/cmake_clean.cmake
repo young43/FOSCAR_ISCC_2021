@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/race_generate_messages_nodejs"
-  "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/race/msg/mode.js"
-  "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/race/msg/enc_values.js"
-  "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/race/msg/drive_values.js"
-  "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/race/msg/test.js"
-  "/home/foscar/ISCC_2021/devel/share/gennodejs/ros/race/msg/lane_info.js"
+  "/home/young/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/race/msg/mode.js"
+  "/home/young/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/race/msg/lane_info.js"
+  "/home/young/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/race/msg/enc_values.js"
+  "/home/young/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/race/msg/test.js"
+  "/home/young/FOSCAR_ISCC_2021/devel/share/gennodejs/ros/race/msg/drive_values.js"
 )
 
 # Per-language clean rules from dependency scanning.

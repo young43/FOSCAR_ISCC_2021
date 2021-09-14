@@ -67,14 +67,14 @@ set(laser_filters_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(laser_filters_SOURCE_PREFIX /home/foscar/ISCC_2021/src/laser_filters)
-  set(laser_filters_DEVEL_PREFIX /home/foscar/ISCC_2021/devel)
+  set(laser_filters_SOURCE_PREFIX /home/young/FOSCAR_ISCC_2021/src/laser_filters)
+  set(laser_filters_DEVEL_PREFIX /home/young/FOSCAR_ISCC_2021/devel)
   set(laser_filters_INSTALL_PREFIX "")
   set(laser_filters_PREFIX ${laser_filters_DEVEL_PREFIX})
 else()
   set(laser_filters_SOURCE_PREFIX "")
   set(laser_filters_DEVEL_PREFIX "")
-  set(laser_filters_INSTALL_PREFIX /home/foscar/ISCC_2021/install)
+  set(laser_filters_INSTALL_PREFIX /home/young/FOSCAR_ISCC_2021/install)
   set(laser_filters_PREFIX ${laser_filters_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(laser_filters_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/laser_filters/include " STREQUAL " ")
+if(NOT "/home/young/FOSCAR_ISCC_2021/devel/include;/home/young/FOSCAR_ISCC_2021/src/laser_filters/include " STREQUAL " ")
   set(laser_filters_INCLUDE_DIRS "")
-  set(_include_dirs "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/laser_filters/include")
+  set(_include_dirs "/home/young/FOSCAR_ISCC_2021/devel/include;/home/young/FOSCAR_ISCC_2021/src/laser_filters/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://ros.org/wiki/laser_filters " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/laser_fi
         message(FATAL_ERROR "Project 'laser_filters' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'laser_filters' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/foscar/ISCC_2021/src/laser_filters/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'laser_filters' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/young/FOSCAR_ISCC_2021/src/laser_filters/${idir}'.  ${_report}")
     endif()
     _list_append_unique(laser_filters_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/foscar/ISCC_2021/devel/lib;/home/foscar/ISCC_2021/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/young/FOSCAR_ISCC_2021/devel/lib;/home/young/FOSCAR_ISCC_2021/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

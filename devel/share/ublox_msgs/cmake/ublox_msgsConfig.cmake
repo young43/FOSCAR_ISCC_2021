@@ -67,14 +67,14 @@ set(ublox_msgs_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(ublox_msgs_SOURCE_PREFIX /home/foscar/ISCC_2021/src/gps/ublox/ublox_msgs)
-  set(ublox_msgs_DEVEL_PREFIX /home/foscar/ISCC_2021/devel)
+  set(ublox_msgs_SOURCE_PREFIX /home/young/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs)
+  set(ublox_msgs_DEVEL_PREFIX /home/young/FOSCAR_ISCC_2021/devel)
   set(ublox_msgs_INSTALL_PREFIX "")
   set(ublox_msgs_PREFIX ${ublox_msgs_DEVEL_PREFIX})
 else()
   set(ublox_msgs_SOURCE_PREFIX "")
   set(ublox_msgs_DEVEL_PREFIX "")
-  set(ublox_msgs_INSTALL_PREFIX /home/foscar/ISCC_2021/install)
+  set(ublox_msgs_INSTALL_PREFIX /home/young/FOSCAR_ISCC_2021/install)
   set(ublox_msgs_PREFIX ${ublox_msgs_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(ublox_msgs_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/gps/ublox/ublox_msgs/include " STREQUAL " ")
+if(NOT "/home/young/FOSCAR_ISCC_2021/devel/include;/home/young/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/include " STREQUAL " ")
   set(ublox_msgs_INCLUDE_DIRS "")
-  set(_include_dirs "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/gps/ublox/ublox_msgs/include")
+  set(_include_dirs "/home/young/FOSCAR_ISCC_2021/devel/include;/home/young/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://ros.org/wiki/ublox " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/foscar/ISCC_2021/devel/include;/home/foscar/ISCC_2021/src/gps/ublo
         message(FATAL_ERROR "Project 'ublox_msgs' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'ublox_msgs' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/foscar/ISCC_2021/src/gps/ublox/ublox_msgs/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'ublox_msgs' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/young/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/${idir}'.  ${_report}")
     endif()
     _list_append_unique(ublox_msgs_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/foscar/ISCC_2021/devel/lib;/home/foscar/ISCC_2021/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/young/FOSCAR_ISCC_2021/devel/lib;/home/young/FOSCAR_ISCC_2021/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

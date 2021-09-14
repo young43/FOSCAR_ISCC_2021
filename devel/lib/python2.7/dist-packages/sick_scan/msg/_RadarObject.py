@@ -174,8 +174,7 @@ float64[36] covariance
     unpack serialized message in str into this message instance
     :param str: byte array of serialized message, ``str``
     """
-    if python3:
-      codecs.lookup_error("rosmsg").msg_type = self._type
+    codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       if self.tracking_time is None:
         self.tracking_time = genpy.Time()
@@ -259,8 +258,7 @@ float64[36] covariance
     :param str: byte array of serialized message, ``str``
     :param numpy: numpy python module
     """
-    if python3:
-      codecs.lookup_error("rosmsg").msg_type = self._type
+    codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       if self.tracking_time is None:
         self.tracking_time = genpy.Time()

@@ -1,4 +1,4 @@
-prefix=/home/foscar/ISCC_2021/install
+prefix=/home/young/FOSCAR_ISCC_2021/install
 
 Name: robot_setup_tf
 Description: Description of robot_setup_tf

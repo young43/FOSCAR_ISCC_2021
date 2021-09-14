@@ -58,20 +58,20 @@ endif()
 
 # Set these up as variables to make reading the generated file easier
 set(CMAKE_COMMAND "/usr/bin/cmake") # path
-set(source_file "/home/foscar/ISCC_2021/src/darknet_ros/darknet/src/convolutional_kernels.cu") # path
-set(NVCC_generated_dependency_file "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_convolutional_kernels.cu.o.NVCC-depend") # path
-set(cmake_dependency_file "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_convolutional_kernels.cu.o.depend") # path
+set(source_file "/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet/src/convolutional_kernels.cu") # path
+set(NVCC_generated_dependency_file "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_convolutional_kernels.cu.o.NVCC-depend") # path
+set(cmake_dependency_file "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/darknet_ros_lib_generated_convolutional_kernels.cu.o.depend") # path
 set(CUDA_make2cmake "/usr/share/cmake-3.10/Modules/FindCUDA/make2cmake.cmake") # path
 set(CUDA_parse_cubin "/usr/share/cmake-3.10/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
 set(CUDA_HOST_COMPILER "/usr/bin/cc") # path
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
-set(generated_file_path "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/.") # path
-set(generated_file_internal "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/./darknet_ros_lib_generated_convolutional_kernels.cu.o") # path
-set(generated_cubin_file_internal "/home/foscar/ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/./darknet_ros_lib_generated_convolutional_kernels.cu.o.cubin.txt") # path
+set(generated_file_path "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/.") # path
+set(generated_file_internal "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/./darknet_ros_lib_generated_convolutional_kernels.cu.o") # path
+set(generated_cubin_file_internal "/home/young/FOSCAR_ISCC_2021/build/darknet_ros/darknet_ros/CMakeFiles/darknet_ros_lib.dir/__/darknet/src/./darknet_ros_lib_generated_convolutional_kernels.cu.o.cubin.txt") # path
 
-set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda-10.2/bin/nvcc") # path
+set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda/bin/nvcc") # path
 set(CUDA_NVCC_FLAGS -O3;-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_50,code=[sm_50,compute_50];-gencode;arch=compute_52,code=[sm_52,compute_52];-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_62,code=sm_62 ;; ) # list
 # Build specific configuration flags
 set(CUDA_NVCC_FLAGS_DEBUG  ; )
@@ -79,8 +79,8 @@ set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64;--std;c++11;-Ddarknet_ros_lib_EXPORTS) # list
-set(CUDA_NVCC_INCLUDE_DIRS "/usr/local/cuda-10.2/include;/usr/include;/usr/include;/usr/include/opencv;/home/foscar/ISCC_2021/src/darknet_ros/darknet/src;/home/foscar/ISCC_2021/src/darknet_ros/darknet/include;/home/foscar/ISCC_2021/src/darknet_ros/darknet_ros/include;/usr/include;/home/foscar/ISCC_2021/devel/include;/opt/ros/melodic/include;/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp;/usr/include;/usr/include/opencv;/usr/local/cuda-10.2/include;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv") # list (needs to be in quotes to handle spaces properly).
-set(CUDA_NVCC_COMPILE_DEFINITIONS [==[ROS_BUILD_SHARED_LIBS=1;ROS_BUILD_SHARED_LIBS=1;DARKNET_FILE_PATH="/home/foscar/ISCC_2021/src/darknet_ros/darknet";GPU;ROS_PACKAGE_NAME="darknet_ros";ROSCONSOLE_BACKEND_LOG4CXX;OPENCV]==]) # list (needs to be in lua quotes see #16510 ).
+set(CUDA_NVCC_INCLUDE_DIRS "/usr/local/cuda/include;/usr/include;/usr/include;/usr/include/opencv;/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet/src;/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet/include;/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet_ros/include;/usr/include;/home/young/FOSCAR_ISCC_2021/devel/include;/opt/ros/melodic/include;/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp;/usr/include;/usr/include/opencv;/usr/local/cuda/include;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv;/usr/include;/usr/include/opencv") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_COMPILE_DEFINITIONS [==[ROS_BUILD_SHARED_LIBS=1;ROS_BUILD_SHARED_LIBS=1;DARKNET_FILE_PATH="/home/young/FOSCAR_ISCC_2021/src/darknet_ros/darknet";GPU;ROS_PACKAGE_NAME="darknet_ros";ROSCONSOLE_BACKEND_LOG4CXX;OPENCV]==]) # list (needs to be in lua quotes see #16510 ).
 set(format_flag "-c") # string
 set(cuda_language_flag ) # list
 
@@ -187,7 +187,7 @@ cuda_execute_process(
 # For CUDA 2.3 and below, -G -M doesn't work, so remove the -G flag
 # for dependency generation and hope for the best.
 set(depends_CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS}")
-set(CUDA_VERSION 10.2)
+set(CUDA_VERSION 11.1)
 if(CUDA_VERSION VERSION_LESS "3.0")
   # Note that this will remove all occurances of -G.
   list(REMOVE_ITEM depends_CUDA_NVCC_FLAGS "-G")

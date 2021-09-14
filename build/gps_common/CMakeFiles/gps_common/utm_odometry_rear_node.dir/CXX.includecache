@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/src/gps_common/include/gps_common/conversions.h
+/home/young/FOSCAR_ISCC_2021/src/gps_common/include/gps_common/conversions.h
 cmath
 -
 cstdio
@@ -14,7 +14,7 @@ cstdio
 cstdlib
 -
 
-/home/foscar/ISCC_2021/src/gps_common/src/utm_odometry_rear_node.cpp
+/home/young/FOSCAR_ISCC_2021/src/gps_common/src/utm_odometry_rear_node.cpp
 ros/ros.h
 -
 message_filters/subscriber.h

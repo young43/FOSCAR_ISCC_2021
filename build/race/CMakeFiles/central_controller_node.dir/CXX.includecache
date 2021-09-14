@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/foscar/ISCC_2021/devel/include/race/drive_values.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/drive_values.h
 string
 -
 vector
@@ -22,7 +22,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/race/lane_info.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/lane_info.h
 string
 -
 vector
@@ -38,7 +38,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/devel/include/race/mode.h
+/home/young/FOSCAR_ISCC_2021/devel/include/race/mode.h
 string
 -
 vector
@@ -54,7 +54,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/foscar/ISCC_2021/src/race/src/central_controller.cpp
+/home/young/FOSCAR_ISCC_2021/src/race/src/central_controller.cpp
 ros/ros.h
 -
 race/lane_info.h

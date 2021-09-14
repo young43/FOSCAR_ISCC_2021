@@ -1,16 +1,16 @@
 
 "use strict";
 
-let lane_info = require('./lane_info.js');
-let mode = require('./mode.js');
 let test = require('./test.js');
-let drive_values = require('./drive_values.js');
+let mode = require('./mode.js');
 let enc_values = require('./enc_values.js');
+let drive_values = require('./drive_values.js');
+let lane_info = require('./lane_info.js');
 
 module.exports = {
-  lane_info: lane_info,
-  mode: mode,
   test: test,
-  drive_values: drive_values,
+  mode: mode,
   enc_values: enc_values,
+  drive_values: drive_values,
+  lane_info: lane_info,
 };
