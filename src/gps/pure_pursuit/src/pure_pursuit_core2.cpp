@@ -98,10 +98,10 @@ int dv_b_idx_final = 1000;
 // const float dv_b_coord3[2] = {935656.375, 1916189.375};
 
 // For School
-const float dv_a_coord1[2] = {935656.875, 1916149.0};
-const float dv_b_coord1[2] = {935656.6875, 1916172.875};
-const float dv_b_coord2[2] = {935656.5625, 1916180.0};
-const float dv_b_coord3[2] = {935656.375, 1916189.375};
+const float dv_a_coord1[2] = {955550.07528, 1956914.94266};
+const float dv_b_coord1[2] = {955547.303188, 1956914.82439};
+const float dv_b_coord2[2] = {955543.419161, 1956918.02947};
+const float dv_b_coord3[2] = {955539.373947, 1956920.80271};
 
 // max index of pp_.a_cnt array
 int a_max_index = -1;
@@ -675,6 +675,8 @@ void PurePursuitNode::run(char** argv) {
       // }
 
 
+
+      // For Stop Test
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_b_idx_1)){
         ROS_INFO_STREAM("DELIVERY 1st Area");
         for (int i = 0; i < 50; i++)
