@@ -138,6 +138,8 @@ void PurePursuitNode::run(char** argv) {
       tf_idx_2 = pp_.getPosIndex(tf_coord2[0], tf_coord2[1]);
     }
 
+    // ROS_INFO("MODE: %d, CURRENT_INDEX: %d", pp_.mode, pp_.current_idx);
+
 
     // 마지막 waypoint 에 다다랐으면 멈추기
     if(pp_.is_finish){
@@ -607,13 +609,15 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
 
   int index = 0;
 
-  
+  if(traffic_lights.size() > 0){
+    if(traffic_lights[0].Class == "4 green" || traffic_lights[0].Class == "3 green" || traffic_lights[0].Class == "4 greenleft")
+      ROS_INFO_STREAM("GREEN LIGHT");
+  }
+
   if(pp_.mode == 2 || pp_.mode == 3){
-    ROS_INFO("TRAFFIC_LIGHT_SIZE : %d", traffic_lights.size());
+    
 
     if(traffic_lights.size() > 0){
-      ROS_INFO("TRAFFIC : %s", traffic_lights[0].Class);
-      
       if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
           traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
       {

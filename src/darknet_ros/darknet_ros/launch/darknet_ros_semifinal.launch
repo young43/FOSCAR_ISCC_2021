@@ -5,6 +5,10 @@
   <arg name="launch_prefix" default=""/>
   <arg name="image" default="/usb_cam/image_raw" />
 
+  <!-- fortest
+  <arg name="image" default="/camera1/usb_cam1/image_raw" />
+  -->
+ 
   <!-- Config and weights folder. -->
   <arg name="yolo_weights_path"          default="$(find darknet_ros)/yolo_network_config/weights"/>
   <arg name="yolo_config_path"           default="$(find darknet_ros)/yolo_network_config/cfg"/>

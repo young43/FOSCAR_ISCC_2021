@@ -67,14 +67,14 @@ set(pure_pursuit_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(pure_pursuit_SOURCE_PREFIX /home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit)
-  set(pure_pursuit_DEVEL_PREFIX /home/young/FOSCAR_ISCC_2021/devel)
+  set(pure_pursuit_SOURCE_PREFIX /home/foscar/ISCC_2021/src/gps/pure_pursuit)
+  set(pure_pursuit_DEVEL_PREFIX /home/foscar/ISCC_2021/devel)
   set(pure_pursuit_INSTALL_PREFIX "")
   set(pure_pursuit_PREFIX ${pure_pursuit_DEVEL_PREFIX})
 else()
   set(pure_pursuit_SOURCE_PREFIX "")
   set(pure_pursuit_DEVEL_PREFIX "")
-  set(pure_pursuit_INSTALL_PREFIX /home/young/FOSCAR_ISCC_2021/install)
+  set(pure_pursuit_INSTALL_PREFIX /home/foscar/ISCC_2021/install)
   set(pure_pursuit_PREFIX ${pure_pursuit_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(pure_pursuit_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/include " STREQUAL " ")
+if(NOT "/home/foscar/ISCC_2021/src/gps/pure_pursuit/include " STREQUAL " ")
   set(pure_pursuit_INCLUDE_DIRS "")
-  set(_include_dirs "/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/include")
+  set(_include_dirs "/home/foscar/ISCC_2021/src/gps/pure_pursuit/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/include " STREQUAL " "
         message(FATAL_ERROR "Project 'pure_pursuit' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'pure_pursuit' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/young/FOSCAR_ISCC_2021/src/gps/pure_pursuit/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'pure_pursuit' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/foscar/ISCC_2021/src/gps/pure_pursuit/${idir}'.  ${_report}")
     endif()
     _list_append_unique(pure_pursuit_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/young/FOSCAR_ISCC_2021/devel/lib;/home/young/FOSCAR_ISCC_2021/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/foscar/ISCC_2021/devel/lib;/home/foscar/ISCC_2021/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
