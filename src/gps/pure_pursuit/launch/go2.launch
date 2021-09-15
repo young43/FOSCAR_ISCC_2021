@@ -8,18 +8,23 @@
   <arg name="final_constant" default="1.25" />
   <arg name="obs_order" default="1" />
   <arg name="pk" default="1" />
-  
-  
+
+
    <!-- gps visualization -->
+  <!--
   <include file="$(find rviz_visualization)/launch/rviz.launch">
     <arg name="path2" value="$(arg path)" />
   </include>
-  
+-->
+
   <!-- lidar(obstacle) -->
   <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" />
-  
-  <!-- yolo -->  
+
+  <!-- yolo -->
   <include file="$(find darknet_ros)/launch/darknet_ros_final.launch" />
+
+  <!-- vision_distance -->
+  <node pkg="vision_distance" type="delivery_mission.py" name="track_mission"/>
 
   <!-- usb_cam node-->
   <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >

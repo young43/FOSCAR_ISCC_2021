@@ -76,6 +76,8 @@ def bounding_callback(msg):
 		if box_class == "B3": b_flag = 3
 
 		if box_class == "A1": b_flag = 4
+		if box_class == "A2": b_flag = 5
+		if box_class == "A3": b_flag = 6
 
 		tf_object_center = get_object_center2(box.Class,box_xmin, box_ymin, box_xmax, box_ymax)
 		tf_center = np.matmul(matrix, center)

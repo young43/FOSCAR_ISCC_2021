@@ -46,16 +46,16 @@ std::chrono::system_clock::time_point obs_start;
 /* traffic Index manager */
 // 1,2,3,4,7 직진
 // 5(비보호 좌회전), 6(좌회전)
-int tf_idx_1 = 1000; 
-int tf_idx_2 = 1000; 
-int tf_idx_3 = 1000; 
-int tf_idx_4 = 1000; 
-int tf_idx_5 = 1000; 
-int tf_idx_6 = 1000; 
-int tf_idx_7 = 1000; 
+int tf_idx_1 = 1000;
+int tf_idx_2 = 1000;
+int tf_idx_3 = 1000;
+int tf_idx_4 = 1000;
+int tf_idx_5 = 1000;
+int tf_idx_6 = 1000;
+int tf_idx_7 = 1000;
 
-int tf_idx_8 = 1000; 
-int tf_idx_9 = 1000; 
+int tf_idx_8 = 1000;
+int tf_idx_9 = 1000;
 
 
 bool index_flag = false;
@@ -101,6 +101,10 @@ const float dv_a_coord1[2] = {955550.07528, 1956914.94266};
 const float dv_b_coord1[2] = {955547.303188, 1956914.82439};
 const float dv_b_coord2[2] = {955543.419161, 1956918.02947};
 const float dv_b_coord3[2] = {955539.373947, 1956920.80271};
+
+// Delivery Distance
+double min_a_dist = 9999999;
+double min_b_dist = 9999999;
 
 // max index of pp_.a_cnt array
 int a_max_index = -1;
@@ -229,7 +233,7 @@ void PurePursuitNode::run(char** argv) {
       tf_idx_5 = pp_.getPosIndex(tf_coord5[0], tf_coord5[1]);
       tf_idx_6 = pp_.getPosIndex(tf_coord6[0], tf_coord6[1]);
       tf_idx_7 = pp_.getPosIndex(tf_coord7[0], tf_coord7[1]);
-      
+
       tf_idx_8 = pp_.getPosIndex(tf_coord8[0], tf_coord8[1]);
       tf_idx_9 = pp_.getPosIndex(tf_coord9[0], tf_coord9[1]);
 
@@ -239,10 +243,10 @@ void PurePursuitNode::run(char** argv) {
       dv_b_idx_3 = pp_.getPosIndex(dv_b_coord3[0], dv_b_coord3[1], 1);
 
     }
-    
+
 
     // Normal 직진구간
-    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17 
+    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17
        || pp_.mode == 22 || pp_.mode == 25 || pp_.mode == 27 || pp_.mode == 30 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
@@ -277,7 +281,7 @@ void PurePursuitNode::run(char** argv) {
         end_parking_backward_idx = 100;
         end_parking_full_steer_backward_idx = 75;
       }
-    
+
        // second
        if (parking_num == 2){
         // int start_parking_idx = 280;
@@ -383,11 +387,11 @@ void PurePursuitNode::run(char** argv) {
 
     // MODE 3,5,8,33 : 신호등 (직진구간)
     if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 33) {
-      pp_.mission_flag = 0; 
+      pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
       final_constant = 1.2;
-     
+
 
       // 1,2,3,7번 직진신호등 멈춤
       if((pp_.reachMissionIdx(tf_idx_1) || pp_.reachMissionIdx(tf_idx_2) || pp_.reachMissionIdx(tf_idx_3) || pp_.reachMissionIdx(tf_idx_7)) && !pp_.straight_go_flag) {
@@ -398,7 +402,7 @@ void PurePursuitNode::run(char** argv) {
 
     // MODE 35,37 : 신호등(무시할지결정바람)
     if (pp_.mode == 35 || pp_.mode == 37) {
-      pp_.mission_flag = 0; 
+      pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
       final_constant = 1.2;
@@ -411,7 +415,7 @@ void PurePursuitNode::run(char** argv) {
 
     // MODE 21 : 신호등 & 커브
     if (pp_.mode == 21){
-      pp_.mission_flag = 0; 
+      pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
       final_constant = 1.5;
@@ -424,11 +428,11 @@ void PurePursuitNode::run(char** argv) {
 
     // MODE 23, 28 : 신호등 (비보호 좌회전 신호)
     if (pp_.mode == 23 || pp_.mode == 28) {
-      pp_.mission_flag = 0; 
+      pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
       final_constant = 1.2;
-     
+
 
       // 5,6번 좌회전 신호등 멈춤
       if((pp_.reachMissionIdx(tf_idx_5) || pp_.reachMissionIdx(tf_idx_6)) && !pp_.left_go_flag) {
@@ -467,12 +471,12 @@ void PurePursuitNode::run(char** argv) {
         pp_.mission_flag = 2;
         ROS_INFO("PATH SWITCHING");
         //pulishControlMsg(0, 0);
-      
+
         // for test
         // const_lookahead_distance_ = 4;
         // const_velocity_ = 6;
         // final_constant = 2.0;
-      
+
         continue;
       }
       // avoid path original time 4.0
@@ -521,7 +525,7 @@ void PurePursuitNode::run(char** argv) {
     }
 
 
-    // MODE 10 : 배달 PICK A 
+    // MODE 10 : 배달 PICK A
     if (pp_.mode == 10) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
@@ -565,61 +569,13 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 8;
       final_constant = 1.5;
     }
-    
+
     // MODE 20 : 배달 PICK B
     if (pp_.mode == 20) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
       final_constant = 1.2;
-      
-      // // case 1) only using vision_distance logic
-      // // pp_.mission_flag == 0 : 배달표지판 판단계산 + 2.5초 직진
-      // // pp_.mission_flag == 1 : 5초 정지
-      // // pp_.mission_flag == 2 : 정상주행
-	    // if((pp_.mission_flag==0 && (pp_.a_flag[0] && pp_.b_flag[0]))
-      //   || (pp_.mission_flag==0 && (pp_.a_flag[1] && pp_.b_flag[1]))
-      //   || (pp_.mission_flag==0 && (pp_.a_flag[2] && pp_.b_flag[2]))) {
 
-      //   if(pp_.a_flag[0] && pp_.b_flag[0])
-      //     ROS_INFO("PICK-UP B1 : %d", pp_.current_idx);
-      //   if(pp_.a_flag[1] && pp_.b_flag[1])
-      //     ROS_INFO("PICK-UP B2 : %d", pp_.current_idx);
-      //   if(pp_.a_flag[2] && pp_.b_flag[2])if(pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3){
-    //   // Calc max_index
-    //   b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
-    //   ROS_INFO("B INDEX (MISSION_FLAG=%d) : %d", pp_.mission_flag, b_max_index);
-
-    //   if (a_max_index == b_max_index) {
-    //     // Max flag on
-    //     pp_.b_flag[b_max_index] = true;
-    //   }
-    //   else {
-    //     pp_.b_cnt = {0,0,0};
-    //   }
-    // }
-      //   {
-      //     pulishControlMsg(const_velocity_, 0);
-      //     usleep(50000); // 2.5초 직진 
-      //   } 
-      //   pp_.mission_flag = 1;
-      // }
-
-      // if(pp_.mission_flag == 1){
-      //   // 5초간 정지
-      //   for (int i = 0; i < 50; i++)
-      //   {
-	    //     pulishControlMsg(0, 0);
-      //     usleep(100000);  // 0.1초
-      //   }
-      //   pp_.mission_flag = 2;
-      // }
-
-      // if(pp_.mission_flag == 2){
-      //   const_lookahead_distance_ = 4;
-      //   const_velocity_ = 10;
-      //   final_constant = 1.4;
-      // }
-      
 
       // case 2) vision_distance + gps 로직
       // pp_.mission_flag == 1 : dv_b_idx_1 도달 판단
@@ -678,7 +634,6 @@ void PurePursuitNode::run(char** argv) {
         }else{
           pp_.mission_flag = 33;
         }
-        
       }
 
       if(pp_.mission_flag == 3){
@@ -706,7 +661,7 @@ void PurePursuitNode::run(char** argv) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
       const_velocity_ = 17;
-      final_constant = 1.2;      
+      final_constant = 1.2;
     }
 
 
@@ -895,22 +850,26 @@ void PurePursuitNode::callbackFromObstacle2(const avoid_obstacle::DetectedObstac
 
 void PurePursuitNode::callbackFromDelivery(const vision_distance::DeliveryArray& msg){
   std::vector<vision_distance::Delivery> deliverySign = msg.visions;
-  
-  // 450 
-  if (pp_.mode == 19 || pp_.mode == 20) {
-    if (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33){
-      for(int i = 0; i < deliverySign.size(); i++) {
+
+  for(int i = 0; i < deliverySign.size(); i++) {
+    // Delivery B Area
+    if (pp_.mode == 19 || pp_.mode == 20) {
+      if (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33){
         ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
-        if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  // dist 수정하기 
-          if (deliverySign[i].flag == 1) 
+
+        if (min_b_dist > deliverySign[i].dist_y)
+          min_b_dist = deliverySign[i].dist_y;
+
+        if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  // dist 수정하기
+          if (deliverySign[i].flag == 1)  // B1
           {
               pp_.b_cnt[0] += 1;
           }
-          if (deliverySign[i].flag == 2) 
+          if (deliverySign[i].flag == 2)  // B2
           {
               pp_.b_cnt[1] += 1;
           }
-          if (deliverySign[i].flag == 3)
+          if (deliverySign[i].flag == 3)  // B3
           {
               pp_.b_cnt[2] += 1;
           }
@@ -918,20 +877,28 @@ void PurePursuitNode::callbackFromDelivery(const vision_distance::DeliveryArray&
       }
     }
 
-    // if(pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3){
-    //   // Calc max_index
-    //   b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
-    //   ROS_INFO("B INDEX (MISSION_FLAG=%d) : %d", pp_.mission_flag, b_max_index);
+    // Delivery A Area
+    if (pp_.mode == 9 || pp_.mode == 10) {
+      ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
 
-    //   if (a_max_index == b_max_index) {
-    //     // Max flag on
-    //     pp_.b_flag[b_max_index] = true;
-    //   }
-    //   else {
-    //     pp_.b_cnt = {0,0,0};
-    //   }
-    // }
-    
+      if (min_a_dist > deliverySign[i].dist_y)
+        min_a_dist = deliverySign[i].dist_y;
+
+      if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  // dist 수정하기
+        if (deliverySign[i].flag == 4)  // A1
+        {
+            pp_.a_cnt[0] += 1;
+        }
+        if (deliverySign[i].flag == 5)  // A2
+        {
+            pp_.a_cnt[1] += 1;
+        }
+        if (deliverySign[i].flag == 6)  // A3
+        {
+            pp_.a_cnt[2] += 1;
+        }
+      }
+    }
   }
 }
 
@@ -979,18 +946,18 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
         }
         return;
       }
-    } 
+    }
   }
 
- 
+
 
   if(traffic_lights.size() > 0){
 
      // debug
-    if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 21 || pp_.mode == 33){
-      ROS_INFO("TRAFFIC_LIGHT_SIZE : %d", traffic_lights.size());
-      ROS_INFO("TRAFFIC : %s", traffic_lights[0].Class);
-    }
+    // if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 21 || pp_.mode == 33){
+    //   ROS_INFO("TRAFFIC_LIGHT_SIZE : %d", traffic_lights.size());
+    //   ROS_INFO("TRAFFIC : %s", traffic_lights[0].Class);
+    // }
 
     if (traffic_lights[index].Class == "3 red" || traffic_lights[index].Class == "3 yellow" || traffic_lights[index].Class == "4 red" ||
       traffic_lights[index].Class == "4 yellow" || traffic_lights[index].Class == "4 redyellow")
@@ -1014,7 +981,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
       pp_.left_go_flag = true;
     }
   }
-  
+
 
 }
 

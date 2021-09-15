@@ -16,8 +16,8 @@
   -->
   <!-- lidar(obstacle) -->
   <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" />
-  
-  <!-- yolo -->  
+
+  <!-- yolo -->
   <include file="$(find darknet_ros)/launch/darknet_ros_semifinal.launch" />
 
   <!-- usb_cam node-->
@@ -46,7 +46,7 @@
     <rosparam command="load"
               file="$(find ublox_gps)/config/$(arg param_file_name).yaml" />
   </node>
- 
+
   <!-- for pure pursuit -->
   <node pkg="pure_pursuit" type="pure_pursuit" name="pure_pursuit" output="screen" args="$(arg path) $(arg ld) $(arg vel) $(arg final_constant) $(arg obs_order)" />
   <node pkg="pure_pursuit" type="coordinate2pos" name="coordinate2pos" />
