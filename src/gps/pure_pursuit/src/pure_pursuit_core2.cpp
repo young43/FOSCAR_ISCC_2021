@@ -89,7 +89,6 @@ int dv_a_idx_1 = 1000;
 int dv_b_idx_1 = 1000;
 int dv_b_idx_2 = 1000;
 int dv_b_idx_3 = 1000;
-int dv_b_idx_final = 1000;
 
 // For kcity (temp)
 // const float dv_a_coord1[2] = {935656.875, 1916149.0};
@@ -699,40 +698,6 @@ void PurePursuitNode::run(char** argv) {
         final_constant = 1.4;
       }
 
-
-
-      // // For Stop Test
-      // if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_b_idx_1)){
-      //   ROS_INFO_STREAM("DELIVERY 1st Area");
-      //   for (int i = 0; i < 50; i++)
-      //   {
-      //     pulishControlMsg(0, 0);
-      //     usleep(100000);  // 0.1초
-      //   }
-      //   pp_.mission_flag = 1;
-      // }
-
-      // if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_b_idx_2)){
-      //   ROS_INFO_STREAM("DELIVERY 2nd Area");
-      //   for (int i = 0; i < 50; i++)
-      //   {
-      //     pulishControlMsg(0, 0);
-      //     usleep(100000);  // 0.1초
-      //   }
-      //   pp_.mission_flag = 1;
-      // }
-
-      // if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_b_idx_3)){
-      //   ROS_INFO_STREAM("DELIVERY 3rd Area");
-      //   for (int i = 0; i < 50; i++)
-      //   {
-      //     pulishControlMsg(0, 0);
-      //     usleep(100000);  // 0.1초
-      //   }
-      //   pp_.mission_flag = 1;
-      // }
-
-      // if(pp_.mission_flag == 1) const_velocity_ = 10;
 
     }
 
