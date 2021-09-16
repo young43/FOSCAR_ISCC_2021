@@ -95,7 +95,8 @@ def bounding_callback(msg):
 			data_list.append(delivery)
 
 	if len(data_list) > 0:
-		#data_list = sorted(data_list, key=lambda x:(x[2],x[1],x[0]))
+		# data_list = sorted(data_list, key=lambda x:(x[2],x[1],x[0]))
+		# data_list = sorted(data_list, key=lambda x:(x.dist_y,x.dist_x,x.flag))
 		delivery_array = DeliveryArray()
 		delivery_array.visions = data_list
 		delivery_pub.publish(delivery_array)

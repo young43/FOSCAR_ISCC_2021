@@ -15,7 +15,7 @@
     <param name="autosize" value="true" />
   </node>
   </group>
-
+<!--
   <group ns="camera2">
   <node name="usb_cam2" pkg="usb_cam" type="usb_cam_node" output="screen" >
     <param name="video_device" value="/dev/video2" />
@@ -31,5 +31,5 @@
     <param name="autosize" value="true" />
   </node>
   </group>
-
+-->
 </launch>

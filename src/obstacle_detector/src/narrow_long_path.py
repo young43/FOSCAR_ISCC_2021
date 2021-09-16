@@ -15,6 +15,8 @@ drive_values_pub = rospy.Publisher('control_value', drive_values, queue_size=1)
 yellow_cone=[]
 blue_cone=[]
 sorted_colorcone=[]
+drive_speed = 0
+
 def cal_distance(x,y):
 	return (math.sqrt(x**2+y**2))
 
@@ -22,42 +24,55 @@ def colorcone_callback(msg):
 	global flag, dist_x, dist_y
 	global yellow_cone, blue_cone,sorted_colorcone
 
-	
-
 	colorcone = msg.colorcone
-	#yellow_cone=[]
-	#blue_cone=[]
-
+    	yellow_cone=[]
+	blue_cone=[]
 
 	sorted_colorcone = sorted(colorcone, key=lambda x:(x.dist_y,x.dist_x,x.flag))
 	sorted_colorcone = sorted_colorcone[:4]
 	
-
 	for i in range (len(sorted_colorcone)):
 		if sorted_colorcone[i].flag==0:
 			yellow_cone.append(sorted_colorcone[i])
 		else:
 			blue_cone.append(sorted_colorcone[i])
 
+def liner_acceleration(flag):
+	global drive_speed
+	in_step=0.1
+	de_step=0.3
+	limit_speed=7
+	bottom_speed=3
+	if(flag):
+		if (drive_speed>=limit_speed):
+		    return drive_speed
+		else:
+			drive_speed+=in_step
+			return (drive_speed)
+	else:
+		if (drive_speed<=bottom_speed):
+			return bottom_speed
+		else:
+			drive_speed-=de_step
+			return (drive_speed)
 
 
-	
 
 
-def drive(angle, speed):
+def drive(angle, flag):
 	global drive_values_pub
-	
+	global drive_speed
 	drive_value = drive_values()
 	drive_value.steering = angle
 	standard_angle=18
-	if (drive_value.steering>standard_angle):
-		drive_value.throttle=3
+	if (drive_value.steering>standard_angle or flag==True):
+		drive_value.throttle=liner_acceleration(False)
 
-	elif (drive_value.steering<-standard_angle):
-		drive_value.throttle=3
+	elif (drive_value.steering<-standard_angle or flag==True):
+		drive_value.throttle=liner_acceleration(False)
 
 	else:
-		drive_value.throttle = speed
+		drive_value.throttle = liner_acceleration(True)
 
 	drive_values_pub.publish(drive_value)
 
@@ -73,8 +88,7 @@ class point:
 		self.xycar_angle_deg = None
 		self.xycar_angle_deg_2 = None
 		self.angle=None
-		self.normal_speed=6
-		self.slow_speed=3
+		
 
 	def cal_distance_two_circle(self,x1,y1,x2,y2):
 		distance=math.sqrt((x2-x1)**2+(y2-y1)**2)
@@ -86,19 +100,19 @@ class point:
 		point=min_list[1]
 		steer=self.xycar_angle_deg
 		margin=8
-		print("###############################################################",sorted_colorcone[0].flag)
-		if(sorted_colorcone[0].flag):
-			steer-=margin
-			drive(steer,self.slow_speed)
-			print("--Danger---left steering")
-			
-			
-		else:
+		if len(sorted_colorcone) == 0: drive(0,True)
+
+		# print("###############################################################",sorted_colorcone[0].flag)
 		
+		if(sorted_colorcone[0].flag):
 			steer+=margin
-			drive(steer,self.slow_speed)
+			drive(steer,True)
+			print("--Danger---left steering")		
+		else:
+	
+			steer-=margin
+			drive(steer,True)
 			print("--Danger---right steering")
-			
 
 	def circles_4_center(self,sorted_list):
 		sorted_2_list=None
@@ -196,16 +210,16 @@ class point:
 		print("CNT:",len(self.obData.circles))
 		if len(self.obData.circles) == 0:
 			print("zero obstacle")
-			drive(0,7)
+			drive(0,False)
 
 		elif len(self.obData.circles) == 1:
 			circles=self.obData.circles
 			if len(yellow_cone)==1 : 
 			
-				drive(25,3)
+				drive(25,True)
 			 	print("one obstacle detected && right steering")
 			else: 
-				drive(-25,3)
+				drive(-25,True)
 				print("one obstacle detected && left steering")
 				
 
@@ -247,7 +261,7 @@ class point:
 				if (len(yellow_cone)>=1) and len(blue_cone)==0 :
  #(self.two_circle_distance>3.0 and left_circle.center.x + 0.4 < right_circle.center.x and self.two_between > 90):
 					#print("two_obstacle_right")
-					drive(30,self.normal_speed)
+					drive(30,False)
 				else:	
 					#print("left_circle:",left_circle.center.y,"right_circle:",right_circle.center.y)
 					left_point=left_circle.center
@@ -255,7 +269,7 @@ class point:
 					self.center_x=(left_point.x+right_point.x)/2
 					self.center_y=(left_point.y+right_point.y)/2
 					self.calc_angle()
-					drive(self.xycar_angle_deg,self.normal_speed)
+					drive(self.xycar_angle_deg,False)
 
 
 			elif (len(circles)==3):
@@ -274,10 +288,10 @@ class point:
 				self.calc_angle()
 				if len(yellow_cone)>=2 and len(blue_cone)==0:
 					self.xycar_angle_deg+=5
-					drive(self.xycar_angle_deg,self.normal_speed)
+					drive(self.xycar_angle_deg,False)
 					
 				else:								#self.three_detected_obstacles=self.angle_between(filter_point1.x,filter_point2.x,filter_point3.x,filter_point1.y,filter_point2.y,filter_point3.y)
-					drive(self.xycar_angle_deg,self.normal_speed)
+					drive(self.xycar_angle_deg,False)
 					#print("angle: ",self.three_detected_obstacles)
 
 			else:
@@ -304,8 +318,8 @@ class point:
 				if len(yellow_cone)>=2 and len(blue_cone)==0:
 
 					self.xycar_angle_deg=self.xycar_angle_deg_2
-					self.xycar_angle_deg_2+=5
-					drive(self.xycar_angle_deg_2,self.slow_speed)
+					self.xycar_angle_deg_2+=3
+					drive(self.xycar_angle_deg_2,True)
 					#print(" xycar_deg_2: ", self.xycar_angle_deg_2)
 					
 					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
@@ -315,7 +329,7 @@ class point:
 						self.avoid_collision(min_list)
 						
 					else:
-						drive(self.xycar_angle_deg,self.normal_speed)
+						drive(self.xycar_angle_deg,False)
 						
 						return
 				else:
@@ -328,7 +342,7 @@ class point:
 
 				
 					else:
-						drive(self.xycar_angle_deg,self.normal_speed)
+						drive(self.xycar_angle_deg,False)
 						
 						return
 
