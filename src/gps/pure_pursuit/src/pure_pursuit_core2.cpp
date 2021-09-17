@@ -116,6 +116,8 @@ int b_max_index = -1;
 // calc max index flag
 bool a_cnt_flag = false;
 bool b_cnt_flag = false;
+
+std::vector<int> passed_index;
 /*************************/
 
 /* Parking manager */
@@ -550,6 +552,8 @@ void PurePursuitNode::run(char** argv) {
 
       if(pp_.mission_flag == 1){
         const_velocity_ = 10; // if not calculated a_max_index
+
+        // for test
         // Calc max_index
         a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
         ROS_INFO("A INDEX : %d",a_max_index);
@@ -559,7 +563,6 @@ void PurePursuitNode::run(char** argv) {
 
         // Lock the a_cnt_flag
         a_cnt_flag = true;
-
         ROS_INFO("A1=%d A2=%d A3=%d",pp_.a_cnt[0], pp_.a_cnt[1], pp_.a_cnt[2]);
         }
     }
@@ -586,6 +589,7 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 8;
       final_constant = 1.5;
 
+      // for test
       a_max_index = 2;
       pp_.a_flag[a_max_index] = true;
     }
@@ -602,15 +606,7 @@ void PurePursuitNode::run(char** argv) {
       // pp_.mission_flag == 1 : dv_b_idx_1 도달 판단
       // pp_.mission_flag == 2 : dv_b_idx_2 도달 판단
       // pp_.mission_flag == 3 : dv_b_idx_3 도달 판단
-      // if(pp_.mission_flag == 0 && pp_.reachMissionIdx(dv_b_idx_1)){
-      //   pp_.mission_flag = 1;
-      // }
-      // else if(pp_.mission_flag == 22 && pp_.reachMissionIdx(dv_b_idx_2)){
-      //   pp_.mission_flag = 2;
-      // }
-      // else if(pp_.mission_flag == 33 && pp_.reachMissionIdx(dv_b_idx_3)){
-      //   pp_.mission_flag = 3;
-      // }
+      
       if(pp_.mission_flag == 0 && pp_.reachMissionIdx(dv_b_idx_0)){
         pp_.mission_flag = 1;
       }
@@ -634,6 +630,14 @@ void PurePursuitNode::run(char** argv) {
         }
         else {
           pp_.b_cnt = {0,0,0};
+          if(pp_.mission_flag == 1){ 
+            pp_.mission_flag = 22; 
+            passed_index.push_back(b_max_index);
+          }
+          else if(pp_.mission_flag == 2){
+            pp_.mission_flag = 33;
+            passed_index.push_back(b_max_index);
+          }
         }
       }
 
@@ -648,9 +652,6 @@ void PurePursuitNode::run(char** argv) {
             usleep(100000);  // 0.1초
           }
           pp_.mission_flag = 100;
-        }else{
-          pp_.mission_flag = 22;
-          pp_.b_cnt = {0,0,0};
         }
       }
 
@@ -662,9 +663,6 @@ void PurePursuitNode::run(char** argv) {
             usleep(100000);  // 0.1초
           }
           pp_.mission_flag = 100;
-        }else{
-          pp_.mission_flag = 33;
-          pp_.b_cnt = {0,0,0};
         }
       }
 
@@ -957,17 +955,23 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
         deliveryObjectsA.push_back(yoloObjects[i]);
     }
 
-    if(pp_.mode == 20 && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
-      if(yoloObjects[i].Class == "B1") pp_.b_cnt[0] += 1;
-      else if(yoloObjects[i].Class == "B2") pp_.b_cnt[1] += 1;
-      else if(yoloObjects[i].Class == "B3") pp_.b_cnt[2] += 1;
+    if(pp_.mode == 20){
+      if(yoloObjects[i].Class == "B1" || yoloObjects[i].Class == "B2" || yoloObjects[i].Class == "B3")
+        deliveryObjectsB.push_back(yoloObjects[i]);
     }
+
+    // if(pp_.mode == 20 && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
+    //   if(yoloObjects[i].Class == "B1") pp_.b_cnt[0] += 1;
+    //   else if(yoloObjects[i].Class == "B2") pp_.b_cnt[1] += 1;
+    //   else if(yoloObjects[i].Class == "B3") pp_.b_cnt[2] += 1;
+    // }
 
     
   }
 
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
   std::sort(deliveryObjectsA.begin(), deliveryObjectsA.end(), compare);
+  std::sort(deliveryObjectsB.begin(), deliveryObjectsB.end(), compare);
 
   if(pp_.mode == 10 && deliveryObjectsA.size() > 0 && pp_.mission_flag == 0){
     if(deliveryObjectsA[0].Class == "A1") pp_.a_cnt[0] += 1;
@@ -975,11 +979,17 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
     else if(deliveryObjectsA[0].Class == "A3") pp_.a_cnt[2] += 1;
   }
 
-  // if(pp_.mode == 20 && deliveryObjectsB.size() && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
-  //   if(deliveryObjectsB[0].Class == "B1") pp_.b_cnt[0] += 1;
-  //   else if(deliveryObjectsB[0].Class == "B2") pp_.b_cnt[1] += 1;
-  //   else if(deliveryObjectsB[0].Class == "B3") pp_.b_cnt[2] += 1;
-  // }
+  if(pp_.mode == 20 && deliveryObjectsB.size() > 0 && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
+    auto it1 = find(passed_index.begin(), passed_index.end(), 0);
+    auto it2 = find(passed_index.begin(), passed_index.end(), 1);
+    auto it3 = find(passed_index.begin(), passed_index.end(), 2);
+
+
+    // 지나간 index는 무시
+    if(deliveryObjectsB[0].Class == "B1" && it1 == passed_index.end()) pp_.b_cnt[0] += 1;
+    else if(deliveryObjectsB[0].Class == "B2" && it2 == passed_index.end()) pp_.b_cnt[1] += 1;
+    else if(deliveryObjectsB[0].Class == "B3" && it3 == passed_index.end()) pp_.b_cnt[2] += 1;
+  }
 
  int index = 0;
 
