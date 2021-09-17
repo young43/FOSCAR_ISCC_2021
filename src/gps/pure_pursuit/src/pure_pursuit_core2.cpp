@@ -86,6 +86,8 @@ const float tf_coord9[2] = {935591.4375, 1915966.875};
 
 /* delivery Index manager */
 int dv_a_idx_1 = 1000;
+
+int dv_b_idx_0 = 1000;
 int dv_b_idx_1 = 1000;
 int dv_b_idx_2 = 1000;
 int dv_b_idx_3 = 1000;
@@ -98,6 +100,8 @@ int dv_b_idx_3 = 1000;
 
 // For School
 const float dv_a_coord1[2] = {955550.07528, 1956914.94266};
+
+const float dv_front_b_coord[2] = {955550.340513, 1956911.73481};
 const float dv_b_coord1[2] = {955547.303188, 1956914.82439};
 const float dv_b_coord2[2] = {955543.419161, 1956918.02947};
 const float dv_b_coord3[2] = {955539.373947, 1956920.80271};
@@ -238,6 +242,8 @@ void PurePursuitNode::run(char** argv) {
       tf_idx_9 = pp_.getPosIndex(tf_coord9[0], tf_coord9[1]);
 
       dv_a_idx_1 = pp_.getPosIndex(dv_a_coord1[0], dv_a_coord1[1]);
+
+      dv_b_idx_0 = pp_.getPosIndex(dv_front_b_coord[0], dv_front_b_coord[1], 1);
       dv_b_idx_1 = pp_.getPosIndex(dv_b_coord1[0], dv_b_coord1[1], 1);
       dv_b_idx_2 = pp_.getPosIndex(dv_b_coord2[0], dv_b_coord2[1], 1);
       dv_b_idx_3 = pp_.getPosIndex(dv_b_coord3[0], dv_b_coord3[1], 1);
@@ -520,7 +526,7 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 9){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
-      const_velocity_ = 8;
+      const_velocity_ = 7;
       final_constant = 1.5;
     }
 
@@ -532,19 +538,30 @@ void PurePursuitNode::run(char** argv) {
       final_constant = 1.2;
 
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
+        pp_.mission_flag = 1;
         for (int i = 0; i < 50; i++)
         {
           pulishControlMsg(0, 0);
           // 0.1초
           usleep(100000);
         }
-        pp_.mission_flag = 1;
         continue;
       }
 
       if(pp_.mission_flag == 1){
-        const_velocity_ = 10;
-      }
+        const_velocity_ = 10; // if not calculated a_max_index
+        // Calc max_index
+        a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
+        ROS_INFO("A INDEX : %d",a_max_index);
+
+        // Max flag on
+        pp_.a_flag[a_max_index] = true;
+
+        // Lock the a_cnt_flag
+        a_cnt_flag = true;
+
+        ROS_INFO("A1=%d A2=%d A3=%d",pp_.a_cnt[0], pp_.a_cnt[1], pp_.a_cnt[2]);
+        }
     }
 
     // 배달 A 구간 끝나고 바로 A_INDEX 계산함
@@ -568,6 +585,9 @@ void PurePursuitNode::run(char** argv) {
       const_lookahead_distance_ = 4;
       const_velocity_ = 8;
       final_constant = 1.5;
+
+      a_max_index = 2;
+      pp_.a_flag[a_max_index] = true;
     }
 
     // MODE 20 : 배달 PICK B
@@ -575,19 +595,29 @@ void PurePursuitNode::run(char** argv) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
       final_constant = 1.2;
-
+      
+      ROS_INFO("B1=%d B2=%d B3=%d",pp_.b_cnt[0], pp_.b_cnt[1], pp_.b_cnt[2]);
 
       // case 2) vision_distance + gps 로직
       // pp_.mission_flag == 1 : dv_b_idx_1 도달 판단
       // pp_.mission_flag == 2 : dv_b_idx_2 도달 판단
       // pp_.mission_flag == 3 : dv_b_idx_3 도달 판단
-      if(pp_.mission_flag == 0 && pp_.reachMissionIdx(dv_b_idx_1)){
+      // if(pp_.mission_flag == 0 && pp_.reachMissionIdx(dv_b_idx_1)){
+      //   pp_.mission_flag = 1;
+      // }
+      // else if(pp_.mission_flag == 22 && pp_.reachMissionIdx(dv_b_idx_2)){
+      //   pp_.mission_flag = 2;
+      // }
+      // else if(pp_.mission_flag == 33 && pp_.reachMissionIdx(dv_b_idx_3)){
+      //   pp_.mission_flag = 3;
+      // }
+      if(pp_.mission_flag == 0 && pp_.reachMissionIdx(dv_b_idx_0)){
         pp_.mission_flag = 1;
       }
-      else if(pp_.mission_flag == 22 && pp_.reachMissionIdx(dv_b_idx_2)){
+      else if(pp_.mission_flag == 22 && pp_.reachMissionIdx(dv_b_idx_1)){
         pp_.mission_flag = 2;
       }
-      else if(pp_.mission_flag == 33 && pp_.reachMissionIdx(dv_b_idx_3)){
+      else if(pp_.mission_flag == 33 && pp_.reachMissionIdx(dv_b_idx_2)){
         pp_.mission_flag = 3;
       }
 
@@ -610,7 +640,7 @@ void PurePursuitNode::run(char** argv) {
       // 배달표지판 매치되고, 정지까지 제대로 했다면  =>  mission_flag = 100
       // mission_flag == 1, 배달표지판 매치가 안됐다면  =>  mission_flag = 22
       // mission_flag == 2, 배달표지판 매치가 안됐다면  =>  mission_flag = 33
-      if(pp_.mission_flag == 1){
+      if(pp_.mission_flag == 1 && pp_.reachMissionIdx(dv_b_idx_1)){
         if((pp_.a_flag[0] && pp_.b_flag[0]) || (pp_.a_flag[1] && pp_.b_flag[1]) || (pp_.a_flag[2] && pp_.b_flag[2])){
           for (int i = 0; i < 50; i++)
           {
@@ -620,10 +650,11 @@ void PurePursuitNode::run(char** argv) {
           pp_.mission_flag = 100;
         }else{
           pp_.mission_flag = 22;
+          pp_.b_cnt = {0,0,0};
         }
       }
 
-      if(pp_.mission_flag == 2){
+      if(pp_.mission_flag == 2 && pp_.reachMissionIdx(dv_b_idx_2)){
         if((pp_.a_flag[0] && pp_.b_flag[0]) || (pp_.a_flag[1] && pp_.b_flag[1]) || (pp_.a_flag[2] && pp_.b_flag[2])){
           for (int i = 0; i < 50; i++)
           {
@@ -633,10 +664,11 @@ void PurePursuitNode::run(char** argv) {
           pp_.mission_flag = 100;
         }else{
           pp_.mission_flag = 33;
+          pp_.b_cnt = {0,0,0};
         }
       }
 
-      if(pp_.mission_flag == 3){
+      if(pp_.mission_flag == 3 && pp_.reachMissionIdx(dv_b_idx_3)){
         if((pp_.a_flag[0] && pp_.b_flag[0]) || (pp_.a_flag[1] && pp_.b_flag[1]) || (pp_.a_flag[2] && pp_.b_flag[2])){
           for (int i = 0; i < 50; i++)
           {
@@ -855,49 +887,49 @@ void PurePursuitNode::callbackFromDelivery(const vision_distance::DeliveryArray&
     // Delivery B Area
     if (pp_.mode == 19 || pp_.mode == 20) {
       if (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33){
-        ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
+        //ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
 
         if (min_b_dist > deliverySign[i].dist_y)
           min_b_dist = deliverySign[i].dist_y;
 
-        if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  // dist 수정하기
-          if (deliverySign[i].flag == 1)  // B1
-          {
-              pp_.b_cnt[0] += 1;
-          }
-          if (deliverySign[i].flag == 2)  // B2
-          {
-              pp_.b_cnt[1] += 1;
-          }
-          if (deliverySign[i].flag == 3)  // B3
-          {
-              pp_.b_cnt[2] += 1;
-          }
-        }
+        // if (deliverySign[i].dist_y > 600 && deliverySign[i].dist_y < 1000) {  // dist 수정하기
+        //   if (deliverySign[i].flag == 1)  // B1
+        //   {
+        //       pp_.b_cnt[0] += 1;
+        //   }
+        //   if (deliverySign[i].flag == 2)  // B2
+        //   {
+        //       pp_.b_cnt[1] += 1;
+        //   }
+        //   if (deliverySign[i].flag == 3)  // B3
+        //   {
+        //       pp_.b_cnt[2] += 1;
+        //   }
+        // }
       }
     }
 
     // Delivery A Area
-    if (pp_.mode == 9 || pp_.mode == 10) {
-      ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
+    if (pp_.mode == 10) {
+      //ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
 
       if (min_a_dist > deliverySign[i].dist_y)
         min_a_dist = deliverySign[i].dist_y;
 
-      if (deliverySign[i].dist_y > 450 && deliverySign[i].dist_y < 650) {  // dist 수정하기
-        if (deliverySign[i].flag == 4)  // A1
-        {
-            pp_.a_cnt[0] += 1;
-        }
-        if (deliverySign[i].flag == 5)  // A2
-        {
-            pp_.a_cnt[1] += 1;
-        }
-        if (deliverySign[i].flag == 6)  // A3
-        {
-            pp_.a_cnt[2] += 1;
-        }
-      }
+        
+        // if (deliverySign[i].flag == 4)  // A1
+        // {
+        //     pp_.a_cnt[0] += 1;
+        // }
+        // if (deliverySign[i].flag == 5)  // A2
+        // {
+        //     pp_.a_cnt[1] += 1;
+        // }
+        // if (deliverySign[i].flag == 6)  // A3
+        // {
+        //     pp_.a_cnt[2] += 1;
+        // }
+      
     }
   }
 }
@@ -908,6 +940,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   // std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
 
   std::vector<darknet_ros_msgs::BoundingBox> yoloObjects = msg.bounding_boxes;
+  std::vector<darknet_ros_msgs::BoundingBox> deliveryObjectsA, deliveryObjectsB;
 
   // 신호등 객체만 따로 검출함 (원근법 알고리즘 적용위함)
   std::vector<darknet_ros_msgs::BoundingBox> traffic_lights;
@@ -918,10 +951,35 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
 
         traffic_lights.push_back(yoloObjects[i]);
       }
+
+    if(pp_.mode == 10){
+      if(yoloObjects[i].Class == "A1" || yoloObjects[i].Class == "A2" || yoloObjects[i].Class == "A3")
+        deliveryObjectsA.push_back(yoloObjects[i]);
+    }
+
+    if(pp_.mode == 20 && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
+      if(yoloObjects[i].Class == "B1") pp_.b_cnt[0] += 1;
+      else if(yoloObjects[i].Class == "B2") pp_.b_cnt[1] += 1;
+      else if(yoloObjects[i].Class == "B3") pp_.b_cnt[2] += 1;
+    }
+
+    
   }
 
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
+  std::sort(deliveryObjectsA.begin(), deliveryObjectsA.end(), compare);
 
+  if(pp_.mode == 10 && deliveryObjectsA.size() > 0 && pp_.mission_flag == 0){
+    if(deliveryObjectsA[0].Class == "A1") pp_.a_cnt[0] += 1;
+    else if(deliveryObjectsA[0].Class == "A2") pp_.a_cnt[1] += 1;
+    else if(deliveryObjectsA[0].Class == "A3") pp_.a_cnt[2] += 1;
+  }
+
+  // if(pp_.mode == 20 && deliveryObjectsB.size() && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
+  //   if(deliveryObjectsB[0].Class == "B1") pp_.b_cnt[0] += 1;
+  //   else if(deliveryObjectsB[0].Class == "B2") pp_.b_cnt[1] += 1;
+  //   else if(deliveryObjectsB[0].Class == "B3") pp_.b_cnt[2] += 1;
+  // }
 
  int index = 0;
 

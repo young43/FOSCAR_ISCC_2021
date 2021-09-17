@@ -41,6 +41,10 @@ delivery_pub = rospy.Publisher('delivery', DeliveryArray, queue_size=10)
 
 data_list = []
 
+#test visualization
+a = np.array([-1,-1,-1], np.float32)
+b = np.array([-1,-1,-1], np.float32)
+
 def image_callback(img_data):
 	global bridge
 	global img
@@ -81,7 +85,9 @@ def bounding_callback(msg):
 
 		tf_object_center = get_object_center2(box.Class,box_xmin, box_ymin, box_xmax, box_ymax)
 		tf_center = np.matmul(matrix, center)
+		print("center:::::::::::", tf_center)
 		tf_center /= tf_center[2]
+		print("::::::::::::::center:::::::::::", tf_center)
 
 		distance = calculate(tf_center, tf_object_center)
 		# print("{}) tf_center: {}, distance: {}".format(idx, tf_center, distance))
@@ -105,7 +111,10 @@ def bounding_callback(msg):
 def get_object_center2(box_class,xmin, ymin, xmax, ymax):  
 	object_center = np.array([(xmin + xmax) / 2, ymax, 1], np.float32)
 	tf_object_center = np.matmul(matrix, object_center)
+	print("object__center:::::::::::", tf_object_center)
 	tf_object_center /= tf_object_center[2]
+	print("::::::::::::::object__center:::::::::::", tf_object_center)
+	
 
 	#if box_class == "B1":
 		#print("B1 : ", tf_object_center)
@@ -117,12 +126,16 @@ def get_object_center2(box_class,xmin, ymin, xmax, ymax):
 	return tf_object_center
 
 def calculate(tf_center, tf_object_center):
-	distance = tf_center - tf_object_center
+	global a,b
+	a = tf_center
+	b = tf_object_center
+	distance = tf_object_center - tf_center	
+	#distance = tf_center - tf_object_center
 	distance = distance * pixel
 	distance[1] += invisible_distance
-	#print("distance", distance)
+	print("distance", distance[1])
 	# print("distance[0]", int(distance[0]), int(distance[1]))
-	return distance	
+	return distance
 
 
 # center_visualization
@@ -130,7 +143,6 @@ def check_center(image):
 	cv2.circle(image, (288,240), 5, (122,0,255), -1)
 	return image
 	
-
 
 if __name__ == '__main__':
 	global matrix
@@ -206,6 +218,8 @@ if __name__ == '__main__':
 		cv2.circle(img, (box_xmax, box_ymax), 5, (122,0,0), -1)
 
 		cv2.circle(img, (288,480), 5, (255,0,0),-1 ) # center
+		cv2.circle(img_transformed, (int(a[0]),int(a[1])),10,(122,134,115),-1)
+		cv2.circle(img_transformed, (int(b[0]),int(b[1])),10,(0,0,155),-1)
 
 		if (len(new_data_list) > 0):
 			left_point = np.array([70.18,520,1], np.float32) #[184.18,520,1]
@@ -217,7 +231,8 @@ if __name__ == '__main__':
 
 
 		#if cv2.waitKey(1) & 0xFF == ord('q'):
-		#	break    		
+		#	break   
+		#cv2.imshow("warp", img_transformed) 		
 		cv2.waitKey(33)
 		rate.sleep()
 

@@ -12,13 +12,16 @@
 
    <!-- gps visualization -->
   <!--
-  <include file="$(find rviz_visualization)/launch/rviz.launch">
+  <include file="$(find rviz_visualization)/launch/rviz_school.launch">
     <arg name="path2" value="$(arg path)" />
   </include>
--->
+  -->
+-
 
   <!-- lidar(obstacle) -->
+  <!--
   <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" />
+  -->
 
   <!-- yolo -->
   <include file="$(find darknet_ros)/launch/darknet_ros_final.launch" />
