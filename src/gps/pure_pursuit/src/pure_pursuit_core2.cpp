@@ -590,8 +590,8 @@ void PurePursuitNode::run(char** argv) {
       final_constant = 1.5;
 
       // for test
-      a_max_index = 2;
-      pp_.a_flag[a_max_index] = true;
+      // a_max_index = 0;
+      // pp_.a_flag[a_max_index] = true;
     }
 
     // MODE 20 : 배달 PICK B
@@ -600,7 +600,8 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 6;
       final_constant = 1.2;
       
-      ROS_INFO("B1=%d B2=%d B3=%d",pp_.b_cnt[0], pp_.b_cnt[1], pp_.b_cnt[2]);
+      ROS_INFO("MISSION_FLAG=%d) A_INDEX(%d)  B_INDEX(%d)", pp_.mission_flag, a_max_index, b_max_index);
+      ROS_INFO("B1=%d, B2=%d, B3=%d", pp_.b_cnt[0],pp_.b_cnt[1], pp_.b_cnt[2]);
 
       // case 2) vision_distance + gps 로직
       // pp_.mission_flag == 1 : dv_b_idx_1 도달 판단
@@ -622,7 +623,7 @@ void PurePursuitNode::run(char** argv) {
       if(pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3){
         // Calc max_index
         b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
-        ROS_INFO("B INDEX (MISSION_FLAG=%d) : %d", pp_.mission_flag, b_max_index);
+        // ROS_INFO("B INDEX (MISSION_FLAG=%d) : %d", pp_.mission_flag, b_max_index);
 
         if (a_max_index == b_max_index) {
           // Max flag on
@@ -984,6 +985,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
     auto it2 = find(passed_index.begin(), passed_index.end(), 1);
     auto it3 = find(passed_index.begin(), passed_index.end(), 2);
 
+    
 
     // 지나간 index는 무시
     if(deliveryObjectsB[0].Class == "B1" && it1 == passed_index.end()) pp_.b_cnt[0] += 1;
