@@ -75,12 +75,12 @@ const float tf_coord2[2] = {935598.875, 1915970.375};
 const float tf_coord3[2] = {935650.071767194, 1916093.28736585};
 const float tf_coord4[2] = {935656.5625, 1916202.0};
 const float tf_coord5[2] = {935649.125, 1916336.375};
-const float tf_coord6[2] = {935649.125, 1916336.375};
+const float tf_coord6[2] = {935581.563637, 1916255.3587};
 const float tf_coord7[2] = {935642.8125, 1916140.375};
 
 // 무시할지결정해야
-const float tf_coord8[2] = {935613.375, 1916012.625};
-const float tf_coord9[2] = {935565.0, 1915917.5};
+const float tf_coord8[2] = {935611.629488, 1916009.71394};
+const float tf_coord9[2] = {935591.309636, 1915967.1553};
 
 /*************************/
 
@@ -425,7 +425,7 @@ void PurePursuitNode::run(char** argv) {
     }
 
     // MODE 21 : 신호등 & 커브
-    if (pp_.mode == 21){
+    if (pp_.mode == 21 || pp_.mode == 23){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
@@ -433,14 +433,14 @@ void PurePursuitNode::run(char** argv) {
 
       ROS_INFO("TRAFFIC_LIGHT STOP3: %d", pp_.straight_go_flag);
 
-      if((pp_.reachMissionIdx(tf_idx_4)) && !pp_.straight_go_flag) {
+      if((pp_.reachMissionIdx(tf_idx_4) || pp_.reachMissionIdx(tf_idx_5)) && !pp_.straight_go_flag) {
         pulishControlMsg(0,0);
         continue;
       }
     }
 
-    // MODE 23, 28 : 신호등 (비보호 좌회전 신호)
-    if (pp_.mode == 23 || pp_.mode == 28) {
+    // MODE 28 : 신호등 (비보호 좌회전 신호)
+    if (pp_.mode == 28) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
@@ -450,7 +450,7 @@ void PurePursuitNode::run(char** argv) {
 
 
       // 5,6번 좌회전 신호등 멈춤
-      if((pp_.reachMissionIdx(tf_idx_5) || pp_.reachMissionIdx(tf_idx_6)) && !pp_.left_go_flag) {
+      if((pp_.reachMissionIdx(tf_idx_6)) && !pp_.left_go_flag) {
         pulishControlMsg(0,0);
         continue;
       }
@@ -1004,7 +1004,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
  int index = 0;
 
   // check mode 22, 27 (신호등 좌회전 구간)
-  if (pp_.mode == 22 || pp_.mode == 27) {
+  if (pp_.mode == 28) {
     if(traffic_lights.size() > 1)
     {
       int first_traffic = (traffic_lights[0].xmax - traffic_lights[0].xmin) * (traffic_lights[0].ymax - traffic_lights[0].ymin);
