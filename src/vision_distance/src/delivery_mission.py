@@ -83,11 +83,11 @@ def bounding_callback(msg):
 		if box_class == "A2": b_flag = 5
 		if box_class == "A3": b_flag = 6
 
-		tf_object_center = get_object_center2(box.Class,box_xmin, box_ymin, box_xmax, box_ymax)
+		tf_object_center = get_object_center2(box.Class,box.xmin, box.ymin, box.xmax, box.ymax)
 		tf_center = np.matmul(matrix, center)
-		print("center:::::::::::", tf_center)
+		#print("center:::::::::::", tf_center)
 		tf_center /= tf_center[2]
-		print("::::::::::::::center:::::::::::", tf_center)
+		#print("::::::::::::::center:::::::::::", tf_center)
 
 		distance = calculate(tf_center, tf_object_center)
 		# print("{}) tf_center: {}, distance: {}".format(idx, tf_center, distance))
@@ -108,10 +108,11 @@ def bounding_callback(msg):
 		delivery_pub.publish(delivery_array)
 
 
-def get_object_center2(box_class,xmin, ymin, xmax, ymax):  
+def get_object_center2(box_class,xmin, ymin, xmax, ymax):
+	print("origin:::::::::::::::", ymax) 
 	object_center = np.array([(xmin + xmax) / 2, ymax, 1], np.float32)
 	tf_object_center = np.matmul(matrix, object_center)
-	print("object__center:::::::::::", tf_object_center)
+	#print("object__center:::::::::::", tf_object_center)
 	tf_object_center /= tf_object_center[2]
 	print("::::::::::::::object__center:::::::::::", tf_object_center)
 	
@@ -128,9 +129,8 @@ def get_object_center2(box_class,xmin, ymin, xmax, ymax):
 def calculate(tf_center, tf_object_center):
 	global a,b
 	a = tf_center
-	b = tf_object_center
-	distance = tf_object_center - tf_center	
-	#distance = tf_center - tf_object_center
+	b = tf_object_center	
+	distance = tf_center - tf_object_center
 	distance = distance * pixel
 	distance[1] += invisible_distance
 	print("distance", distance[1])
@@ -186,7 +186,7 @@ if __name__ == '__main__':
 	    	matrix = cv2.getPerspectiveTransform(corner_points_array, img_params)
 		np_matrix = np.array(matrix)
 		np.save(matrix_path, np_matrix)
-		# print(np_matrix)
+		print(np_matrix)
 	    	img_transformed = cv2.warpPerspective(img, matrix, (width, height))
 
 		if box_xmin == None or box_ymin == None or box_xmax == None or box_ymax == None: continue 

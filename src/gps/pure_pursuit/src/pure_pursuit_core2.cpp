@@ -127,20 +127,20 @@ int end_parking_backward_idx = 0;
 int end_parking_full_steer_backward_idx = 0;
 
 // For kcity
-// const float pk_coord1[2] = {935534.247324, 1915849.29071};
-// const float pk_coord2[2] = {935536.127777, 1915852.74891};
-// const float pk_coord3[2] = {935537.027791, 1915854.43949};
-// const float pk_coord4[2] = {935539.530479, 1915859.22427};
-// const float pk_coord5[2] = {935540.465801, 1915860.89238};
-// const float pk_coord6[2] = {935541.86021, 1915863.43345};
+const float pk_coord1[2] = {935534.247324, 1915849.29071};
+const float pk_coord2[2] = {935536.127777, 1915852.74891};
+const float pk_coord3[2] = {935537.027791, 1915854.43949};
+const float pk_coord4[2] = {935539.530479, 1915859.22427};
+const float pk_coord5[2] = {935540.465801, 1915860.89238};
+const float pk_coord6[2] = {935541.86021, 1915863.43345};
 
 // For School Test
-const float pk_coord1[2] = {955565.3630135682, 1956933.4946035568};
-const float pk_coord2[2] = {955564.96476695, 1956933.8079647133};
-const float pk_coord3[2] = {955564.6498305532, 1956934.0536339642};
-const float pk_coord4[2] = {955564.018495136, 1956934.5500655076};
-const float pk_coord5[2] = {955563.8305732157, 1956934.6975132197};
-const float pk_coord6[2] = {955563.4789975542, 1956934.971366751};
+// const float pk_coord1[2] = {955565.3630135682, 1956933.4946035568};
+// const float pk_coord2[2] = {955564.96476695, 1956933.8079647133};
+// const float pk_coord3[2] = {955564.6498305532, 1956934.0536339642};
+// const float pk_coord4[2] = {955564.018495136, 1956934.5500655076};
+// const float pk_coord5[2] = {955563.8305732157, 1956934.6975132197};
+// const float pk_coord6[2] = {955563.4789975542, 1956934.971366751};
 /*************************/
 
 
@@ -251,6 +251,8 @@ void PurePursuitNode::run(char** argv) {
       dv_b_idx_3 = pp_.getPosIndex(dv_b_coord3[0], dv_b_coord3[1], 1);
 
     }
+
+    ROS_INFO("MODE=%d, MISSION_FLAG=%d", pp_.mode, pp_.mission_flag);
 
 
     // Normal 직진구간
@@ -400,6 +402,8 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 8;
       final_constant = 1.2;
 
+      ROS_INFO("TRAFFIC_LIGHT STOP1: %d", pp_.straight_go_flag);
+
 
       // 1,2,3,7번 직진신호등 멈춤
       if((pp_.reachMissionIdx(tf_idx_1) || pp_.reachMissionIdx(tf_idx_2) || pp_.reachMissionIdx(tf_idx_3) || pp_.reachMissionIdx(tf_idx_7)) && !pp_.straight_go_flag) {
@@ -415,6 +419,8 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 8;
       final_constant = 1.2;
 
+       ROS_INFO("TRAFFIC_LIGHT STOP2: %d", pp_.straight_go_flag);
+
       if((pp_.reachMissionIdx(tf_idx_8) || pp_.reachMissionIdx(tf_idx_9)) && !pp_.straight_go_flag) {
         pulishControlMsg(0,0);
         continue;
@@ -428,6 +434,8 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 8;
       final_constant = 1.5;
 
+      ROS_INFO("TRAFFIC_LIGHT STOP3: %d", pp_.straight_go_flag);
+
       if((pp_.reachMissionIdx(tf_idx_4)) && !pp_.straight_go_flag) {
         pulishControlMsg(0,0);
         continue;
@@ -440,6 +448,8 @@ void PurePursuitNode::run(char** argv) {
       const_lookahead_distance_ = 5;
       const_velocity_ = 8;
       final_constant = 1.2;
+
+      ROS_INFO("TRAFFIC_LIGHT STOP4: %d", pp_.left_go_flag);
 
 
       // 5,6번 좌회전 신호등 멈춤
@@ -539,6 +549,8 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 6;
       final_constant = 1.2;
 
+      continue;
+
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
         pp_.mission_flag = 1;
         for (int i = 0; i < 50; i++)
@@ -553,17 +565,17 @@ void PurePursuitNode::run(char** argv) {
       if(pp_.mission_flag == 1){
         const_velocity_ = 10; // if not calculated a_max_index
 
-        // for test
-        // Calc max_index
-        a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
-        ROS_INFO("A INDEX : %d",a_max_index);
+        // // for test
+        // // Calc max_index
+        // a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
+        // ROS_INFO("A INDEX : %d",a_max_index);
 
-        // Max flag on
-        pp_.a_flag[a_max_index] = true;
+        // // Max flag on
+        // pp_.a_flag[a_max_index] = true;
 
-        // Lock the a_cnt_flag
-        a_cnt_flag = true;
-        ROS_INFO("A1=%d A2=%d A3=%d",pp_.a_cnt[0], pp_.a_cnt[1], pp_.a_cnt[2]);
+        // // Lock the a_cnt_flag
+        // a_cnt_flag = true;
+        // ROS_INFO("A1=%d A2=%d A3=%d",pp_.a_cnt[0], pp_.a_cnt[1], pp_.a_cnt[2]);
         }
     }
 
@@ -599,6 +611,8 @@ void PurePursuitNode::run(char** argv) {
       const_lookahead_distance_ = 6;
       const_velocity_ = 6;
       final_constant = 1.2;
+
+      continue;
       
       ROS_INFO("MISSION_FLAG=%d) A_INDEX(%d)  B_INDEX(%d)", pp_.mission_flag, a_max_index, b_max_index);
       ROS_INFO("B1=%d, B2=%d, B3=%d", pp_.b_cnt[0],pp_.b_cnt[1], pp_.b_cnt[2]);
