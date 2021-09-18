@@ -72,14 +72,15 @@ bool index_flag = false;
 // 0914 new stop_line path
 const float tf_coord1[2] = {935573.8125, 1915923.125};
 const float tf_coord2[2] = {935598.875, 1915970.375};
-const float tf_coord3[2] = {935650.3125, 1916096.5};
-const float tf_coord4[2] = {935656.0625, 1916202.0};
-const float tf_coord5[2] = {935649.0, 1916339.75};
-const float tf_coord6[2] = {935581.125, 1916280.875};
-const float tf_coord7[2] = {935642.8125, 1916134.25};
+const float tf_coord3[2] = {935650.071767194, 1916093.28736585};
+const float tf_coord4[2] = {935656.5625, 1916202.0};
+const float tf_coord5[2] = {935649.125, 1916336.375};
+const float tf_coord6[2] = {935649.125, 1916336.375};
+const float tf_coord7[2] = {935642.8125, 1916140.375};
+
 // 무시할지결정해야
-const float tf_coord8[2] = {935611.1875, 1916008.5};
-const float tf_coord9[2] = {935591.4375, 1915966.875};
+const float tf_coord8[2] = {935613.375, 1916012.625};
+const float tf_coord9[2] = {935565.0, 1915917.5};
 
 /*************************/
 
@@ -142,8 +143,6 @@ const float pk_coord6[2] = {935541.86021, 1915863.43345};
 // const float pk_coord5[2] = {955563.8305732157, 1956934.6975132197};
 // const float pk_coord6[2] = {955563.4789975542, 1956934.971366751};
 /*************************/
-
-
 
 // float tmp_distance = 100.0;
 ///////////////////////////////
@@ -226,8 +225,6 @@ void PurePursuitNode::run(char** argv) {
       ROS_INFO_STREAM("Finish Pure Pursuit");
       continue;
     }
-
-
 
     // Traffic Light Index 한번만 초기화
     if(!index_flag){
