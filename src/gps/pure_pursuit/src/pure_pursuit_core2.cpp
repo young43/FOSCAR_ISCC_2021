@@ -424,7 +424,7 @@ void PurePursuitNode::run(char** argv) {
       }
     }
 
-    // MODE 21 : 신호등 & 커브
+    // MODE 21, 23 : 신호등 & 커브
     if (pp_.mode == 21 || pp_.mode == 23){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
