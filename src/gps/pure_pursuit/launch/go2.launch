@@ -19,9 +19,9 @@
 -
 
   <!-- lidar(obstacle) -->
-  <!--
-  <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" />
-  -->
+  
+  <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" output="screen" />
+ 
 
   <!-- yolo -->
   <include file="$(find darknet_ros)/launch/darknet_ros_final.launch" />

@@ -559,7 +559,7 @@ void PurePursuitNode::run(char** argv) {
       }
 
       if(pp_.mission_flag == 1){
-        const_velocity_ = 10; // if not calculated a_max_index
+        const_velocity_ = 8; // if not calculated a_max_index
 
         // // for test
         // // Calc max_index
