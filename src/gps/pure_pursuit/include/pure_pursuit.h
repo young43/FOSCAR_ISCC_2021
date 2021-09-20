@@ -71,6 +71,8 @@ public:
   bool straight_go_flag;
   bool left_go_flag;
   int is_obstacle_detected_8m;
+  int is_delivery_obs_stop_detected;
+  int is_delivery_obs_calc_detected;
 
   // for delivery
   bool a1_flag = false;

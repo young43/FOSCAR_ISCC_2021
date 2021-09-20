@@ -54,6 +54,8 @@ private:
   ros::Subscriber pose_sub;
   ros::Subscriber obstacle_sub;
   ros::Subscriber obstacle_sub2;
+  ros::Subscriber delivery_obs_sub1;
+  ros::Subscriber delivery_obs_sub2;
   ros::Subscriber obstacle_sub_8m;
   ros::Subscriber traffic_light_sub;
   ros::Subscriber delivery_sub;
@@ -86,6 +88,8 @@ private:
   void callbackFromObstacle(const avoid_obstacle::TrueObstacles& msg);
   void callbackFromObstacle2(const avoid_obstacle::DetectedObstacles& msg);   // 왼오
   void callbackFromObstacle3(const avoid_obstacle::DetectedObstacles& msg);   // 오왼
+  void callbackFromObstacleDelivery1(const avoid_obstacle::TrueObstacles& msg);
+  void callbackFromObstacleDelivery2(const avoid_obstacle::TrueObstacles& msg);
 
   void callbackFromObstacle_8M(const avoid_obstacle::TrueObstacles& msg);
   void callbackFromTrafficLight(const darknet_ros_msgs::BoundingBoxes& msg);

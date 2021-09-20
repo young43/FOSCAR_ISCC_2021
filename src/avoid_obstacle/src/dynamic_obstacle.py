@@ -15,6 +15,9 @@ obstacles_pub = rospy.Publisher('detected_obs', DetectedObstacles, queue_size=1)
 trueObs_pub = rospy.Publisher('true_obs', TrueObstacles, queue_size=1)
 # obstacle present publisher : yes or no
 trueObs_pub_long = rospy.Publisher('true_obs_long', TrueObstacles, queue_size=1)
+# obstacle present publisher : yes or no
+deliveryObsStop_pub = rospy.Publisher('delivery_obs_stop', TrueObstacles, queue_size=1)
+deliveryObsCalc_pub = rospy.Publisher('delivery_obs_calc', TrueObstacles, queue_size=1)
 
 sec = 0
 yellow_cone=[]
@@ -58,7 +61,13 @@ def callback(msg):
       true_obs.detected = 0
       true_obs_long = TrueObstacles()
       true_obs_long.detected = 0
-      
+
+      # delivery_obstacle
+      delivery_obs_stop = TrueObstacles()
+      delivery_obs_stop.detected = 0
+
+      delivery_obs_calc = TrueObstacles()
+      delivery_obs_calc.detected = 0
 
       rospy.loginfo(len(msg.circles))
 
@@ -71,6 +80,13 @@ def callback(msg):
 
         if i.center.x < 8 and (i.center.y > - 1.4 and i.center.y < 1):
             true_obs_long.detected = 1
+
+        # 전방 0.5m 안, 오른쪽으로 1m 
+        if i.center.x < 0.5 and 0 < i.center.y < 1:
+            delivery_obs_stop.detected = 1
+
+        if 1 < i.center.x < 3 and 0 < i.center.y < 1:
+            delivery_obs_calc.detected = 1
 
         point_obs = PointObstacles()
         point_obs.x = i.center.x
@@ -87,6 +103,9 @@ def callback(msg):
       obstacles_pub.publish(detected_obs)
       trueObs_pub.publish(true_obs)
       trueObs_pub_long.publish(true_obs_long)
+
+      deliveryObsStop_pub.publish(delivery_obs_stop)
+      deliveryObsCalc_pub.publish(delivery_obs_calc)
 
       # drive_values_pub.publish(drive_value)
 

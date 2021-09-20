@@ -163,12 +163,12 @@ void PurePursuitNode::initForROS()
     &PurePursuitNode::callbackFromCurrentPose, this);
 
   // for main control
-  obstacle_sub = nh_.subscribe("true_obs", 1,
-    &PurePursuitNode::callbackFromObstacle, this);
-  obstacle_sub2 = nh_.subscribe("detected_obs", 1,
-    &PurePursuitNode::callbackFromObstacle2, this);
-  traffic_light_sub = nh_.subscribe("darknet_ros/bounding_boxes",1,
-    &PurePursuitNode::callbackFromTrafficLight, this);
+  obstacle_sub = nh_.subscribe("true_obs", 1, &PurePursuitNode::callbackFromObstacle, this);
+  obstacle_sub2 = nh_.subscribe("detected_obs", 1, &PurePursuitNode::callbackFromObstacle2, this);
+  traffic_light_sub = nh_.subscribe("darknet_ros/bounding_boxes",1, &PurePursuitNode::callbackFromTrafficLight, this);
+
+  delivery_obs_sub1 = nh_.subscribe("delivery_obs_stop", 1, &PurePursuitNode::callbackFromObstacleDelivery1, this);
+  delivery_obs_sub2 = nh_.subscribe("delivery_obs_calc", 1, &PurePursuitNode::callbackFromObstacleDelivery2, this);
   // obstacle_sub = nh_.subscribe("{lane_topic_name}", 1,
   //   &PurePursuitNode::callbackFromLane, this);
 
@@ -282,7 +282,6 @@ void PurePursuitNode::run(char** argv) {
 
       // first
       if (parking_num == 1){
-        // int start_parking_idx = 260
         start_parking_idx = pp_.getPosIndex(pk_coord1[0], pk_coord1[1]);
         end_parking_idx = 120;
         end_parking_backward_idx = 100;
@@ -291,7 +290,6 @@ void PurePursuitNode::run(char** argv) {
 
        // second
        if (parking_num == 2){
-        // int start_parking_idx = 280;
         start_parking_idx = pp_.getPosIndex(pk_coord2[0], pk_coord2[1]);
         end_parking_idx = 87;
         end_parking_backward_idx = 55;
@@ -300,7 +298,6 @@ void PurePursuitNode::run(char** argv) {
 
        // third
        if (parking_num == 3){
-        // int start_parking_idx = 290;
         start_parking_idx = pp_.getPosIndex(pk_coord3[0], pk_coord3[1]);
         end_parking_idx = 145;
         end_parking_backward_idx = 117; // 120
@@ -309,7 +306,6 @@ void PurePursuitNode::run(char** argv) {
 
       // forth
       if (parking_num == 4){
-        // int start_parking_idx = 320;
         start_parking_idx = pp_.getPosIndex(pk_coord4[0], pk_coord4[1]);
         end_parking_idx = 88;
         end_parking_backward_idx = 55;
@@ -318,7 +314,6 @@ void PurePursuitNode::run(char** argv) {
 
       // fifth
       if (parking_num == 5){
-        // int start_parking_idx = 330;
         start_parking_idx = pp_.getPosIndex(pk_coord5[0], pk_coord5[1]);
         end_parking_idx = 80;
         end_parking_backward_idx = 50;
@@ -327,7 +322,6 @@ void PurePursuitNode::run(char** argv) {
 
       //sixth
       if (parking_num == 6){
-        // int start_parking_idx = 345;
         start_parking_idx = pp_.getPosIndex(pk_coord6[0], pk_coord6[1]);
         end_parking_idx = 75;
         end_parking_backward_idx = 55;
@@ -485,13 +479,7 @@ void PurePursuitNode::run(char** argv) {
         pp_.setWaypoints(avoidance_path);
         pp_.mission_flag = 2;
         ROS_INFO("PATH SWITCHING");
-        //pulishControlMsg(0, 0);
-
-        // for test
-        // const_lookahead_distance_ = 4;
-        // const_velocity_ = 6;
-        // final_constant = 2.0;
-
+      
         continue;
       }
       // avoid path original time 4.0
@@ -517,18 +505,6 @@ void PurePursuitNode::run(char** argv) {
         final_constant = 1.5;
       }
 
-      // If failed the mission
-      //pp_.mission_flag = 4;
-      //const_lookahead_distance_ = 4;
-      //const_velocity_ = 6;
-      //final_constant = 1.5;
-
-      // 세번째 신호등 인덱스 : tf_idx_3, temp comment
-      // if(pp_.mission_flag == 0 && pp_.reachMissionIdx(tf_idx_3) && !pp_.straight_go_flag) {
-      //   pulishControlMsg(0,0);
-      //   continue;
-      // }
-
     }
 
     // MODE 9 : 배달 A 전 진입구간
@@ -546,6 +522,8 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 6;
       final_constant = 1.2;
 
+      if(pp_.is_delivery_obs_stop_detected) ROS_INFO("DELIVERY OBSTACLE DETECT!!!");
+
 
       if(pp_.mission_flag==0 && pp_.reachMissionIdx(dv_a_idx_1)) {
         pp_.mission_flag = 1;
@@ -561,17 +539,6 @@ void PurePursuitNode::run(char** argv) {
       if(pp_.mission_flag == 1){
         const_velocity_ = 8; // if not calculated a_max_index
 
-        // // for test
-        // // Calc max_index
-        // a_max_index = max_element(pp_.a_cnt.begin(), pp_.a_cnt.end()) - pp_.a_cnt.begin();
-        // ROS_INFO("A INDEX : %d",a_max_index);
-
-        // // Max flag on
-        // pp_.a_flag[a_max_index] = true;
-
-        // // Lock the a_cnt_flag
-        // a_cnt_flag = true;
-        // ROS_INFO("A1=%d A2=%d A3=%d",pp_.a_cnt[0], pp_.a_cnt[1], pp_.a_cnt[2]);
         }
     }
 
@@ -612,10 +579,6 @@ void PurePursuitNode::run(char** argv) {
       ROS_INFO("B1=%d, B2=%d, B3=%d", pp_.b_cnt[0],pp_.b_cnt[1], pp_.b_cnt[2]);
 
       // case 2) vision_distance + gps 로직
-      // pp_.mission_flag == 1 : dv_b_idx_1 도달 판단
-      // pp_.mission_flag == 2 : dv_b_idx_2 도달 판단
-      // pp_.mission_flag == 3 : dv_b_idx_3 도달 판단
-      
       if(pp_.mission_flag == 0 && pp_.reachMissionIdx(dv_b_idx_0)){
         pp_.mission_flag = 1;
       }
@@ -828,6 +791,18 @@ void PurePursuitNode::publishSteeringVisualizationMsg (const double& steering_ra
 // for main control
 void PurePursuitNode::callbackFromObstacle(const avoid_obstacle::TrueObstacles& msg) {
   pp_.is_obstacle_detected = msg.detected;
+  //std::cout << "msg.detected : " << msg.detected << std::endl;
+}
+
+// for delivery obstacle (stop)
+void PurePursuitNode::callbackFromObstacleDelivery1(const avoid_obstacle::TrueObstacles& msg) {
+  pp_.is_delivery_obs_stop_detected = msg.detected;
+  //std::cout << "msg.detected : " << msg.detected << std::endl;
+}
+
+// for delivery obstacle (calc) - 판단로직
+void PurePursuitNode::callbackFromObstacleDelivery2(const avoid_obstacle::TrueObstacles& msg) {
+  pp_.is_delivery_obs_calc_detected = msg.detected;
   //std::cout << "msg.detected : " << msg.detected << std::endl;
 }
 
