@@ -186,7 +186,7 @@ void PurePursuitNode::initForROS()
 }
 
 void PurePursuitNode::run(char** argv) {
-  ROS_INFO_STREAM("pure pursuit2 start");
+  ROS_INFO_STREAM("pure pursuit3 start");
 
   // temp
   const_lookahead_distance_ = atof(argv[2]);
@@ -534,10 +534,13 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 6;
       final_constant = 1.2;
 
+      ROS_INFO("DELIVERY_A STOP FLAG=%d", pp_.is_delivery_obs_calc_detected);
+
       // if(pp_.is_delivery_obs_stop_detected) ROS_INFO("DELIVERY OBSTACLE DETECT!!!");
       if(pp_.mission_flag==0 && pp_.is_delivery_obs_stop_detected) {
         ROS_INFO("DELIVERY OBSTACLE DETECT!!!");
         pp_.mission_flag = 1;
+        
         for (int i = 0; i < 50; i++)
         {
           pulishControlMsg(0, 0);
@@ -576,8 +579,8 @@ void PurePursuitNode::run(char** argv) {
       final_constant = 1.5;
 
       // for test
-      // a_max_index = 0;
-      // pp_.a_flag[a_max_index] = true;
+      a_max_index = 1;
+      pp_.a_flag[a_max_index] = true;
     }
 
     // MODE 20 : 배달 PICK B
@@ -586,8 +589,8 @@ void PurePursuitNode::run(char** argv) {
       const_velocity_ = 6;
       final_constant = 1.2;
       
-      // ROS_INFO("MISSION_FLAG=%d) A_INDEX(%d)  B_INDEX(%d)", pp_.mission_flag, a_max_index, b_max_index);
-      // ROS_INFO("B1=%d, B2=%d, B3=%d", pp_.b_cnt[0],pp_.b_cnt[1], pp_.b_cnt[2]);
+      ROS_INFO("MISSION_FLAG=%d) A_INDEX(%d)  B_INDEX(%d)", pp_.mission_flag, a_max_index, b_max_index);
+      ROS_INFO("B1=%d, B2=%d, B3=%d", pp_.b_cnt[0],pp_.b_cnt[1], pp_.b_cnt[2]);
       ROS_INFO("CALC_FLAG=%d, STOP_FLAG=%d", pp_.is_delivery_obs_calc_detected, pp_.is_delivery_obs_stop_detected);
       
       // case 2) vision_distance + gps 로직
@@ -603,60 +606,48 @@ void PurePursuitNode::run(char** argv) {
 
 
       // Delivery Subscribe 함수와 main 코드 상에서 순서상의 차이가 있을 경우를 대비함.
-      if(pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3){
-        // Calc max_index
-        b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
-        // ROS_INFO("B INDEX (MISSION_FLAG=%d) : %d", pp_.mission_flag, b_max_index);
+      // if(pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3){
+      //   // Calc max_index
+      //   b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
+      //   // ROS_INFO("B INDEX (MISSION_FLAG=%d) : %d", pp_.mission_flag, b_max_index);
 
-        if (a_max_index == b_max_index) {
-          // Max flag on
-          pp_.b_flag[b_max_index] = true;
-        }
-        else {
-          pp_.b_cnt = {0,0,0};
-          if(pp_.mission_flag == 1){ 
-            pp_.mission_flag = 22; 
-            passed_index.push_back(b_max_index);
-          }
-          else if(pp_.mission_flag == 2){
-            pp_.mission_flag = 33;
-            passed_index.push_back(b_max_index);
-          }
-        }
-      }
+      //   if (a_max_index == b_max_index) {
+      //     // Max flag on
+      //     pp_.b_flag[b_max_index] = true;
+      //   }
+      //   else {
+      //     pp_.b_cnt = {0,0,0};
+      //     if(pp_.mission_flag == 1){ 
+      //       pp_.mission_flag = 22; 
+      //       passed_index.push_back(b_max_index);
+      //     }
+      //     else if(pp_.mission_flag == 2){
+      //       pp_.mission_flag = 33;
+      //       passed_index.push_back(b_max_index);
+      //     }
+      //   }
+      // }
 
       if((pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3) && pp_.is_delivery_obs_stop_detected){
-        if((pp_.a_flag[0] && pp_.b_flag[0]) || (pp_.a_flag[1] && pp_.b_flag[1]) || (pp_.a_flag[2] && pp_.b_flag[2])){
+        b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
+        if (a_max_index == b_max_index) {
+          ROS_INFO("B DELIVEY STOP");
+          // Max flag on
           for (int i = 0; i < 50; i++)
           {
             pulishControlMsg(0, 0);
             usleep(100000);  // 0.1초
           }
           pp_.mission_flag = 100;
+        }else{
+          pp_.b_cnt = {0,0,0};
+          if(pp_.mission_flag == 1) pp_.mission_flag = 22;
+          else if(pp_.mission_flag == 2) pp_.mission_flag = 33;
+          
         }
+   
       }
 
-      // if(pp_.mission_flag == 2 && pp_.is_delivery_obs_stop_detected){
-      //   if((pp_.a_flag[0] && pp_.b_flag[0]) || (pp_.a_flag[1] && pp_.b_flag[1]) || (pp_.a_flag[2] && pp_.b_flag[2])){
-      //     for (int i = 0; i < 50; i++)
-      //     {
-      //       pulishControlMsg(0, 0);
-      //       usleep(100000);  // 0.1초
-      //     }
-      //     pp_.mission_flag = 100;
-      //   }
-      // }
-
-      // if(pp_.mission_flag == 3 && pp_.is_delivery_obs_stop_detected){
-      //   if((pp_.a_flag[0] && pp_.b_flag[0]) || (pp_.a_flag[1] && pp_.b_flag[1]) || (pp_.a_flag[2] && pp_.b_flag[2])){
-      //     for (int i = 0; i < 50; i++)
-      //     {
-      //       pulishControlMsg(0, 0);
-      //       usleep(100000);  // 0.1초
-      //     }
-      //   }
-      //   pp_.mission_flag = 100;
-      // }
 
       if(pp_.mission_flag == 100){
         const_lookahead_distance_ = 4;
@@ -806,12 +797,19 @@ void PurePursuitNode::callbackFromObstacle(const avoid_obstacle::TrueObstacles& 
 // for delivery obstacle (stop)
 void PurePursuitNode::callbackFromObstacleDelivery1(const avoid_obstacle::TrueObstacles& msg) {
   pp_.is_delivery_obs_stop_detected = msg.detected;
+
+  if(pp_.is_delivery_obs_stop_detected)
+    pp_.is_delivery_obs_calc_detected = 0;
   //std::cout << "msg.detected : " << msg.detected << std::endl;
 }
 
 // for delivery obstacle (calc) - 판단로직
 void PurePursuitNode::callbackFromObstacleDelivery2(const avoid_obstacle::TrueObstacles& msg) {
-  pp_.is_delivery_obs_calc_detected = msg.detected;
+  if(msg.detected)
+    pp_.is_delivery_obs_calc_detected = msg.detected;
+
+  if(pp_.is_delivery_obs_stop_detected)
+    pp_.is_delivery_obs_calc_detected = 0;
   //std::cout << "msg.detected : " << msg.detected << std::endl;
 }
 
@@ -972,7 +970,7 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
     else if(deliveryObjectsA[0].Class == "A3") pp_.a_cnt[2] += 1;
   }
 
-  if(pp_.mode == 20 && deliveryObjectsB.size() > 0 && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
+  if(pp_.mode == 20 && deliveryObjectsB.size() > 0 && (pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3)){
     auto it1 = find(passed_index.begin(), passed_index.end(), 0);
     auto it2 = find(passed_index.begin(), passed_index.end(), 1);
     auto it3 = find(passed_index.begin(), passed_index.end(), 2);

@@ -11,14 +11,15 @@
   <node name="obstacle_extractor" pkg="nodelet" type="nodelet" args="load obstacle_detector/ObstacleExtractor nodelet_manager">
     <param name="active"               value="true"/>
     <param name="use_scan"             value="true"/>
-    <param name="use_pcl"              value="false"/>
+    <param name="use_pcl"              value="true"/>
 
     <param name="use_split_and_merge"    value="true"/>
     <param name="circles_from_visibles"  value="true"/>
-    <param name="discard_converted_segments" value="true"/>
+    <param name="discard_converted_segments" value="false"/>
     <param name="transform_coordinates"  value="true"/>
 
-    <param name="min_group_points"     value="5"/>
+
+    <param name="min_group_points"     value="2"/>
 
     <!-- <param name="max_group_distance"   value="0.5"/>  -->
     <param name="max_group_distance"   value="0.5"/> 

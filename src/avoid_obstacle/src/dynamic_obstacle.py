@@ -74,18 +74,17 @@ def callback(msg):
       for i in msg.circles:
         center.append([i.center.x, i.center.y])
 
-        if i.center.x < 5 and (i.center.y > - 1.4 and i.center.y < 1):
+        if i.center.x < 5 and (i.center.y > - 1.4 and i.center.y < 1.4):
             true_obs.detected = 1
             print("OBSTACLE) {}".format(i.radius))
 
-        if i.center.x < 8 and (i.center.y > - 1.4 and i.center.y < 1):
+        if i.center.x < 8 and (i.center.y > - 1.4 and i.center.y < 1.4):
             true_obs_long.detected = 1
 
-        # 전방 0.5m 안, 오른쪽으로 1m 
-        if i.center.x < 0.5 and 0 < i.center.y < 1:
+        if i.center.x < 0.7 and -2 < i.center.y < -0.1:
             delivery_obs_stop.detected = 1
 
-        if 1 < i.center.x < 3 and 0 < i.center.y < 1:
+        if 1 < i.center.x < 5 and -2 < i.center.y < -0.1:
             delivery_obs_calc.detected = 1
 
         point_obs = PointObstacles()
@@ -118,7 +117,7 @@ def listener():
       rospy.Subscriber("color_cone", ColorconeArray_lidar, colorcone_callback)
 
 if __name__=='__main__':
-      global yellow_cone, blue_cone
+      # global yellow_cone, blue_cone
       listener()
       rospy.spin()
 
