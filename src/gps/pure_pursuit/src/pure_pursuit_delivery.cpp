@@ -71,7 +71,7 @@ bool index_flag = false;
 
 // 0914 new stop_line path
 const float tf_coord1[2] = {935573.8125, 1915923.125};
-const float tf_coord2[2] = {935599.106224, 1915970.57923};
+const float tf_coord2[2] = {935598.43036, 1915969.19758};
 const float tf_coord3[2] = {935650.071767194, 1916093.28736585};
 const float tf_coord4[2] = {935656.5625, 1916202.0};
 const float tf_coord5[2] = {935649.125, 1916336.375};
@@ -80,7 +80,7 @@ const float tf_coord7[2] = {935642.8125, 1916140.375};
 
 // 무시할지결정해야
 const float tf_coord8[2] = {935611.629488, 1916009.71394};
-const float tf_coord9[2] = {935591.309636, 1915967.1553};
+const float tf_coord9[2] = {935592.698823, 1915969.01965};
 
 /*************************/
 

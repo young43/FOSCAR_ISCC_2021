@@ -302,7 +302,7 @@ class point:
 					self.xycar_angle_deg=self.xycar_angle_deg_2
 					self.xycar_angle_deg_2-=0
 					drive(self.xycar_angle_deg_2,True)
-					print(" xycar_deg_2: ", self.xycar_angle_deg_2)
+					#print(" xycar_deg_2: ", self.xycar_angle_deg_2)
 					
 					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
 					
@@ -319,7 +319,7 @@ class point:
 					self.xycar_angle_deg=self.xycar_angle_deg_2
 					self.xycar_angle_deg_2+=0
 					drive(self.xycar_angle_deg_2,True)
-					print(" xycar_deg_2: ", self.xycar_angle_deg_2)
+					#print(" xycar_deg_2: ", self.xycar_angle_deg_2)
 					
 					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
 					
