@@ -1,0 +1,7 @@
+\subsubsection usage Usage
+\verbatim
+<node name="darknet_ros" pkg="darknet_ros" type="darknet_ros">
+  <param name="YOLO_THRESH" type="double" value="0.4" />
+</node>
+\endverbatim
+

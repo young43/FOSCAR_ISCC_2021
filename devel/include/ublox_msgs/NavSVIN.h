@@ -119,6 +119,14 @@ struct NavSVIN_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 59u,
@@ -150,6 +158,35 @@ ros::message_operations::Printer< ::ublox_msgs::NavSVIN_<ContainerAllocator> >::
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavSVIN_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSVIN_<ContainerAllocator2> & rhs)
+{
+  return lhs.version == rhs.version &&
+    lhs.reserved0 == rhs.reserved0 &&
+    lhs.iTOW == rhs.iTOW &&
+    lhs.dur == rhs.dur &&
+    lhs.meanX == rhs.meanX &&
+    lhs.meanY == rhs.meanY &&
+    lhs.meanZ == rhs.meanZ &&
+    lhs.meanXHP == rhs.meanXHP &&
+    lhs.meanYHP == rhs.meanYHP &&
+    lhs.meanZHP == rhs.meanZHP &&
+    lhs.reserved1 == rhs.reserved1 &&
+    lhs.meanAcc == rhs.meanAcc &&
+    lhs.obs == rhs.obs &&
+    lhs.valid == rhs.valid &&
+    lhs.active == rhs.active &&
+    lhs.reserved3 == rhs.reserved3;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavSVIN_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSVIN_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -157,12 +194,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -227,58 +258,58 @@ struct Definition< ::ublox_msgs::NavSVIN_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-SVIN (0x01 0x3B)\n\
-# Survey-in data\n\
-# \n\
-# This message contains information about survey-in parameters.\n\
-# Supported on:\n\
-#  - u-blox 8 / u-blox M8 with protocol version 20 (only with High Precision\n\
-#    GNSS products)\n\
-\n\
-uint8 CLASS_ID = 1\n\
-uint8 MESSAGE_ID = 59\n\
-\n\
-uint8 version           # Message version (0x00 for this version)\n\
-uint8[3] reserved0      # Reserved\n\
-\n\
-uint32 iTOW             # GPS time of week of the navigation epoch [ms]\n\
-\n\
-uint32 dur              # Passed survey-in observation time [s]\n\
-\n\
-int32 meanX             # Current survey-in mean position ECEF X coordinate [cm]\n\
-int32 meanY             # Current survey-in mean position ECEF Y coordinate [cm]\n\
-int32 meanZ             # Current survey-in mean position ECEF Z coordinate [cm]\n\
-\n\
-int8 meanXHP            # Current high-precision survey-in mean position\n\
-                        # ECEF X coordinate. 0.1_mm \n\
-                        # Must be in the range -99..+99.\n\
-                        # The current survey-in mean position ECEF X\n\
-                        # coordinate, in units of cm, is given by\n\
-                        # meanX + (0.01 * meanXHP)\n\
-int8 meanYHP            # Current high-precision survey-in mean position\n\
-                        # ECEF Y coordinate. [0.1 mm] \n\
-                        # Must be in the range -99..+99.\n\
-                        # The current survey-in mean position ECEF Y\n\
-                        # coordinate, in units of cm, is given by\n\
-                        # meanY + (0.01 * meanYHP)\n\
-int8 meanZHP            # Current high-precision survey-in mean position\n\
-                        # ECEF Z coordinate. [0.1 mm] \n\
-                        # Must be in the range -99..+99.\n\
-                        # The current survey-in mean position ECEF Z\n\
-                        # coordinate, in units of cm, is given by\n\
-                        # meanZ + (0.01 * meanZHP)\n\
-\n\
-uint8 reserved1         # Reserved\n\
-\n\
-uint32 meanAcc          # Current survey-in mean position accuracy [0.1 mm]\n\
-uint32 obs              # Number of position observations used during survey-in\n\
-uint8 valid             # Survey-in position validity flag, 1 = valid\n\
-                        # otherwise 0\n\
-uint8 active            # Survey-in in progress flag, 1 = in-progress\n\
-                        # otherwise 0\n\
-\n\
-uint8[2] reserved3      # Reserved\n\
-";
+    return "# NAV-SVIN (0x01 0x3B)\n"
+"# Survey-in data\n"
+"# \n"
+"# This message contains information about survey-in parameters.\n"
+"# Supported on:\n"
+"#  - u-blox 8 / u-blox M8 with protocol version 20 (only with High Precision\n"
+"#    GNSS products)\n"
+"\n"
+"uint8 CLASS_ID = 1\n"
+"uint8 MESSAGE_ID = 59\n"
+"\n"
+"uint8 version           # Message version (0x00 for this version)\n"
+"uint8[3] reserved0      # Reserved\n"
+"\n"
+"uint32 iTOW             # GPS time of week of the navigation epoch [ms]\n"
+"\n"
+"uint32 dur              # Passed survey-in observation time [s]\n"
+"\n"
+"int32 meanX             # Current survey-in mean position ECEF X coordinate [cm]\n"
+"int32 meanY             # Current survey-in mean position ECEF Y coordinate [cm]\n"
+"int32 meanZ             # Current survey-in mean position ECEF Z coordinate [cm]\n"
+"\n"
+"int8 meanXHP            # Current high-precision survey-in mean position\n"
+"                        # ECEF X coordinate. 0.1_mm \n"
+"                        # Must be in the range -99..+99.\n"
+"                        # The current survey-in mean position ECEF X\n"
+"                        # coordinate, in units of cm, is given by\n"
+"                        # meanX + (0.01 * meanXHP)\n"
+"int8 meanYHP            # Current high-precision survey-in mean position\n"
+"                        # ECEF Y coordinate. [0.1 mm] \n"
+"                        # Must be in the range -99..+99.\n"
+"                        # The current survey-in mean position ECEF Y\n"
+"                        # coordinate, in units of cm, is given by\n"
+"                        # meanY + (0.01 * meanYHP)\n"
+"int8 meanZHP            # Current high-precision survey-in mean position\n"
+"                        # ECEF Z coordinate. [0.1 mm] \n"
+"                        # Must be in the range -99..+99.\n"
+"                        # The current survey-in mean position ECEF Z\n"
+"                        # coordinate, in units of cm, is given by\n"
+"                        # meanZ + (0.01 * meanZHP)\n"
+"\n"
+"uint8 reserved1         # Reserved\n"
+"\n"
+"uint32 meanAcc          # Current survey-in mean position accuracy [0.1 mm]\n"
+"uint32 obs              # Number of position observations used during survey-in\n"
+"uint8 valid             # Survey-in position validity flag, 1 = valid\n"
+"                        # otherwise 0\n"
+"uint8 active            # Survey-in in progress flag, 1 = in-progress\n"
+"                        # otherwise 0\n"
+"\n"
+"uint8[2] reserved3      # Reserved\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavSVIN_<ContainerAllocator>&) { return value(); }

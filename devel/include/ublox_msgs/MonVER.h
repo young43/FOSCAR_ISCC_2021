@@ -55,6 +55,14 @@ struct MonVER_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+
   enum {
     CLASS_ID = 10u,
     MESSAGE_ID = 4u,
@@ -86,6 +94,22 @@ ros::message_operations::Printer< ::ublox_msgs::MonVER_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::MonVER_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonVER_<ContainerAllocator2> & rhs)
+{
+  return lhs.swVersion == rhs.swVersion &&
+    lhs.hwVersion == rhs.hwVersion &&
+    lhs.extension == rhs.extension;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::MonVER_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonVER_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -93,12 +117,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -163,28 +181,28 @@ struct Definition< ::ublox_msgs::MonVER_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# MON-VER (0x0A 0x04)\n\
-#\n\
-# Receiver/Software Version\n\
-# Returned when the version is polled.\n\
-\n\
-uint8 CLASS_ID = 10\n\
-uint8 MESSAGE_ID = 4\n\
-\n\
-char[30] swVersion    # Zero-terminated software version string.\n\
-char[10] hwVersion    # Zero-terminated hardware version string.\n\
-\n\
-# Start of repeated block (N times)\n\
-MonVER_Extension[] extension\n\
-# End of repeated block\n\
-\n\
-================================================================================\n\
-MSG: ublox_msgs/MonVER_Extension\n\
-# see MonVER message\n\
-#\n\
-\n\
-char[30] field\n\
-";
+    return "# MON-VER (0x0A 0x04)\n"
+"#\n"
+"# Receiver/Software Version\n"
+"# Returned when the version is polled.\n"
+"\n"
+"uint8 CLASS_ID = 10\n"
+"uint8 MESSAGE_ID = 4\n"
+"\n"
+"char[30] swVersion    # Zero-terminated software version string.\n"
+"char[10] hwVersion    # Zero-terminated hardware version string.\n"
+"\n"
+"# Start of repeated block (N times)\n"
+"MonVER_Extension[] extension\n"
+"# End of repeated block\n"
+"\n"
+"================================================================================\n"
+"MSG: ublox_msgs/MonVER_Extension\n"
+"# see MonVER message\n"
+"#\n"
+"\n"
+"char[30] field\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::MonVER_<ContainerAllocator>&) { return value(); }

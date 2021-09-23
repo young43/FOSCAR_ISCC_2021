@@ -81,10 +81,10 @@ def callback(msg):
         if i.center.x < 8 and (i.center.y > - 1.4 and i.center.y < 1.4):
             true_obs_long.detected = 1
 
-        if i.center.x < 0.7 and -2 < i.center.y < -0.1:
+        if i.center.x < 0.7 and -2.5 < i.center.y < -0.1:
             delivery_obs_stop.detected = 1
 
-        if 1 < i.center.x < 5 and -2 < i.center.y < -0.1:
+        if 1 < i.center.x < 4 and -2.5 < i.center.y < -0.1:
             delivery_obs_calc.detected = 1
 
         point_obs = PointObstacles()

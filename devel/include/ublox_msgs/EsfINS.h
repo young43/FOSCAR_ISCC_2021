@@ -80,6 +80,35 @@ struct EsfINS_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(BITFIELD0_VERSION)
+  #undef BITFIELD0_VERSION
+#endif
+#if defined(_WIN32) && defined(BITFIELD0_X_ANG_RATE_VALID)
+  #undef BITFIELD0_X_ANG_RATE_VALID
+#endif
+#if defined(_WIN32) && defined(BITFIELD0_Y_ANG_RATE_VALID)
+  #undef BITFIELD0_Y_ANG_RATE_VALID
+#endif
+#if defined(_WIN32) && defined(BITFIELD0_Z_ANG_RATE_VALID)
+  #undef BITFIELD0_Z_ANG_RATE_VALID
+#endif
+#if defined(_WIN32) && defined(BITFIELD0_X_ACCEL_VALID)
+  #undef BITFIELD0_X_ACCEL_VALID
+#endif
+#if defined(_WIN32) && defined(BITFIELD0_Y_ACCEL_VALID)
+  #undef BITFIELD0_Y_ACCEL_VALID
+#endif
+#if defined(_WIN32) && defined(BITFIELD0_Z_ACCEL_VALID)
+  #undef BITFIELD0_Z_ACCEL_VALID
+#endif
+
   enum {
     CLASS_ID = 16u,
     MESSAGE_ID = 21u,
@@ -132,6 +161,28 @@ ros::message_operations::Printer< ::ublox_msgs::EsfINS_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::EsfINS_<ContainerAllocator1> & lhs, const ::ublox_msgs::EsfINS_<ContainerAllocator2> & rhs)
+{
+  return lhs.bitfield0 == rhs.bitfield0 &&
+    lhs.reserved1 == rhs.reserved1 &&
+    lhs.iTOW == rhs.iTOW &&
+    lhs.xAngRate == rhs.xAngRate &&
+    lhs.yAngRate == rhs.yAngRate &&
+    lhs.zAngRate == rhs.zAngRate &&
+    lhs.xAccel == rhs.xAccel &&
+    lhs.yAccel == rhs.yAccel &&
+    lhs.zAccel == rhs.zAccel;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::EsfINS_<ContainerAllocator1> & lhs, const ::ublox_msgs::EsfINS_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -139,12 +190,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -209,45 +254,45 @@ struct Definition< ::ublox_msgs::EsfINS_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# ESF-INS (0x10 0x15)\n\
-# Vehicle dynamics information\n\
-# \n\
-# This message outputs information about vehicle dynamics computed by the \n\
-# Inertial Navigation System (INS) during ESF-based navigation.\n\
-# For ADR products, the output dynamics information (angular rates and \n\
-# accelerations) is expressed with respect to the vehicle-frame.\n\
-# For UDR products, the output dynamics information (angular rates and \n\
-# accelerations) is expressed with respect to the body-frame.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 16\n\
-uint8 MESSAGE_ID = 21\n\
-\n\
-uint32 bitfield0      # Bitfield (see graphic below)\n\
-uint32 BITFIELD0_VERSION = 255            # Message version (1 for this version).\n\
-uint32 BITFIELD0_X_ANG_RATE_VALID = 256   # Compensated x-axis angular rate data \n\
-                                          # validity flag\n\
-uint32 BITFIELD0_Y_ANG_RATE_VALID = 512   # Compensated y-axis angular rate data \n\
-                                          # validity flag\n\
-uint32 BITFIELD0_Z_ANG_RATE_VALID = 1024  # Compensated z-axis angular rate data \n\
-                                          # validity flag\n\
-uint32 BITFIELD0_X_ACCEL_VALID = 2048     # Compensated x-axis acceleration data \n\
-                                          # validity flag\n\
-uint32 BITFIELD0_Y_ACCEL_VALID = 4096     # Compensated y-axis acceleration data \n\
-                                          # validity flag\n\
-uint32 BITFIELD0_Z_ACCEL_VALID = 8192     # Compensated z-axis acceleration data \n\
-                                          # validity flag\n\
-\n\
-uint8[4] reserved1    # Reserved\n\
-\n\
-uint32 iTOW           # GPS time of week of the navigation epoch [ms]\n\
-int32 xAngRate        # Compensated x-axis angular rate [deg/s / 1e-3]\n\
-int32 yAngRate        # Compensated y-axis angular rate [deg/s / 1e-3]\n\
-int32 zAngRate        # Compensated z-axis angular rate [deg/s / 1e-3]\n\
-int32 xAccel          # Compensated x-axis acceleration (gravity-free) [mg]\n\
-int32 yAccel          # Compensated y-axis acceleration (gravity-free) [mg]\n\
-int32 zAccel          # Compensated z-axis acceleration (gravity-free) [mg]\n\
-";
+    return "# ESF-INS (0x10 0x15)\n"
+"# Vehicle dynamics information\n"
+"# \n"
+"# This message outputs information about vehicle dynamics computed by the \n"
+"# Inertial Navigation System (INS) during ESF-based navigation.\n"
+"# For ADR products, the output dynamics information (angular rates and \n"
+"# accelerations) is expressed with respect to the vehicle-frame.\n"
+"# For UDR products, the output dynamics information (angular rates and \n"
+"# accelerations) is expressed with respect to the body-frame.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 16\n"
+"uint8 MESSAGE_ID = 21\n"
+"\n"
+"uint32 bitfield0      # Bitfield (see graphic below)\n"
+"uint32 BITFIELD0_VERSION = 255            # Message version (1 for this version).\n"
+"uint32 BITFIELD0_X_ANG_RATE_VALID = 256   # Compensated x-axis angular rate data \n"
+"                                          # validity flag\n"
+"uint32 BITFIELD0_Y_ANG_RATE_VALID = 512   # Compensated y-axis angular rate data \n"
+"                                          # validity flag\n"
+"uint32 BITFIELD0_Z_ANG_RATE_VALID = 1024  # Compensated z-axis angular rate data \n"
+"                                          # validity flag\n"
+"uint32 BITFIELD0_X_ACCEL_VALID = 2048     # Compensated x-axis acceleration data \n"
+"                                          # validity flag\n"
+"uint32 BITFIELD0_Y_ACCEL_VALID = 4096     # Compensated y-axis acceleration data \n"
+"                                          # validity flag\n"
+"uint32 BITFIELD0_Z_ACCEL_VALID = 8192     # Compensated z-axis acceleration data \n"
+"                                          # validity flag\n"
+"\n"
+"uint8[4] reserved1    # Reserved\n"
+"\n"
+"uint32 iTOW           # GPS time of week of the navigation epoch [ms]\n"
+"int32 xAngRate        # Compensated x-axis angular rate [deg/s / 1e-3]\n"
+"int32 yAngRate        # Compensated y-axis angular rate [deg/s / 1e-3]\n"
+"int32 zAngRate        # Compensated z-axis angular rate [deg/s / 1e-3]\n"
+"int32 xAccel          # Compensated x-axis acceleration (gravity-free) [mg]\n"
+"int32 yAccel          # Compensated y-axis acceleration (gravity-free) [mg]\n"
+"int32 zAccel          # Compensated z-axis acceleration (gravity-free) [mg]\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::EsfINS_<ContainerAllocator>&) { return value(); }

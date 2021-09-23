@@ -1,0 +1,6 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~YOLO_THRESH" : \b [double] Threshold below which an object will not be included in the detection results min: 0.0, default: 0.4, max: 1.0
+

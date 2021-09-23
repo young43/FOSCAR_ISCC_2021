@@ -73,6 +73,56 @@ struct NavSVINFO_SV_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(FLAGS_SV_USED)
+  #undef FLAGS_SV_USED
+#endif
+#if defined(_WIN32) && defined(FLAGS_DIFF_CORR)
+  #undef FLAGS_DIFF_CORR
+#endif
+#if defined(_WIN32) && defined(FLAGS_ORBIT_AVAIL)
+  #undef FLAGS_ORBIT_AVAIL
+#endif
+#if defined(_WIN32) && defined(FLAGS_ORBIT_EPH)
+  #undef FLAGS_ORBIT_EPH
+#endif
+#if defined(_WIN32) && defined(FLAGS_UNHEALTHY)
+  #undef FLAGS_UNHEALTHY
+#endif
+#if defined(_WIN32) && defined(FLAGS_ORBIT_ALM)
+  #undef FLAGS_ORBIT_ALM
+#endif
+#if defined(_WIN32) && defined(FLAGS_ORBIT_AOP)
+  #undef FLAGS_ORBIT_AOP
+#endif
+#if defined(_WIN32) && defined(FLAGS_SMOOTHED)
+  #undef FLAGS_SMOOTHED
+#endif
+#if defined(_WIN32) && defined(QUALITY_IDLE)
+  #undef QUALITY_IDLE
+#endif
+#if defined(_WIN32) && defined(QUALITY_SEARCHING)
+  #undef QUALITY_SEARCHING
+#endif
+#if defined(_WIN32) && defined(QUALITY_ACQUIRED)
+  #undef QUALITY_ACQUIRED
+#endif
+#if defined(_WIN32) && defined(QUALITY_DETECTED)
+  #undef QUALITY_DETECTED
+#endif
+#if defined(_WIN32) && defined(QUALITY_CODE_LOCK)
+  #undef QUALITY_CODE_LOCK
+#endif
+#if defined(_WIN32) && defined(QUALITY_CODE_AND_CARRIER_LOCKED1)
+  #undef QUALITY_CODE_AND_CARRIER_LOCKED1
+#endif
+#if defined(_WIN32) && defined(QUALITY_CODE_AND_CARRIER_LOCKED2)
+  #undef QUALITY_CODE_AND_CARRIER_LOCKED2
+#endif
+#if defined(_WIN32) && defined(QUALITY_CODE_AND_CARRIER_LOCKED3)
+  #undef QUALITY_CODE_AND_CARRIER_LOCKED3
+#endif
+
   enum {
     FLAGS_SV_USED = 1u,
     FLAGS_DIFF_CORR = 2u,
@@ -146,6 +196,27 @@ ros::message_operations::Printer< ::ublox_msgs::NavSVINFO_SV_<ContainerAllocator
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavSVINFO_SV_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSVINFO_SV_<ContainerAllocator2> & rhs)
+{
+  return lhs.chn == rhs.chn &&
+    lhs.svid == rhs.svid &&
+    lhs.flags == rhs.flags &&
+    lhs.quality == rhs.quality &&
+    lhs.cno == rhs.cno &&
+    lhs.elev == rhs.elev &&
+    lhs.azim == rhs.azim &&
+    lhs.prRes == rhs.prRes;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavSVINFO_SV_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSVINFO_SV_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -153,12 +224,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -223,48 +288,48 @@ struct Definition< ::ublox_msgs::NavSVINFO_SV_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# see message NavSVINFO\n\
-#\n\
-\n\
-uint8 chn             # Channel number, 255 for SVs not assigned to a channel\n\
-uint8 svid            # Satellite ID\n\
-\n\
-uint8 flags           # Bitmask\n\
-uint8 FLAGS_SV_USED = 1                     # SV is used for navigation\n\
-uint8 FLAGS_DIFF_CORR = 2                   # Differential correction data \n\
-                                            # is available for this SV\n\
-uint8 FLAGS_ORBIT_AVAIL = 4                 # Orbit information is available for \n\
-                                            # this SV (Ephemeris or Almanach)\n\
-uint8 FLAGS_ORBIT_EPH = 8                   # Orbit information is Ephemeris\n\
-uint8 FLAGS_UNHEALTHY = 16                  # SV is unhealthy / shall not be \n\
-                                            # used\n\
-uint8 FLAGS_ORBIT_ALM = 32                  # Orbit information is Almanac Plus\n\
-uint8 FLAGS_ORBIT_AOP = 64                  # Orbit information is AssistNow \n\
-                                            # Autonomous\n\
-uint8 FLAGS_SMOOTHED = 128                  # Carrier smoothed pseudorange used\n\
-\n\
-uint8 quality         # Bitfield\n\
-# qualityInd: Signal Quality indicator (range 0..7). The following list shows \n\
-# the meaning of the different QI values:\n\
-# Note: Since IMES signals are not time synchronized, a channel tracking an IMES\n\
-# signal can never reach a quality indicator value of higher than 3.\n\
-uint8 QUALITY_IDLE = 0                      # This channel is idle\n\
-uint8 QUALITY_SEARCHING = 1                 # Channel is searching\n\
-uint8 QUALITY_ACQUIRED = 2                   # Signal acquired\n\
-uint8 QUALITY_DETECTED = 3                  # Signal detected but unusable\n\
-uint8 QUALITY_CODE_LOCK = 4                 # Code Lock on Signal\n\
-uint8 QUALITY_CODE_AND_CARRIER_LOCKED1 = 5  # Code and Carrier locked \n\
-                                            # and time synchronized\n\
-uint8 QUALITY_CODE_AND_CARRIER_LOCKED2 = 6  # Code and Carrier locked \n\
-                                            # and time synchronized\n\
-uint8 QUALITY_CODE_AND_CARRIER_LOCKED3 = 7  # Code and Carrier locked \n\
-                                            # and time synchronized\n\
-\n\
-uint8 cno             # Carrier to Noise Ratio (Signal Strength) [dBHz]\n\
-int8 elev             # Elevation in integer degrees [deg]\n\
-int16 azim            # Azimuth in integer degrees [deg]\n\
-int32 prRes           # Pseudo range residual in centimetres [cm]\n\
-";
+    return "# see message NavSVINFO\n"
+"#\n"
+"\n"
+"uint8 chn             # Channel number, 255 for SVs not assigned to a channel\n"
+"uint8 svid            # Satellite ID\n"
+"\n"
+"uint8 flags           # Bitmask\n"
+"uint8 FLAGS_SV_USED = 1                     # SV is used for navigation\n"
+"uint8 FLAGS_DIFF_CORR = 2                   # Differential correction data \n"
+"                                            # is available for this SV\n"
+"uint8 FLAGS_ORBIT_AVAIL = 4                 # Orbit information is available for \n"
+"                                            # this SV (Ephemeris or Almanach)\n"
+"uint8 FLAGS_ORBIT_EPH = 8                   # Orbit information is Ephemeris\n"
+"uint8 FLAGS_UNHEALTHY = 16                  # SV is unhealthy / shall not be \n"
+"                                            # used\n"
+"uint8 FLAGS_ORBIT_ALM = 32                  # Orbit information is Almanac Plus\n"
+"uint8 FLAGS_ORBIT_AOP = 64                  # Orbit information is AssistNow \n"
+"                                            # Autonomous\n"
+"uint8 FLAGS_SMOOTHED = 128                  # Carrier smoothed pseudorange used\n"
+"\n"
+"uint8 quality         # Bitfield\n"
+"# qualityInd: Signal Quality indicator (range 0..7). The following list shows \n"
+"# the meaning of the different QI values:\n"
+"# Note: Since IMES signals are not time synchronized, a channel tracking an IMES\n"
+"# signal can never reach a quality indicator value of higher than 3.\n"
+"uint8 QUALITY_IDLE = 0                      # This channel is idle\n"
+"uint8 QUALITY_SEARCHING = 1                 # Channel is searching\n"
+"uint8 QUALITY_ACQUIRED = 2                   # Signal acquired\n"
+"uint8 QUALITY_DETECTED = 3                  # Signal detected but unusable\n"
+"uint8 QUALITY_CODE_LOCK = 4                 # Code Lock on Signal\n"
+"uint8 QUALITY_CODE_AND_CARRIER_LOCKED1 = 5  # Code and Carrier locked \n"
+"                                            # and time synchronized\n"
+"uint8 QUALITY_CODE_AND_CARRIER_LOCKED2 = 6  # Code and Carrier locked \n"
+"                                            # and time synchronized\n"
+"uint8 QUALITY_CODE_AND_CARRIER_LOCKED3 = 7  # Code and Carrier locked \n"
+"                                            # and time synchronized\n"
+"\n"
+"uint8 cno             # Carrier to Noise Ratio (Signal Strength) [dBHz]\n"
+"int8 elev             # Elevation in integer degrees [deg]\n"
+"int16 azim            # Azimuth in integer degrees [deg]\n"
+"int32 prRes           # Pseudo range residual in centimetres [cm]\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavSVINFO_SV_<ContainerAllocator>&) { return value(); }

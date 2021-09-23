@@ -38,6 +38,11 @@ struct Inf_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+
   enum {
     CLASS_ID = 4u,
   };
@@ -66,6 +71,20 @@ ros::message_operations::Printer< ::ublox_msgs::Inf_<ContainerAllocator> >::stre
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::Inf_<ContainerAllocator1> & lhs, const ::ublox_msgs::Inf_<ContainerAllocator2> & rhs)
+{
+  return lhs.str == rhs.str;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::Inf_<ContainerAllocator1> & lhs, const ::ublox_msgs::Inf_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -73,12 +92,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -143,16 +156,16 @@ struct Definition< ::ublox_msgs::Inf_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# UBX-INF (0x04, 0x00...0x04)\n\
-# ASCII output\n\
-#\n\
-# This message has a variable length payload, representing an ASCII string.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 4\n\
-\n\
-char[] str\n\
-";
+    return "# UBX-INF (0x04, 0x00...0x04)\n"
+"# ASCII output\n"
+"#\n"
+"# This message has a variable length payload, representing an ASCII string.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 4\n"
+"\n"
+"char[] str\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::Inf_<ContainerAllocator>&) { return value(); }

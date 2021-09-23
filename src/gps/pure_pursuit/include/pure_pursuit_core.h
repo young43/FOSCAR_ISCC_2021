@@ -122,6 +122,7 @@ void path_split(const std::string& str, std::vector<std::string>& cont,
 		const std::string& delim);
 
 bool compare(darknet_ros_msgs::BoundingBox a, darknet_ros_msgs::BoundingBox b);
+bool compare2(vision_distance::Delivery a, vision_distance::Delivery b);
 
 }  // namespace waypoint_follower
 

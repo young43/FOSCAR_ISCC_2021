@@ -48,6 +48,71 @@ struct CfgRST_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_HOT_START)
+  #undef NAV_BBR_HOT_START
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_WARM_START)
+  #undef NAV_BBR_WARM_START
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_COLD_START)
+  #undef NAV_BBR_COLD_START
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_EPH)
+  #undef NAV_BBR_EPH
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_ALM)
+  #undef NAV_BBR_ALM
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_HEALTH)
+  #undef NAV_BBR_HEALTH
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_KLOB)
+  #undef NAV_BBR_KLOB
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_POS)
+  #undef NAV_BBR_POS
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_CLKD)
+  #undef NAV_BBR_CLKD
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_OSC)
+  #undef NAV_BBR_OSC
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_UTC)
+  #undef NAV_BBR_UTC
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_RTC)
+  #undef NAV_BBR_RTC
+#endif
+#if defined(_WIN32) && defined(NAV_BBR_AOP)
+  #undef NAV_BBR_AOP
+#endif
+#if defined(_WIN32) && defined(RESET_MODE_HW_IMMEDIATE)
+  #undef RESET_MODE_HW_IMMEDIATE
+#endif
+#if defined(_WIN32) && defined(RESET_MODE_SW)
+  #undef RESET_MODE_SW
+#endif
+#if defined(_WIN32) && defined(RESET_MODE_GNSS)
+  #undef RESET_MODE_GNSS
+#endif
+#if defined(_WIN32) && defined(RESET_MODE_HW_AFTER_SHUTDOWN)
+  #undef RESET_MODE_HW_AFTER_SHUTDOWN
+#endif
+#if defined(_WIN32) && defined(RESET_MODE_GNSS_STOP)
+  #undef RESET_MODE_GNSS_STOP
+#endif
+#if defined(_WIN32) && defined(RESET_MODE_GNSS_START)
+  #undef RESET_MODE_GNSS_START
+#endif
+
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 4u,
@@ -136,6 +201,22 @@ ros::message_operations::Printer< ::ublox_msgs::CfgRST_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::CfgRST_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgRST_<ContainerAllocator2> & rhs)
+{
+  return lhs.navBbrMask == rhs.navBbrMask &&
+    lhs.resetMode == rhs.resetMode &&
+    lhs.reserved1 == rhs.reserved1;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::CfgRST_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgRST_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -143,12 +224,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -213,45 +288,45 @@ struct Definition< ::ublox_msgs::CfgRST_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-RST (0x06 0x04)\n\
-# Reset Receiver / Clear Backup Data Structures\n\
-#\n\
-# Don't expect this message to be acknowledged by the receiver.\n\
-#  - Newer FW version won't acknowledge this message at all.\n\
-#  - Older FW version will acknowledge this message but the acknowledge may not\n\
-#    be sent completely before the receiver is reset.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 6\n\
-uint8 MESSAGE_ID = 4 \n\
-\n\
-uint16 navBbrMask # BBR Sections to clear. \n\
-# The following Special Sets apply:\n\
-uint16 NAV_BBR_HOT_START = 0       # Hot start the device\n\
-uint16 NAV_BBR_WARM_START = 1      # Warm start the device\n\
-uint16 NAV_BBR_COLD_START = 65535  # Cold start the device\n\
-uint16 NAV_BBR_EPH = 1       # Ephemeris\n\
-uint16 NAV_BBR_ALM = 2       # Almanac\n\
-uint16 NAV_BBR_HEALTH = 4    # Health\n\
-uint16 NAV_BBR_KLOB = 8      # Klobuchar parameters\n\
-uint16 NAV_BBR_POS = 16      # Position\n\
-uint16 NAV_BBR_CLKD = 32     # Clock Drift\n\
-uint16 NAV_BBR_OSC = 64      # Oscillator Parameter\n\
-uint16 NAV_BBR_UTC = 128     # UTC Correction + GPS Leap Seconds Parameters\n\
-uint16 NAV_BBR_RTC = 256     # RTC\n\
-uint16 NAV_BBR_AOP = 32768   # Autonomous Orbit Parameters\n\
-\n\
-uint8 resetMode              # Reset Type:\n\
-uint8 RESET_MODE_HW_IMMEDIATE = 0       # Hardware reset (Watchdog) immediately\n\
-uint8 RESET_MODE_SW = 1                 # Controlled Software reset\n\
-uint8 RESET_MODE_GNSS = 2               # Controlled Software reset (GNSS only)\n\
-uint8 RESET_MODE_HW_AFTER_SHUTDOWN = 4  # Hardware reset (Watchdog) after \n\
-                                        # shutdown\n\
-uint8 RESET_MODE_GNSS_STOP = 8          # Controlled GNSS stop\n\
-uint8 RESET_MODE_GNSS_START = 9         # Controlled GNSS start\n\
-\n\
-uint8 reserved1     # Reserved\n\
-";
+    return "# CFG-RST (0x06 0x04)\n"
+"# Reset Receiver / Clear Backup Data Structures\n"
+"#\n"
+"# Don't expect this message to be acknowledged by the receiver.\n"
+"#  - Newer FW version won't acknowledge this message at all.\n"
+"#  - Older FW version will acknowledge this message but the acknowledge may not\n"
+"#    be sent completely before the receiver is reset.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 6\n"
+"uint8 MESSAGE_ID = 4 \n"
+"\n"
+"uint16 navBbrMask # BBR Sections to clear. \n"
+"# The following Special Sets apply:\n"
+"uint16 NAV_BBR_HOT_START = 0       # Hot start the device\n"
+"uint16 NAV_BBR_WARM_START = 1      # Warm start the device\n"
+"uint16 NAV_BBR_COLD_START = 65535  # Cold start the device\n"
+"uint16 NAV_BBR_EPH = 1       # Ephemeris\n"
+"uint16 NAV_BBR_ALM = 2       # Almanac\n"
+"uint16 NAV_BBR_HEALTH = 4    # Health\n"
+"uint16 NAV_BBR_KLOB = 8      # Klobuchar parameters\n"
+"uint16 NAV_BBR_POS = 16      # Position\n"
+"uint16 NAV_BBR_CLKD = 32     # Clock Drift\n"
+"uint16 NAV_BBR_OSC = 64      # Oscillator Parameter\n"
+"uint16 NAV_BBR_UTC = 128     # UTC Correction + GPS Leap Seconds Parameters\n"
+"uint16 NAV_BBR_RTC = 256     # RTC\n"
+"uint16 NAV_BBR_AOP = 32768   # Autonomous Orbit Parameters\n"
+"\n"
+"uint8 resetMode              # Reset Type:\n"
+"uint8 RESET_MODE_HW_IMMEDIATE = 0       # Hardware reset (Watchdog) immediately\n"
+"uint8 RESET_MODE_SW = 1                 # Controlled Software reset\n"
+"uint8 RESET_MODE_GNSS = 2               # Controlled Software reset (GNSS only)\n"
+"uint8 RESET_MODE_HW_AFTER_SHUTDOWN = 4  # Hardware reset (Watchdog) after \n"
+"                                        # shutdown\n"
+"uint8 RESET_MODE_GNSS_STOP = 8          # Controlled GNSS stop\n"
+"uint8 RESET_MODE_GNSS_START = 9         # Controlled GNSS start\n"
+"\n"
+"uint8 reserved1     # Reserved\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::CfgRST_<ContainerAllocator>&) { return value(); }

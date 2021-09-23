@@ -13,9 +13,6 @@ from math import atan2, degrees
 drive_speed=8
 drive_values_pub = rospy.Publisher('control_value', drive_values, queue_size=1)
 
-is_car_start=False
-prev_steering=0.0
-is_first_drive=True
 
 
 
@@ -44,16 +41,11 @@ def liner_acceleration(flag):
 def drive(angle, flag):
 	global drive_values_pub
 	global drive_speed
-	global is_car_start
-	global is_first_drive
-	global prev_steering
+
 	drive_value = drive_values()
 	drive_value.steering = angle
 	standard_angle=18
-	check_start=0.00000001
-	if (is_first_drive):
-		prev_steering=drive_value.steering
-		is_first_drive=False
+
 	
 	
 
@@ -69,17 +61,10 @@ def drive(angle, flag):
 		
 		drive_value.throttle=liner_acceleration(True)
 	
-	print("prev",int(prev_steering))
+
 	print("steer",int(drive_value.steering))
-	print(is_first_drive,is_car_start)
-	if (not(is_car_start)):
-		print("###############################################")
-		if(abs(prev_steering-drive_value.steering)):
-			drive_value.throttle=8
-		else:
-			drive_value.throttle=8
-			is_car_start=True
-	prev_steering=drive_value.steering
+
+
 
 	drive_values_pub.publish(drive_value)
 	

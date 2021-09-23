@@ -1,10 +1,10 @@
 
 "use strict";
 
-let GPSFix = require('./GPSFix.js');
 let GPSStatus = require('./GPSStatus.js');
+let GPSFix = require('./GPSFix.js');
 
 module.exports = {
-  GPSFix: GPSFix,
   GPSStatus: GPSStatus,
+  GPSFix: GPSFix,
 };

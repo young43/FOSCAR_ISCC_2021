@@ -118,6 +118,44 @@ struct NavSOL_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(GPS_NO_FIX)
+  #undef GPS_NO_FIX
+#endif
+#if defined(_WIN32) && defined(GPS_DEAD_RECKONING_ONLY)
+  #undef GPS_DEAD_RECKONING_ONLY
+#endif
+#if defined(_WIN32) && defined(GPS_2D_FIX)
+  #undef GPS_2D_FIX
+#endif
+#if defined(_WIN32) && defined(GPS_3D_FIX)
+  #undef GPS_3D_FIX
+#endif
+#if defined(_WIN32) && defined(GPS_GPS_DEAD_RECKONING_COMBINED)
+  #undef GPS_GPS_DEAD_RECKONING_COMBINED
+#endif
+#if defined(_WIN32) && defined(GPS_TIME_ONLY_FIX)
+  #undef GPS_TIME_ONLY_FIX
+#endif
+#if defined(_WIN32) && defined(FLAGS_GPS_FIX_OK)
+  #undef FLAGS_GPS_FIX_OK
+#endif
+#if defined(_WIN32) && defined(FLAGS_DIFF_SOLN)
+  #undef FLAGS_DIFF_SOLN
+#endif
+#if defined(_WIN32) && defined(FLAGS_WKNSET)
+  #undef FLAGS_WKNSET
+#endif
+#if defined(_WIN32) && defined(FLAGS_TOWSET)
+  #undef FLAGS_TOWSET
+#endif
+
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 6u,
@@ -179,6 +217,36 @@ ros::message_operations::Printer< ::ublox_msgs::NavSOL_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavSOL_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSOL_<ContainerAllocator2> & rhs)
+{
+  return lhs.iTOW == rhs.iTOW &&
+    lhs.fTOW == rhs.fTOW &&
+    lhs.week == rhs.week &&
+    lhs.gpsFix == rhs.gpsFix &&
+    lhs.flags == rhs.flags &&
+    lhs.ecefX == rhs.ecefX &&
+    lhs.ecefY == rhs.ecefY &&
+    lhs.ecefZ == rhs.ecefZ &&
+    lhs.pAcc == rhs.pAcc &&
+    lhs.ecefVX == rhs.ecefVX &&
+    lhs.ecefVY == rhs.ecefVY &&
+    lhs.ecefVZ == rhs.ecefVZ &&
+    lhs.sAcc == rhs.sAcc &&
+    lhs.pDOP == rhs.pDOP &&
+    lhs.reserved1 == rhs.reserved1 &&
+    lhs.numSV == rhs.numSV &&
+    lhs.reserved2 == rhs.reserved2;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavSOL_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSOL_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -186,12 +254,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -256,50 +318,50 @@ struct Definition< ::ublox_msgs::NavSOL_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-SOL (0x01 0x06)\n\
-# Navigation Solution Information\n\
-#\n\
-# This message combines Position, velocity and time solution in ECEF, including \n\
-# accuracy figures\n\
-# This message has only been retained for backwards compatibility; users are \n\
-# recommended to use the UBX-NAV-PVT message in preference.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 1\n\
-uint8 MESSAGE_ID = 6\n\
-\n\
-uint32 iTOW             # GPS Millisecond time of week [ms]\n\
-int32 fTOW              # Fractional Nanoseconds remainder of rounded\n\
-                        # ms above, range -500000 .. 500000 [ns]\n\
-int16 week              # GPS week (GPS time)\n\
-\n\
-uint8 gpsFix            # GPSfix Type, range 0..5\n\
-uint8 GPS_NO_FIX = 0\n\
-uint8 GPS_DEAD_RECKONING_ONLY = 1\n\
-uint8 GPS_2D_FIX = 2\n\
-uint8 GPS_3D_FIX = 3\n\
-uint8 GPS_GPS_DEAD_RECKONING_COMBINED = 4\n\
-uint8 GPS_TIME_ONLY_FIX = 5\n\
-\n\
-uint8 flags             # Fix Status Flags\n\
-uint8 FLAGS_GPS_FIX_OK = 1      # Fix within limits i.e. within DOP & ACC Masks\n\
-uint8 FLAGS_DIFF_SOLN = 2       # DGPS used\n\
-uint8 FLAGS_WKNSET = 4          # Week Number valid\n\
-uint8 FLAGS_TOWSET = 8          # Time of Week valid\n\
-\n\
-int32 ecefX             # ECEF X coordinate [cm]\n\
-int32 ecefY             # ECEF Y coordinate [cm]\n\
-int32 ecefZ             # ECEF Z coordinate [cm]\n\
-uint32 pAcc             # 3D Position Accuracy Estimate [cm]\n\
-int32 ecefVX            # ECEF X velocity [cm/s]\n\
-int32 ecefVY            # ECEF Y velocity [cm/s]\n\
-int32 ecefVZ            # ECEF Z velocity [cm/s]\n\
-uint32 sAcc             # Speed Accuracy Estimate [cm/s]\n\
-uint16 pDOP             # Position DOP [1 / 0.01]\n\
-uint8 reserved1         # Reserved\n\
-uint8 numSV             # Number of SVs used in Nav Solution\n\
-uint32 reserved2        # Reserved\n\
-";
+    return "# NAV-SOL (0x01 0x06)\n"
+"# Navigation Solution Information\n"
+"#\n"
+"# This message combines Position, velocity and time solution in ECEF, including \n"
+"# accuracy figures\n"
+"# This message has only been retained for backwards compatibility; users are \n"
+"# recommended to use the UBX-NAV-PVT message in preference.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 1\n"
+"uint8 MESSAGE_ID = 6\n"
+"\n"
+"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
+"int32 fTOW              # Fractional Nanoseconds remainder of rounded\n"
+"                        # ms above, range -500000 .. 500000 [ns]\n"
+"int16 week              # GPS week (GPS time)\n"
+"\n"
+"uint8 gpsFix            # GPSfix Type, range 0..5\n"
+"uint8 GPS_NO_FIX = 0\n"
+"uint8 GPS_DEAD_RECKONING_ONLY = 1\n"
+"uint8 GPS_2D_FIX = 2\n"
+"uint8 GPS_3D_FIX = 3\n"
+"uint8 GPS_GPS_DEAD_RECKONING_COMBINED = 4\n"
+"uint8 GPS_TIME_ONLY_FIX = 5\n"
+"\n"
+"uint8 flags             # Fix Status Flags\n"
+"uint8 FLAGS_GPS_FIX_OK = 1      # Fix within limits i.e. within DOP & ACC Masks\n"
+"uint8 FLAGS_DIFF_SOLN = 2       # DGPS used\n"
+"uint8 FLAGS_WKNSET = 4          # Week Number valid\n"
+"uint8 FLAGS_TOWSET = 8          # Time of Week valid\n"
+"\n"
+"int32 ecefX             # ECEF X coordinate [cm]\n"
+"int32 ecefY             # ECEF Y coordinate [cm]\n"
+"int32 ecefZ             # ECEF Z coordinate [cm]\n"
+"uint32 pAcc             # 3D Position Accuracy Estimate [cm]\n"
+"int32 ecefVX            # ECEF X velocity [cm/s]\n"
+"int32 ecefVY            # ECEF Y velocity [cm/s]\n"
+"int32 ecefVZ            # ECEF Z velocity [cm/s]\n"
+"uint32 sAcc             # Speed Accuracy Estimate [cm/s]\n"
+"uint16 pDOP             # Position DOP [1 / 0.01]\n"
+"uint8 reserved1         # Reserved\n"
+"uint8 numSV             # Number of SVs used in Nav Solution\n"
+"uint32 reserved2        # Reserved\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavSOL_<ContainerAllocator>&) { return value(); }

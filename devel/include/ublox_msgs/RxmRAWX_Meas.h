@@ -103,6 +103,20 @@ struct RxmRAWX_Meas_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(TRK_STAT_PR_VALID)
+  #undef TRK_STAT_PR_VALID
+#endif
+#if defined(_WIN32) && defined(TRK_STAT_CP_VALID)
+  #undef TRK_STAT_CP_VALID
+#endif
+#if defined(_WIN32) && defined(TRK_STAT_HALF_CYC)
+  #undef TRK_STAT_HALF_CYC
+#endif
+#if defined(_WIN32) && defined(TRK_STAT_SUB_HALF_CYC)
+  #undef TRK_STAT_SUB_HALF_CYC
+#endif
+
   enum {
     TRK_STAT_PR_VALID = 1u,
     TRK_STAT_CP_VALID = 2u,
@@ -140,6 +154,33 @@ ros::message_operations::Printer< ::ublox_msgs::RxmRAWX_Meas_<ContainerAllocator
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::RxmRAWX_Meas_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAWX_Meas_<ContainerAllocator2> & rhs)
+{
+  return lhs.prMes == rhs.prMes &&
+    lhs.cpMes == rhs.cpMes &&
+    lhs.doMes == rhs.doMes &&
+    lhs.gnssId == rhs.gnssId &&
+    lhs.svId == rhs.svId &&
+    lhs.reserved0 == rhs.reserved0 &&
+    lhs.freqId == rhs.freqId &&
+    lhs.locktime == rhs.locktime &&
+    lhs.cno == rhs.cno &&
+    lhs.prStdev == rhs.prStdev &&
+    lhs.cpStdev == rhs.cpStdev &&
+    lhs.doStdev == rhs.doStdev &&
+    lhs.trkStat == rhs.trkStat &&
+    lhs.reserved1 == rhs.reserved1;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::RxmRAWX_Meas_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAWX_Meas_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -147,12 +188,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -217,49 +252,49 @@ struct Definition< ::ublox_msgs::RxmRAWX_Meas_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# see message RxmRAWX\n\
-#\n\
-\n\
-float64 prMes             # Pseudorange measurement [m]. GLONASS inter frequency\n\
-                          # channel delays are compensated with an internal\n\
-                          # calibration table.\n\
-float64 cpMes             # Carrier phase measurement [L1 cycles]. The carrier\n\
-                          # phase initial ambiguity is initialized using an\n\
-                          # approximate value to make the magnitude of\n\
-                          # the phase close to the pseudorange\n\
-                          # measurement. Clock resets are applied to both\n\
-                          # phase and code measurements in accordance\n\
-                          # with the RINEX specification.\n\
-float32 doMes             # Doppler measurement [Hz] (positive sign for\n\
-                          # approaching satellites)\n\
-uint8 gnssId              # GNSS identifier (see CfgGNSS for constants)\n\
-\n\
-uint8 svId                # Satellite identifier (see Satellite Numbering)\n\
-\n\
-uint8 reserved0           # Reserved\n\
-\n\
-uint8 freqId              # Only used for GLONASS: This is the frequency\n\
-                          # slot + 7 (range from 0 to 13)\n\
-uint16 locktime           # Carrier phase locktime counter [ms] \n\
-                          # (maximum 64500 ms)\n\
-int8 cno                  # Carrier-to-noise density ratio (signal strength) \n\
-                          # [dB-Hz]\n\
-uint8 prStdev             # Estimated pseudorange measurement standard\n\
-                          # deviation [m / 0.01*2^n]\n\
-uint8 cpStdev             # Estimated carrier phase measurement standard\n\
-                          # deviation (note a raw value of 0x0F indicates the\n\
-                          # value is invalid) [cycles / 0.004]\n\
-uint8 doStdev             # Estimated Doppler measurement standard deviation \n\
-                          # [Hz / 0.002*2^n]\n\
-\n\
-uint8 trkStat             # Tracking status bitfield\n\
-uint8 TRK_STAT_PR_VALID = 1       # Pseudorange valid\n\
-uint8 TRK_STAT_CP_VALID = 2       # Carrier phase valid\n\
-uint8 TRK_STAT_HALF_CYC = 4       # Half cycle valid\n\
-uint8 TRK_STAT_SUB_HALF_CYC = 8   # Half cycle subtracted from phase\n\
-\n\
-uint8 reserved1           # Reserved\n\
-";
+    return "# see message RxmRAWX\n"
+"#\n"
+"\n"
+"float64 prMes             # Pseudorange measurement [m]. GLONASS inter frequency\n"
+"                          # channel delays are compensated with an internal\n"
+"                          # calibration table.\n"
+"float64 cpMes             # Carrier phase measurement [L1 cycles]. The carrier\n"
+"                          # phase initial ambiguity is initialized using an\n"
+"                          # approximate value to make the magnitude of\n"
+"                          # the phase close to the pseudorange\n"
+"                          # measurement. Clock resets are applied to both\n"
+"                          # phase and code measurements in accordance\n"
+"                          # with the RINEX specification.\n"
+"float32 doMes             # Doppler measurement [Hz] (positive sign for\n"
+"                          # approaching satellites)\n"
+"uint8 gnssId              # GNSS identifier (see CfgGNSS for constants)\n"
+"\n"
+"uint8 svId                # Satellite identifier (see Satellite Numbering)\n"
+"\n"
+"uint8 reserved0           # Reserved\n"
+"\n"
+"uint8 freqId              # Only used for GLONASS: This is the frequency\n"
+"                          # slot + 7 (range from 0 to 13)\n"
+"uint16 locktime           # Carrier phase locktime counter [ms] \n"
+"                          # (maximum 64500 ms)\n"
+"int8 cno                  # Carrier-to-noise density ratio (signal strength) \n"
+"                          # [dB-Hz]\n"
+"uint8 prStdev             # Estimated pseudorange measurement standard\n"
+"                          # deviation [m / 0.01*2^n]\n"
+"uint8 cpStdev             # Estimated carrier phase measurement standard\n"
+"                          # deviation (note a raw value of 0x0F indicates the\n"
+"                          # value is invalid) [cycles / 0.004]\n"
+"uint8 doStdev             # Estimated Doppler measurement standard deviation \n"
+"                          # [Hz / 0.002*2^n]\n"
+"\n"
+"uint8 trkStat             # Tracking status bitfield\n"
+"uint8 TRK_STAT_PR_VALID = 1       # Pseudorange valid\n"
+"uint8 TRK_STAT_CP_VALID = 2       # Carrier phase valid\n"
+"uint8 TRK_STAT_HALF_CYC = 4       # Half cycle valid\n"
+"uint8 TRK_STAT_SUB_HALF_CYC = 8   # Half cycle subtracted from phase\n"
+"\n"
+"uint8 reserved1           # Reserved\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::RxmRAWX_Meas_<ContainerAllocator>&) { return value(); }

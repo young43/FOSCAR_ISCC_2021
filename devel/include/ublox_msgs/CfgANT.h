@@ -43,6 +43,41 @@ struct CfgANT_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(FLAGS_SVCS)
+  #undef FLAGS_SVCS
+#endif
+#if defined(_WIN32) && defined(FLAGS_SCD)
+  #undef FLAGS_SCD
+#endif
+#if defined(_WIN32) && defined(FLAGS_OCD)
+  #undef FLAGS_OCD
+#endif
+#if defined(_WIN32) && defined(FLAGS_PDWN_ON_SCD)
+  #undef FLAGS_PDWN_ON_SCD
+#endif
+#if defined(_WIN32) && defined(FLAGS_RECOVERY)
+  #undef FLAGS_RECOVERY
+#endif
+#if defined(_WIN32) && defined(PIN_SWITCH_MASK)
+  #undef PIN_SWITCH_MASK
+#endif
+#if defined(_WIN32) && defined(PIN_SCD_MASK)
+  #undef PIN_SCD_MASK
+#endif
+#if defined(_WIN32) && defined(PIN_OCD_MASK)
+  #undef PIN_OCD_MASK
+#endif
+#if defined(_WIN32) && defined(PIN_RECONFIG)
+  #undef PIN_RECONFIG
+#endif
+
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 19u,
@@ -101,6 +136,21 @@ ros::message_operations::Printer< ::ublox_msgs::CfgANT_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::CfgANT_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgANT_<ContainerAllocator2> & rhs)
+{
+  return lhs.flags == rhs.flags &&
+    lhs.pins == rhs.pins;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::CfgANT_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgANT_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -108,12 +158,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -178,32 +222,32 @@ struct Definition< ::ublox_msgs::CfgANT_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# CFG-ANT (0x06 0x13)\n\
-# Antenna Control Settings\n\
-#\n\
-\n\
-uint8 CLASS_ID = 6\n\
-uint8 MESSAGE_ID = 19\n\
-\n\
-uint16 flags            # Antenna Flag Mask\n\
-uint16 FLAGS_SVCS = 1         # Enable Antenna Supply Voltage Control Signal\n\
-uint16 FLAGS_SCD = 2          # Enable Short Circuit Detection\n\
-uint16 FLAGS_OCD = 4          # Enable Open Circuit Detection\n\
-uint16 FLAGS_PDWN_ON_SCD = 8  # Power Down Antenna supply if Short Circuit is \n\
-                              # detected. (only in combination with Bit 1)\n\
-uint16 FLAGS_RECOVERY = 16    # Enable automatic recovery from short state\n\
-\n\
-uint16 pins             # Antenna Pin Configuration\n\
-uint16 PIN_SWITCH_MASK = 31    # PIO-Pin used for switching antenna supply \n\
-                               # (internal to TIM-LP/TIM-LF)\n\
-uint16 PIN_SCD_MASK = 992      # PIO-Pin used for detecting a short in the \n\
-                               # antenna supply\n\
-uint16 PIN_OCD_MASK = 31744    # PIO-Pin used for detecting open/not connected \n\
-                               # antenna\n\
-uint16 PIN_RECONFIG = 32678    # if set to one, and this command is sent to the \n\
-                               # receiver, the receiver will reconfigure the \n\
-                               # pins as specified.\n\
-";
+    return "# CFG-ANT (0x06 0x13)\n"
+"# Antenna Control Settings\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 6\n"
+"uint8 MESSAGE_ID = 19\n"
+"\n"
+"uint16 flags            # Antenna Flag Mask\n"
+"uint16 FLAGS_SVCS = 1         # Enable Antenna Supply Voltage Control Signal\n"
+"uint16 FLAGS_SCD = 2          # Enable Short Circuit Detection\n"
+"uint16 FLAGS_OCD = 4          # Enable Open Circuit Detection\n"
+"uint16 FLAGS_PDWN_ON_SCD = 8  # Power Down Antenna supply if Short Circuit is \n"
+"                              # detected. (only in combination with Bit 1)\n"
+"uint16 FLAGS_RECOVERY = 16    # Enable automatic recovery from short state\n"
+"\n"
+"uint16 pins             # Antenna Pin Configuration\n"
+"uint16 PIN_SWITCH_MASK = 31    # PIO-Pin used for switching antenna supply \n"
+"                               # (internal to TIM-LP/TIM-LF)\n"
+"uint16 PIN_SCD_MASK = 992      # PIO-Pin used for detecting a short in the \n"
+"                               # antenna supply\n"
+"uint16 PIN_OCD_MASK = 31744    # PIO-Pin used for detecting open/not connected \n"
+"                               # antenna\n"
+"uint16 PIN_RECONFIG = 32678    # if set to one, and this command is sent to the \n"
+"                               # receiver, the receiver will reconfigure the \n"
+"                               # pins as specified.\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::CfgANT_<ContainerAllocator>&) { return value(); }

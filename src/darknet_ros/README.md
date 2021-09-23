@@ -1,109 +1,45 @@
-# parrot2无人机yolov3目标物体追踪
-
-- yolov3目标识别
-- opencv颜色识别
-- 物体追踪
-- 无目标搜索（施工中ing20181106）
+# YOLO ROS: Real-Time Object Detection for ROS
 
 ## Overview
 
-- [MRZIRC比赛](http://www.mbzirc.com/challenge/2020)的第一个竞赛项目是无人机在100X60m的区域下寻找有悬挂气球的无人机，并且捕获目标气球，学校校内赛是在50mX60m的范围内寻找目标气球并且刺破；
-- [ROS](www.ros.org)是一款为机器人设计的系统框架，[parrot2](http://www.parrot.com.cn/)无人机提供ROS的开发通信环境[bebop_autonomy](http://wiki.ros.org/bebop_autonomy)；
-- [darknet yolov3](https://pjreddie.com/darknet/yolo/)是深度学习的目标检测框架，C++/C编写；
-- 这个项目是基于一位外国的github的项目修改的[darknet_ros](https://github.com/leggedrobotics/darknet_ros)项目。
+This is a ROS package developed for **object detection in camera images**. You only look once (YOLO) is a state-of-the-art, real-time object detection system. In the following ROS package you are able to use **YOLO (V3) on GPU and CPU**. The pre-trained model of the convolutional neural network is able to detect pre-trained classes including the data set from VOC and COCO, or you can also create a network with your own detection objects. For more information about YOLO, Darknet, available training data and training YOLO see the following link: [YOLO: Real-Time Object Detection](http://pjreddie.com/darknet/yolo/).
 
-<img src="doc/record.gif">
+The YOLO packages have been tested under **ROS Noetic** and **Ubuntu 20.04**. Note: We also provide branches that work under **ROS Melodic**, **ROS Foxy** and **ROS2**.
 
-## Prepare
-- 笔记本配置：i5，GTX1060
-- 软件环境：Ubuntu16.04、 kinetic版本ROS
+This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
 
-## Vidio
-- [YouTube](https://youtu.be/F69QrPSHUOs)
+**Author: [Marko Bjelonic](https://www.markobjelonic.com), marko.bjelonic@mavt.ethz.ch**
 
-## How to used
-### build
-```
-cd catkin_ws/src
-git clone https://github.com/AutonomyLab/bebop_autonomy.git
-git clone https://github.com/ShiSanChuan/darknet_ros.git
-cd ..
-catkin build bebop_autonomy
-catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
+**Affiliation: [Robotic Systems Lab](http://www.rsl.ethz.ch/), ETH Zurich**
 
-source devel/setup.bash
-```
-### Download weights
-- 原COCO data 训练好的框架
-```
-wget http://pjreddie.com/media/files/yolov3-voc.weights
-wget http://pjreddie.com/media/files/yolov3.weights
-```
-- 比赛训练的模型框架文件(待传)
+![Darknet Ros example: Detection image](darknet_ros/doc/test_detection.png)
+![Darknet Ros example: Detection image](darknet_ros/doc/test_detection_anymal.png)
 
-### run
-- 参照bebop_autonomy的链接，打开parrot2后笔记本连接parrot的网络，运行
-```
-roslaunch bebop_driver bebop_node.launch
-```
-- 运行成功后运行darknet ros，启动后飞机会自动起飞，注意安全，若不希望起飞在代码中修改下
-```
-roslaunch darknet_ros yolo_v3.launch
-```
-- 停止运行，在terminal输入
-```
-rostopic pub --once /bebop/land std_msgs/Empty
-```
+Based on the [Pascal VOC](https://pjreddie.com/projects/pascal-voc-dataset-mirror/) 2012 dataset, YOLO can detect the 20 Pascal object classes:
 
-<img src="doc/opencv_detect.png">
+- person
+- bird, cat, cow, dog, horse, sheep
+- aeroplane, bicycle, boat, bus, car, motorbike, train
+- bottle, chair, dining table, potted plant, sofa, tv/monitor
 
-<img src="doc/YOLO V3_screenshot_25.09.2018.png">
+Based on the [COCO](http://cocodataset.org/#home) dataset, YOLO can detect the 80 COCO object classes:
 
-- opencv颜色提取获取参数，使用的是RGB设置的阈值，可修改为HSV，文件中有个全色图圈可用来测试下范围,调整完的参数在程序中修改
-```
-cd doc
-g++ -std=c++11 Inrang.cpp -o Inrang  `pkg-config --cflags --libs opencv`
-./Inrang YOLO V3_screenshot_17.10.2018.png
-```
-<img src="doc/opencv_use.png">
+- person
+- bicycle, car, motorbike, aeroplane, bus, train, truck, boat
+- traffic light, fire hydrant, stop sign, parking meter, bench
+- cat, dog, horse, sheep, cow, elephant, bear, zebra, giraffe
+- backpack, umbrella, handbag, tie, suitcase, frisbee, skis, snowboard, sports ball, kite, baseball bat, baseball glove, skateboard, surfboard, tennis racket
+- bottle, wine glass, cup, fork, knife, spoon, bowl
+- banana, apple, sandwich, orange, broccoli, carrot, hot dog, pizza, donut, cake
+- chair, sofa, pottedplant, bed, diningtable, toilet, tvmonitor, laptop, mouse, remote, keyboard, cell phone, microwave, oven, toaster, sink, refrigerator, book, clock, vase, scissors, teddy bear, hair drier, toothbrush
 
-## Thinking
-- 通过深度学习框架比如yolo来识别物体是可以的，不过受到图片尺寸问题，对于近处目标（大概3米）的目标可以识别，但对于远处目标（在parrot传来的428x240图片里大概占5个像素），这种目标是无法分辨出来的，因此在原基础代码上添加opencv的颜色识别的线程，用于辅助yolo的识别，使得无人机在比较远处能先靠近物体，若不是该目标物体再移动视角环境，找下一个疑似目标；
+## Citing
 
-- 由于目标是移动的或者静止的，因此通过PID调整飞行参数使得目标的中心位置与图像中心位置重合。
+The YOLO methods used in this software are described in the paper: [You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640).
 
-## Parament
-- 安装原darknet_ros程序步骤，需要将训练模型的weight和cfg文件配置好，比赛识别的目标是气球因此专门为气球识别训练了几组weight
-```
-catkin_wc/src/darknet_ros/darknet_ros/yolo_network_config/weights/
-catkin_wc/src/darknet_ros/darknet_ros/yolo_network_config/cfg/
-```
-- 在launch文件里修改launch启动文件,yaml文件设置识别阈值和目标类型
+If you are using YOLO V3 for ROS, please add the following citation to your publication:
 
-```
-catkin_wc/src/darknet_ros/darknet_ros/launch/yolo_v3.launch
-
-<rosparam command="load" ns="darknet_ros" file="$(find darknet_ros)/config/yolov3-MBZIRC.yaml"/>
-```
-
-## used on other UAV
-- 若要使得该无人机目标追踪能在其他平台上使用（比如M100），除了处理修改自己要的识别目标的模型文件外，还必须按照bebop的话题修改ROStopic，同时对于无人机的控制命令（起飞、降落、姿态调整）的rostopic保持一致；
-
-```
-<param name="bebop_topic_head"  value="/bebop" />
-```
-- 若要修改识别目标，先按照darknet官网训练目标的模型文件，在调节下远处目标识别的大概颜色。
-
-## Some Problem
-- 在代码里面加入无目标时的路径搜索，参考的是这个大佬的[网页动画](http://www.webhek.com/post/pathfinding.html),先在20x20的框图以起始和中心（或者其他目标点），所以没有目标时无人机回往中心点靠；
-- 问题一是~~没有ＧＰＳ~~，所以每次发送控制命令时计算无人机坐标有点难；
-- 问题二是无人机摄像头识别范围，每次无人机经过地图的点，将没有目标的地图点的高度下降，再随时间上涨
-- 问题三是有摄像头通过ｏｐｅｎｃｖ识别到物体时，如何确定物体在地图中的点（距离），靠近后用ｙｏｌｏ下不是该物体同样方法至该点至最负
-
-
-## Contributier
-- 队友[Voyager](https://github.com/VoyagerIII)
-- M. Bjelonic
+M. Bjelonic
 **"YOLO ROS: Real-Time Object Detection for ROS"**,
 URL: https://github.com/leggedrobotics/darknet_ros, 2018.
 
@@ -112,4 +48,150 @@ URL: https://github.com/leggedrobotics/darknet_ros, 2018.
       title = {{YOLO ROS}: Real-Time Object Detection for {ROS}},
       howpublished = {\url{https://github.com/leggedrobotics/darknet_ros}},
       year = {2016--2018},
-}
+    }
+
+## Installation
+
+### Dependencies
+
+This software is built on the Robotic Operating System ([ROS]), which needs to be [installed](http://wiki.ros.org) first. Additionally, YOLO for ROS depends on following software:
+
+- [OpenCV](http://opencv.org/) (computer vision library),
+- [boost](http://www.boost.org/) (c++ library),
+
+### Building
+
+[![Build Status](https://ci.leggedrobotics.com/buildStatus/icon?job=github_leggedrobotics/darknet_ros/master)](https://ci.leggedrobotics.com/job/github_leggedrobotics/job/darknet_ros/job/master/)
+
+In order to install darknet_ros, clone the latest version using SSH (see [how to set up an SSH key](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html)) from this repository into your catkin workspace and compile the package using ROS.
+
+    cd catkin_workspace/src
+    git clone --recursive git@github.com:leggedrobotics/darknet_ros.git
+    cd ../
+
+To maximize performance, make sure to build in *Release* mode. You can specify the build type by setting
+
+    catkin_make -DCMAKE_BUILD_TYPE=Release
+
+or using the [Catkin Command Line Tools](http://catkin-tools.readthedocs.io/en/latest/index.html#)
+
+    catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
+
+Darknet on the CPU is fast (approximately 1.5 seconds on an Intel Core i7-6700HQ CPU @ 2.60GHz × 8) but it's like 500 times faster on GPU! You'll have to have an Nvidia GPU and you'll have to install CUDA. The CMakeLists.txt file automatically detects if you have CUDA installed or not. CUDA is a parallel computing platform and application programming interface (API) model created by Nvidia. If you do not have CUDA on your System the build process will switch to the CPU version of YOLO. If you are compiling with CUDA, you might receive the following build error:
+
+    nvcc fatal : Unsupported gpu architecture 'compute_61'.
+
+This means that you need to check the compute capability (version) of your GPU. You can find a list of supported GPUs in CUDA here: [CUDA - WIKIPEDIA](https://en.wikipedia.org/wiki/CUDA#Supported_GPUs). Simply find the compute capability of your GPU and add it into darknet_ros/CMakeLists.txt. Simply add a similar line like
+
+    -O3 -gencode arch=compute_62,code=sm_62
+
+### Download weights
+
+The yolo-voc.weights and tiny-yolo-voc.weights are downloaded automatically in the CMakeLists.txt file. If you need to download them again, go into the weights folder and download the two pre-trained weights from the COCO data set:
+
+    cd catkin_workspace/src/darknet_ros/darknet_ros/yolo_network_config/weights/
+    wget http://pjreddie.com/media/files/yolov2.weights
+    wget http://pjreddie.com/media/files/yolov2-tiny.weights
+
+And weights from the VOC data set can be found here:
+
+    wget http://pjreddie.com/media/files/yolov2-voc.weights
+    wget http://pjreddie.com/media/files/yolov2-tiny-voc.weights
+
+And the pre-trained weight from YOLO v3 can be found here:
+
+    wget http://pjreddie.com/media/files/yolov3-tiny.weights
+    wget http://pjreddie.com/media/files/yolov3.weights
+
+There are more pre-trained weights from different data sets reported [here](https://pjreddie.com/darknet/yolo/).
+
+### Use your own detection objects
+
+In order to use your own detection objects you need to provide your weights and your cfg file inside the directories:
+
+    catkin_workspace/src/darknet_ros/darknet_ros/yolo_network_config/weights/
+    catkin_workspace/src/darknet_ros/darknet_ros/yolo_network_config/cfg/
+
+In addition, you need to create your config file for ROS where you define the names of the detection objects. You need to include it inside:
+
+    catkin_workspace/src/darknet_ros/darknet_ros/config/
+
+Then in the launch file you have to point to your new config file in the line:
+
+    <rosparam command="load" ns="darknet_ros" file="$(find darknet_ros)/config/your_config_file.yaml"/>
+
+### Unit Tests
+
+Run the unit tests using the [Catkin Command Line Tools](http://catkin-tools.readthedocs.io/en/latest/index.html#)
+
+    catkin build darknet_ros --no-deps --verbose --catkin-make-args run_tests
+
+You will see the image above popping up.
+
+## Basic Usage
+
+In order to get YOLO ROS: Real-Time Object Detection for ROS to run with your robot, you will need to adapt a few parameters. It is the easiest if duplicate and adapt all the parameter files that you need to change from the `darknet_ros` package. These are specifically the parameter files in `config` and the launch file from the `launch` folder.
+
+## Nodes
+
+### Node: darknet_ros
+
+This is the main YOLO ROS: Real-Time Object Detection for ROS node. It uses the camera measurements to detect pre-learned objects in the frames.
+
+### ROS related parameters
+
+You can change the names and other parameters of the publishers, subscribers and actions inside `darknet_ros/config/ros.yaml`.
+
+#### Subscribed Topics
+
+* **`/camera_reading`** ([sensor_msgs/Image])
+
+    The camera measurements.
+
+#### Published Topics
+
+* **`object_detector`** ([std_msgs::Int8])
+
+    Publishes the number of detected objects.
+
+* **`bounding_boxes`** ([darknet_ros_msgs::BoundingBoxes])
+
+    Publishes an array of bounding boxes that gives information of the position and size of the bounding box in pixel coordinates.
+
+* **`detection_image`** ([sensor_msgs::Image])
+
+    Publishes an image of the detection image including the bounding boxes.
+
+#### Actions
+
+* **`camera_reading`** ([sensor_msgs::Image])
+
+    Sends an action with an image and the result is an array of bounding boxes.
+
+### Detection related parameters
+
+You can change the parameters that are related to the detection by adding a new config file that looks similar to `darknet_ros/config/yolo.yaml`.
+
+* **`image_view/enable_opencv`** (bool)
+
+    Enable or disable the open cv view of the detection image including the bounding boxes.
+
+* **`image_view/wait_key_delay`** (int)
+
+    Wait key delay in ms of the open cv window.
+
+* **`yolo_model/config_file/name`** (string)
+
+    Name of the cfg file of the network that is used for detection. The code searches for this name inside `darknet_ros/yolo_network_config/cfg/`.
+
+* **`yolo_model/weight_file/name`** (string)
+
+    Name of the weights file of the network that is used for detection. The code searches for this name inside `darknet_ros/yolo_network_config/weights/`.
+
+* **`yolo_model/threshold/value`** (float)
+
+    Threshold of the detection algorithm. It is defined between 0 and 1.
+
+* **`yolo_model/detection_classes/names`** (array of strings)
+
+    Detection names of the network used by the cfg and weights file inside `darknet_ros/yolo_network_config/`.

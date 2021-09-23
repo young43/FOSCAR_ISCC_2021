@@ -71,7 +71,7 @@ bool index_flag = false;
 
 // 0914 new stop_line path
 const float tf_coord1[2] = {935573.8125, 1915923.125};
-const float tf_coord2[2] = {935598.875, 1915970.375};
+const float tf_coord2[2] = {935599.106224, 1915970.57923};
 const float tf_coord3[2] = {935650.071767194, 1916093.28736585};
 const float tf_coord4[2] = {935656.5625, 1916202.0};
 const float tf_coord5[2] = {935649.125, 1916336.375};
@@ -531,7 +531,7 @@ void PurePursuitNode::run(char** argv) {
     // MODE 10 : 배달 PICK A
     if (pp_.mode == 10) {
       const_lookahead_distance_ = 6;
-      const_velocity_ = 6;
+      const_velocity_ = 4;
       final_constant = 1.2;
 
       ROS_INFO("DELIVERY_A STOP FLAG=%d", pp_.is_delivery_obs_calc_detected);
@@ -575,23 +575,27 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 19){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
-      const_velocity_ = 8;
+      const_velocity_ = 6;
       final_constant = 1.5;
 
       // for test
-      a_max_index = 1;
-      pp_.a_flag[a_max_index] = true;
+      // a_max_index = 0;
+      // pp_.a_flag[a_max_index] = true;
     }
 
     // MODE 20 : 배달 PICK B
     if (pp_.mode == 20) {
       const_lookahead_distance_ = 6;
-      const_velocity_ = 6;
+      const_velocity_ = 4;
       final_constant = 1.2;
       
       ROS_INFO("MISSION_FLAG=%d) A_INDEX(%d)  B_INDEX(%d)", pp_.mission_flag, a_max_index, b_max_index);
       ROS_INFO("B1=%d, B2=%d, B3=%d", pp_.b_cnt[0],pp_.b_cnt[1], pp_.b_cnt[2]);
       ROS_INFO("CALC_FLAG=%d, STOP_FLAG=%d", pp_.is_delivery_obs_calc_detected, pp_.is_delivery_obs_stop_detected);
+
+      // for test
+      a_max_index = 2;
+      pp_.a_flag[a_max_index] = true;
       
       // case 2) vision_distance + gps 로직
       if(pp_.mission_flag == 0 && pp_.is_delivery_obs_calc_detected){
@@ -605,29 +609,7 @@ void PurePursuitNode::run(char** argv) {
       }
 
 
-      // Delivery Subscribe 함수와 main 코드 상에서 순서상의 차이가 있을 경우를 대비함.
-      // if(pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3){
-      //   // Calc max_index
-      //   b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
-      //   // ROS_INFO("B INDEX (MISSION_FLAG=%d) : %d", pp_.mission_flag, b_max_index);
-
-      //   if (a_max_index == b_max_index) {
-      //     // Max flag on
-      //     pp_.b_flag[b_max_index] = true;
-      //   }
-      //   else {
-      //     pp_.b_cnt = {0,0,0};
-      //     if(pp_.mission_flag == 1){ 
-      //       pp_.mission_flag = 22; 
-      //       passed_index.push_back(b_max_index);
-      //     }
-      //     else if(pp_.mission_flag == 2){
-      //       pp_.mission_flag = 33;
-      //       passed_index.push_back(b_max_index);
-      //     }
-      //   }
-      // }
-
+      
       if((pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3) && pp_.is_delivery_obs_stop_detected){
         b_max_index = max_element(pp_.b_cnt.begin(), pp_.b_cnt.end()) - pp_.b_cnt.begin();
         if (a_max_index == b_max_index) {
@@ -641,8 +623,8 @@ void PurePursuitNode::run(char** argv) {
           pp_.mission_flag = 100;
         }else{
           pp_.b_cnt = {0,0,0};
-          if(pp_.mission_flag == 1) pp_.mission_flag = 22;
-          else if(pp_.mission_flag == 2) pp_.mission_flag = 33;
+          if(pp_.mission_flag == 1){ pp_.mission_flag = 22; }
+          else if(pp_.mission_flag == 2){ pp_.mission_flag = 33; }
           
         }
    
@@ -872,55 +854,56 @@ void PurePursuitNode::callbackFromObstacle2(const avoid_obstacle::DetectedObstac
 void PurePursuitNode::callbackFromDelivery(const vision_distance::DeliveryArray& msg){
   std::vector<vision_distance::Delivery> deliverySign = msg.visions;
 
-  for(int i = 0; i < deliverySign.size(); i++) {
-    // Delivery B Area
-    if (pp_.mode == 19 || pp_.mode == 20) {
-      if (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33){
-        //ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
-
-        if (min_b_dist > deliverySign[i].dist_y)
-          min_b_dist = deliverySign[i].dist_y;
-
-        // if (deliverySign[i].dist_y > 600 && deliverySign[i].dist_y < 1000) {  // dist 수정하기
-        //   if (deliverySign[i].flag == 1)  // B1
-        //   {
-        //       pp_.b_cnt[0] += 1;
-        //   }
-        //   if (deliverySign[i].flag == 2)  // B2
-        //   {
-        //       pp_.b_cnt[1] += 1;
-        //   }
-        //   if (deliverySign[i].flag == 3)  // B3
-        //   {
-        //       pp_.b_cnt[2] += 1;
-        //   }
-        // }
+  // B Area
+  if (pp_.mode == 20 && (pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3)){
+    sort(deliverySign.begin(), deliverySign.end(), compare2);
+    
+    if(deliverySign.size() > 0){
+      if(deliverySign[0].flag < 4){
+        pp_.b_cnt[deliverySign[0].flag-1] += 1;
       }
     }
+  }
 
-    // Delivery A Area
-    if (pp_.mode == 10) {
-      //ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
-
-      if (min_a_dist > deliverySign[i].dist_y)
-        min_a_dist = deliverySign[i].dist_y;
-
-        
-        // if (deliverySign[i].flag == 4)  // A1
-        // {
-        //     pp_.a_cnt[0] += 1;
-        // }
-        // if (deliverySign[i].flag == 5)  // A2
-        // {
-        //     pp_.a_cnt[1] += 1;
-        // }
-        // if (deliverySign[i].flag == 6)  // A3
-        // {
-        //     pp_.a_cnt[2] += 1;
-        // }
-      
+  // A Area
+  if (pp_.mode == 10 && pp_.mission_flag == 0){
+    sort(deliverySign.begin(), deliverySign.end(), compare2);
+    
+    if(deliverySign.size() > 0){
+      if(deliverySign[0].flag >= 4){
+        pp_.a_cnt[deliverySign[0].flag-4] += 1;
+      }
     }
   }
+
+  // for(int i = 0; i < deliverySign.size(); i++) {
+    
+  //   // Delivery A Area
+  //   if (pp_.mode == 10 && pp_.mission_flag == 0) {
+  //     //ROS_INFO("delivery dist_y : %f", deliverySign[i].dist_y);
+
+  //     if (min_a_dist > deliverySign[i].dist_y)
+  //       min_a_dist = deliverySign[i].dist_y;
+
+  //     if (deliverySign[i].dist_y > 600 && deliverySign[i].dist_y < 1500) { 
+  //       if (deliverySign[i].flag == 4)  // A1
+  //       {
+  //           pp_.a_cnt[0] += 1;
+  //       }
+  //       if (deliverySign[i].flag == 5)  // A2
+  //       {
+  //           pp_.a_cnt[1] += 1;
+  //       }
+  //       if (deliverySign[i].flag == 6)  // A3
+  //       {
+  //           pp_.a_cnt[2] += 1;
+  //       }
+  //     }
+      
+  //   }
+  // }
+
+
 }
 
 
@@ -941,15 +924,15 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
         traffic_lights.push_back(yoloObjects[i]);
       }
 
-    if(pp_.mode == 10){
-      if(yoloObjects[i].Class == "A1" || yoloObjects[i].Class == "A2" || yoloObjects[i].Class == "A3")
-        deliveryObjectsA.push_back(yoloObjects[i]);
-    }
+    // if(pp_.mode == 10){
+    //   if(yoloObjects[i].Class == "A1" || yoloObjects[i].Class == "A2" || yoloObjects[i].Class == "A3")
+    //     deliveryObjectsA.push_back(yoloObjects[i]);
+    // }
 
-    if(pp_.mode == 20){
-      if(yoloObjects[i].Class == "B1" || yoloObjects[i].Class == "B2" || yoloObjects[i].Class == "B3")
-        deliveryObjectsB.push_back(yoloObjects[i]);
-    }
+    // if(pp_.mode == 20){
+    //   if(yoloObjects[i].Class == "B1" || yoloObjects[i].Class == "B2" || yoloObjects[i].Class == "B3")
+    //     deliveryObjectsB.push_back(yoloObjects[i]);
+    // }
 
     // if(pp_.mode == 20 && (pp_.mission_flag == 0 || pp_.mission_flag == 22 || pp_.mission_flag == 33)){
     //   if(yoloObjects[i].Class == "B1") pp_.b_cnt[0] += 1;
@@ -961,25 +944,25 @@ void PurePursuitNode::callbackFromTrafficLight(const darknet_ros_msgs::BoundingB
   }
 
   std::sort(traffic_lights.begin(), traffic_lights.end(), compare);
-  std::sort(deliveryObjectsA.begin(), deliveryObjectsA.end(), compare);
-  std::sort(deliveryObjectsB.begin(), deliveryObjectsB.end(), compare);
+  // std::sort(deliveryObjectsA.begin(), deliveryObjectsA.end(), compare);
+  // std::sort(deliveryObjectsB.begin(), deliveryObjectsB.end(), compare);
 
-  if(pp_.mode == 10 && deliveryObjectsA.size() > 0 && pp_.mission_flag == 0){
-    if(deliveryObjectsA[0].Class == "A1") pp_.a_cnt[0] += 1;
-    else if(deliveryObjectsA[0].Class == "A2") pp_.a_cnt[1] += 1;
-    else if(deliveryObjectsA[0].Class == "A3") pp_.a_cnt[2] += 1;
-  }
+  // if(pp_.mode == 10 && deliveryObjectsA.size() > 0 && pp_.mission_flag == 0){
+  //   if(deliveryObjectsA[0].Class == "A1") pp_.a_cnt[0] += 1;
+  //   else if(deliveryObjectsA[0].Class == "A2") pp_.a_cnt[1] += 1;
+  //   else if(deliveryObjectsA[0].Class == "A3") pp_.a_cnt[2] += 1;
+  // }
 
-  if(pp_.mode == 20 && deliveryObjectsB.size() > 0 && (pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3)){
-    auto it1 = find(passed_index.begin(), passed_index.end(), 0);
-    auto it2 = find(passed_index.begin(), passed_index.end(), 1);
-    auto it3 = find(passed_index.begin(), passed_index.end(), 2);
+  // if(pp_.mode == 20 && deliveryObjectsB.size() > 0 && (pp_.mission_flag == 1 || pp_.mission_flag == 2 || pp_.mission_flag == 3)){
+  //   auto it1 = find(passed_index.begin(), passed_index.end(), 0);
+  //   auto it2 = find(passed_index.begin(), passed_index.end(), 1);
+  //   auto it3 = find(passed_index.begin(), passed_index.end(), 2);
 
-    // 지나간 index는 무시
-    if(deliveryObjectsB[0].Class == "B1" && it1 == passed_index.end()) pp_.b_cnt[0] += 1;
-    else if(deliveryObjectsB[0].Class == "B2" && it2 == passed_index.end()) pp_.b_cnt[1] += 1;
-    else if(deliveryObjectsB[0].Class == "B3" && it3 == passed_index.end()) pp_.b_cnt[2] += 1;
-  }
+  //   // 지나간 index는 무시
+  //   if(deliveryObjectsB[0].Class == "B1" && it1 == passed_index.end()) pp_.b_cnt[0] += 1;
+  //   else if(deliveryObjectsB[0].Class == "B2" && it2 == passed_index.end()) pp_.b_cnt[1] += 1;
+  //   else if(deliveryObjectsB[0].Class == "B3" && it3 == passed_index.end()) pp_.b_cnt[2] += 1;
+  // }
 
  int index = 0;
 
@@ -1068,6 +1051,12 @@ bool compare(darknet_ros_msgs::BoundingBox a, darknet_ros_msgs::BoundingBox b) {
   int b_area = (b.ymax - b.ymin) * (b.xmax - b.xmin);
 
   return a_area > b_area ? true : false;
+}
+
+
+bool compare2(vision_distance::Delivery a, vision_distance::Delivery b) {
+  
+  return a.dist_y < b.dist_y ? true : false;
 }
 
 }  // namespace waypoint_follower

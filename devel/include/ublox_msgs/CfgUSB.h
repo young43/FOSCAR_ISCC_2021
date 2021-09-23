@@ -96,6 +96,20 @@ struct CfgUSB_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(FLAGS_RE_ENUM)
+  #undef FLAGS_RE_ENUM
+#endif
+#if defined(_WIN32) && defined(FLAGS_POWER_MODE)
+  #undef FLAGS_POWER_MODE
+#endif
+
   enum {
     CLASS_ID = 6u,
     MESSAGE_ID = 27u,
@@ -133,6 +147,28 @@ ros::message_operations::Printer< ::ublox_msgs::CfgUSB_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::CfgUSB_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgUSB_<ContainerAllocator2> & rhs)
+{
+  return lhs.vendorID == rhs.vendorID &&
+    lhs.productID == rhs.productID &&
+    lhs.reserved1 == rhs.reserved1 &&
+    lhs.reserved2 == rhs.reserved2 &&
+    lhs.powerConsumption == rhs.powerConsumption &&
+    lhs.flags == rhs.flags &&
+    lhs.vendorString == rhs.vendorString &&
+    lhs.productString == rhs.productString &&
+    lhs.serialNumber == rhs.serialNumber;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::CfgUSB_<ContainerAllocator1> & lhs, const ::ublox_msgs::CfgUSB_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -140,12 +176,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -210,37 +240,37 @@ struct Definition< ::ublox_msgs::CfgUSB_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# UBX-CFG-USB (0x06 0x1B)\n\
-# USB Configuration\n\
-#\n\
-\n\
-uint8 CLASS_ID = 6\n\
-uint8 MESSAGE_ID = 27 \n\
-\n\
-uint16 vendorID             # Only set to registered Vendor IDs.                     \n\
-                            # Changing this field requires special Host drivers.\n\
-\n\
-uint16 productID            # Product ID. Changing this field requires special  \n\
-                            # Host drivers.\n\
-\n\
-uint8[2] reserved1          # Reserved\n\
-uint8[2] reserved2          # Reserved\n\
-\n\
-uint16 powerConsumption     # Power consumed by the device [mA]\n\
-\n\
-uint16 flags                # various configuration flags (see graphic below)\n\
-uint16 FLAGS_RE_ENUM = 0       # force re-enumeration\n\
-uint16 FLAGS_POWER_MODE = 2    # self-powered (1), bus-powered (0)\n\
-\n\
-int8[32] vendorString      # String containing the vendor name. \n\
-                           # 32 ASCII bytes including 0-termination.\n\
-int8[32] productString     # String containing the product name. \n\
-                           # 32 ASCII bytes including 0-termination.\n\
-int8[32] serialNumber      # String containing the serial number. \n\
-                           # 32 ASCII bytes including 0-termination. \n\
-                           # Changing the String fields requires special Host \n\
-                           # drivers.\n\
-";
+    return "# UBX-CFG-USB (0x06 0x1B)\n"
+"# USB Configuration\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 6\n"
+"uint8 MESSAGE_ID = 27 \n"
+"\n"
+"uint16 vendorID             # Only set to registered Vendor IDs.                     \n"
+"                            # Changing this field requires special Host drivers.\n"
+"\n"
+"uint16 productID            # Product ID. Changing this field requires special  \n"
+"                            # Host drivers.\n"
+"\n"
+"uint8[2] reserved1          # Reserved\n"
+"uint8[2] reserved2          # Reserved\n"
+"\n"
+"uint16 powerConsumption     # Power consumed by the device [mA]\n"
+"\n"
+"uint16 flags                # various configuration flags (see graphic below)\n"
+"uint16 FLAGS_RE_ENUM = 0       # force re-enumeration\n"
+"uint16 FLAGS_POWER_MODE = 2    # self-powered (1), bus-powered (0)\n"
+"\n"
+"int8[32] vendorString      # String containing the vendor name. \n"
+"                           # 32 ASCII bytes including 0-termination.\n"
+"int8[32] productString     # String containing the product name. \n"
+"                           # 32 ASCII bytes including 0-termination.\n"
+"int8[32] serialNumber      # String containing the serial number. \n"
+"                           # 32 ASCII bytes including 0-termination. \n"
+"                           # Changing the String fields requires special Host \n"
+"                           # drivers.\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::CfgUSB_<ContainerAllocator>&) { return value(); }

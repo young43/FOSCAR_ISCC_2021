@@ -68,6 +68,92 @@ struct NavSTATUS_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(GPS_NO_FIX)
+  #undef GPS_NO_FIX
+#endif
+#if defined(_WIN32) && defined(GPS_DEAD_RECKONING_ONLY)
+  #undef GPS_DEAD_RECKONING_ONLY
+#endif
+#if defined(_WIN32) && defined(GPS_2D_FIX)
+  #undef GPS_2D_FIX
+#endif
+#if defined(_WIN32) && defined(GPS_3D_FIX)
+  #undef GPS_3D_FIX
+#endif
+#if defined(_WIN32) && defined(GPS_GPS_DEAD_RECKONING_COMBINED)
+  #undef GPS_GPS_DEAD_RECKONING_COMBINED
+#endif
+#if defined(_WIN32) && defined(GPS_TIME_ONLY_FIX)
+  #undef GPS_TIME_ONLY_FIX
+#endif
+#if defined(_WIN32) && defined(FLAGS_GPS_FIX_OK)
+  #undef FLAGS_GPS_FIX_OK
+#endif
+#if defined(_WIN32) && defined(FLAGS_DIFF_SOLN)
+  #undef FLAGS_DIFF_SOLN
+#endif
+#if defined(_WIN32) && defined(FLAGS_WKNSET)
+  #undef FLAGS_WKNSET
+#endif
+#if defined(_WIN32) && defined(FLAGS_TOWSET)
+  #undef FLAGS_TOWSET
+#endif
+#if defined(_WIN32) && defined(FIX_STAT_DIFF_CORR_MASK)
+  #undef FIX_STAT_DIFF_CORR_MASK
+#endif
+#if defined(_WIN32) && defined(FIX_STAT_MAP_MATCHING_MASK)
+  #undef FIX_STAT_MAP_MATCHING_MASK
+#endif
+#if defined(_WIN32) && defined(MAP_MATCHING_NONE)
+  #undef MAP_MATCHING_NONE
+#endif
+#if defined(_WIN32) && defined(MAP_MATCHING_VALID)
+  #undef MAP_MATCHING_VALID
+#endif
+#if defined(_WIN32) && defined(MAP_MATCHING_USED)
+  #undef MAP_MATCHING_USED
+#endif
+#if defined(_WIN32) && defined(MAP_MATCHING_DR)
+  #undef MAP_MATCHING_DR
+#endif
+#if defined(_WIN32) && defined(FLAGS2_PSM_STATE_MASK)
+  #undef FLAGS2_PSM_STATE_MASK
+#endif
+#if defined(_WIN32) && defined(PSM_STATE_ACQUISITION)
+  #undef PSM_STATE_ACQUISITION
+#endif
+#if defined(_WIN32) && defined(PSM_STATE_TRACKING)
+  #undef PSM_STATE_TRACKING
+#endif
+#if defined(_WIN32) && defined(PSM_STATE_POWER_OPTIMIZED_TRACKING)
+  #undef PSM_STATE_POWER_OPTIMIZED_TRACKING
+#endif
+#if defined(_WIN32) && defined(PSM_STATE_INACTIVE)
+  #undef PSM_STATE_INACTIVE
+#endif
+#if defined(_WIN32) && defined(FLAGS2_SPOOF_DET_STATE_MASK)
+  #undef FLAGS2_SPOOF_DET_STATE_MASK
+#endif
+#if defined(_WIN32) && defined(SPOOF_DET_STATE_UNKNOWN)
+  #undef SPOOF_DET_STATE_UNKNOWN
+#endif
+#if defined(_WIN32) && defined(SPOOF_DET_STATE_NONE)
+  #undef SPOOF_DET_STATE_NONE
+#endif
+#if defined(_WIN32) && defined(SPOOF_DET_STATE_SPOOFING)
+  #undef SPOOF_DET_STATE_SPOOFING
+#endif
+#if defined(_WIN32) && defined(SPOOF_DET_STATE_MULTIPLE)
+  #undef SPOOF_DET_STATE_MULTIPLE
+#endif
+
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 3u,
@@ -177,6 +263,26 @@ ros::message_operations::Printer< ::ublox_msgs::NavSTATUS_<ContainerAllocator> >
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavSTATUS_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSTATUS_<ContainerAllocator2> & rhs)
+{
+  return lhs.iTOW == rhs.iTOW &&
+    lhs.gpsFix == rhs.gpsFix &&
+    lhs.flags == rhs.flags &&
+    lhs.fixStat == rhs.fixStat &&
+    lhs.flags2 == rhs.flags2 &&
+    lhs.ttff == rhs.ttff &&
+    lhs.msss == rhs.msss;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavSTATUS_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavSTATUS_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -184,12 +290,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -254,72 +354,72 @@ struct Definition< ::ublox_msgs::NavSTATUS_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-STATUS (0x01 0x03)\n\
-# Receiver Navigation Status\n\
-#\n\
-# See important comments concerning validity of position and velocity given in\n\
-# section Navigation Output Filters.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 1\n\
-uint8 MESSAGE_ID = 3\n\
-\n\
-uint32 iTOW             # GPS Millisecond time of week [ms]\n\
-\n\
-uint8 gpsFix            # GPSfix Type, this value does not qualify a fix as\n\
-                        # valid and within the limits. See note on flag gpsFixOk\n\
-                        # below\n\
-uint8 GPS_NO_FIX = 0\n\
-uint8 GPS_DEAD_RECKONING_ONLY = 1\n\
-uint8 GPS_2D_FIX = 2\n\
-uint8 GPS_3D_FIX = 3\n\
-uint8 GPS_GPS_DEAD_RECKONING_COMBINED = 4\n\
-uint8 GPS_TIME_ONLY_FIX = 5\n\
-\n\
-uint8 flags             # Navigation Status Flags\n\
-uint8 FLAGS_GPS_FIX_OK = 1      # position & velocity valid & within DOP & ACC \n\
-                                # Masks\n\
-uint8 FLAGS_DIFF_SOLN = 2       # Differential corrections were applied\n\
-uint8 FLAGS_WKNSET = 4          # Week Number valid\n\
-uint8 FLAGS_TOWSET = 8          # Time of Week valid\n\
-\n\
-uint8 fixStat           # Fix Status Information\n\
-uint8 FIX_STAT_DIFF_CORR_MASK = 1       # 1 = differential corrections available\n\
-# map matching status:\n\
-uint8 FIX_STAT_MAP_MATCHING_MASK = 192\n\
-uint8 MAP_MATCHING_NONE = 0      # none\n\
-uint8 MAP_MATCHING_VALID = 64    # valid but not used, i.e. map matching data \n\
-                                 # was received, but was too old\n\
-uint8 MAP_MATCHING_USED = 128    # valid and used, map matching data was applied\n\
-uint8 MAP_MATCHING_DR = 192      # valid and used, map matching data was \n\
-                                 # applied. In case of sensor unavailability map\n\
-                                 # matching data enables dead reckoning. \n\
-                                 # This requires map matched latitude/longitude \n\
-                                 # or heading data.\n\
-\n\
-uint8 flags2            # further information about navigation output\n\
-# power safe mode state (Only for FW version >= 7.01; undefined otherwise)\n\
-uint8 FLAGS2_PSM_STATE_MASK = 3\n\
-uint8 PSM_STATE_ACQUISITION = 0                # ACQUISITION \n\
-                                               # [or when psm disabled]\n\
-uint8 PSM_STATE_TRACKING = 1                   # TRACKING\n\
-uint8 PSM_STATE_POWER_OPTIMIZED_TRACKING = 2   # POWER OPTIMIZED TRACKING\n\
-uint8 PSM_STATE_INACTIVE = 3                   # INACTIVE\n\
-# Note that the spoofing state value only reflects the detector state for the \n\
-# current navigation epoch. As spoofing can be detected most easily at the \n\
-# transition from real signal to spoofing signal, this is also where the \n\
-# detector is triggered the most. I.e. a value of 1 - No spoofing indicated does\n\
-# not mean that the receiver is not spoofed, it #simply states that the detector\n\
-# was not triggered in this epoch.\n\
-uint8 FLAGS2_SPOOF_DET_STATE_MASK = 24 \n\
-uint8 SPOOF_DET_STATE_UNKNOWN = 0    # Unknown or deactivated\n\
-uint8 SPOOF_DET_STATE_NONE = 8       # No spoofing indicated\n\
-uint8 SPOOF_DET_STATE_SPOOFING = 16  # Spoofing indicated\n\
-uint8 SPOOF_DET_STATE_MULTIPLE = 24  # Multiple spoofing indication\n\
-\n\
-uint32 ttff             # Time to first fix (millisecond time tag) [ms]\n\
-uint32 msss             # Milliseconds since Startup / Reset [ms]\n\
-";
+    return "# NAV-STATUS (0x01 0x03)\n"
+"# Receiver Navigation Status\n"
+"#\n"
+"# See important comments concerning validity of position and velocity given in\n"
+"# section Navigation Output Filters.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 1\n"
+"uint8 MESSAGE_ID = 3\n"
+"\n"
+"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
+"\n"
+"uint8 gpsFix            # GPSfix Type, this value does not qualify a fix as\n"
+"                        # valid and within the limits. See note on flag gpsFixOk\n"
+"                        # below\n"
+"uint8 GPS_NO_FIX = 0\n"
+"uint8 GPS_DEAD_RECKONING_ONLY = 1\n"
+"uint8 GPS_2D_FIX = 2\n"
+"uint8 GPS_3D_FIX = 3\n"
+"uint8 GPS_GPS_DEAD_RECKONING_COMBINED = 4\n"
+"uint8 GPS_TIME_ONLY_FIX = 5\n"
+"\n"
+"uint8 flags             # Navigation Status Flags\n"
+"uint8 FLAGS_GPS_FIX_OK = 1      # position & velocity valid & within DOP & ACC \n"
+"                                # Masks\n"
+"uint8 FLAGS_DIFF_SOLN = 2       # Differential corrections were applied\n"
+"uint8 FLAGS_WKNSET = 4          # Week Number valid\n"
+"uint8 FLAGS_TOWSET = 8          # Time of Week valid\n"
+"\n"
+"uint8 fixStat           # Fix Status Information\n"
+"uint8 FIX_STAT_DIFF_CORR_MASK = 1       # 1 = differential corrections available\n"
+"# map matching status:\n"
+"uint8 FIX_STAT_MAP_MATCHING_MASK = 192\n"
+"uint8 MAP_MATCHING_NONE = 0      # none\n"
+"uint8 MAP_MATCHING_VALID = 64    # valid but not used, i.e. map matching data \n"
+"                                 # was received, but was too old\n"
+"uint8 MAP_MATCHING_USED = 128    # valid and used, map matching data was applied\n"
+"uint8 MAP_MATCHING_DR = 192      # valid and used, map matching data was \n"
+"                                 # applied. In case of sensor unavailability map\n"
+"                                 # matching data enables dead reckoning. \n"
+"                                 # This requires map matched latitude/longitude \n"
+"                                 # or heading data.\n"
+"\n"
+"uint8 flags2            # further information about navigation output\n"
+"# power safe mode state (Only for FW version >= 7.01; undefined otherwise)\n"
+"uint8 FLAGS2_PSM_STATE_MASK = 3\n"
+"uint8 PSM_STATE_ACQUISITION = 0                # ACQUISITION \n"
+"                                               # [or when psm disabled]\n"
+"uint8 PSM_STATE_TRACKING = 1                   # TRACKING\n"
+"uint8 PSM_STATE_POWER_OPTIMIZED_TRACKING = 2   # POWER OPTIMIZED TRACKING\n"
+"uint8 PSM_STATE_INACTIVE = 3                   # INACTIVE\n"
+"# Note that the spoofing state value only reflects the detector state for the \n"
+"# current navigation epoch. As spoofing can be detected most easily at the \n"
+"# transition from real signal to spoofing signal, this is also where the \n"
+"# detector is triggered the most. I.e. a value of 1 - No spoofing indicated does\n"
+"# not mean that the receiver is not spoofed, it #simply states that the detector\n"
+"# was not triggered in this epoch.\n"
+"uint8 FLAGS2_SPOOF_DET_STATE_MASK = 24 \n"
+"uint8 SPOOF_DET_STATE_UNKNOWN = 0    # Unknown or deactivated\n"
+"uint8 SPOOF_DET_STATE_NONE = 8       # No spoofing indicated\n"
+"uint8 SPOOF_DET_STATE_SPOOFING = 16  # Spoofing indicated\n"
+"uint8 SPOOF_DET_STATE_MULTIPLE = 24  # Multiple spoofing indication\n"
+"\n"
+"uint32 ttff             # Time to first fix (millisecond time tag) [ms]\n"
+"uint32 msss             # Milliseconds since Startup / Reset [ms]\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavSTATUS_<ContainerAllocator>&) { return value(); }

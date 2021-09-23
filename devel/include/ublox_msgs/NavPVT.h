@@ -195,6 +195,95 @@ struct NavPVT_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(VALID_DATE)
+  #undef VALID_DATE
+#endif
+#if defined(_WIN32) && defined(VALID_TIME)
+  #undef VALID_TIME
+#endif
+#if defined(_WIN32) && defined(VALID_FULLY_RESOLVED)
+  #undef VALID_FULLY_RESOLVED
+#endif
+#if defined(_WIN32) && defined(VALID_MAG)
+  #undef VALID_MAG
+#endif
+#if defined(_WIN32) && defined(FIX_TYPE_NO_FIX)
+  #undef FIX_TYPE_NO_FIX
+#endif
+#if defined(_WIN32) && defined(FIX_TYPE_DEAD_RECKONING_ONLY)
+  #undef FIX_TYPE_DEAD_RECKONING_ONLY
+#endif
+#if defined(_WIN32) && defined(FIX_TYPE_2D)
+  #undef FIX_TYPE_2D
+#endif
+#if defined(_WIN32) && defined(FIX_TYPE_3D)
+  #undef FIX_TYPE_3D
+#endif
+#if defined(_WIN32) && defined(FIX_TYPE_GNSS_DEAD_RECKONING_COMBINED)
+  #undef FIX_TYPE_GNSS_DEAD_RECKONING_COMBINED
+#endif
+#if defined(_WIN32) && defined(FIX_TYPE_TIME_ONLY)
+  #undef FIX_TYPE_TIME_ONLY
+#endif
+#if defined(_WIN32) && defined(FLAGS_GNSS_FIX_OK)
+  #undef FLAGS_GNSS_FIX_OK
+#endif
+#if defined(_WIN32) && defined(FLAGS_DIFF_SOLN)
+  #undef FLAGS_DIFF_SOLN
+#endif
+#if defined(_WIN32) && defined(FLAGS_PSM_MASK)
+  #undef FLAGS_PSM_MASK
+#endif
+#if defined(_WIN32) && defined(PSM_OFF)
+  #undef PSM_OFF
+#endif
+#if defined(_WIN32) && defined(PSM_ENABLED)
+  #undef PSM_ENABLED
+#endif
+#if defined(_WIN32) && defined(PSM_ACQUIRED)
+  #undef PSM_ACQUIRED
+#endif
+#if defined(_WIN32) && defined(PSM_TRACKING)
+  #undef PSM_TRACKING
+#endif
+#if defined(_WIN32) && defined(PSM_POWER_OPTIMIZED_TRACKING)
+  #undef PSM_POWER_OPTIMIZED_TRACKING
+#endif
+#if defined(_WIN32) && defined(PSM_INACTIVE)
+  #undef PSM_INACTIVE
+#endif
+#if defined(_WIN32) && defined(FLAGS_HEAD_VEH_VALID)
+  #undef FLAGS_HEAD_VEH_VALID
+#endif
+#if defined(_WIN32) && defined(FLAGS_CARRIER_PHASE_MASK)
+  #undef FLAGS_CARRIER_PHASE_MASK
+#endif
+#if defined(_WIN32) && defined(CARRIER_PHASE_NO_SOLUTION)
+  #undef CARRIER_PHASE_NO_SOLUTION
+#endif
+#if defined(_WIN32) && defined(CARRIER_PHASE_FLOAT)
+  #undef CARRIER_PHASE_FLOAT
+#endif
+#if defined(_WIN32) && defined(CARRIER_PHASE_FIXED)
+  #undef CARRIER_PHASE_FIXED
+#endif
+#if defined(_WIN32) && defined(FLAGS2_CONFIRMED_AVAILABLE)
+  #undef FLAGS2_CONFIRMED_AVAILABLE
+#endif
+#if defined(_WIN32) && defined(FLAGS2_CONFIRMED_DATE)
+  #undef FLAGS2_CONFIRMED_DATE
+#endif
+#if defined(_WIN32) && defined(FLAGS2_CONFIRMED_TIME)
+  #undef FLAGS2_CONFIRMED_TIME
+#endif
+
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 7u,
@@ -307,6 +396,51 @@ ros::message_operations::Printer< ::ublox_msgs::NavPVT_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavPVT_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavPVT_<ContainerAllocator2> & rhs)
+{
+  return lhs.iTOW == rhs.iTOW &&
+    lhs.year == rhs.year &&
+    lhs.month == rhs.month &&
+    lhs.day == rhs.day &&
+    lhs.hour == rhs.hour &&
+    lhs.min == rhs.min &&
+    lhs.sec == rhs.sec &&
+    lhs.valid == rhs.valid &&
+    lhs.tAcc == rhs.tAcc &&
+    lhs.nano == rhs.nano &&
+    lhs.fixType == rhs.fixType &&
+    lhs.flags == rhs.flags &&
+    lhs.flags2 == rhs.flags2 &&
+    lhs.numSV == rhs.numSV &&
+    lhs.lon == rhs.lon &&
+    lhs.lat == rhs.lat &&
+    lhs.height == rhs.height &&
+    lhs.hMSL == rhs.hMSL &&
+    lhs.hAcc == rhs.hAcc &&
+    lhs.vAcc == rhs.vAcc &&
+    lhs.velN == rhs.velN &&
+    lhs.velE == rhs.velE &&
+    lhs.velD == rhs.velD &&
+    lhs.gSpeed == rhs.gSpeed &&
+    lhs.heading == rhs.heading &&
+    lhs.sAcc == rhs.sAcc &&
+    lhs.headAcc == rhs.headAcc &&
+    lhs.pDOP == rhs.pDOP &&
+    lhs.reserved1 == rhs.reserved1 &&
+    lhs.headVeh == rhs.headVeh &&
+    lhs.magDec == rhs.magDec &&
+    lhs.magAcc == rhs.magAcc;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavPVT_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavPVT_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -314,12 +448,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -384,99 +512,99 @@ struct Definition< ::ublox_msgs::NavPVT_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-PVT (0x01 0x07)\n\
-# Navigation Position Velocity Time Solution\n\
-#\n\
-# Note that during a leap second there may be more (or less) than 60 seconds in\n\
-# a minute; see the description of leap seconds for details.\n\
-#\n\
-# This message combines Position, velocity and time solution in LLH, \n\
-# including accuracy figures\n\
-#\n\
-# WARNING: For firmware version 7, this message is a different length.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 1\n\
-uint8 MESSAGE_ID = 7\n\
-\n\
-uint32 iTOW             # GPS Millisecond time of week [ms]\n\
-uint16 year             # Year (UTC)\n\
-uint8 month             # Month, range 1..12 (UTC)\n\
-uint8 day               # Day of month, range 1..31 (UTC)\n\
-uint8 hour              # Hour of day, range 0..23 (UTC)\n\
-uint8 min               # Minute of hour, range 0..59 (UTC)\n\
-uint8 sec               # Seconds of minute, range 0..60 (UTC)\n\
-\n\
-uint8 valid             # Validity flags\n\
-uint8 VALID_DATE = 1            # Valid UTC Date\n\
-uint8 VALID_TIME = 2            # Valid \n\
-uint8 VALID_FULLY_RESOLVED = 4  # UTC time of day has been fully resolved \n\
-                                # (no seconds uncertainty)\n\
-uint8 VALID_MAG = 8             # Valid Magnetic Declination\n\
-\n\
-uint32 tAcc             # time accuracy estimate [ns] (UTC)\n\
-int32 nano              # fraction of a second [ns], range -1e9 .. 1e9 (UTC)\n\
-\n\
-uint8 fixType           # GNSS fix Type, range 0..5\n\
-uint8 FIX_TYPE_NO_FIX = 0\n\
-uint8 FIX_TYPE_DEAD_RECKONING_ONLY = 1\n\
-uint8 FIX_TYPE_2D = 2                           # Signal from only 3 SVs, \n\
-                                                # constant altitude assumed\n\
-uint8 FIX_TYPE_3D = 3\n\
-uint8 FIX_TYPE_GNSS_DEAD_RECKONING_COMBINED = 4 # GNSS + Dead reckoning\n\
-uint8 FIX_TYPE_TIME_ONLY = 5                    # Time only fix (High precision \n\
-                                                # devices)\n\
-\n\
-uint8 flags             # Fix Status Flags\n\
-uint8 FLAGS_GNSS_FIX_OK = 1          # i.e. within DOP & accuracy masks\n\
-uint8 FLAGS_DIFF_SOLN = 2            # DGPS used\n\
-uint8 FLAGS_PSM_MASK = 28            # Power Save Mode\n\
-uint8 PSM_OFF = 0                       # PSM is off\n\
-uint8 PSM_ENABLED = 4                   # Enabled (state before acquisition)\n\
-uint8 PSM_ACQUIRED = 8                  # Acquisition\n\
-uint8 PSM_TRACKING = 12                 # Tracking\n\
-uint8 PSM_POWER_OPTIMIZED_TRACKING = 16 # Power Optimized Tracking\n\
-uint8 PSM_INACTIVE = 20                 # Inactive\n\
-uint8 FLAGS_HEAD_VEH_VALID = 32         # heading of vehicle is valid\n\
-uint8 FLAGS_CARRIER_PHASE_MASK = 192 # Carrier Phase Range Solution Status     \n\
-uint8 CARRIER_PHASE_NO_SOLUTION = 0     # no carrier phase range solution\n\
-uint8 CARRIER_PHASE_FLOAT = 64          # carrier phase float solution (no fixed \n\
-                                        # integer measurements have been used to \n\
-                                        # calculate the solution)\n\
-uint8 CARRIER_PHASE_FIXED = 128         # fixed solution (>=1 fixed integer \n\
-                                        # carrier phase range measurements have \n\
-                                        # been used to calculate  the solution)\n\
-\n\
-uint8 flags2            # Additional Flags\n\
-uint8 FLAGS2_CONFIRMED_AVAILABLE = 32   # information about UTC Date and Time of \n\
-                                        # Day validity confirmation is available\n\
-uint8 FLAGS2_CONFIRMED_DATE = 64        # UTC Date validity could be confirmed\n\
-uint8 FLAGS2_CONFIRMED_TIME = 128       # UTC Time of Day could be confirmed\n\
-\n\
-uint8 numSV             # Number of SVs used in Nav Solution\n\
-int32 lon               # Longitude [deg / 1e-7]\n\
-int32 lat               # Latitude [deg / 1e-7]\n\
-int32 height            # Height above Ellipsoid [mm]\n\
-int32 hMSL              # Height above mean sea level [mm]\n\
-uint32 hAcc             # Horizontal Accuracy Estimate [mm]\n\
-uint32 vAcc             # Vertical Accuracy Estimate [mm]\n\
-\n\
-int32 velN              # NED north velocity [mm/s]\n\
-int32 velE              # NED east velocity [mm/s]\n\
-int32 velD              # NED down velocity [mm/s]\n\
-int32 gSpeed            # Ground Speed (2-D) [mm/s]\n\
-int32 heading           # Heading of motion 2-D [deg / 1e-5]\n\
-uint32 sAcc             # Speed Accuracy Estimate [mm/s]\n\
-uint32 headAcc          # Heading Accuracy Estimate (both motion & vehicle) \n\
-                        # [deg / 1e-5]\n\
-\n\
-uint16 pDOP             # Position DOP [1 / 0.01]\n\
-uint8[6] reserved1      # Reserved\n\
-\n\
-int32 headVeh           # Heading of vehicle (2-D) [deg / 1e-5]\n\
-int16 magDec            # Magnetic declination [deg / 1e-2]\n\
-uint16 magAcc           # Magnetic declination accuracy [deg / 1e-2]\n\
-";
+    return "# NAV-PVT (0x01 0x07)\n"
+"# Navigation Position Velocity Time Solution\n"
+"#\n"
+"# Note that during a leap second there may be more (or less) than 60 seconds in\n"
+"# a minute; see the description of leap seconds for details.\n"
+"#\n"
+"# This message combines Position, velocity and time solution in LLH, \n"
+"# including accuracy figures\n"
+"#\n"
+"# WARNING: For firmware version 7, this message is a different length.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 1\n"
+"uint8 MESSAGE_ID = 7\n"
+"\n"
+"uint32 iTOW             # GPS Millisecond time of week [ms]\n"
+"uint16 year             # Year (UTC)\n"
+"uint8 month             # Month, range 1..12 (UTC)\n"
+"uint8 day               # Day of month, range 1..31 (UTC)\n"
+"uint8 hour              # Hour of day, range 0..23 (UTC)\n"
+"uint8 min               # Minute of hour, range 0..59 (UTC)\n"
+"uint8 sec               # Seconds of minute, range 0..60 (UTC)\n"
+"\n"
+"uint8 valid             # Validity flags\n"
+"uint8 VALID_DATE = 1            # Valid UTC Date\n"
+"uint8 VALID_TIME = 2            # Valid \n"
+"uint8 VALID_FULLY_RESOLVED = 4  # UTC time of day has been fully resolved \n"
+"                                # (no seconds uncertainty)\n"
+"uint8 VALID_MAG = 8             # Valid Magnetic Declination\n"
+"\n"
+"uint32 tAcc             # time accuracy estimate [ns] (UTC)\n"
+"int32 nano              # fraction of a second [ns], range -1e9 .. 1e9 (UTC)\n"
+"\n"
+"uint8 fixType           # GNSS fix Type, range 0..5\n"
+"uint8 FIX_TYPE_NO_FIX = 0\n"
+"uint8 FIX_TYPE_DEAD_RECKONING_ONLY = 1\n"
+"uint8 FIX_TYPE_2D = 2                           # Signal from only 3 SVs, \n"
+"                                                # constant altitude assumed\n"
+"uint8 FIX_TYPE_3D = 3\n"
+"uint8 FIX_TYPE_GNSS_DEAD_RECKONING_COMBINED = 4 # GNSS + Dead reckoning\n"
+"uint8 FIX_TYPE_TIME_ONLY = 5                    # Time only fix (High precision \n"
+"                                                # devices)\n"
+"\n"
+"uint8 flags             # Fix Status Flags\n"
+"uint8 FLAGS_GNSS_FIX_OK = 1          # i.e. within DOP & accuracy masks\n"
+"uint8 FLAGS_DIFF_SOLN = 2            # DGPS used\n"
+"uint8 FLAGS_PSM_MASK = 28            # Power Save Mode\n"
+"uint8 PSM_OFF = 0                       # PSM is off\n"
+"uint8 PSM_ENABLED = 4                   # Enabled (state before acquisition)\n"
+"uint8 PSM_ACQUIRED = 8                  # Acquisition\n"
+"uint8 PSM_TRACKING = 12                 # Tracking\n"
+"uint8 PSM_POWER_OPTIMIZED_TRACKING = 16 # Power Optimized Tracking\n"
+"uint8 PSM_INACTIVE = 20                 # Inactive\n"
+"uint8 FLAGS_HEAD_VEH_VALID = 32         # heading of vehicle is valid\n"
+"uint8 FLAGS_CARRIER_PHASE_MASK = 192 # Carrier Phase Range Solution Status     \n"
+"uint8 CARRIER_PHASE_NO_SOLUTION = 0     # no carrier phase range solution\n"
+"uint8 CARRIER_PHASE_FLOAT = 64          # carrier phase float solution (no fixed \n"
+"                                        # integer measurements have been used to \n"
+"                                        # calculate the solution)\n"
+"uint8 CARRIER_PHASE_FIXED = 128         # fixed solution (>=1 fixed integer \n"
+"                                        # carrier phase range measurements have \n"
+"                                        # been used to calculate  the solution)\n"
+"\n"
+"uint8 flags2            # Additional Flags\n"
+"uint8 FLAGS2_CONFIRMED_AVAILABLE = 32   # information about UTC Date and Time of \n"
+"                                        # Day validity confirmation is available\n"
+"uint8 FLAGS2_CONFIRMED_DATE = 64        # UTC Date validity could be confirmed\n"
+"uint8 FLAGS2_CONFIRMED_TIME = 128       # UTC Time of Day could be confirmed\n"
+"\n"
+"uint8 numSV             # Number of SVs used in Nav Solution\n"
+"int32 lon               # Longitude [deg / 1e-7]\n"
+"int32 lat               # Latitude [deg / 1e-7]\n"
+"int32 height            # Height above Ellipsoid [mm]\n"
+"int32 hMSL              # Height above mean sea level [mm]\n"
+"uint32 hAcc             # Horizontal Accuracy Estimate [mm]\n"
+"uint32 vAcc             # Vertical Accuracy Estimate [mm]\n"
+"\n"
+"int32 velN              # NED north velocity [mm/s]\n"
+"int32 velE              # NED east velocity [mm/s]\n"
+"int32 velD              # NED down velocity [mm/s]\n"
+"int32 gSpeed            # Ground Speed (2-D) [mm/s]\n"
+"int32 heading           # Heading of motion 2-D [deg / 1e-5]\n"
+"uint32 sAcc             # Speed Accuracy Estimate [mm/s]\n"
+"uint32 headAcc          # Heading Accuracy Estimate (both motion & vehicle) \n"
+"                        # [deg / 1e-5]\n"
+"\n"
+"uint16 pDOP             # Position DOP [1 / 0.01]\n"
+"uint8[6] reserved1      # Reserved\n"
+"\n"
+"int32 headVeh           # Heading of vehicle (2-D) [deg / 1e-5]\n"
+"int16 magDec            # Magnetic declination [deg / 1e-2]\n"
+"uint16 magAcc           # Magnetic declination accuracy [deg / 1e-2]\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavPVT_<ContainerAllocator>&) { return value(); }

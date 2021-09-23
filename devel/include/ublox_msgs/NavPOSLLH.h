@@ -68,6 +68,14 @@ struct NavPOSLLH_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 2u,
@@ -99,6 +107,26 @@ ros::message_operations::Printer< ::ublox_msgs::NavPOSLLH_<ContainerAllocator> >
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavPOSLLH_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavPOSLLH_<ContainerAllocator2> & rhs)
+{
+  return lhs.iTOW == rhs.iTOW &&
+    lhs.lon == rhs.lon &&
+    lhs.lat == rhs.lat &&
+    lhs.height == rhs.height &&
+    lhs.hMSL == rhs.hMSL &&
+    lhs.hAcc == rhs.hAcc &&
+    lhs.vAcc == rhs.vAcc;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavPOSLLH_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavPOSLLH_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -106,12 +134,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -176,28 +198,28 @@ struct Definition< ::ublox_msgs::NavPOSLLH_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-POSLLH (0x01 0x02)\n\
-# Geodetic Position Solution\n\
-#\n\
-# See important comments concerning validity of position given in section\n\
-# Navigation Output Filters.\n\
-# This message outputs the Geodetic position in the currently selected \n\
-# Ellipsoid. The default is the WGS84 Ellipsoid, but can be changed with the\n\
-# message CFG-DAT.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 1\n\
-uint8 MESSAGE_ID = 2\n\
-\n\
-uint32 iTOW             # GPS Millisecond Time of Week [ms]\n\
-\n\
-int32 lon               # Longitude [deg / 1e-7]\n\
-int32 lat               # Latitude [deg / 1e-7]\n\
-int32 height            # Height above Ellipsoid [mm]\n\
-int32 hMSL              # Height above mean sea level [mm]\n\
-uint32 hAcc             # Horizontal Accuracy Estimate [mm]\n\
-uint32 vAcc             # Vertical Accuracy Estimate [mm]\n\
-";
+    return "# NAV-POSLLH (0x01 0x02)\n"
+"# Geodetic Position Solution\n"
+"#\n"
+"# See important comments concerning validity of position given in section\n"
+"# Navigation Output Filters.\n"
+"# This message outputs the Geodetic position in the currently selected \n"
+"# Ellipsoid. The default is the WGS84 Ellipsoid, but can be changed with the\n"
+"# message CFG-DAT.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 1\n"
+"uint8 MESSAGE_ID = 2\n"
+"\n"
+"uint32 iTOW             # GPS Millisecond Time of Week [ms]\n"
+"\n"
+"int32 lon               # Longitude [deg / 1e-7]\n"
+"int32 lat               # Latitude [deg / 1e-7]\n"
+"int32 height            # Height above Ellipsoid [mm]\n"
+"int32 hMSL              # Height above mean sea level [mm]\n"
+"uint32 hAcc             # Horizontal Accuracy Estimate [mm]\n"
+"uint32 vAcc             # Vertical Accuracy Estimate [mm]\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavPOSLLH_<ContainerAllocator>&) { return value(); }

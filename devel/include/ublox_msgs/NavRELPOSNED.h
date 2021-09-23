@@ -108,6 +108,44 @@ struct NavRELPOSNED_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(FLAGS_GNSS_FIX_OK)
+  #undef FLAGS_GNSS_FIX_OK
+#endif
+#if defined(_WIN32) && defined(FLAGS_DIFF_SOLN)
+  #undef FLAGS_DIFF_SOLN
+#endif
+#if defined(_WIN32) && defined(FLAGS_REL_POS_VALID)
+  #undef FLAGS_REL_POS_VALID
+#endif
+#if defined(_WIN32) && defined(FLAGS_CARR_SOLN_MASK)
+  #undef FLAGS_CARR_SOLN_MASK
+#endif
+#if defined(_WIN32) && defined(FLAGS_CARR_SOLN_NONE)
+  #undef FLAGS_CARR_SOLN_NONE
+#endif
+#if defined(_WIN32) && defined(FLAGS_CARR_SOLN_FLOAT)
+  #undef FLAGS_CARR_SOLN_FLOAT
+#endif
+#if defined(_WIN32) && defined(FLAGS_CARR_SOLN_FIXED)
+  #undef FLAGS_CARR_SOLN_FIXED
+#endif
+#if defined(_WIN32) && defined(FLAGS_IS_MOVING)
+  #undef FLAGS_IS_MOVING
+#endif
+#if defined(_WIN32) && defined(FLAGS_REF_POS_MISS)
+  #undef FLAGS_REF_POS_MISS
+#endif
+#if defined(_WIN32) && defined(FLAGS_REF_OBS_MISS)
+  #undef FLAGS_REF_OBS_MISS
+#endif
+
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 60u,
@@ -169,6 +207,34 @@ ros::message_operations::Printer< ::ublox_msgs::NavRELPOSNED_<ContainerAllocator
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavRELPOSNED_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavRELPOSNED_<ContainerAllocator2> & rhs)
+{
+  return lhs.version == rhs.version &&
+    lhs.reserved0 == rhs.reserved0 &&
+    lhs.refStationId == rhs.refStationId &&
+    lhs.iTow == rhs.iTow &&
+    lhs.relPosN == rhs.relPosN &&
+    lhs.relPosE == rhs.relPosE &&
+    lhs.relPosD == rhs.relPosD &&
+    lhs.relPosHPN == rhs.relPosHPN &&
+    lhs.relPosHPE == rhs.relPosHPE &&
+    lhs.relPosHPD == rhs.relPosHPD &&
+    lhs.reserved1 == rhs.reserved1 &&
+    lhs.accN == rhs.accN &&
+    lhs.accE == rhs.accE &&
+    lhs.accD == rhs.accD &&
+    lhs.flags == rhs.flags;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavRELPOSNED_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavRELPOSNED_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -176,12 +242,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -246,92 +306,92 @@ struct Definition< ::ublox_msgs::NavRELPOSNED_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-RELPOSNED (0x01 0x3C)\n\
-# Relative Positioning Information in NED frame\n\
-# \n\
-# The NED frame is defined as the local topological system at the reference\n\
-# station. The relative position vector components in this message, along with\n\
-# their associated accuracies, are given in that local topological system\n\
-# This message contains the relative position vector from the Reference Station\n\
-# to the Rover, including accuracy figures, in the local topological system\n\
-# defined at the reference station\n\
-#\n\
-# Supported on:\n\
-#  - u-blox 8 / u-blox M8 from protocol version 20 up to version 23.01 (only\n\
-#    with High Precision GNSS products)\n\
-#\n\
-\n\
-uint8 CLASS_ID = 1\n\
-uint8 MESSAGE_ID = 60\n\
-\n\
-uint8 version                     # Message version (0x00 for this version)\n\
-uint8 reserved0                   # Reserved\n\
-uint16 refStationId               # Reference Station ID. Must be in the range \n\
-                                  # 0..4095\n\
-uint32 iTow                       # GPS time of week of the navigation epoch \n\
-                                  # [ms]\n\
-\n\
-int32 relPosN                     # North component of relative position vector \n\
-                                  # [cm]\n\
-int32 relPosE                     # East component of relative position vector\n\
-                                  # [cm]\n\
-int32 relPosD                     # Down component of relative position vector\n\
-                                  # [cm]\n\
-\n\
-int8 relPosHPN                    # High-precision North component of relative\n\
-                                  # position vector. [0.1 mm]\n\
-                                  # Must be in the range -99 to +99.\n\
-                                  # The full North component of the relative\n\
-                                  # position vector, in units of cm, is given by\n\
-                                  # relPosN + (relPosHPN * 1e-2)\n\
-int8 relPosHPE                    # High-precision East component of relative\n\
-                                  # position vector. [0.1 mm]\n\
-                                  # Must be in the range -99 to +99.\n\
-                                  # The full East component of the relative \n\
-                                  # position vector, in units of cm, is given by\n\
-                                  # relPosE + (relPosHPE * 1e-2)\n\
-int8 relPosHPD                    # High-precision Down component of relative\n\
-                                  # position vector. [0.1 mm]\n\
-                                  # Must be in the range -99 to +99.\n\
-                                  # The full Down component of the relative\n\
-                                  # position vector, in units of cm, is given by\n\
-                                  # relPosD + (relPosHPD * 1e-2)\n\
-\n\
-uint8 reserved1                   # Reserved\n\
-\n\
-uint32 accN                       # Accuracy of relative position North \n\
-                                  # component [0.1 mm]\n\
-uint32 accE                       # Accuracy of relative position East component\n\
-                                  # [0.1 mm]\n\
-uint32 accD                       # Accuracy of relative position Down component\n\
-                                  # [0.1 mm]\n\
-\n\
-uint32 flags\n\
-uint32 FLAGS_GNSS_FIX_OK = 1      # A valid fix (i.e within DOP & accuracy \n\
-                                  # masks)\n\
-uint32 FLAGS_DIFF_SOLN = 2        # Set if differential corrections were applied\n\
-uint32 FLAGS_REL_POS_VALID = 4    # Set if relative position components and\n\
-                                  # accuracies are valid\n\
-uint32 FLAGS_CARR_SOLN_MASK = 24  # Carrier phase range solution status:\n\
-uint32 FLAGS_CARR_SOLN_NONE = 0     # No carrier phase range solution\n\
-uint32 FLAGS_CARR_SOLN_FLOAT = 8    # Float solution. No fixed integer carrier \n\
-                                    # phase measurements have been used to\n\
-                                    # calculate the solution\n\
-uint32 FLAGS_CARR_SOLN_FIXED = 16   # Fixed solution. One or more fixed\n\
-                                    # integer carrier phase range measurements\n\
-                                    # have been used to calculate the solution\n\
-uint32 FLAGS_IS_MOVING = 32       # if the receiver is operating in moving \n\
-                                  # baseline mode (not supported in protocol\n\
-                                  # versions less than 20.3)\n\
-uint32 FLAGS_REF_POS_MISS = 64    # Set if extrapolated reference position was\n\
-                                  # used to compute moving baseline solution \n\
-                                  # this epoch (not supported in protocol\n\
-                                  # versions less than 20.3)  \n\
-uint32 FLAGS_REF_OBS_MISS = 128   # Set if extrapolated reference observations\n\
-                                  # were used to compute moving baseline\n\
-                                  # solution this epoch (not supported in\n\
-                                  # protocol versions less than 20.3)\n\
-";
+    return "# NAV-RELPOSNED (0x01 0x3C)\n"
+"# Relative Positioning Information in NED frame\n"
+"# \n"
+"# The NED frame is defined as the local topological system at the reference\n"
+"# station. The relative position vector components in this message, along with\n"
+"# their associated accuracies, are given in that local topological system\n"
+"# This message contains the relative position vector from the Reference Station\n"
+"# to the Rover, including accuracy figures, in the local topological system\n"
+"# defined at the reference station\n"
+"#\n"
+"# Supported on:\n"
+"#  - u-blox 8 / u-blox M8 from protocol version 20 up to version 23.01 (only\n"
+"#    with High Precision GNSS products)\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 1\n"
+"uint8 MESSAGE_ID = 60\n"
+"\n"
+"uint8 version                     # Message version (0x00 for this version)\n"
+"uint8 reserved0                   # Reserved\n"
+"uint16 refStationId               # Reference Station ID. Must be in the range \n"
+"                                  # 0..4095\n"
+"uint32 iTow                       # GPS time of week of the navigation epoch \n"
+"                                  # [ms]\n"
+"\n"
+"int32 relPosN                     # North component of relative position vector \n"
+"                                  # [cm]\n"
+"int32 relPosE                     # East component of relative position vector\n"
+"                                  # [cm]\n"
+"int32 relPosD                     # Down component of relative position vector\n"
+"                                  # [cm]\n"
+"\n"
+"int8 relPosHPN                    # High-precision North component of relative\n"
+"                                  # position vector. [0.1 mm]\n"
+"                                  # Must be in the range -99 to +99.\n"
+"                                  # The full North component of the relative\n"
+"                                  # position vector, in units of cm, is given by\n"
+"                                  # relPosN + (relPosHPN * 1e-2)\n"
+"int8 relPosHPE                    # High-precision East component of relative\n"
+"                                  # position vector. [0.1 mm]\n"
+"                                  # Must be in the range -99 to +99.\n"
+"                                  # The full East component of the relative \n"
+"                                  # position vector, in units of cm, is given by\n"
+"                                  # relPosE + (relPosHPE * 1e-2)\n"
+"int8 relPosHPD                    # High-precision Down component of relative\n"
+"                                  # position vector. [0.1 mm]\n"
+"                                  # Must be in the range -99 to +99.\n"
+"                                  # The full Down component of the relative\n"
+"                                  # position vector, in units of cm, is given by\n"
+"                                  # relPosD + (relPosHPD * 1e-2)\n"
+"\n"
+"uint8 reserved1                   # Reserved\n"
+"\n"
+"uint32 accN                       # Accuracy of relative position North \n"
+"                                  # component [0.1 mm]\n"
+"uint32 accE                       # Accuracy of relative position East component\n"
+"                                  # [0.1 mm]\n"
+"uint32 accD                       # Accuracy of relative position Down component\n"
+"                                  # [0.1 mm]\n"
+"\n"
+"uint32 flags\n"
+"uint32 FLAGS_GNSS_FIX_OK = 1      # A valid fix (i.e within DOP & accuracy \n"
+"                                  # masks)\n"
+"uint32 FLAGS_DIFF_SOLN = 2        # Set if differential corrections were applied\n"
+"uint32 FLAGS_REL_POS_VALID = 4    # Set if relative position components and\n"
+"                                  # accuracies are valid\n"
+"uint32 FLAGS_CARR_SOLN_MASK = 24  # Carrier phase range solution status:\n"
+"uint32 FLAGS_CARR_SOLN_NONE = 0     # No carrier phase range solution\n"
+"uint32 FLAGS_CARR_SOLN_FLOAT = 8    # Float solution. No fixed integer carrier \n"
+"                                    # phase measurements have been used to\n"
+"                                    # calculate the solution\n"
+"uint32 FLAGS_CARR_SOLN_FIXED = 16   # Fixed solution. One or more fixed\n"
+"                                    # integer carrier phase range measurements\n"
+"                                    # have been used to calculate the solution\n"
+"uint32 FLAGS_IS_MOVING = 32       # if the receiver is operating in moving \n"
+"                                  # baseline mode (not supported in protocol\n"
+"                                  # versions less than 20.3)\n"
+"uint32 FLAGS_REF_POS_MISS = 64    # Set if extrapolated reference position was\n"
+"                                  # used to compute moving baseline solution \n"
+"                                  # this epoch (not supported in protocol\n"
+"                                  # versions less than 20.3)  \n"
+"uint32 FLAGS_REF_OBS_MISS = 128   # Set if extrapolated reference observations\n"
+"                                  # were used to compute moving baseline\n"
+"                                  # solution this epoch (not supported in\n"
+"                                  # protocol versions less than 20.3)\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavRELPOSNED_<ContainerAllocator>&) { return value(); }

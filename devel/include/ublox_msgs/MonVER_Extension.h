@@ -63,6 +63,20 @@ ros::message_operations::Printer< ::ublox_msgs::MonVER_Extension_<ContainerAlloc
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::MonVER_Extension_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonVER_Extension_<ContainerAllocator2> & rhs)
+{
+  return lhs.field == rhs.field;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::MonVER_Extension_<ContainerAllocator1> & lhs, const ::ublox_msgs::MonVER_Extension_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -70,12 +84,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -140,11 +148,11 @@ struct Definition< ::ublox_msgs::MonVER_Extension_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# see MonVER message\n\
-#\n\
-\n\
-char[30] field\n\
-";
+    return "# see MonVER message\n"
+"#\n"
+"\n"
+"char[30] field\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::MonVER_Extension_<ContainerAllocator>&) { return value(); }

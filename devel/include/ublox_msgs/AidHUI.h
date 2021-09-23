@@ -128,6 +128,23 @@ struct AidHUI_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+#if defined(_WIN32) && defined(FLAGS_HEALTH)
+  #undef FLAGS_HEALTH
+#endif
+#if defined(_WIN32) && defined(FLAGS_UTC)
+  #undef FLAGS_UTC
+#endif
+#if defined(_WIN32) && defined(FLAGS_KLOB)
+  #undef FLAGS_KLOB
+#endif
+
   enum {
     CLASS_ID = 11u,
     MESSAGE_ID = 2u,
@@ -168,6 +185,38 @@ ros::message_operations::Printer< ::ublox_msgs::AidHUI_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::AidHUI_<ContainerAllocator1> & lhs, const ::ublox_msgs::AidHUI_<ContainerAllocator2> & rhs)
+{
+  return lhs.health == rhs.health &&
+    lhs.utcA0 == rhs.utcA0 &&
+    lhs.utcA1 == rhs.utcA1 &&
+    lhs.utcTOW == rhs.utcTOW &&
+    lhs.utcWNT == rhs.utcWNT &&
+    lhs.utcLS == rhs.utcLS &&
+    lhs.utcWNF == rhs.utcWNF &&
+    lhs.utcDN == rhs.utcDN &&
+    lhs.utcLSF == rhs.utcLSF &&
+    lhs.utcSpare == rhs.utcSpare &&
+    lhs.klobA0 == rhs.klobA0 &&
+    lhs.klobA1 == rhs.klobA1 &&
+    lhs.klobA2 == rhs.klobA2 &&
+    lhs.klobA3 == rhs.klobA3 &&
+    lhs.klobB0 == rhs.klobB0 &&
+    lhs.klobB1 == rhs.klobB1 &&
+    lhs.klobB2 == rhs.klobB2 &&
+    lhs.klobB3 == rhs.klobB3 &&
+    lhs.flags == rhs.flags;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::AidHUI_<ContainerAllocator1> & lhs, const ::ublox_msgs::AidHUI_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -175,12 +224,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -245,42 +288,42 @@ struct Definition< ::ublox_msgs::AidHUI_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# AID-HUI (0x0B 0x02)\n\
-# GPS Health, UTC and ionosphere parameters\n\
-#\n\
-# All UBX-AID messages are deprecated; use UBX-MGA messages instead.\n\
-# This message contains a health bit mask, UTC time and Klobuchar parameters. For more\n\
-# information on these parameters, please see the ICD-GPS-200 documentation.\n\
-\n\
-uint8 CLASS_ID = 11\n\
-uint8 MESSAGE_ID = 2\n\
-\n\
-uint32  health          # Bitmask, every bit represents a GPS SV (1-32). \n\
-                        # If the bit is set the SV is healthy.\n\
-float64 utcA0           # UTC - parameter A0\n\
-float64 utcA1           # UTC - parameter A1\n\
-int32   utcTOW          # UTC - reference time of week\n\
-int16   utcWNT          # UTC - reference week number\n\
-int16   utcLS           # UTC - time difference due to leap seconds before event\n\
-int16   utcWNF          # UTC - week number when next leap second event occurs\n\
-int16   utcDN           # UTC - day of week when next leap second event occurs\n\
-int16   utcLSF          # UTC - time difference due to leap seconds after event\n\
-int16   utcSpare        # UTC - Spare to ensure structure is a multiple of 4 \n\
-                        # bytes\n\
-float32 klobA0          # Klobuchar - alpha 0 [s]\n\
-float32 klobA1          # Klobuchar - alpha 1 [s/semicircle]\n\
-float32 klobA2          # Klobuchar - alpha 2 [s/semicircle^2]\n\
-float32 klobA3          # Klobuchar - alpha 3 [s/semicircle^3]\n\
-float32 klobB0          # Klobuchar - beta 0  [s]\n\
-float32 klobB1          # Klobuchar - beta 1  [s/semicircle]\n\
-float32 klobB2          # Klobuchar - beta 2  [s/semicircle^2]\n\
-float32 klobB3          # Klobuchar - beta 3  [s/semicircle^3]\n\
-uint32 flags            # flags\n\
-uint32 FLAGS_HEALTH = 1     # Healthmask field in this message is valid\n\
-uint32 FLAGS_UTC = 2        # UTC parameter fields in this message are valid\n\
-uint32 FLAGS_KLOB = 4       # Klobuchar parameter fields in this message are \n\
-                            # valid\n\
-";
+    return "# AID-HUI (0x0B 0x02)\n"
+"# GPS Health, UTC and ionosphere parameters\n"
+"#\n"
+"# All UBX-AID messages are deprecated; use UBX-MGA messages instead.\n"
+"# This message contains a health bit mask, UTC time and Klobuchar parameters. For more\n"
+"# information on these parameters, please see the ICD-GPS-200 documentation.\n"
+"\n"
+"uint8 CLASS_ID = 11\n"
+"uint8 MESSAGE_ID = 2\n"
+"\n"
+"uint32  health          # Bitmask, every bit represents a GPS SV (1-32). \n"
+"                        # If the bit is set the SV is healthy.\n"
+"float64 utcA0           # UTC - parameter A0\n"
+"float64 utcA1           # UTC - parameter A1\n"
+"int32   utcTOW          # UTC - reference time of week\n"
+"int16   utcWNT          # UTC - reference week number\n"
+"int16   utcLS           # UTC - time difference due to leap seconds before event\n"
+"int16   utcWNF          # UTC - week number when next leap second event occurs\n"
+"int16   utcDN           # UTC - day of week when next leap second event occurs\n"
+"int16   utcLSF          # UTC - time difference due to leap seconds after event\n"
+"int16   utcSpare        # UTC - Spare to ensure structure is a multiple of 4 \n"
+"                        # bytes\n"
+"float32 klobA0          # Klobuchar - alpha 0 [s]\n"
+"float32 klobA1          # Klobuchar - alpha 1 [s/semicircle]\n"
+"float32 klobA2          # Klobuchar - alpha 2 [s/semicircle^2]\n"
+"float32 klobA3          # Klobuchar - alpha 3 [s/semicircle^3]\n"
+"float32 klobB0          # Klobuchar - beta 0  [s]\n"
+"float32 klobB1          # Klobuchar - beta 1  [s/semicircle]\n"
+"float32 klobB2          # Klobuchar - beta 2  [s/semicircle^2]\n"
+"float32 klobB3          # Klobuchar - beta 3  [s/semicircle^3]\n"
+"uint32 flags            # flags\n"
+"uint32 FLAGS_HEALTH = 1     # Healthmask field in this message is valid\n"
+"uint32 FLAGS_UTC = 2        # UTC parameter fields in this message are valid\n"
+"uint32 FLAGS_KLOB = 4       # Klobuchar parameter fields in this message are \n"
+"                            # valid\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::AidHUI_<ContainerAllocator>&) { return value(); }

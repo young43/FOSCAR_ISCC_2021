@@ -86,10 +86,16 @@ def bounding_callback(msg):
 		tf_object_center = get_object_center2(box.Class,box.xmin, box.ymin, box.xmax, box.ymax)
 		tf_center = np.matmul(matrix, center)
 		#print("center:::::::::::", tf_center)
-		tf_center /= tf_center[2]
+		if tf_center[2] > 0:
+			tf_center /= -tf_center[2]
+		else:
+			tf_center /= tf_center[2]
 		#print("::::::::::::::center:::::::::::", tf_center)
 
 		distance = calculate(tf_center, tf_object_center)
+
+		distance = abs(distance)
+
 		# print("{}) tf_center: {}, distance: {}".format(idx, tf_center, distance))
 
 		if b_flag != -1:

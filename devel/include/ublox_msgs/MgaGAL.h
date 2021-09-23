@@ -204,6 +204,14 @@ struct MgaGAL_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+
   enum {
     CLASS_ID = 19u,
     MESSAGE_ID = 2u,
@@ -235,6 +243,52 @@ ros::message_operations::Printer< ::ublox_msgs::MgaGAL_<ContainerAllocator> >::s
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::MgaGAL_<ContainerAllocator1> & lhs, const ::ublox_msgs::MgaGAL_<ContainerAllocator2> & rhs)
+{
+  return lhs.type == rhs.type &&
+    lhs.version == rhs.version &&
+    lhs.svid == rhs.svid &&
+    lhs.reserved0 == rhs.reserved0 &&
+    lhs.iodNav == rhs.iodNav &&
+    lhs.deltaN == rhs.deltaN &&
+    lhs.m0 == rhs.m0 &&
+    lhs.e == rhs.e &&
+    lhs.sqrtA == rhs.sqrtA &&
+    lhs.omega0 == rhs.omega0 &&
+    lhs.i0 == rhs.i0 &&
+    lhs.omega == rhs.omega &&
+    lhs.omegaDot == rhs.omegaDot &&
+    lhs.iDot == rhs.iDot &&
+    lhs.cuc == rhs.cuc &&
+    lhs.cus == rhs.cus &&
+    lhs.crc == rhs.crc &&
+    lhs.crs == rhs.crs &&
+    lhs.cic == rhs.cic &&
+    lhs.cis == rhs.cis &&
+    lhs.toe == rhs.toe &&
+    lhs.af0 == rhs.af0 &&
+    lhs.af1 == rhs.af1 &&
+    lhs.af2 == rhs.af2 &&
+    lhs.sisaindexE1E5b == rhs.sisaindexE1E5b &&
+    lhs.toc == rhs.toc &&
+    lhs.bgdE1E5b == rhs.bgdE1E5b &&
+    lhs.reserved1 == rhs.reserved1 &&
+    lhs.healthE1B == rhs.healthE1B &&
+    lhs.dataValidityE1B == rhs.dataValidityE1B &&
+    lhs.healthE5b == rhs.healthE5b &&
+    lhs.dataValidityE5b == rhs.dataValidityE5b &&
+    lhs.reserved2 == rhs.reserved2;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::MgaGAL_<ContainerAllocator1> & lhs, const ::ublox_msgs::MgaGAL_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -242,12 +296,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -312,68 +360,68 @@ struct Definition< ::ublox_msgs::MgaGAL_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# MGA-GAL (0x13 0x02)\n\
-# Galileo Ephemeris Assistance\n\
-#\n\
-# This message allows the delivery of Galileo ephemeris assistance to a \n\
-# receiver. See the description of AssistNow Online for details.\n\
-# \n\
-\n\
-uint8 CLASS_ID = 19\n\
-uint8 MESSAGE_ID = 2\n\
-\n\
-uint8 type              # Message type (0x01 for this type)\n\
-uint8 version           # Message version (0x00 for this version)\n\
-uint8 svid              # Galileo Satellite identifier\n\
-\n\
-uint8 reserved0         # Reserved\n\
-\n\
-uint16 iodNav           # Ephemeris and clock correction issue of Data\n\
-int16 deltaN            # Mean motion difference from computed value \n\
-                        # [semi-cir cles/s * 2^-43]\n\
-int32 m0                # Mean anomaly at reference time [semi-cir cles 2^-31]\n\
-uint32 e                # Eccentricity [2^-33]\n\
-uint32 sqrtA            # Square root of the semi-major axis [m^0.5 * 2^-19]\n\
-int32 omega0            # Longitude of ascending node of orbital plane at weekly\n\
-                        # epoch [semi-cir cles 2^-31]\n\
-int32 i0                # inclination angle at reference time \n\
-                        # [semi-cir cles 2^-31]\n\
-int32 omega             # Argument of perigee [semi-cir cles 2^-31]\n\
-int32 omegaDot          # Rate of change of right ascension \n\
-                        # [semi-cir cles/s 2^-43]\n\
-int16 iDot              # Rate of change of inclination angle \n\
-                        # [semi-cir cles/s 2^-43]\n\
-int16 cuc               # Amplitude of the cosine harmonic correction term to \n\
-                        # the argument of latitude [radians * 2^-29]\n\
-int16 cus               # Amplitude of the sine harmonic correction term to \n\
-                        # the argument of latitude [radians * 2^-29]\n\
-int16 crc               # Amplitude of the cosine harmonic correction term \n\
-                        # to the orbit radius [radians * 2^-5]\n\
-int16 crs               # Amplitude of the sine harmonic correction term to the \n\
-                        # orbit radius [radians * 2^-5]\n\
-int16 cic               # Amplitude of the cosine harmonic correction term to \n\
-                        # the angle of inclination [radians * 2^-29]\n\
-int16 cis               # Amplitude of the sine harmonic correction term to the \n\
-                        # angle of inclination [radians * 2^-29]\n\
-uint16 toe              # Ephemeris reference time [60 * s]\n\
-int32 af0               # clock bias correction coefficient [s * 2^-34]\n\
-int32 af1               # SV clock drift correction coefficient [s/s * 2^-46]\n\
-int8 af2               # SV clock drift rate correction coefficient \n\
-                        # [s/s^2 * 2^-59]\n\
-uint8 sisaindexE1E5b   # Signal-in-Space Accuracy index for dual frequency \n\
-                        # E1-E5b\n\
-uint16 toc              # Clock correction data reference Time of Week [60 * s]\n\
-int16 bgdE1E5b          # E1-E5b Broadcast Group Delay\n\
-\n\
-uint8[2] reserved1     # Reserved\n\
-\n\
-uint8 healthE1B        # E1-B Signal Health Status\n\
-uint8 dataValidityE1B  # E1-B Data Validity Status\n\
-uint8 healthE5b        # E5b Signal Health Status\n\
-uint8 dataValidityE5b  # E5b Data Validity Status\n\
-\n\
-uint8[4] reserved2     # Reserved\n\
-";
+    return "# MGA-GAL (0x13 0x02)\n"
+"# Galileo Ephemeris Assistance\n"
+"#\n"
+"# This message allows the delivery of Galileo ephemeris assistance to a \n"
+"# receiver. See the description of AssistNow Online for details.\n"
+"# \n"
+"\n"
+"uint8 CLASS_ID = 19\n"
+"uint8 MESSAGE_ID = 2\n"
+"\n"
+"uint8 type              # Message type (0x01 for this type)\n"
+"uint8 version           # Message version (0x00 for this version)\n"
+"uint8 svid              # Galileo Satellite identifier\n"
+"\n"
+"uint8 reserved0         # Reserved\n"
+"\n"
+"uint16 iodNav           # Ephemeris and clock correction issue of Data\n"
+"int16 deltaN            # Mean motion difference from computed value \n"
+"                        # [semi-cir cles/s * 2^-43]\n"
+"int32 m0                # Mean anomaly at reference time [semi-cir cles 2^-31]\n"
+"uint32 e                # Eccentricity [2^-33]\n"
+"uint32 sqrtA            # Square root of the semi-major axis [m^0.5 * 2^-19]\n"
+"int32 omega0            # Longitude of ascending node of orbital plane at weekly\n"
+"                        # epoch [semi-cir cles 2^-31]\n"
+"int32 i0                # inclination angle at reference time \n"
+"                        # [semi-cir cles 2^-31]\n"
+"int32 omega             # Argument of perigee [semi-cir cles 2^-31]\n"
+"int32 omegaDot          # Rate of change of right ascension \n"
+"                        # [semi-cir cles/s 2^-43]\n"
+"int16 iDot              # Rate of change of inclination angle \n"
+"                        # [semi-cir cles/s 2^-43]\n"
+"int16 cuc               # Amplitude of the cosine harmonic correction term to \n"
+"                        # the argument of latitude [radians * 2^-29]\n"
+"int16 cus               # Amplitude of the sine harmonic correction term to \n"
+"                        # the argument of latitude [radians * 2^-29]\n"
+"int16 crc               # Amplitude of the cosine harmonic correction term \n"
+"                        # to the orbit radius [radians * 2^-5]\n"
+"int16 crs               # Amplitude of the sine harmonic correction term to the \n"
+"                        # orbit radius [radians * 2^-5]\n"
+"int16 cic               # Amplitude of the cosine harmonic correction term to \n"
+"                        # the angle of inclination [radians * 2^-29]\n"
+"int16 cis               # Amplitude of the sine harmonic correction term to the \n"
+"                        # angle of inclination [radians * 2^-29]\n"
+"uint16 toe              # Ephemeris reference time [60 * s]\n"
+"int32 af0               # clock bias correction coefficient [s * 2^-34]\n"
+"int32 af1               # SV clock drift correction coefficient [s/s * 2^-46]\n"
+"int8 af2               # SV clock drift rate correction coefficient \n"
+"                        # [s/s^2 * 2^-59]\n"
+"uint8 sisaindexE1E5b   # Signal-in-Space Accuracy index for dual frequency \n"
+"                        # E1-E5b\n"
+"uint16 toc              # Clock correction data reference Time of Week [60 * s]\n"
+"int16 bgdE1E5b          # E1-E5b Broadcast Group Delay\n"
+"\n"
+"uint8[2] reserved1     # Reserved\n"
+"\n"
+"uint8 healthE1B        # E1-B Signal Health Status\n"
+"uint8 dataValidityE1B  # E1-B Data Validity Status\n"
+"uint8 healthE5b        # E5b Signal Health Status\n"
+"uint8 dataValidityE5b  # E5b Data Validity Status\n"
+"\n"
+"uint8[4] reserved2     # Reserved\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::MgaGAL_<ContainerAllocator>&) { return value(); }

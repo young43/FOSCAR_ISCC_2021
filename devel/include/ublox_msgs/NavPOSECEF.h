@@ -58,6 +58,14 @@ struct NavPOSECEF_
 
 
 
+// reducing the odds to have name collisions with Windows.h 
+#if defined(_WIN32) && defined(CLASS_ID)
+  #undef CLASS_ID
+#endif
+#if defined(_WIN32) && defined(MESSAGE_ID)
+  #undef MESSAGE_ID
+#endif
+
   enum {
     CLASS_ID = 1u,
     MESSAGE_ID = 1u,
@@ -89,6 +97,24 @@ ros::message_operations::Printer< ::ublox_msgs::NavPOSECEF_<ContainerAllocator> 
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::NavPOSECEF_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavPOSECEF_<ContainerAllocator2> & rhs)
+{
+  return lhs.iTOW == rhs.iTOW &&
+    lhs.ecefX == rhs.ecefX &&
+    lhs.ecefY == rhs.ecefY &&
+    lhs.ecefZ == rhs.ecefZ &&
+    lhs.pAcc == rhs.pAcc;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::NavPOSECEF_<ContainerAllocator1> & lhs, const ::ublox_msgs::NavPOSECEF_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -96,12 +122,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -166,23 +186,23 @@ struct Definition< ::ublox_msgs::NavPOSECEF_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# NAV-POSECEF (0x01 0x01)\n\
-# Position Solution in ECEF\n\
-#\n\
-# See important comments concerning validity of position given in section\n\
-# Navigation Output Filters.\n\
-#\n\
-\n\
-uint8 CLASS_ID = 1\n\
-uint8 MESSAGE_ID = 1\n\
-\n\
-uint32 iTOW             # GPS Millisecond Time of Week [ms]\n\
-\n\
-int32 ecefX             # ECEF X coordinate [cm]\n\
-int32 ecefY             # ECEF Y coordinate [cm]\n\
-int32 ecefZ             # ECEF Z coordinate [cm]\n\
-uint32 pAcc             # Position Accuracy Estimate [cm]\n\
-";
+    return "# NAV-POSECEF (0x01 0x01)\n"
+"# Position Solution in ECEF\n"
+"#\n"
+"# See important comments concerning validity of position given in section\n"
+"# Navigation Output Filters.\n"
+"#\n"
+"\n"
+"uint8 CLASS_ID = 1\n"
+"uint8 MESSAGE_ID = 1\n"
+"\n"
+"uint32 iTOW             # GPS Millisecond Time of Week [ms]\n"
+"\n"
+"int32 ecefX             # ECEF X coordinate [cm]\n"
+"int32 ecefY             # ECEF Y coordinate [cm]\n"
+"int32 ecefZ             # ECEF Z coordinate [cm]\n"
+"uint32 pAcc             # Position Accuracy Estimate [cm]\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::NavPOSECEF_<ContainerAllocator>&) { return value(); }

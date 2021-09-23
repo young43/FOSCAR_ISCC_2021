@@ -91,6 +91,26 @@ ros::message_operations::Printer< ::ublox_msgs::RxmRAW_SV_<ContainerAllocator> >
 return s;
 }
 
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator==(const ::ublox_msgs::RxmRAW_SV_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAW_SV_<ContainerAllocator2> & rhs)
+{
+  return lhs.cpMes == rhs.cpMes &&
+    lhs.prMes == rhs.prMes &&
+    lhs.doMes == rhs.doMes &&
+    lhs.sv == rhs.sv &&
+    lhs.mesQI == rhs.mesQI &&
+    lhs.cno == rhs.cno &&
+    lhs.lli == rhs.lli;
+}
+
+template<typename ContainerAllocator1, typename ContainerAllocator2>
+bool operator!=(const ::ublox_msgs::RxmRAW_SV_<ContainerAllocator1> & lhs, const ::ublox_msgs::RxmRAW_SV_<ContainerAllocator2> & rhs)
+{
+  return !(lhs == rhs);
+}
+
+
 } // namespace ublox_msgs
 
 namespace ros
@@ -98,12 +118,6 @@ namespace ros
 namespace message_traits
 {
 
-
-
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'sensor_msgs': ['/opt/ros/kinetic/share/sensor_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'ublox_msgs': ['/home/young43/FOSCAR_ISCC_2021/src/gps/ublox/ublox_msgs/msg']}
-
-// !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
@@ -168,22 +182,22 @@ struct Definition< ::ublox_msgs::RxmRAW_SV_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# see message RxmRAW\n\
-#\n\
-\n\
-float64 cpMes             # Carrier phase measurement [L1 cycles]\n\
-float64 prMes             # Pseudorange measurement [m]\n\
-float32 doMes             # Doppler measurement [Hz]\n\
-\n\
-uint8 sv                  # Space Vehicle Number\n\
-int8 mesQI                # Nav Measurements Quality Indicator\n\
-                          #  >=4 : PR+DO OK\n\
-                          #  >=5 : PR+DO+CP OK\n\
-                          #  <6 : likely loss of carrier lock in previous \n\
-                          #       interval\n\
-int8 cno                  # Signal strength C/No. [dbHz]\n\
-uint8 lli                 # Loss of lock indicator (RINEX definition)\n\
-";
+    return "# see message RxmRAW\n"
+"#\n"
+"\n"
+"float64 cpMes             # Carrier phase measurement [L1 cycles]\n"
+"float64 prMes             # Pseudorange measurement [m]\n"
+"float32 doMes             # Doppler measurement [Hz]\n"
+"\n"
+"uint8 sv                  # Space Vehicle Number\n"
+"int8 mesQI                # Nav Measurements Quality Indicator\n"
+"                          #  >=4 : PR+DO OK\n"
+"                          #  >=5 : PR+DO+CP OK\n"
+"                          #  <6 : likely loss of carrier lock in previous \n"
+"                          #       interval\n"
+"int8 cno                  # Signal strength C/No. [dbHz]\n"
+"uint8 lli                 # Loss of lock indicator (RINEX definition)\n"
+;
   }
 
   static const char* value(const ::ublox_msgs::RxmRAW_SV_<ContainerAllocator>&) { return value(); }
