@@ -1,4 +1,4 @@
-	#!/usr/bin/python
+#!/usr/bin/python
 #-*- encoding: utf-8 -*-
 
 # video : /home/foscar/ISCC_2021/src/vision_distance/src/ISCC_2021_Vision/yesun/9-2/origin_2021-9-2-13-41.avi
@@ -225,7 +225,7 @@ if __name__ == '__main__':
 		warp_xymax /= warp_xymax[2]
 
 		img = check_center(img)
-		# print('class name', box_class)
+		# primissinnt('class name', box_class)
 
 		cv2.circle(img, (up_left[0], up_left[1]), 5, (255,0,0), -1)
 		cv2.circle(img, (up_right[0], up_right[1]), 5, (0,255,0), -1)

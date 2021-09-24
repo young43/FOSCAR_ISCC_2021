@@ -69,13 +69,14 @@
  <!--<node name="test11" pkg="obstacle_detector" type="narrow_path.py" output="screen">
  </node>
 -->
-<node name="test_path" pkg="obstacle_detector" type="narrow_path_final.py" output="screen">
- </node>
+<node name="test_path" pkg="obstacle_detector" type="narrow_backup.py" output="screen">
 
+ </node>
+<!--
   <include file="$(find darknet_ros)/launch/darknet_ros_track.launch" />
 
 <node pkg="vision_distance" type="track_mission_lidar.py" name="track_mission"/>
-
+-->
 
 
 

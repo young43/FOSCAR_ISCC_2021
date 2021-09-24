@@ -253,11 +253,22 @@ void PurePursuitNode::run(char** argv) {
 
 
     // Normal 직진구간
-    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17
-       || pp_.mode == 22 || pp_.mode == 25 || pp_.mode == 27 || pp_.mode == 30 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
+    // 3,5,8,33
+    // 35, 37
+    // 21,23,28
+
+    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 27 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 12;
+      const_velocity_ = 10.5;
+      final_constant = 1.2;
+    }
+
+    if(pp_.mode == 6 || pp_.mode == 11 || pp_.mode == 13 || pp_.mode == 15 || pp_.mode == 17
+       || pp_.mode == 22 || pp_.mode == 25 || pp_.mode == 30){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 6;
+      const_velocity_ = 13.5;
       final_constant = 1.2;
     }
 
@@ -265,7 +276,7 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 12 || pp_.mode == 14 || pp_.mode == 16 || pp_.mode == 18 || pp_.mode == 24 || pp_.mode == 26 || pp_.mode == 29 || pp_.mode == 31) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
-      const_velocity_ = 10;
+      const_velocity_ = 11.5;
       final_constant = 1.5;
     }
 
@@ -402,7 +413,7 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 3 || pp_.mode == 5 || pp_.mode == 8 || pp_.mode == 33) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
-      const_velocity_ = 8;
+      const_velocity_ = 7;
       final_constant = 1.2;
 
       ROS_INFO("TRAFFIC_LIGHT STOP1: %d", pp_.straight_go_flag);
@@ -419,7 +430,7 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 35 || pp_.mode == 37) {
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 5;
-      const_velocity_ = 8;
+      const_velocity_ = 7;
       final_constant = 1.2;
 
        ROS_INFO("TRAFFIC_LIGHT STOP2: %d", pp_.straight_go_flag);
@@ -551,7 +562,7 @@ void PurePursuitNode::run(char** argv) {
       }
 
       if(pp_.mission_flag == 1){
-        const_velocity_ = 8; // if not calculated a_max_index
+        const_velocity_ = 9; // if not calculated a_max_index
 
         }
     }
@@ -593,9 +604,6 @@ void PurePursuitNode::run(char** argv) {
       ROS_INFO("B1=%d, B2=%d, B3=%d", pp_.b_cnt[0],pp_.b_cnt[1], pp_.b_cnt[2]);
       ROS_INFO("CALC_FLAG=%d, STOP_FLAG=%d", pp_.is_delivery_obs_calc_detected, pp_.is_delivery_obs_stop_detected);
 
-      // for test
-      a_max_index = 2;
-      pp_.a_flag[a_max_index] = true;
       
       // case 2) vision_distance + gps 로직
       if(pp_.mission_flag == 0 && pp_.is_delivery_obs_calc_detected){
@@ -633,7 +641,7 @@ void PurePursuitNode::run(char** argv) {
 
       if(pp_.mission_flag == 100){
         const_lookahead_distance_ = 4;
-        const_velocity_ = 10;
+        const_velocity_ = 11;
         final_constant = 1.4;
       }
 
@@ -644,7 +652,7 @@ void PurePursuitNode::run(char** argv) {
     if(pp_.mode == 38){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 17;
+      const_velocity_ = 18;
       final_constant = 1.2;
     }
 
