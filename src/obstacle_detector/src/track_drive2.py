@@ -96,7 +96,7 @@ class point:
 	def avoid_collision(self,min_list):
 		margin=10
 		point=min_list[1]
-		steer=self.car_angle_deg
+		steer=self.car_angle_deg_2
 		print("dis#######################################################",cal_distance(point.x,point.y))
 		#margin=cal_distance(point.x,point.y)*(-10)+14
 		if point.y>0:
@@ -241,9 +241,39 @@ class point:
 				filter_point3=sorted_2_list[2].center
 
 				self.center_x,self.center_y=self.calcEquidistance(filter_point1.x,filter_point2.x,filter_point3.x,filter_point1.y,filter_point2.y,filter_point3.y)
-				self.calc_angle() 		                                           
-				drive(self.car_angle_deg,False)
-			
+				self.calc_angle() 
+				if len(yellow_cone)>=2 and len(blue_cone)==0: 
+					self.car_angle_deg=self.car_angle_deg_2
+					self.car_angle_deg_2+=5
+					print("************************vision margin111")
+					print("self.car_angle_deg_2:",self.car_angle_deg_2)
+
+					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
+					if(min_list[0]<0.8 and abs(min_list[1].y)<0.6):
+						self.avoid_collision(min_list)	
+					else:
+						drive(self.car_angle_deg_2,False)
+						return
+
+				elif len(blue_cone)>=2 and len(yellow_cone)==0: 
+					self.car_angle_deg=self.car_angle_deg_2
+					self.car_angle_deg_2-=5
+					print("************************vision margin222")
+					print("self.car_angle_deg_2:",self.car_angle_deg_2)
+					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
+					if(min_list[0]<0.8 and abs(min_list[1].y)<0.6):
+						self.avoid_collision(min_list)
+					else:
+						drive(self.car_angle_deg_2,False)
+						return
+				else:
+					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
+					if(min_list[0]<0.8 and abs(min_list[1].y)<0.6):
+						self.avoid_collision(min_list)
+					else:
+						drive(self.car_angle_deg,False)
+						return
+
 			else:
 				sorted_first_list=sorted(circles,key= lambda circle:circle.center.x)
 				sorted_list[0]=sorted_first_list[0]
