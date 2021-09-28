@@ -41,7 +41,7 @@ def liner_acceleration(flag):
 	global drive_speed
 	in_step=0.1
 	de_step=0.2
-	limit_speed=8
+	limit_speed=7
 	bottom_speed=3
 	if(flag):
 		if (drive_speed>=limit_speed):
@@ -75,8 +75,8 @@ def drive(angle, flag):
 
 	drive_values_pub.publish(drive_value)
 
-	#print("steer : ", drive_value.steering)
-	#print("throttle : ", drive_value.throttle)
+	print("steer : ", drive_value.steering)
+	print("throttle : ", drive_value.throttle)
   
   
 class point:
@@ -96,12 +96,12 @@ class point:
 		return distance
 	
 	def avoid_collision(self,min_list):
-		margin=0
+		margin=5
 		point=min_list[1]
 		steer=self.xycar_angle_deg
 		print("dis",cal_distance(point.x,point.y))
-		margin=cal_distance(point.x,point.y)*(-10)+18
-		print("mar",int(margin))
+		#margin=cal_distance(point.x,point.y)*(-10)+14
+		#print("mar",int(margin))
 		if point.y>0:
 			steer-=margin
 			drive(steer,True)
@@ -201,7 +201,7 @@ class point:
 		
 
 		#print("###################", len(yellow_cone))
-		#print("CNT:",len(self.obData.circles))
+		print("CNT:",len(self.obData.circles))
 		if len(self.obData.circles) == 0:
 			#print("zero obstacle")
 			drive(0,False)
@@ -272,7 +272,7 @@ class point:
 				filter_point3=sorted_2_list[2].center
 
 				self.center_x,self.center_y=self.calcEquidistance(filter_point1.x,filter_point2.x,filter_point3.x,filter_point1.y,filter_point2.y,filter_point3.y)
-				self.calc_angle()                                            
+				self.calc_angle() 		                                           
 				drive(self.xycar_angle_deg,False)
 			
 
@@ -297,45 +297,44 @@ class point:
 				self.center_x=(left_point1.x+left_point2.x+right_point1.x+right_point2.x)/4
 				self.center_y=(left_point1.y+left_point2.y+right_point1.y+right_point2.y)/4
 				self.calc_angle()
-				if len(yellow_cone)>=3 and len(blue_cone)<=1: # len(yellow_cone)>=2
+				#print("point_x: ",self.center_x,"point_y: ",self.center_y)
+				if len(yellow_cone)>=3 and len(blue_cone)==0: # len(yellow_cone)>=2
 
 					self.xycar_angle_deg=self.xycar_angle_deg_2
-					self.xycar_angle_deg_2-=0
-					drive(self.xycar_angle_deg_2,True)
-					#print(" xycar_deg_2: ", self.xycar_angle_deg_2)
-					
+					self.xycar_angle_deg_2-=5
+					print("************************vision margin111")
+					#print("self.xycar_angle_deg_2:",self.xycar_angle_deg_2)
 					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
 					
 					#print('center_y:' ,self.center_y)
-					if(min_list[0]<1.3 and abs(min_list[1].y)<1.1):
+					if(min_list[0]<1.0 and abs(min_list[1].y)<0.8):
 						self.avoid_collision(min_list)
 						
 					else:
-						drive(self.xycar_angle_deg,False)
+						drive(self.xycar_angle_deg_2,False)
 						
 						return
-				elif len(blue_cone)>=3 and len(yellow_cone)<=1: # len(yellow_cone)>=2
+				elif len(blue_cone)>=3 and len(yellow_cone)==0: # len(yellow_cone)>=2
 
 					self.xycar_angle_deg=self.xycar_angle_deg_2
-					self.xycar_angle_deg_2+=0
-					drive(self.xycar_angle_deg_2,True)
-					#print(" xycar_deg_2: ", self.xycar_angle_deg_2)
-					
+					self.xycar_angle_deg_2+=5
+					print("************************vision margin222")
+					#print("self.xycar_angle_deg_2:",self.xycar_angle_deg_2)
 					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
 					
 					#print('center_y:' ,self.center_y)
-					if(min_list[0]<1.3 and abs(min_list[1].y)<1.1):
+					if(min_list[0]<1.0 and abs(min_list[1].y)<0.8):
 						self.avoid_collision(min_list)
 						
 					else:
-						drive(self.xycar_angle_deg,False)
+						drive(self.xycar_angle_deg_2,False)
 						
 						return
 				else:
 					min_list=self.calc_dismin(left_point1,left_point2,right_point1,right_point2)
 					
 					#print('center_y:' ,self.center_y)
-					if(min_list[0]<1.3 and abs(min_list[1].y)<1.1):
+					if(min_list[0]<1.0 and abs(min_list[1].y)<0.8):
 						self.avoid_collision(min_list)
 										
 					

@@ -84,8 +84,8 @@ class point:
 		self.center_x = None
 		self.center_y = None
 		self.xycar_angle = None
-		self.car_angle_deg = None
-		self.car_angle_deg_2 = None
+		self.car_angle_deg = 0
+		self.car_angle_deg_2 = 0
 		self.angle=None
 		
 	def cal_distance_two_circle(self,x1,y1,x2,y2):
@@ -205,23 +205,83 @@ class point:
 		#print("Angle deg : ", self.car_angle_deg)
 
 	def circle(self):
-		#global yellow_cone
-		#global blue_cone
-		
+		global yellow_cone
+		global blue_cone
+		vision_margin=10
+		yb_flag=True  # yb_flag ==True yellow=0 -> left_steer 
 		#print("###################", len(yellow_cone))
+		print("yellow: ",len(yellow_cone), "blue: ", len(blue_cone))
 		#print("CNT:",len(self.obData.circles))
+	
 		if len(self.obData.circles) == 0:
 			#print("zero obstacle")
-			drive(0,False)
+			if(yb_flag==True):
+				if (len(yellow_cone)==0 or len(blue_cone) ==0):
+					print("###################Vision_avoid")
+				
+					if(len(yellow_cone)==0):
+						self.car_angle_deg-=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+					else:
+						self.car_angle_deg+=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+				
+				else:
+					drive(0,False)
+						
+			else:
+				if (len(yellow_cone)==0 or len(blue_cone) ==0):
+					print("###################Vision_avoid")
+				
+					if(len(yellow_cone)==0):
+						self.car_angle_deg+=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+					else:
+						self.car_angle_deg-=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+				
+				else:
+					drive(0,False)
+		
 
 		elif len(self.obData.circles) == 1:
 			circles=self.obData.circles
-			if len(yellow_cone)>=1 : 
-				drive(25,True)
-			 	#print("one obstacle detected && right steering")
-			else: 
-				drive(-25,True)
-				#print("one obstacle detected && left steering")
+			if(yb_flag==True):
+				if (len(yellow_cone)==0 or len(blue_cone) ==0):
+					print("###################Vision_avoid")
+				
+					if(len(yellow_cone)==0):
+						self.car_angle_deg-=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+					else:
+						self.car_angle_deg+=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+				
+				else:
+					drive(0,False)
+						
+			else:
+				if (len(yellow_cone)==0 or len(blue_cone) ==0):
+					print("###################Vision_avoid")
+				
+					if(len(yellow_cone)==0):
+						self.car_angle_deg+=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+					else:
+						self.car_angle_deg-=vision_margin
+						drive(self.car_angle_deg,True)
+						return
+				
+				else:
+					drive(0,False)
+		
 				
 
 		else:
@@ -232,12 +292,6 @@ class point:
 			sorted_list=[1,2,3,4]
 			sorted_list_3=[1,2,3]
 		
-			'''
-			if len(blue_cone) == 0:
-				print("blue cone is not detected!!")					#print("left_circle:",left_circle.center.y,"right_circle:",right_circle.center.y)
-			if len(yellow_cone) == 0:
-				print("yellow cone is not detected!!")
-				drive(-30,self.normal_speed)'''
  			if(len(circles)==2):
 
 				if(circles[0].center.y<circles[1].center.y):  #judgement left & right
@@ -252,7 +306,39 @@ class point:
 				self.center_x=(left_point.x+right_point.x)/2
 				self.center_y=(left_point.y+right_point.y)/2
 				self.calc_angle()
-				drive(self.car_angle_deg,False)
+				if(yb_flag==True):
+					if (len(yellow_cone)==0 or len(blue_cone) ==0):
+						print("###################Vision_avoid")
+					
+						if(len(yellow_cone)==0):
+							self.car_angle_deg-=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+						else:
+							self.car_angle_deg+=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+				
+					else:
+						drive(0,False)
+						
+				else:
+					if (len(yellow_cone)==0 or len(blue_cone) ==0):
+						print("###################Vision_avoid")
+					
+						if(len(yellow_cone)==0):
+							self.car_angle_deg+=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+						else:
+							self.car_angle_deg-=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+					
+					else:
+						drive(0,False)
+		
+		
 
 
 			elif (len(circles)==3):
@@ -269,7 +355,38 @@ class point:
 
 				self.center_x,self.center_y=self.calcEquidistance(filter_point1.x,filter_point2.x,filter_point3.x,filter_point1.y,filter_point2.y,filter_point3.y)
 				self.calc_angle()
-			 	drive(self.car_angle_deg,False)
+			 	if(yb_flag==True):
+					if (len(yellow_cone)==0 or len(blue_cone) ==0):
+						print("###################Vision_avoid")
+					
+						if(len(yellow_cone)==0):
+							self.car_angle_deg-=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+						else:
+							self.car_angle_deg+=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+					
+					else:
+						drive(0,False)
+						
+				else:
+					if (len(yellow_cone)==0 or len(blue_cone) ==0):
+						print("###################Vision_avoid")
+					
+						if(len(yellow_cone)==0):
+							self.car_angle_deg+=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+						else:
+							self.car_angle_deg-=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+					
+					else:
+						drive(0,False)
+		
          			       		                                        
 				
 			
@@ -295,31 +412,38 @@ class point:
 				self.center_x=(left_point1.x+left_point2.x+right_point1.x+right_point2.x)/4
 				self.center_y=(left_point1.y+left_point2.y+right_point1.y+right_point2.y)/4
 				self.calc_angle()
-				if len(yellow_cone)>=3 and len(blue_cone)<=0: # len(yellow_cone)>=2
-
-					self.car_angle_deg=self.car_angle_deg_2
-					self.car_angle_deg_2-=0
+				if(yb_flag==True):
+					if (len(yellow_cone)==0 or len(blue_cone) ==0):
+						print("###################Vision_avoid")
 					
+						if(len(yellow_cone)==0):
+							self.car_angle_deg-=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+						else:
+							self.car_angle_deg+=vision_margin
+							drive(self.car_angle_deg,True)
+							return
 					
-					
-					drive(self.car_angle_deg_2,False)
-					return
-				elif len(blue_cone)>=3 and len(yellow_cone)<=0: # len(yellow_cone)>=2
-
-					self.car_angle_deg=self.car_angle_deg_2
-					self.car_angle_deg_2+=0
-					print("###########################3####")
-					
-					
-					
-					#print('center_y:' ,self.center_y)
-					
-					drive(self.car_angle_deg_2,False)
-						
-						
+					else:
+						drive(0,False)
+							
 				else:
-					drive(self.car_angle_deg,False)
-					return
+					if (len(yellow_cone)==0 or len(blue_cone) ==0):
+						print("###################Vision_avoid")
+					
+						if(len(yellow_cone)==0):
+							self.car_angle_deg+=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+						else:
+							self.car_angle_deg-=vision_margin
+							drive(self.car_angle_deg,True)
+							return
+					
+					else:
+						drive(0,False)
+		
 
 
 
@@ -331,6 +455,7 @@ if __name__=='__main__':
 	rospy.init_node('test3')
 	time.sleep(1)
 	while not rospy.is_shutdown():
+		
 		time.sleep(0.1)
 		ob.circle()
 		yellow_cone = []

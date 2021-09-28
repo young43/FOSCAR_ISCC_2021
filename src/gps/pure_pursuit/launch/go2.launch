@@ -9,7 +9,6 @@
   <arg name="obs_order" default="1" />
   <arg name="pk" default="1" />
 
-
    <!-- gps visualization -->
   <!--
   <include file="$(find rviz_visualization)/launch/rviz_school.launch">
@@ -19,7 +18,7 @@
 -
 
   <!-- lidar(obstacle) -->
-  <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" output="screen" />
+  <include file="$(find avoid_obstacle)/launch/avoid_obs.launch" />
 
   <!-- yolo -->
   <include file="$(find darknet_ros)/launch/darknet_ros_final.launch" />

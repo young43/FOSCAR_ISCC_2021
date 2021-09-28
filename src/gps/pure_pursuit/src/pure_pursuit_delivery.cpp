@@ -260,7 +260,7 @@ void PurePursuitNode::run(char** argv) {
     if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 27 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
-      const_velocity_ = 10.5;
+      const_velocity_ = 11;
       final_constant = 1.2;
     }
 
