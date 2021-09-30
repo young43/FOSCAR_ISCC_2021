@@ -258,11 +258,26 @@ void PurePursuitNode::run(char** argv) {
     // 21,23,28
 
     // 신호등, 미션 전 직진
-    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 22  || pp_.mode == 27 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
+    if(pp_.mode == 0 || pp_.mode == 2 || pp_.mode == 4 || pp_.mode == 6 || pp_.mode == 27 || pp_.mode == 32 || pp_.mode == 34 || pp_.mode == 36){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 6;
       const_velocity_ = 11;
       final_constant = 1.2;
+    }
+
+    // MODE 22 : 교차로 차선변경 전 직진
+    if(pp_.mode == 22){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 6;
+      const_velocity_ = 10;
+      final_constant = 1.2;
+    }
+    // MODE 222 : 22끝나고 교차로 차선변경 로직 추가
+    if(pp_.mode == 222){
+      pp_.mission_flag = 0;
+      const_lookahead_distance_ = 4;
+      const_velocity_ = 8;
+      final_constant = 1.5;
     }
 
     // 마지막 신호등 전 직진
@@ -522,8 +537,8 @@ void PurePursuitNode::run(char** argv) {
     if (pp_.mode == 9){
       pp_.mission_flag = 0;
       const_lookahead_distance_ = 4;
-      const_velocity_ = 7;
-      final_constant = 1.5;
+      const_velocity_ = 7.5;
+      final_constant = 1.8;
     }
 
 
